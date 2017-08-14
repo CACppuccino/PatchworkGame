@@ -42,7 +42,7 @@ of 25. So each mark in the assignment corresponds to a mark in your final
 assessment for the course. Note that for some stages of the assignment you 
 will get a _group_ mark, and for others you will be _individually_ marked. The
 mark breakdown and the due dates are described on the
-[deliverables](http://cs.anu.edu.au/courses/COMP1110/deliverables.html) page.
+[deliverables](https://cs.anu.edu.au/courses/comp1110/assessments/deliverables/) page.
 
 Your work will be marked via your tutor accessing git, so it is essential that
 you carefully follow instructions for setting up and maintaining your group
@@ -315,15 +315,15 @@ not have broken any rules either).
 
 ## Evaluation Criteria
 
-It is essential that you refer to the [deliverables page](http://cs.anu.edu.au/courses/COMP1110/deliverables.html)
+It is essential that you refer to the [deliverables page](https://cs.anu.edu.au/courses/comp1110/assessments/deliverables/)
 to check that you understand each of the deadlines and what is required.
 Your assignment will be marked via GitLab, so all submittable materials will
 need to be in the *correct* locations in GitLab, as prescribed by the 
-[deliverables page](http://cs.anu.edu.au/courses/COMP1110/deliverables.html).
+deliverables page.
 
 
 **The mark breakdown is described on the
-[deliverables](https://gitlab.cecs.anu.edu.au/comp1110/comp1110/wikis/deliverables) page.**
+[deliverables](https://cs.anu.edu.au/courses/comp1110/assessments/deliverables/) page.**
 
 ### Part One
 
@@ -332,7 +332,7 @@ In the first part of the assignment you will:
 * Implement parts of the text interface to the game (Tasks #3, #4, and #6).
 * Implement a simple viewer that allows you to visualise game states (Task #5).
 
-The criteria for the [completion of part one](https://gitlab.cecs.anu.edu.au/comp1110/comp1110/wikis/deliverables#d2c-assignment-2-stage-c-2-marks-group)
+The criteria for the [completion of part one](https://cs.anu.edu.au/courses/comp1110/assessments/deliverables/#D2C)
 is as follows:
 
 <a name="p"></a>
