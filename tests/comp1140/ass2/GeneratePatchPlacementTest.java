@@ -52,13 +52,13 @@ public class GeneratePatchPlacementTest {
         int numNormalPatches = 33; // don't include special tile
         for (int i = 0; i < numNormalPatches; i++) {
             int patchIndex = rand.nextInt(numNormalPatches);
-            String patchId;
-            if (patchIndex > 26) patchId = String.valueOf('a' + (patchIndex - 26));
-            else patchId = String.valueOf('A' + patchIndex);
-            while (patchCircleString.contains(patchId)) {
+            char patchId;
+            if (patchIndex > 26) patchId = (char)('a' + (patchIndex - 26));
+            else patchId = (char)('A' + patchIndex);
+            while (patchCircleString.indexOf(patchId) > -1) {
                 patchIndex = (patchIndex + 1) % numNormalPatches;
-                if (patchIndex > 26) patchId = String.valueOf('a' + (patchIndex - 26));
-                else patchId = String.valueOf('A' + patchIndex);
+                if (patchIndex > 26) patchId = (char) ('a' + (patchIndex - 26));
+                else patchId = (char) ('A' + patchIndex);
             }
             patchCircleString += patchId;
         }
