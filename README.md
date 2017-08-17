@@ -319,15 +319,11 @@ not have broken any rules either).
 
 ## Evaluation Criteria
 
-It is essential that you refer to the [deliverables page](http://cs.anu.edu.au/courses/COMP1110/deliverables.html)
-to check that you understand each of the deadlines and what is required.
-Your assignment will be marked via GitLab, so all submittable materials will
-need to be in the *correct* locations in GitLab, as prescribed by the 
-[deliverables page](http://cs.anu.edu.au/courses/COMP1110/deliverables.html).
-
+It is essential that you refer to the [deliverables page](https://cs.anu.edu.au/courses/comp1110/assessments/deliverables/) to check that you understand each of the deadlines and what is required.   Your assignment will be marked via git, so all submittable materials will need to be in git and in the *correct* locations, as prescribed by the [deliverables page](https://cs.anu.edu.au/courses/comp1110/assessments/deliverables/).
 
 **The mark breakdown is described on the
-[deliverables](https://gitlab.cecs.anu.edu.au/comp1110/comp1110/wikis/deliverables) page.**
+[deliverables](https://cs.anu.edu.au/courses/comp1110/assessments/deliverables/) page.**
+
 
 ### Part One
 
