@@ -38,6 +38,7 @@ public class Viewer extends Application {
         // FIXME Task 5: implement the simple placement viewer
     }
 
+
     /**
      * Create a basic text field for input and a refresh button.
      */
@@ -71,4 +72,41 @@ public class Viewer extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
+    //describe the window attributes
+    public void canvas(){
+
+    }
+
+    // show the final window when the game ends.Including two players'
+    // socres and who wins the game. Show a restart button as well.
+    public void finalWindow(){
+
+    }
+
+    //displays the squilt board for player 1.
+    public void squiltBoard1(){}
+
+    //displays the squilt board for player 2.
+    public void squiltBoard2(){}
+
+    //displays the time board for players.
+    public void timeBoard(){}
+
+    //displays the time token of player1,
+    // call the drag() when token is dragged.
+    public void timeToken1(){}
+
+    //displays the time token of player2,
+    // call the drag() when token is dragged.
+    public void timeToken2(){}
+
+//    displays the candidates area which shows the three available tiles.
+    public void candidateArea(){}
+
+    // displays the two button, undo and confirm, call the relevant functions
+    // about the interaction
+    public void clickArea(){}
+
+
 }
