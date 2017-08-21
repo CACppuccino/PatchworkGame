@@ -1,5 +1,8 @@
 package comp1140.ass2;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Represents the state of a Patchwork game in progress.
  */
@@ -26,7 +29,36 @@ public class PatchworkGame {
      */
     static boolean isPatchPlacementWellFormed(String placement) {
         // FIXME Task 3: determine whether a patch placement is well-formed
-        return false;
+        String [] allchars = new String[4];
+        allchars[0] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefgh";
+        allchars[1] = "ABCDEFGHI";
+        allchars[2] = "ABCDEFGHI";
+        allchars[3] = "ABCDEFGH";
+        int count = 0;
+        boolean result = false;
+        if ( placement.charAt(0) == '.')
+        {
+            result = true;
+        }
+        else if (placement.length() != 4)
+        {
+            result = false;
+        }
+        else
+        {
+            for (int i = 0; i < placement.length(); i++) {
+                for (int j = 0; j < allchars[i].length(); j++) {
+                    if (placement.charAt(i) == allchars[i].charAt(j)) {
+                        count = count + 1;
+                    }
+                }
+            }
+        }
+
+        if ( count == 4){
+            result = true;
+        }
+        return result;
     }
 
     /**
@@ -40,8 +72,59 @@ public class PatchworkGame {
      * @return true if the placement is well-formed
      */
     static boolean isPlacementWellFormed(String placement) {
-        // FIXME Task 4: determine whether a placement is well-formed
-        return false;
+        // FIXME Task 4: determine whether a placement is well-formed`
+        //initialize a List<Integer> to store all the position of the patch
+        List<Integer> patchposition = new ArrayList();
+        // to count the time of the String placement when it has more tiles
+        int count = 0;
+        // the count1 is to count how many times the '.' show
+        int count1 = 0;
+        boolean result = false;
+        String SubSting;
+        if (placement == null || placement.isEmpty())
+        {
+            result = false;
+            return result;
+        }
+        else {
+            for (int i = 0; i < placement.length(); i++) {
+                if (placement.charAt(i) == '.') {
+                    count = count + 1;
+                    count1 = count1 + 1;
+                } else {
+                    if ( placement.length() - i < 4)
+                    {
+                        SubSting = placement.substring(i, placement.length());
+                    }
+                    else
+                    {
+                        SubSting = placement.substring(i, i + 4);
+                    }
+                    patchposition.add(i);
+                    result = isPatchPlacementWellFormed(SubSting);
+                    if (result == true) {
+                        count = count + 1;
+                    }
+                    else
+                    {
+                        result = false;
+                        return result;
+                    }
+                    i = i + 3;
+                }
+            }
+        }
+        // check whether there is a patch appear more than once
+        for ( int i = 0; i < patchposition.size();i++){
+            for ( int j = i + 1;j < patchposition.size();j++){
+                if ( placement.charAt(patchposition.get(i)) == placement.charAt(patchposition.get(j)) && placement.charAt(patchposition.get(i)) != 'h'){
+                    result = false;
+                    return result;
+                }
+            }
+        }
+        result = true;
+        return result;
     }
 
     /**
