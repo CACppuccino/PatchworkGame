@@ -17,4 +17,20 @@ public class PatchworkAI {
         // FIXME Task 10: generate a valid move
         return null;
     }
+
+    //choose to move the time token or buy a patch
+    public static int choose(){
+        return 1;
+    }
+
+    //evaluate the dicision and get the best choice
+    public static void main(String[] args) {
+
+    }
+
+    //after the dicision, execute should be called to use APIs provided by the game to
+    //interact with the game
+    public static void execute(){
+
+    }
 }
