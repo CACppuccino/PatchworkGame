@@ -42,7 +42,7 @@ of 25. So each mark in the assignment corresponds to a mark in your final
 assessment for the course. Note that for some stages of the assignment you 
 will get a _group_ mark, and for others you will be _individually_ marked. The
 mark breakdown and the due dates are described on the
-[deliverables](https://cs.anu.edu.au/courses/comp1110/assessments/deliverables/) page.
+[deliverables](http://cs.anu.edu.au/courses/COMP1110/deliverables.html) page.
 
 Your work will be marked via your tutor accessing git, so it is essential that
 you carefully follow instructions for setting up and maintaining your group
@@ -167,7 +167,7 @@ purchased and removed from the circle.)
 Each patch tile's position is described in terms of its origin, which is the top
 left-most square when in its unrotated state (as illustrated above).
 
-A *patch placement string* consists of four characters describing the location
+A *patch placement string* usually consists of four characters describing the location
 and orientation of a particular patch on a player's 9x9 quilt board:
 
 * The first character identifies which of the 34 tile-types is being placed ('A' to 'Z' or 'a' to 'h').
@@ -179,14 +179,18 @@ The default (unrotated) orientation is 'A'. Orientation 'B' means the tile is ro
 'C' means the tile is rotated 180 degrees, and 'D' means the tile is rotated 270 degrees clockwise.
 Rotations 'E' through 'H' mean the tile is flipped over before rotating.
 
+Assume that in its default orientation, a piece is M columns wide and N
+rows tall.
+After a 90 degree rotation, it will be N columns wide and M rows tall.
 To make rotation regular and ensure that rotated pieces correctly align
-with the quilt board squares, rotation is performed within an NxN square
-on the quilt board, where N is the maximum dimension (column or row) of
-the patch.
+with the quilt board squares, rotation is performed so that the top-left
+hand corner of the MxN bounding box is always in the same place.
 
 For example, the following pictures show the 'O' piece at column 'B',
 row 'B', the first with rotation 'A' and the second with rotation 'D'.
-It has been rotated within a 4x4 square with the origin at ('B','B').
+It has been rotated within a 2x4 rectangle with the origin at ('B','B').
+The origin is indicated with a red dot in the top left corner of the
+bounding box.
 
 ![game](assets/OBBA.png)
 ![game](assets/OBBD.png)
@@ -201,7 +205,7 @@ On any turn instead of placing a patch, a player may instead choose to
 advance their time token to the next square after the other player's
 time token, and receive a number of buttons equal to the number of squares
 moved.
-To represent this choice, a special single-character string is used: ".".
+To represent this choice, a special single-character patch placement string is used: ".".
 
 #### Example Game
 
@@ -315,15 +319,11 @@ not have broken any rules either).
 
 ## Evaluation Criteria
 
-It is essential that you refer to the [deliverables page](https://cs.anu.edu.au/courses/comp1110/assessments/deliverables/)
-to check that you understand each of the deadlines and what is required.
-Your assignment will be marked via GitLab, so all submittable materials will
-need to be in the *correct* locations in GitLab, as prescribed by the 
-deliverables page.
-
+It is essential that you refer to the [deliverables page](https://cs.anu.edu.au/courses/comp1110/assessments/deliverables/) to check that you understand each of the deadlines and what is required.   Your assignment will be marked via git, so all submittable materials will need to be in git and in the *correct* locations, as prescribed by the [deliverables page](https://cs.anu.edu.au/courses/comp1110/assessments/deliverables/).
 
 **The mark breakdown is described on the
 [deliverables](https://cs.anu.edu.au/courses/comp1110/assessments/deliverables/) page.**
+
 
 ### Part One
 
@@ -332,7 +332,7 @@ In the first part of the assignment you will:
 * Implement parts of the text interface to the game (Tasks #3, #4, and #6).
 * Implement a simple viewer that allows you to visualise game states (Task #5).
 
-The criteria for the [completion of part one](https://cs.anu.edu.au/courses/comp1110/assessments/deliverables/#D2C)
+The criteria for the [completion of part one](https://gitlab.cecs.anu.edu.au/comp1110/comp1110/wikis/deliverables#d2c-assignment-2-stage-c-2-marks-group)
 is as follows:
 
 <a name="p"></a>

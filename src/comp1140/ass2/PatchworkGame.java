@@ -18,7 +18,8 @@ public class PatchworkGame {
 
     /**
      * Determine whether a patch placement is well-formed according to the following:
-     * - it consists of exactly four characters
+     * - either it is the single character string ".", or
+     * - it consists of exactly four characters:
      * - the first character is in the range A .. Z or a .. h
      * - the second character is in the range A .. I
      * - the third character is in the range A .. I
