@@ -2,6 +2,7 @@ package comp1140.ass2;
 
 import javafx.application.Application;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.ObjectPropertyBase;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -10,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
@@ -70,6 +72,7 @@ public class Viewer extends Application {
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Patchwork Viewer");
         Scene scene = new Scene(root, VIEWER_WIDTH, VIEWER_HEIGHT);
+        timeBoard();
         makeControls();
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -96,7 +99,17 @@ public class Viewer extends Application {
 
     //displays the time board for players.
     public void timeBoard(){
-        ObjectProperty<Image> tb ;
+        Image tb = new Image("file:./gui/assets/timeBoard.png");//("../gui/assets/timeBoard.png");
+        ImageView tbView = new ImageView();
+        tbView.setImage(tb);
+        tbView.setFitHeight(300);
+        tbView.setFitWidth(300);
+        HBox timeboard = new HBox();
+        timeboard.getChildren().add(tbView);
+        timeboard.setLayoutX(200);
+        timeboard.setLayoutY(500);
+        controls.getChildren().add(timeboard);
+
     }
 
     //displays the time token of player1,
