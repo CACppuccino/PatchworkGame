@@ -212,7 +212,7 @@ To represent this choice, a special single-character patch placement string is u
 The following diagram shows both players' quilt boards after four patch
 tiles have been placed.
 
-![game](assets/BDCAUAAAEACAdBEB.png)
+![game](assets/BDCAUAAAEACAdBDB.png)
 
 The following sequence shows the progression of turns that led to the board
 layout above.
@@ -251,12 +251,12 @@ the time board.
 
 ##### BDCAUAAAEACAdBEB
 Now Player 2's token is in front, so it is Player 1's turn again.
-She places the 'd' tile at location 'BE', rotated 90 degrees clockwise
+She places the 'd' tile at location 'BD', rotated 90 degrees clockwise
 (rotation 'B').
 The 'd' tile has a time cost of 2, so she moves her token forward 2 on the
 time board.
 
-![game](assets/BDCAUAAAEACAdBEB.png)
+![game](assets/BDCAUAAAEACAdBDB.png)
 
 ##### Legal Tile Placements
 
