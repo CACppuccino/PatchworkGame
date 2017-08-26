@@ -177,7 +177,8 @@ and orientation of a particular patch on a player's 9x9 quilt board:
 
 The default (unrotated) orientation is 'A'. Orientation 'B' means the tile is rotated 90 degrees clockwise;
 'C' means the tile is rotated 180 degrees, and 'D' means the tile is rotated 270 degrees clockwise.
-Rotations 'E' through 'H' mean the tile is flipped over before rotating.
+Rotations 'E' through 'H' mean the tile is flipped horizontally (i.e. reflected about the y-axis)
+before rotating clockwise.
 
 Assume that in its default orientation, a piece is M columns wide and N
 rows tall.
