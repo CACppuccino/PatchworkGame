@@ -54,7 +54,7 @@ public class TestUtility {
     };
 
     static final int SCORES[] = {
-            22, 7, 24, -19, -11, 4, 20, -1, 22, -10, -101, 7, 2, 0, 23, 9, -2, -2, 19, -5, 15, 9
+            21, 7, 24, -19, -11, 3, 20, -1, 22, -10, -102, 7, 2, 0, 23, 9, -2, -2, 19, -6, 15, 8
     };
 
     static final String INVALID_PLACEMENTS[] = {
