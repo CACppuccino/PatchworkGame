@@ -16,20 +16,25 @@ public class PatchworkGame {
     public PatchworkGame() {
 
     }
-    public final int [] tileCost = {2,1,3,2,3,2,1,0,6,
+    public static final int [] tileCost = {2,1,3,2,3,2,1,0,6,
                                     4,2,1,3,7,3,7,3,
                                     2,4,5,2,5,10,5,10,
                                     1,4,7,10,1,2,7,8};
 
-    public final int [] tileCover = {2,3,3,3,4,5,7,6,4,
-                                    6,4,6,4,5,5,6,6,
-                                    6,4,5,7,8,5,5,6,
-                                    6,4,6,5,5,5,4,6};
+    public static final int [] tileCover = {2,3,3,3,4,5,7,6,4,
+                                            6,4,6,4,5,5,6,6,
+                                            6,4,5,7,8,5,5,6,
+                                            6,4,6,5,5,5,4,6};
 
-    public final int [] tileTimetoken = {1,3,1,2,2,2,4,3,5,
+    public static final int [] tileTimetoken = {1,3,1,2,2,2,4,3,5,
                                          2,2,5,3,1,4,4,6,
                                          1,6,4,3,3,3,5,5,
                                          2,2,2,4,2,3,6,6};
+
+    public static final int [ ] tileButton = {0,0,0,0,1,0,1,1,2,0,
+                                              0,1,1,1,1,2,2,0,2,
+                                              2,0,1,2,2,3,0,1,
+                                              2,3,0,1,3,3};
 
     /**
      * Determine whether a patch placement is well-formed according to the following:
@@ -151,6 +156,8 @@ public class PatchworkGame {
      * @param placement   A placement string
      * @return true if the placement is valid
      */
+
+    // Here has some problems for test good
     static boolean isPlacementValid(String patchCircle, String placement) {
         // FIXME Task 6: determine whether a placement is valid
         boolean ans = false;
@@ -301,6 +308,41 @@ public class PatchworkGame {
         answer = true;
         return answer;
     }
+
+    // this block is to get the tile's cost and token
+    public static int[] getDetails(char tile){
+        String tiles = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefgh";
+        int tilePosition = 0;
+        for (int i = 0; i < tiles.length();i++){
+            if ( tile == tiles.charAt(i)){
+                tilePosition = i;
+                break;
+            }
+        }
+        PatchworkGame a = new PatchworkGame();
+        int timeToken = a.tileTimetoken[tilePosition];
+        int tileCost = a.tileCost[tilePosition];
+        int [] details  =  {timeToken,tileCost};
+        return details;
+    }
+
+    public static int checkTurn(char [] player1,char [] player2){
+        int timeToken1 = 0;
+        int timeToken2 = 0;
+        for ( int i = 0;i < player1.length;i++){
+            timeToken1 = getDetails(player1[i])[1];
+        }
+        for ( int i = 0;i < player2.length;i++){
+            timeToken1 = getDetails(player2[i])[1];
+        }
+        if ( timeToken1 > timeToken2){
+            return 0;
+        }
+        else{
+            return 1;
+        }
+    }
+
     /**
      * Determine the score for a player given a placement, following the
      * scoring rules for the game.
