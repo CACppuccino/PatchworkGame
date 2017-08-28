@@ -50,21 +50,24 @@ public class Viewer extends Application {
      *
      * @param placement A valid placement string
      */
-    void makePlacement(String placement) {
+    void makePlacement(String placement) {//throws Exception  {
         final double[] rotation = {0,90,180,270};
         // FIXME Task 5: implement the simple placement viewer
         HBox mPlacement = new HBox();
         Label error = new Label("invalide placement");
-        if (placement.length()!=4)
+        if (placement.length()!=4 )
         {
+//            throw new Exception("invalid placement");
             error.setTextFill(Color.valueOf("#3367D6"));
             mPlacement.getChildren().add(error);
             mPlacement.setLayoutX(300);
             mPlacement.setLayoutY(VIEWER_HEIGHT-30);
         }
         else {
+
             char tileName = placement.charAt(0),col = placement.charAt(1),row = placement.charAt(2),
                     rotate = placement.charAt(3) ;
+//            if ()
             /*get the image path*/
             String tileN = tileName+(tileName>'a' && tileName<'h'?"_.png":".png");
             String tilePath = "file:"+(new File("src/comp1140/ass2/gui/assets/"+tileN)).getAbsolutePath();
@@ -78,7 +81,7 @@ public class Viewer extends Application {
             double r = rotation[rotate-'A'];
             tileView.setRotate(r);
             /* set the coordinate according to the input* */
-            int x = row-'A',y = col - 'A';
+            int x = (row-'A')*40,y = (col - 'A')*40;
             //indicates which board is going to be placed on the tile
             int player = State.check_turn()==1?0:601;
             mPlacement.setLayoutX(player+20+x);mPlacement.setLayoutY(290+y);

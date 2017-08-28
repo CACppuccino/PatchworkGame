@@ -8,7 +8,7 @@ public class State {
     int squareleft = 49;
 
 //    calculating the time left in the time board of two players
-    int timecount = 0;
+    int timecount = 52;
 
 //    calculating the button of each player holds
     int buttonCount = 0;
@@ -33,13 +33,14 @@ public class State {
     //    this function is used for recognizing the end of the game.
 // Both of the players' time consumption is full,
 // i.e. players' time token have reached the end square of the time board.
-    public boolean check_fullstate(){return false;}
+    public boolean check_fullstate(){
+        return this.timecount==0;}
 
     //    this function is used for checking the who should be the person doing the next turn.
 //    Two situation should be considered: if they are not in the same square of the tiem board,
 // the one fall behind should take the turn. If they are in the same square, the player who
 // last moved to that space takes the turn.
-    public static int check_turn(){return 2;}
+    public static int check_turn(){return 1;}
 
     //    the functions is called to get two players' score,
 // first int is for player 1, second for player 2
