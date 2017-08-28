@@ -2,66 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="65da6ae4-3a7c-4801-b171-39bf72c9367f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/AITraining.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/PatchworkAI.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/gui/assets/A.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/gui/assets/B.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/gui/assets/C.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/gui/assets/D.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/gui/assets/E.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/gui/assets/F.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/gui/assets/G.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/gui/assets/H.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/gui/assets/I.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/gui/assets/J.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/gui/assets/K.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/gui/assets/L.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/gui/assets/M.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/gui/assets/N.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/gui/assets/O.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/gui/assets/P.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/gui/assets/Q.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/gui/assets/R.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/gui/assets/S.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/gui/assets/T.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/gui/assets/U.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/gui/assets/V.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/gui/assets/W.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/gui/assets/X.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/gui/assets/Y.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/gui/assets/Z.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/gui/assets/a_.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/gui/assets/b_.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/gui/assets/c_.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/gui/assets/d_.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/gui/assets/e_.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/gui/assets/f_.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/gui/assets/g_.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/gui/assets/h_.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/gui/assets/timeBoard.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/gittest/A.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/gittest/B.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/gittest/C.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/gittest/Main.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/test/comp1140-ass2/comp1140/ass2/PatchPlacementWellFormedTest.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/test/comp1140-ass2/comp1140/ass2/PlacementValidTest.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/test/comp1140-ass2/comp1140/ass2/PlacementWellFormedTest.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/test/comp1140-ass2/comp1140/ass2/ScoreFromPlacementTest.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gittest/A.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gittest/B.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gittest/C.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gittest/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/PatchworkGame.class" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/PatchworkGame.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/State.class" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/State.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/Viewer$1.class" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/Viewer$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/Viewer.class" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/Viewer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/test/comp1140-ass2/comp1140/ass2/TestUtility.class" afterPath="$PROJECT_DIR$/out/test/comp1140-ass2/comp1140/ass2/TestUtility.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/comp1140/ass2/PatchworkAI.java" afterPath="$PROJECT_DIR$/src/comp1140/ass2/PatchworkAI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/comp1140/ass2/PatchworkGame.java" afterPath="$PROJECT_DIR$/src/comp1140/ass2/PatchworkGame.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/comp1140/ass2/State.java" afterPath="$PROJECT_DIR$/src/comp1140/ass2/State.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/comp1140/ass2/Viewer.java" afterPath="$PROJECT_DIR$/src/comp1140/ass2/Viewer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/comp1140/ass2/ScoreFromPlacementTest.java" afterPath="$PROJECT_DIR$/tests/comp1140/ass2/ScoreFromPlacementTest.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -100,8 +41,8 @@
       <file leaf-file-name="State.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/State.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="36" column="33" lean-forward="false" selection-start-line="36" selection-start-column="33" selection-end-line="36" selection-end-column="33" />
+            <state relative-caret-position="334">
+              <caret line="55" column="20" lean-forward="false" selection-start-line="55" selection-start-column="20" selection-end-line="55" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -110,8 +51,8 @@
       <file leaf-file-name="PatchworkGame.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/PatchworkGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3409">
-              <caret line="155" column="40" lean-forward="false" selection-start-line="155" selection-start-column="40" selection-end-line="155" selection-end-column="40" />
+            <state relative-caret-position="2710">
+              <caret line="239" column="48" lean-forward="true" selection-start-line="239" selection-start-column="48" selection-end-line="239" selection-end-column="48" />
               <folding />
             </state>
           </provider>
@@ -407,6 +348,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="-4" width="1301" height="772" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32970452" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -420,7 +362,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2659409" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Execute Anonymous" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13530326" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2830482" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16733068" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -818,16 +760,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/PatchworkGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3409">
-          <caret line="155" column="40" lean-forward="false" selection-start-line="155" selection-start-column="40" selection-end-line="155" selection-end-column="40" />
+        <state relative-caret-position="2710">
+          <caret line="239" column="48" lean-forward="true" selection-start-line="239" selection-start-column="48" selection-end-line="239" selection-end-column="48" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/State.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="36" column="33" lean-forward="false" selection-start-line="36" selection-start-column="33" selection-end-line="36" selection-end-column="33" />
+        <state relative-caret-position="334">
+          <caret line="55" column="20" lean-forward="false" selection-start-line="55" selection-start-column="20" selection-end-line="55" selection-end-column="20" />
           <folding />
         </state>
       </provider>
