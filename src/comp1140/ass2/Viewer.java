@@ -15,11 +15,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.awt.*;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Random;
 
 
 /**
@@ -39,6 +42,7 @@ public class Viewer extends Application {
     private final Group controls = new Group();
     private final Group sqiltBoard = new Group();
     private final Group tilesArea = new Group();
+    ArrayList<Character> candi;
     TextField textField;
 
     /**
@@ -114,6 +118,7 @@ public class Viewer extends Application {
         primaryStage.setTitle("Patchwork Viewer");
         Scene scene = new Scene(root, VIEWER_WIDTH, VIEWER_HEIGHT);
         timeBoard();
+        timeToken1(0);
         squiltBoard1();
         squiltBoard2();
         makeControls();
@@ -136,11 +141,13 @@ public class Viewer extends Application {
     public void squiltBoard1(){
         Rectangle[][] sq = new Rectangle[7][7];
         HBox sq1 = new HBox();
+        Random gen = new Random();
         sq1.setPrefSize(280,280);
         for (int i=0;i<7;i++){
             for (int j=0;j<7;j++){
                 sq[i][j] = new Rectangle(20+i*40,290+j*40,40,40);
                 sq[i][j].setStroke(Color.color((double)i/7,(double) j/7,(double)(i+j)/14));
+                sq[i][j].setFill(Color.WHEAT);
                 root.getChildren().add(sq[i][j]);
             }
         }
@@ -167,7 +174,7 @@ public class Viewer extends Application {
     public void timeBoard(){
         File imgTimeboard = new File("src/comp1140/ass2/gui/assets/timeBoard.png");
         String tbPath = new String("file:"+imgTimeboard.getAbsolutePath());
-        Image tb = new Image(tbPath);//("../gui/assets/timeBoard.png");
+        Image tb = new Image(tbPath);
         ImageView tbView = new ImageView();
         tbView.setImage(tb);
         tbView.setFitHeight(270);
@@ -182,16 +189,23 @@ public class Viewer extends Application {
 
     //displays the time token of player1,
     // call the drag() when token is dragged.
-    public void timeToken1(){}
+    public void timeToken1(double steps){
+        Circle tt1 = new Circle();
+        tt1.setRadius(10);
+        tt1.setCenterX(321);
+        tt1.setCenterY(300);
+        tt1.setFill(Color.YELLOW);
+        HBox tT1 = new HBox();
+        root.getChildren().add(tt1);
+
+    }
 
     //displays the time token of player2,
     // call the drag() when token is dragged.
-    public void timeToken2(){}
+    public void timeToken2(double steps){}
 
 //    displays the candidates area which shows the three available tiles.
     public void candidateArea(){
-
-        HBox candiArea = new HBox();
 
     }
 

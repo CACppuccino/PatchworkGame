@@ -22,7 +22,7 @@ public class State {
 // then the patch i,i+1,i+2 should be displayed in the candidate area.
     int ntState = 0;
 
-    char[] PATCHES = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W',
+    final static char[] PATCHES = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W',
             'X','Y','Z','a','b','c','d','e','f','g'};
 
 //    this list should be changed when being initialised randomly by the initialization()/
