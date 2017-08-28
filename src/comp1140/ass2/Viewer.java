@@ -1,6 +1,7 @@
 package comp1140.ass2;
 
 import javafx.application.Application;
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ObjectPropertyBase;
 import javafx.event.ActionEvent;
@@ -13,7 +14,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+
+import java.awt.*;
+import java.io.File;
 
 
 /**
@@ -31,6 +37,8 @@ public class Viewer extends Application {
 
     private final Group root = new Group();
     private final Group controls = new Group();
+    private final Group sqiltBoard = new Group();
+    private final Group tilesArea = new Group();
     TextField textField;
 
     /**
@@ -39,8 +47,41 @@ public class Viewer extends Application {
      * @param placement A valid placement string
      */
     void makePlacement(String placement) {
+        final double[] rotation = {0,90,180,270};
         // FIXME Task 5: implement the simple placement viewer
+        HBox mPlacement = new HBox();
+        Label error = new Label("invalide placement");
+        if (placement.length()!=4)
+        {
+            error.setTextFill(Color.valueOf("#3367D6"));
+            mPlacement.getChildren().add(error);
+            mPlacement.setLayoutX(300);
+            mPlacement.setLayoutY(VIEWER_HEIGHT-30);
+        }
+        else {
+            char tileName = placement.charAt(0),col = placement.charAt(1),row = placement.charAt(2),
+                    rotate = placement.charAt(3) ;
+            /*get the image path*/
+            String tileN = tileName+(tileName>'a' && tileName<'h'?"_.png":".png");
+            String tilePath = "file:"+(new File("src/comp1140/ass2/gui/assets/"+tileN)).getAbsolutePath();
+            Image tile = new Image(tilePath);
+            ImageView tileView = new ImageView(tile);
+            /*resize the tile to fit the squiltboard*/
+            double w = tile.getWidth()/50,h = tile.getHeight()/50;
+            w *= 40; h*=40;
+            tileView.setFitWidth(w);tileView.setFitHeight(h);
+            /*rotation*/
+            double r = rotation[rotate-'A'];
+            tileView.setRotate(r);
+            /* set the coordinate according to the input* */
+            int x = row-'A',y = col - 'A';
+            //indicates which board is going to be placed on the tile
+            int player = State.check_turn()==1?0:601;
+            mPlacement.setLayoutX(player+20+x);mPlacement.setLayoutY(290+y);
+            mPlacement.getChildren().add(tileView);
 
+        }
+        controls.getChildren().add(mPlacement);
     }
 
 
@@ -65,7 +106,7 @@ public class Viewer extends Application {
         hb.setLayoutY(VIEWER_HEIGHT - 50);
         controls.getChildren().add(hb);
         root.getChildren().add(controls);
-
+//        root.getChildren().add(sqiltBoard);
     }
 
     @Override
@@ -73,6 +114,8 @@ public class Viewer extends Application {
         primaryStage.setTitle("Patchwork Viewer");
         Scene scene = new Scene(root, VIEWER_WIDTH, VIEWER_HEIGHT);
         timeBoard();
+        squiltBoard1();
+        squiltBoard2();
         makeControls();
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -91,23 +134,48 @@ public class Viewer extends Application {
 
     //displays the squilt board for player 1.
     public void squiltBoard1(){
-
+        Rectangle[][] sq = new Rectangle[7][7];
+        HBox sq1 = new HBox();
+        sq1.setPrefSize(280,280);
+        for (int i=0;i<7;i++){
+            for (int j=0;j<7;j++){
+                sq[i][j] = new Rectangle(20+i*40,290+j*40,40,40);
+                sq[i][j].setStroke(Color.color((double)i/7,(double) j/7,(double)(i+j)/14));
+                root.getChildren().add(sq[i][j]);
+            }
+        }
+        sq1.setLayoutX(20);sq1.setLayoutY(290);
+//        sqiltBoard.getChildren().add(sq1);
     }
 
     //displays the squilt board for player 2.
-    public void squiltBoard2(){}
+    public void squiltBoard2(){
+        Rectangle[][] sq2 = new Rectangle[7][7];
+        HBox sq1 = new HBox();
+        sq1.setPrefSize(280,280);
+        for (int i=0;i<7;i++){
+            for (int j=0;j<7;j++){
+                sq2[i][j] = new Rectangle(621+i*40,290+j*40,40,40);
+                sq2[i][j].setStroke(Color.color((double)i/7,(double) j/7,(double)(i+j)/14));
+                root.getChildren().add(sq2[i][j]);
+            }
+        }
+        sq1.setLayoutX(20);sq1.setLayoutY(290);
+    }
 
     //displays the time board for players.
     public void timeBoard(){
-        Image tb = new Image("file:./gui/assets/timeBoard.png");//("../gui/assets/timeBoard.png");
+        File imgTimeboard = new File("src/comp1140/ass2/gui/assets/timeBoard.png");
+        String tbPath = new String("file:"+imgTimeboard.getAbsolutePath());
+        Image tb = new Image(tbPath);//("../gui/assets/timeBoard.png");
         ImageView tbView = new ImageView();
         tbView.setImage(tb);
-        tbView.setFitHeight(300);
-        tbView.setFitWidth(300);
+        tbView.setFitHeight(270);
+        tbView.setFitWidth(270);
         HBox timeboard = new HBox();
         timeboard.getChildren().add(tbView);
-        timeboard.setLayoutX(200);
-        timeboard.setLayoutY(500);
+        timeboard.setLayoutX(331.5);
+        timeboard.setLayoutY(290);
         controls.getChildren().add(timeboard);
 
     }
@@ -121,7 +189,11 @@ public class Viewer extends Application {
     public void timeToken2(){}
 
 //    displays the candidates area which shows the three available tiles.
-    public void candidateArea(){}
+    public void candidateArea(){
+
+        HBox candiArea = new HBox();
+
+    }
 
     // displays the two button, undo and confirm, call the relevant functions
     // about the interaction

@@ -39,7 +39,7 @@ public class State {
 //    Two situation should be considered: if they are not in the same square of the tiem board,
 // the one fall behind should take the turn. If they are in the same square, the player who
 // last moved to that space takes the turn.
-    public int check_turn(){return 0;}
+    public static int check_turn(){return 2;}
 
     //    the functions is called to get two players' score,
 // first int is for player 1, second for player 2

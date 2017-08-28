@@ -6,34 +6,37 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.nio.file.Path;
 
 public class test extends Application{
-    private Group root = new Group();
-    private void setImg(){
-        File file = new File("./A.png");
-        System.out.println(file.exists());
-        Image tb = new Image("file:/home/cup/IdeaProjects/comp1140-ass2-wed15c/src/comp1140/ass2/gui/assets/timeBoard.png");//"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ84hMKGYnLjbYASltpjWRIIumEGrwWPmkDFVkkr4hppCPekUIY");//("../gui/assets/timeBoard.png");
-        ImageView tbView = new ImageView();
-        tbView.setImage(tb);
-//        tbView.setFitHeight(300);
-//        tbView.setFitWidth(300);
-        HBox timeboard = new HBox();
-        timeboard.getChildren().add(tbView);
-//        timeboard.setLayoutX(200);
-//        timeboard.setLayoutY(500);
-        root.getChildren().add(timeboard);
+
+    @Override
+    public void start(Stage stage) {
+        AnchorPane root = new AnchorPane();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+
+        int columns = 20, rows = 10, horizontal = 50, vertical = 20;
+        Rectangle rect = null;
+        for (int i = 0; i < columns; ++i) {
+            for (int j = 0; j < rows; ++j) {
+                rect = new Rectangle(horizontal * j, vertical * i, horizontal, vertical);
+                rect.setStroke(Color.RED);
+                root.getChildren().add(rect);
+            }
+        }
+        scene.setRoot(root);
+        stage.show();
     }
-    public void start(Stage primaryStage) throws Exception{
-        primaryStage.setTitle("for testing");
-        setImg();
-        Scene scene = new Scene(root, 900,900);
-        scene.setFill(Color.valueOf("#3367D6"));
-        primaryStage.setScene(scene);
-        primaryStage.show();
+
+    public static void main(String[] args) {
+        launch(args);
     }
 }

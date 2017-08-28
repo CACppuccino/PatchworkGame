@@ -9,13 +9,20 @@ public class Matrix{
         this.col = col;
         matrix = new double[row][col];
     }
+    public double[][] getMatrix(){return matrix;}
+    void setZero(){
+        for (int i =0;i<row;i++)
+            for (int j=0;j<col;j++)
+                matrix[i][j] = 0;
+    }
+
     public void setMatrix (int coordR, int coordC, double element) throws Exception{
         if (coordR>= row || coordC >= col)
             throw new Exception("Matrix out of bound, should be ("+row+','+col+") but have " +
                     "("+coordR+','+coordC+")");
         this.matrix[coordR][coordC] = element;
     }
-    public double getMatrix (int coordR, int coordC) throws Exception{
+    public double getElement (int coordR, int coordC) throws Exception{
         if (coordR>= row || coordC >= col)
             throw new Exception("Matrix out of bound, should be ("+row+','+col+") but have " +
                     "("+coordR+','+coordC+")");
@@ -25,14 +32,15 @@ public class Matrix{
         for (int i=0;i<row;i++){
             for (int j=0;j<col;j++){
                 if (j!=col-1)
-                System.out.print(matrix[i][j]+',');
+                System.out.print(matrix[i][j]+", ");
                 else
-                    System.out.print(matrix[i][j] + ';');
+                    System.out.print(matrix[i][j] + ";");
             }
             System.out.println();
         }
     }
-    public Matrix addMatrix (Matrix a, Matrix b) throws Exception{
+    //produce a new Matrix
+    public static Matrix addMatrix (Matrix a, Matrix b) throws Exception{
         if (a.row!=b.row || a.col!=b.col)
             throw new Exception("Matrix not the same size");
         Matrix c = new Matrix(a.row,a.col);
@@ -45,7 +53,16 @@ public class Matrix{
         }
         return c;
     }
+    public Matrix addBy (Matrix a) throws Exception{
 
+        return this;
+    }
+
+    public static void main(String[] args) {
+        Matrix a = new Matrix(9,3);
+        a.setZero();
+        a.printMatrix();
+    }
 }
 //public class Matrix {
 //    int dimension;
