@@ -262,15 +262,8 @@ public class PatchworkGame {
                     patchCircleList.remove(newPosition);
                     System.out.println(i);
                 }
-                if ( checkOverlap(placement)){
-                    ans = true;
-                    return ans;
-                }
-                else
-                {
-                    ans = false;
-                    return ans;
-                }
+                ans = true;
+                return ans;
             }
         }
         else
@@ -298,7 +291,6 @@ public class PatchworkGame {
                 i = i + 3;
             }
         }
-        System.out.println(tilePosition);
         for ( int i = 0; i < tilePosition.size();i++){
             for ( int j = i+1; j < tilePosition.size();j++){
                 if ( tilePosition.get(i).equals(tilePosition.get(j))){
@@ -321,10 +313,6 @@ public class PatchworkGame {
     static int getScoreForPlacement(String patchCircle, String placement, boolean firstPlayer) {
         // FIXME Task 7: determine the score for a player given a placement
         return 0;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(checkOverlap("LHAAOAAAHADA.MAFANCAA..QFBCXBACIBHAhBBAcECAgGEChGBAKCCASCEFWHFAYAAEhHHAGDAABCGDPEEARECFTEFAeBBHVADAhDCAZGEACDHAAFIBaCDCDGABfEHAhGIA."));
     }
 
 }
