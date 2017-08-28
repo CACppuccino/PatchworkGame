@@ -8,7 +8,7 @@ public class State {
     int squareleft = 49;
 
 //    calculating the time left in the time board of two players
-    int timecount = 0;
+    int timecount = 52;
 
 //    calculating the button of each player holds
     int buttonCount = 0;
@@ -22,7 +22,7 @@ public class State {
 // then the patch i,i+1,i+2 should be displayed in the candidate area.
     int ntState = 0;
 
-    char[] PATCHES = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W',
+    final static char[] PATCHES = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W',
             'X','Y','Z','a','b','c','d','e','f','g'};
 
 //    this list should be changed when being initialised randomly by the initialization()/
@@ -33,13 +33,14 @@ public class State {
     //    this function is used for recognizing the end of the game.
 // Both of the players' time consumption is full,
 // i.e. players' time token have reached the end square of the time board.
-    public boolean check_fullstate(){return false;}
+    public boolean check_fullstate(){
+        return this.timecount==0;}
 
     //    this function is used for checking the who should be the person doing the next turn.
 //    Two situation should be considered: if they are not in the same square of the tiem board,
 // the one fall behind should take the turn. If they are in the same square, the player who
 // last moved to that space takes the turn.
-    public int check_turn(){return 0;}
+    public static int check_turn(){return 1;}
 
     //    the functions is called to get two players' score,
 // first int is for player 1, second for player 2
