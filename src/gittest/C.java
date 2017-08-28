@@ -1,9 +1,8 @@
 package gittest;
 
-public class A {
+public class C {
     @Override
     public String toString(){
-        int a;
         return "";
     }
 }
