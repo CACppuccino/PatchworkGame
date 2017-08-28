@@ -23,12 +23,12 @@ public class PatchworkAI {
         return 1;
     }
 
-    //evaluate the dicision and get the best choice
+    //evaluate the decision and get the best choice
     public static void main(String[] args) {
 
     }
 
-    //after the dicision, execute should be called to use APIs provided by the game to
+    //after the decision, execute should be called to use APIs provided by the game to
     //interact with the game
     public static void execute(){
 
