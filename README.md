@@ -177,7 +177,8 @@ and orientation of a particular patch on a player's 9x9 quilt board:
 
 The default (unrotated) orientation is 'A'. Orientation 'B' means the tile is rotated 90 degrees clockwise;
 'C' means the tile is rotated 180 degrees, and 'D' means the tile is rotated 270 degrees clockwise.
-Rotations 'E' through 'H' mean the tile is flipped over before rotating.
+Rotations 'E' through 'H' mean the tile is flipped horizontally (i.e. reflected about the y-axis)
+before rotating clockwise.
 
 Assume that in its default orientation, a piece is M columns wide and N
 rows tall.
@@ -212,7 +213,7 @@ To represent this choice, a special single-character patch placement string is u
 The following diagram shows both players' quilt boards after four patch
 tiles have been placed.
 
-![game](assets/BDCAUAAAEACAdBEB.png)
+![game](assets/BDCAUAAAEACAdBDB.png)
 
 The following sequence shows the progression of turns that led to the board
 layout above.
@@ -251,12 +252,12 @@ the time board.
 
 ##### BDCAUAAAEACAdBEB
 Now Player 2's token is in front, so it is Player 1's turn again.
-She places the 'd' tile at location 'BE', rotated 90 degrees clockwise
+She places the 'd' tile at location 'BD', rotated 90 degrees clockwise
 (rotation 'B').
 The 'd' tile has a time cost of 2, so she moves her token forward 2 on the
 time board.
 
-![game](assets/BDCAUAAAEACAdBEB.png)
+![game](assets/BDCAUAAAEACAdBDB.png)
 
 ##### Legal Tile Placements
 

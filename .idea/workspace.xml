@@ -2,17 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="65da6ae4-3a7c-4801-b171-39bf72c9367f" name="Default" comment="Added A">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/CCBB.png" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/BDCAUAAAEACAdBEB.png" afterPath="$PROJECT_DIR$/assets/BDCAUAAAEACAdBDB.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/PatchworkGame.class" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/PatchworkGame.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/State.class" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/State.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/Viewer$1.class" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/Viewer$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/Viewer.class" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/Viewer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/test/comp1140-ass2/comp1140/ass2/GeneratePatchPlacementTest.class" afterPath="$PROJECT_DIR$/out/test/comp1140-ass2/comp1140/ass2/GeneratePatchPlacementTest.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/test/comp1140-ass2/comp1140/ass2/ScoreFromPlacementTest.class" afterPath="$PROJECT_DIR$/out/test/comp1140-ass2/comp1140/ass2/ScoreFromPlacementTest.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/test/comp1140-ass2/comp1140/ass2/TestUtility.class" afterPath="$PROJECT_DIR$/out/test/comp1140-ass2/comp1140/ass2/TestUtility.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/comp1140/ass2/PatchworkAI.java" afterPath="$PROJECT_DIR$/src/comp1140/ass2/PatchworkAI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/comp1140/ass2/PatchworkGame.java" afterPath="$PROJECT_DIR$/src/comp1140/ass2/PatchworkGame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gittest/Main.java" afterPath="$PROJECT_DIR$/src/gittest/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/comp1140/ass2/ScoreFromPlacementTest.java" afterPath="$PROJECT_DIR$/tests/comp1140/ass2/ScoreFromPlacementTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/B-contribution.md" afterPath="$PROJECT_DIR$/admin/B-contribution.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/B-originality.md" afterPath="$PROJECT_DIR$/admin/B-originality.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/comp1140/ass2/Viewer.java" afterPath="$PROJECT_DIR$/src/comp1140/ass2/Viewer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/comp1140/ass2/PlacementWellFormedTest.java" afterPath="$PROJECT_DIR$/tests/comp1140/ass2/PlacementWellFormedTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/comp1140/ass2/TestUtility.java" afterPath="$PROJECT_DIR$/tests/comp1140/ass2/TestUtility.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,9 +28,31 @@
       <file leaf-file-name="Viewer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/Viewer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="38" column="5" lean-forward="false" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="5" />
+            <state relative-caret-position="750">
+              <caret line="39" column="5" lean-forward="false" selection-start-line="39" selection-start-column="5" selection-end-line="39" selection-end-column="5" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="workspace.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-6681">
+              <caret line="460" column="19" lean-forward="true" selection-start-line="460" selection-start-column="19" selection-end-line="460" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PatchworkGame.class" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/PatchworkGame.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="250">
+              <caret line="12" column="1" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#8864#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -37,18 +60,18 @@
       <file leaf-file-name="State.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/State.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1025">
+            <state relative-caret-position="211">
               <caret line="41" column="20" lean-forward="false" selection-start-line="41" selection-start-column="20" selection-end-line="41" selection-end-column="20" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PatchworkGame.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PatchworkGame.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/PatchworkGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="348">
-              <caret line="330" column="0" lean-forward="true" selection-start-line="330" selection-start-column="0" selection-end-line="330" selection-end-column="0" />
+            <state relative-caret-position="600">
+              <caret line="330" column="0" lean-forward="false" selection-start-line="330" selection-start-column="0" selection-end-line="330" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -99,6 +122,7 @@
         <option value="$PROJECT_DIR$/src/gittest/A.java" />
         <option value="$PROJECT_DIR$/src/gittest/Main.java" />
         <option value="$PROJECT_DIR$/src/comp1140/ass2/PatchworkGame.java" />
+        <option value="$PROJECT_DIR$/.idea/workspace.xml" />
       </list>
     </option>
   </component>
@@ -141,6 +165,12 @@
               <item name="comp1140-ass2-wed15c" type="b2602c69:ProjectViewProjectNode" />
               <item name="comp1140-ass2-wed15c" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="comp1140-ass2-wed15c" type="b2602c69:ProjectViewProjectNode" />
+              <item name="comp1140-ass2-wed15c" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="ass2" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="comp1140-ass2-wed15c" type="b2602c69:ProjectViewProjectNode" />
@@ -348,7 +378,7 @@
       <workItem from="1503377614776" duration="12440000" />
       <workItem from="1503466491557" duration="4400000" />
       <workItem from="1503804752502" duration="30602000" />
-      <workItem from="1503915135215" duration="5045000" />
+      <workItem from="1503915135215" duration="6588000" />
     </task>
     <task id="LOCAL-00001" summary="Added main class">
       <created>1503470205153</created>
@@ -400,20 +430,10 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="54416000" />
-  </component>
-  <component name="TodoView">
-    <todo-panel id="selected-file">
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-    <todo-panel id="all">
-      <are-packages-shown value="true" />
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
+    <option name="totallyTimeSpent" value="55959000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-11" y="-11" width="1942" height="1042" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14575866" sideWeight="0.64054054" order="6" side_tool="false" content_ui="tabs" />
@@ -424,11 +444,11 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6690562" sideWeight="0.62108105" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297491" sideWeight="0.5313513" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30107528" sideWeight="0.49783784" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.49462366" sideWeight="0.37891892" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30107528" sideWeight="0.49783784" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19354838" sideWeight="0.37891892" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16270271" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16270271" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -785,22 +805,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/State.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1025">
-          <caret line="41" column="20" lean-forward="false" selection-start-line="41" selection-start-column="20" selection-end-line="41" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/Viewer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="38" column="5" lean-forward="false" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/gui/assets/A.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -816,10 +820,44 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/PatchworkGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="330" column="0" lean-forward="true" selection-start-line="330" selection-start-column="0" selection-end-line="330" selection-end-column="0" />
+        <state relative-caret-position="600">
+          <caret line="330" column="0" lean-forward="false" selection-start-line="330" selection-start-column="0" selection-end-line="330" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/State.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211">
+          <caret line="41" column="20" lean-forward="false" selection-start-line="41" selection-start-column="20" selection-end-line="41" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/Viewer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="750">
+          <caret line="39" column="5" lean-forward="false" selection-start-line="39" selection-start-column="5" selection-end-line="39" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6681">
+          <caret line="460" column="19" lean-forward="true" selection-start-line="460" selection-start-column="19" selection-end-line="460" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/PatchworkGame.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="12" column="1" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#8864#0" expanded="true" />
           </folding>
         </state>
       </provider>
