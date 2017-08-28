@@ -6,7 +6,8 @@ import org.junit.rules.Timeout;
 
 import java.util.Random;
 
-import static comp1140.ass2.TestUtility.*;
+import static comp1140.ass2.TestUtility.BASE_ITERATIONS;
+import static comp1140.ass2.TestUtility.PLACEMENTS;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -63,8 +64,15 @@ public class PlacementWellFormedTest {
     public void testReplication() {
         for (int i = 0; i < PLACEMENTS.length; i++) {
             String p = PLACEMENTS[i];
-            String d = p.substring(4, 5);
-            String test = p.substring(0, 8) + d + p.substring(9);
+            int s = 0;
+            while (p.charAt(s) == '.') s++;
+            s += 4;
+            while (p.charAt(s) == '.') s++;
+            String d = p.substring(s, s+1);
+            int n=s+4;
+            while (p.charAt(n) == '.') n++;
+            String test = p.substring(0, n) + d + p.substring(n+1);
+            System.out.println(test);
             assertFalse("Placement string '" + test + "' contains has piece " + d + " more than twice, but passed", PatchworkGame.isPlacementWellFormed(test));
         }
     }
