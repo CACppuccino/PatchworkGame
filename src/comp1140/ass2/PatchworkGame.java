@@ -1,5 +1,7 @@
 package comp1140.ass2;
 
+import com.sun.xml.internal.bind.v2.TODO;
+
 import java.util.*;
 
 /**
@@ -24,7 +26,6 @@ public class PatchworkGame {
     public static final int [][] tileCover = {{2,1},{2,2},{2,2},{3,1},{3,2},{3,2},{3,5},
             {4,3},{2,2},{4,2},{3,2},{4,2},{4,1},{1,5},{4,2},{4,2},{3,3},{4,3},{3,2},{3,3},
             {3,3},{4,3},{5,2},{3,3},{4,2},{4,3},{3,2},{4,3},{3,3},{2,3},{4,2},{2,3},{3,3},{1,1}};
-
     //{row,col}
     public static final int [][][] tileSpace = {{{0,0},{1,0}},{{0,1},{1,0},{1,1}},{{0,1},{1,0},{1,1}},
             {{0,0},{1,0},{2,0}},{{0,1},{1,0},{1,1},{2,0}},{{0,0},{1,0},{2,0},{1,1},{1,2}},{{1,0},{1,1},{1,2},{1,3},{1,4},{0,2},{2,2}},
@@ -188,7 +189,7 @@ public class PatchworkGame {
         }
         boolean fstPlayer = true;
         String fstPlc = new String(),secPlc = new String();
-        State p1 = new State(), p2 = new State();
+        State p1 = new State(1), p2 = new State(2);
         p1.onTop=true;
         for (int i=0;i<placement.length();i++){
             if (placement.charAt(i)=='.'){
@@ -200,14 +201,14 @@ public class PatchworkGame {
                 System.out.println("%%%%"+plc);
                 if (fstPlayer) {
                     fstPlc = fstPlc + plc;
-                    if (!checkOverlap(fstPlc) || !outOfBoard(plc, 1)) {
-                        System.out.println("out of Board/Overlap1" + checkOverlap(fstPlc) + outOfBoard(plc, 2));
+                    if ( !outOfBoard(plc, p1)) {
+                        System.out.println("out of Board/Overlap1"  );
                         return false;
                     }
                 } else {
                     secPlc = secPlc + plc;
-                    if (!checkOverlap(secPlc) || !outOfBoard(plc, 1)) {
-                        System.out.println("out of Board/Overlap2" + checkOverlap(fstPlc) + outOfBoard(plc, 2));
+                    if ( !outOfBoard(plc, p2)) {
+                        System.out.println("out of Board/Overlap2"  );
                         return false;
                     }
                 }
@@ -220,6 +221,7 @@ public class PatchworkGame {
                         return false;
                     } else if (e.getMessage().equals("no enough h")) {
                         System.out.println("no enough h");
+                        System.out.println(p1.specialH+" "+p2.specialH);
                         return false;
                     }
                 }
@@ -243,10 +245,10 @@ public class PatchworkGame {
                         partches.remove(aPlc);
 
                     } else if (plc.charAt(0) == three[1]) {
-                        partches.remove(aPlc + 1);
+                        partches.remove((aPlc + 1)%partches.size());
                         aPlc++;
                     } else {
-                        partches.remove(aPlc + 2);
+                        partches.remove((aPlc + 2)%partches.size());
                         aPlc += 2;
                     }
                     System.out.println("aPlc" + aPlc);
@@ -262,34 +264,9 @@ public class PatchworkGame {
 
     }
 
-    public static boolean checkOverlap(String placement){
-        ArrayList<String> tilePosition = new ArrayList<>();
-        boolean answer = false;
-        int counter = 0;
-        for( int i = 0; i < placement.length();i++){
-            char [] position = new char[2];
-            if ( placement.charAt(i) == '.'){
-                continue;
-            }
-            else
-            {
-                position[0] = placement.charAt(i+1);
-                position[1] = placement.charAt(i+2);
-                String positionArray = new String(position);
-                tilePosition.add(positionArray);
-                i = i + 3;
-            }
-        }
-        for ( int i = 0; i < tilePosition.size();i++){
-            for ( int j = i+1; j < tilePosition.size();j++){
-                if ( tilePosition.get(i).equals(tilePosition.get(j))){
-                    return answer;
-                }
-            }
-        }
-        answer = true;
-        return answer;
-    }
+//    public static boolean checkOverlap(String placement){
+//
+//    }
 
     // this block is to get the tile's cost and token
     public static int[] getDetails(char tile){
@@ -316,16 +293,26 @@ public class PatchworkGame {
         else if (index==6 || index==7 || index==8 || index==16 || index==19 || index ==20 || index == 21 ||index==23 ||index==27||index==29)
             return expose;
 
-        int[][] copy = tileSpace[index];
+        int[][] copy = new int[tileSpace[index].length][2] ;
+
+
+        //to make it rotation sensitive,need to add 1 to avoid zero circumenstance
+        for (int i=0;i<tileSpace[index].length;i++)
+        {
+            copy[i][0] = tileSpace[index][i][0]+1;
+            copy[i][1] = tileSpace[index][i][1]+1;
+        }
+
+
+        System.out.println("copy:"+index+" "+Arrays.deepToString(copy));
         //flip on tiles that width is 2
         if (tileCover[index][1]==2)
             for (int[] xs:copy)
-                xs[0] = xs[0]==0?1:0;
-
+                xs[1] = (xs[1]==1?2:1);
         //flip on tiles that width is 3
         else
             for (int[] xs:copy)
-                xs[0] = xs[0]==0?2:0;
+                xs[1] = (xs[1]==1?3:1);
     return copy;
     }
     private static int getIndex(char tile){
@@ -363,13 +350,15 @@ public class PatchworkGame {
             System.out.println("rotation wrong"+rotate);
             return null;
         }
-        int[] topleft = expose[0];
+        int[] topleft =new int[2];
+        topleft[0] = expose[0][0];
+        topleft[1] = expose[0][1];
         for (int[] xs:expose){
             if (topleft[0]>xs[0]) topleft[0] = xs[0];
             if (topleft[1]>xs[1]) topleft[1] = xs[1];
         }
-        topleft[0] = 0-topleft[0];
-        topleft[1] = 0-topleft[1];
+        topleft[0] = 1-topleft[0];
+        topleft[1] = 1-topleft[1];
         for (int[] xs:expose){
             xs[0] += topleft[0];
             xs[1] += topleft[1];
@@ -397,7 +386,7 @@ public class PatchworkGame {
     }
     private static int[][] getTileSpace(int index){return tileSpace[index];}
     //false for out of the board, true for in
-    public static boolean outOfBoard(String placement,int sign){
+    public static boolean outOfBoard(String placement,State player){
         if (!isValidOnePlacement(placement)){
             System.out.println("invalid one placement");
             return false;}
@@ -413,8 +402,8 @@ public class PatchworkGame {
         expo =  new int[tileSpace[index].length][2];
         for (int i=0;i<tileSpace[index].length;i++)
         {
-            expo[i][0] = tileSpace[index][i][0];
-            expo[i][1] = tileSpace[index][i][1];
+            expo[i][0] = tileSpace[index][i][0]+1;
+            expo[i][1] = tileSpace[index][i][1]+1;
         }
 
         System.out.println("expo: "+Arrays.deepToString(expo));
@@ -425,40 +414,53 @@ public class PatchworkGame {
         else{
             rotate = (char) ('A' + rotate - 'E');
             result = rotateHandle(rotate, flipHandle(tile, expo));
+//            System.out.println("rotate result: "+ Arrays.deepToString(result));
         }
+        for (int[] xs:result) {
+//            System.out.println("result before: "+rotate+" "+Arrays.deepToString(result));
+            xs[0] += rowN;
+            xs[1] += colN;
+//            System.out.println("result after: "+Arrays.deepToString(result));
+        }
+                    System.out.println("result after: "+Arrays.deepToString(result));
         for (int[] xs:result){
-            System.out.println("result before: "+rotate+" "+Arrays.deepToString(result));
-            xs[0] += rowN;xs[1] += colN;
-            System.out.println("result after: "+Arrays.deepToString(result));
-            if (!(xs[0]>=0 && xs[0]<=9 && xs[1]>=0 && xs[1]<=9))
+            if (!(xs[0]>=1 && xs[0]<=10 && xs[1]>=1 && xs[1]<=10))
             {
                 for (int[] sxs:result){
                     System.out.println(sxs[0]+" "+sxs[1]);
                 }
-                System.out.println("out of board"+placement+" "+xs[0]+" "+xs[1]+"//"+sign);
+                System.out.println("out of board"+placement+" "+xs[0]+" "+xs[1]+"//");
                 return false;
             }
+            System.out.println("id:"+player.id);
+            player.printSquiltBoard();
+            System.out.println();
+            if (!player.squiltBoard[xs[0]-1][xs[1]-1])
+                player.squiltBoard[xs[0]-1][xs[1]-1] = true;
+            else
+                return false;
+            player.printSquiltBoard();
         }
 
 
         return true;
     }
-    public static int checkTurn(char [] player1,char [] player2){
-        int timeToken1 = 0;
-        int timeToken2 = 0;
-        for ( int i = 0;i < player1.length;i++){
-            timeToken1 = getDetails(player1[i])[1];
-        }
-        for ( int i = 0;i < player2.length;i++){
-            timeToken1 = getDetails(player2[i])[1];
-        }
-        if ( timeToken1 > timeToken2){
-            return 0;
-        }
-        else{
-            return 1;
-        }
-    }
+//    public static int checkTurn(char [] player1,char [] player2){
+//        int timeToken1 = 0;
+//        int timeToken2 = 0;
+//        for ( int i = 0;i < player1.length;i++){
+//            timeToken1 = getDetails(player1[i])[1];
+//        }
+//        for ( int i = 0;i < player2.length;i++){
+//            timeToken1 = getDetails(player2[i])[1];
+//        }
+//        if ( timeToken1 > timeToken2){
+//            return 0;
+//        }
+//        else{
+//            return 1;
+//        }
+//    }
 
     /**
      * Determine the score for a player given a placement, following the

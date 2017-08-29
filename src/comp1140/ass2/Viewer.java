@@ -78,6 +78,7 @@ public class Viewer extends Application {
             w *= 30; h*=30;
             tileView.setFitWidth(w);tileView.setFitHeight(h);
             /*rotation*/
+            /*haven't included the E-H*/
             double r = rotation[rotate-'A'];
             tileView.setRotate(r);
             /* set the coordinate according to the input* */
