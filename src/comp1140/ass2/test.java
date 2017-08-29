@@ -15,28 +15,10 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.nio.file.Path;
 
-public class test extends Application{
-
-    @Override
-    public void start(Stage stage) {
-        AnchorPane root = new AnchorPane();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-
-        int columns = 20, rows = 10, horizontal = 50, vertical = 20;
-        Rectangle rect = null;
-        for (int i = 0; i < columns; ++i) {
-            for (int j = 0; j < rows; ++j) {
-                rect = new Rectangle(horizontal * j, vertical * i, horizontal, vertical);
-                rect.setStroke(Color.RED);
-                root.getChildren().add(rect);
-            }
-        }
-        scene.setRoot(root);
-        stage.show();
-    }
-
+public class test{
     public static void main(String[] args) {
-        launch(args);
+        String abc = "ABCD";
+        String s = abc.substring(0,3);
+        System.out.println(s);
     }
 }

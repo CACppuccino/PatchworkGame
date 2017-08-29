@@ -83,7 +83,8 @@ public class Viewer extends Application {
             /* set the coordinate according to the input* */
             int x = (row-'A')*40,y = (col - 'A')*40;
             //indicates which board is going to be placed on the tile
-            int player = State.check_turn()==1?0:601;
+//            int player = State.check_turn()==1?0:601;
+            int player = 1;
             mPlacement.setLayoutX(player+20+x);mPlacement.setLayoutY(290+y);
             mPlacement.getChildren().add(tileView);
 
