@@ -41,11 +41,21 @@
       <file leaf-file-name="PatchworkGame.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/PatchworkGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="295">
-              <caret line="440" column="17" lean-forward="false" selection-start-line="440" selection-start-column="17" selection-end-line="440" selection-end-column="17" />
+            <state relative-caret-position="22">
+              <caret line="448" column="23" lean-forward="false" selection-start-line="448" selection-start-column="23" selection-end-line="448" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PlacementValidTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/comp1140/ass2/PlacementValidTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="342">
+              <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -71,13 +81,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>out of Boar</find>
-      <find>outof</find>
-      <find>index</find>
-      <find>H</find>
-      <find>three</find>
-      <find>partch</find>
-      <find>aPlc</find>
       <find>advanc</find>
       <find>specialevent</find>
       <find>out of b</find>
@@ -97,10 +100,17 @@
       <find>fliphandle</find>
       <find>checkturn</find>
       <find>raaa</find>
-      <find>tile</find>
       <find>overlap</find>
+      <find>FDAD</find>
       <find>outofBoard</find>
+      <find>C</find>
+      <find>CGGD</find>
+      <find>tile</find>
+      <find>three</find>
       <find>spe</find>
+      <find>！</find>
+      <find>！！！！！</find>
+      <find>！！！！！--</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -398,34 +408,34 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="PlacementValidTest - 2017.08.29 at 21h 40m 17s.xml">
+    <history-entry file="PlacementValidTest - 2017.08.30 at 00h 37m 22s.xml">
       <configuration name="PlacementValidTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="PlacementValidTest - 2017.08.29 at 21h 41m 03s.xml">
+    <history-entry file="PlacementValidTest - 2017.08.30 at 00h 41m 26s.xml">
       <configuration name="PlacementValidTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="PlacementValidTest - 2017.08.29 at 21h 43m 18s.xml">
+    <history-entry file="PlacementValidTest - 2017.08.30 at 00h 41m 45s.xml">
       <configuration name="PlacementValidTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="PlacementValidTest - 2017.08.29 at 21h 44m 30s.xml">
+    <history-entry file="PlacementValidTest - 2017.08.30 at 00h 43m 53s.xml">
       <configuration name="PlacementValidTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="PlacementValidTest - 2017.08.29 at 21h 50m 59s.xml">
+    <history-entry file="PlacementValidTest - 2017.08.30 at 00h 45m 12s.xml">
       <configuration name="PlacementValidTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="PlacementValidTest - 2017.08.29 at 21h 52m 51s.xml">
+    <history-entry file="PlacementValidTest - 2017.08.30 at 00h 46m 24s.xml">
       <configuration name="PlacementValidTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="PlacementValidTest - 2017.08.29 at 22h 02m 42s.xml">
+    <history-entry file="PlacementValidTest - 2017.08.30 at 00h 46m 43s.xml">
       <configuration name="PlacementValidTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="PlacementValidTest - 2017.08.29 at 22h 03m 37s.xml">
+    <history-entry file="PlacementValidTest - 2017.08.30 at 00h 49m 14s.xml">
       <configuration name="PlacementValidTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="PlacementValidTest - 2017.08.29 at 22h 46m 58s.xml">
+    <history-entry file="PlacementValidTest - 2017.08.30 at 00h 49m 30s.xml">
       <configuration name="PlacementValidTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="PlacementValidTest - 2017.08.29 at 22h 49m 30s.xml">
+    <history-entry file="PlacementValidTest - 2017.08.30 at 00h 50m 31s.xml">
       <configuration name="PlacementValidTest" configurationId="JUnit" />
     </history-entry>
   </component>
@@ -451,10 +461,10 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.041990668" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.45567653" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Execute Anonymous" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6687403" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2830482" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.0812749" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -833,18 +843,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/comp1140/ass2/PlacementValidTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="46" column="9" lean-forward="true" selection-start-line="46" selection-start-column="9" selection-end-line="46" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/Viewer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="267">
           <caret line="80" column="38" lean-forward="false" selection-start-line="80" selection-start-column="38" selection-end-line="80" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/comp1140/ass2/PlacementValidTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -861,8 +871,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/PatchworkGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="440" column="17" lean-forward="false" selection-start-line="440" selection-start-column="17" selection-end-line="440" selection-end-column="17" />
+        <state relative-caret-position="22">
+          <caret line="448" column="23" lean-forward="false" selection-start-line="448" selection-start-column="23" selection-end-line="448" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

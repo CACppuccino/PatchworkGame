@@ -28,7 +28,7 @@ public class PatchworkGame {
             {3,3},{4,3},{5,2},{3,3},{4,2},{4,3},{3,2},{4,3},{3,3},{2,3},{4,2},{2,3},{3,3},{1,1}};
     //{row,col}
     public static final int [][][] tileSpace = {{{0,0},{1,0}},{{0,1},{1,0},{1,1}},{{0,1},{1,0},{1,1}},
-            {{0,0},{1,0},{2,0}},{{0,1},{1,0},{1,1},{2,0}},{{0,0},{1,0},{2,0},{1,1},{1,2}},{{1,0},{1,1},{1,2},{1,3},{1,4},{0,2},{2,2}},
+            {{0,0},{1,0},{2,0}},{{0,1},{1,0},{1,1},{2,0}},{{0,0},{1,0},{2,0},{1,1},{2,1}},{{1,0},{1,1},{1,2},{1,3},{1,4},{0,2},{2,2}},
             {{0,1},{1,0},{1,1},{1,2},{2,1},{3,1}},{{0,0},{0,1},{1,0},{1,1}},{{0,0},{1,0},{2,0},{1,1},{2,1},
             {3,1}},{{1,0},{0,1},{1,1},{2,1}},{{0,0},{3,0},{0,1},{1,1},{2,1},{3,1}},{{0,0},{1,0},{2,0},{3,0}},
             {{0,0},{0,1},{0,2},{0,3},{0,4}},{{0,0},{1,0},{2,0},{3,0},{2,1}},{{0,0},{1,0},{2,0},{3,0},{2,1},{1,1}},
@@ -36,7 +36,7 @@ public class PatchworkGame {
             {{1,0},{0,1},{1,1},{2,1},{1,2}},{{0,0},{1,0},{2,0},{1,1},{0,2},{1,2},{2,2}},{{1,0},{2,0},{0,1},{1,1},{2,1},{3,1},{1,2},{2,2}},
             {{3,0},{0,1},{1,1},{2,1},{3,1}},{{2,0},{0,1},{1,1},{2,1},{2,2}},{{0,0},{1,0},{0,1},{1,1},{2,1},{3,1}},
             {{0,0},{0,1},{1,1},{2,1},{3,1},{3,2}},{{0,0},{1,0},{2,0},{2,1}},{{3,0},{0,1},{1,1},{2,1},{3,1},{3,2}},
-            {{0,0},{1,0},{1,1},{2,1},{2,2}},{{0,0},{1,0},{1,1},{0,2},{1,2}},{{2,0},{3,0},{0,1},{1,2},{2,1}},
+            {{0,0},{1,0},{1,1},{2,1},{2,2}},{{0,0},{1,0},{1,1},{0,2},{1,2}},{{2,0},{3,0},{0,1},{1,1},{2,1}},
             {{1,0},{0,1},{1,1},{0,2}},{{2,0},{0,1},{1,1},{2,1},{0,2},{1,2}},{{0,0}}};
 
     public static final int [] tileTimetoken = {1,3,1,2,2,2,4,3,5,
@@ -49,6 +49,7 @@ public class PatchworkGame {
                                               2,0,1,2,2,3,0,1,
                                               2,3,0,1,3,3,0};
 
+    static int fals;
     /**
      * Determine whether a patch placement is well-formed according to the following:
      * - either it is the single character string ".", or
@@ -179,9 +180,11 @@ public class PatchworkGame {
         if (!PatchworkGame.isPlacementWellFormed(placement))   {
             System.out.println("isPlacementWellFormed");return false;}
         int aPlc = 0;
+
         LinkedList<Character> partches = new LinkedList<>();
         if (patchCircle==null || patchCircle.isEmpty()) {
             System.out.println("circle null");return false;}
+        fals++;
         for (int i=0;i<patchCircle.length();i++){
             if (patchCircle.charAt(i)=='A')
                 aPlc=i+1;
@@ -229,7 +232,7 @@ public class PatchworkGame {
                 }
 
 
-                char[] three = {partches.get(aPlc), partches.get((aPlc + 1) % partches.size()), partches.get((aPlc + 2) % partches.size())};
+                char[] three = {partches.get(aPlc%partches.size()), partches.get((aPlc + 1) % partches.size()), partches.get((aPlc + 2) % partches.size())};
                 //move the nertral token
                 //if the parches left in the partches circle doesn't contain the current
                 //wanted partches,then is invalid
@@ -241,7 +244,9 @@ public class PatchworkGame {
 
 
                     if (!(plc.charAt(0) == three[0] || plc.charAt(0) == three[1] || plc.charAt(0) == three[2])) {
-                        System.out.println("three error:" + plc.charAt(0) + " " + patchCircle);
+                        System.out.println("three error:" + plc.charAt(0) + " " + patchCircle+" "+three[0]+" "+three[1]+" "+three[2]);
+                        for (int j=0;j<partches.size();j++)
+                            System.out.println(partches.get(j));
                         return false;
                     } else if (plc.charAt(0) == three[0]) {
                         partches.remove(aPlc);
@@ -253,9 +258,10 @@ public class PatchworkGame {
                         partches.remove((aPlc + 2)%partches.size());
                         aPlc += 2;
                     }
-                    System.out.println("aPlc" + aPlc);
+
                     //if token goes to the end, make it back to the beginning
-                    aPlc = aPlc % partches.size();
+                    aPlc = aPlc > partches.size()? aPlc %(partches.size()+1):aPlc%partches.size();//aPlc >= partches.size()? (aPlc % partches.size())-1:aPlc;
+                    System.out.println("aPlc" + aPlc+" "+partches.size());
                 }
 
                 i = i + 3;
@@ -438,9 +444,13 @@ public class PatchworkGame {
             System.out.println();
             if (!player.squiltBoard[xs[0]-1][xs[1]-1])
                 player.squiltBoard[xs[0]-1][xs[1]-1] = true;
-            else{
+            else {
                 player.printSquiltBoard();
-                return false;}
+//                fals++;
+            if (fals<=7)
+                return false;
+            }
+
         }
         player.printSquiltBoard();
 
