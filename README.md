@@ -250,7 +250,7 @@ the time board.
 
 ![game](assets/BDCAUAAAEACA.png)
 
-##### BDCAUAAAEACAdBEB
+##### BDCAUAAAEACAdBDB
 Now Player 2's token is in front, so it is Player 1's turn again.
 She places the 'd' tile at location 'BD', rotated 90 degrees clockwise
 (rotation 'B').
