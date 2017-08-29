@@ -27,6 +27,9 @@ public class State {
 // then the patch i,i+1,i+2 should be displayed in the candidate area.
     int ntState = 0;
 
+    //for special h to be paied out
+    boolean specialH = false;
+
     //showing whether the player is on the top
     boolean onTop = false;
 
@@ -49,6 +52,8 @@ public class State {
 // the one fall behind should take the turn. If they are in the same square, the player who
 // last moved to that space takes the turn.
     public static int check_turn(State p1,State p2){
+        if (p1.specialH)    return 1;
+        else if (p2.specialH) return 2;
         if (p1.timecount>p2.timecount)
             return 2;
         else if (p1.timecount<p2.timecount)
@@ -63,17 +68,22 @@ public class State {
     public static void advanced(State p1,State p2){
         int t =check_turn(p1,p2);
         int diff =0;
+
         if (t==1) {
             //be infront of the p2
             diff = p2.timecount+1<=GRIDS?(p2.timecount-p1.timecount)+1:GRIDS-p2.timecount;
             p1.buttonCount += diff;
+            State.specialEvent(p1,p1.timecount,diff);
             p1.timecount = p2.timecount + 1 > GRIDS ? GRIDS : p2.timecount + 1;
-
+            System.out.println("player "+t+"make advance "+diff+"steps and now in "+p1.timecount);
         }
         else {
             diff = p1.timecount+1<=GRIDS?(p1.timecount-p2.timecount)+1:GRIDS-p1.timecount;
+
             p2.buttonCount += diff;
+            State.specialEvent(p2,p2.timecount,diff);
             p2.timecount = p1.timecount + 1 > GRIDS ? GRIDS : p1.timecount + 1;
+            System.out.println("player "+t+"make advance "+diff+"steps and now in "+p2.timecount);
         }
     }
 
@@ -87,8 +97,18 @@ public class State {
         final int specialButton= PatchworkGame.tileButton[index];
 
         int t = check_turn(p1,p2);
-        System.out.println("player"+t+"buying "+p+" hosts"+(t==1?p1.buttonCount:p2.buttonCount)+"and cost him"+buttonDec);
+        System.out.println("player "+t+" buying "+p+" hosts"+(t==1?p1.buttonCount:p2.buttonCount)+"and cost him"+buttonDec);
         if (t==1) {
+            if (p=='h'){
+                if (p1.tiles.size()>0){
+                    p1.tiles.remove(p1.tiles.size()-1);
+                    p1.specialH = false;
+                    throw new Error("spend a h");
+                }
+                else {
+                    throw new Error("no enough h");
+                }
+            }
             p1.buttonCount = p1.buttonCount - buttonDec;
             if (p1.buttonCount<0)
                 //suppose to notice the Viewer
@@ -97,14 +117,26 @@ public class State {
             specialEvent(p1,p1.timecount,timeInc);
             p1.timecount = p1.timecount+timeInc>GRIDS ? GRIDS : p1.timecount+timeInc;
             System.out.println("now get special Button "+p1.specialButton+" now get button"+p1.buttonCount);
+            System.out.println("make forward "+timeInc+" now stepping "+p1.timecount);
             //considering the timetoken overlap situation
             if (p1.timecount==p2.timecount)
             {
                 p1.onTop = true;
                 p2.onTop = false;
             }
+
         }
         else {
+            if (p=='h'){
+                if (p2.tiles.size()>0){
+                    p2.tiles.remove(p2.tiles.size()-1);
+                    p2.specialH = false;
+                    throw new Error("spend a h");
+                }
+                else {
+                    throw new Error("no enough h");
+                }
+            }
             p2.buttonCount = p2.buttonCount - buttonDec;
             if (p2.buttonCount<0)
                 //suppose to notice the Viewer
@@ -113,6 +145,8 @@ public class State {
             specialEvent(p2,p2.timecount,timeInc);
             p2.timecount = p2.timecount+timeInc>GRIDS ? GRIDS : p2.timecount+timeInc;
             System.out.println("now get special Button "+p2.specialButton+" now get button"+p2.buttonCount);
+            System.out.println("make forward "+timeInc+" now stepping "+p2.timecount);
+
             if (p1.timecount==p2.timecount)
             {
                 p2.onTop = true;
@@ -130,6 +164,8 @@ public class State {
             if (st>=start+1 && st<=start+steps)
                 player.tiles.add('h');
         }
+        if (player.tiles.size()>0)
+            player.specialH = true;
     }
     //    the functions is called to get two players' score,
 // first int is for player 1, second for player 2
