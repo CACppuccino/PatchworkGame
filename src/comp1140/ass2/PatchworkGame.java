@@ -199,6 +199,8 @@ public class PatchworkGame {
             else {
                 String plc = placement.substring(i, i + 4);
                 System.out.println("%%%%"+plc);
+                if (State.check_turn(p1,p2)==1) fstPlayer = true;
+                else fstPlayer = false;
                 if (fstPlayer) {
                     fstPlc = fstPlc + plc;
                     if ( !outOfBoard(plc, p1)) {
@@ -424,7 +426,7 @@ public class PatchworkGame {
         }
                     System.out.println("result after: "+Arrays.deepToString(result));
         for (int[] xs:result){
-            if (!(xs[0]>=1 && xs[0]<=10 && xs[1]>=1 && xs[1]<=10))
+            if (!(xs[0]>=1 && xs[0]<=9 && xs[1]>=1 && xs[1]<=9))
             {
                 for (int[] sxs:result){
                     System.out.println(sxs[0]+" "+sxs[1]);
@@ -433,15 +435,14 @@ public class PatchworkGame {
                 return false;
             }
             System.out.println("id:"+player.id);
-            player.printSquiltBoard();
             System.out.println();
             if (!player.squiltBoard[xs[0]-1][xs[1]-1])
                 player.squiltBoard[xs[0]-1][xs[1]-1] = true;
-            else
-                return false;
-            player.printSquiltBoard();
+            else{
+                player.printSquiltBoard();
+                return false;}
         }
-
+        player.printSquiltBoard();
 
         return true;
     }
