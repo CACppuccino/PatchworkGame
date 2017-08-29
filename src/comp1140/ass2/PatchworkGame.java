@@ -196,58 +196,66 @@ public class PatchworkGame {
                 State.advanced(p1,p2);
             }
             else {
-                    String plc = placement.substring(i,i+4);
-                    if (fstPlayer) {
-                        fstPlc = fstPlc + plc;
-                        if (!checkOverlap(fstPlc) || !outOfBoard(plc,1)) {
-                            System.out.println("out of Board/Overlap1"+checkOverlap(fstPlc)+outOfBoard(plc,2));
-                            return false;}
-                    }
-                    else {
-                        secPlc = secPlc + plc;
-                        if (!checkOverlap(secPlc) || !outOfBoard(plc,1)){
-                            System.out.println("out of Board/Overlap2"+checkOverlap(fstPlc)+outOfBoard(plc,2));
-                            return false;}
-                    }
-                    try {
-                        State.buyPartches(p1, p2, plc.charAt(0));
-                    }catch (Error e){
-                        System.out.println("buyparches error");
-                        System.out.println(p1.buttonCount+" "+p2.buttonCount);
+                String plc = placement.substring(i, i + 4);
+                System.out.println("%%%%"+plc);
+                if (fstPlayer) {
+                    fstPlc = fstPlc + plc;
+                    if (!checkOverlap(fstPlc) || !outOfBoard(plc, 1)) {
+                        System.out.println("out of Board/Overlap1" + checkOverlap(fstPlc) + outOfBoard(plc, 2));
                         return false;
                     }
+                } else {
+                    secPlc = secPlc + plc;
+                    if (!checkOverlap(secPlc) || !outOfBoard(plc, 1)) {
+                        System.out.println("out of Board/Overlap2" + checkOverlap(fstPlc) + outOfBoard(plc, 2));
+                        return false;
+                    }
+                }
+                try {
+                    State.buyPartches(p1, p2, plc.charAt(0));
+                } catch (Error e) {
+                    if (e.getMessage().equals("cant afford the tile" + plc.charAt(0))) {
+                        System.out.println("buyparches error");
+                        System.out.println(p1.buttonCount + " " + p2.buttonCount);
+                        return false;
+                    } else if (e.getMessage().equals("no enough h")) {
+                        System.out.println("no enough h");
+                        return false;
+                    }
+                }
 
 
-                    char[] three = {partches.get(aPlc),partches.get((aPlc+1)%partches.size()),partches.get((aPlc+2)%partches.size())};
-                    //move the nertral token
+                char[] three = {partches.get(aPlc), partches.get((aPlc + 1) % partches.size()), partches.get((aPlc + 2) % partches.size())};
+                //move the nertral token
                 //if the parches left in the partches circle doesn't contain the current
                 //wanted partches,then is invalid
+                if (plc.charAt(0) != 'h') {
                     if (!partches.contains(plc.charAt(0))) {
-                    System.out.println("not cotains anymore"+plc.charAt(0));
-                    return false;}
-
-                    if (!(plc.charAt(0)==three[0] ||plc.charAt(0)==three[1] || plc.charAt(0)==three[2]))
-                    {
-                        System.out.println("three error:"+plc.charAt(0)+" "+patchCircle);
+                        System.out.println("not cotains anymore" + plc.charAt(0));
                         return false;
                     }
-                    else if (plc.charAt(0)==three[0]){
+
+
+                    if (!(plc.charAt(0) == three[0] || plc.charAt(0) == three[1] || plc.charAt(0) == three[2])) {
+                        System.out.println("three error:" + plc.charAt(0) + " " + patchCircle);
+                        return false;
+                    } else if (plc.charAt(0) == three[0]) {
                         partches.remove(aPlc);
 
-                    }
-                    else if (plc.charAt(0)==three[1]) {
+                    } else if (plc.charAt(0) == three[1]) {
                         partches.remove(aPlc + 1);
-                        aPlc ++;
-                    }
-                    else {
+                        aPlc++;
+                    } else {
                         partches.remove(aPlc + 2);
-                        aPlc +=2;
+                        aPlc += 2;
                     }
-                System.out.println("aPlc"+aPlc);
+                    System.out.println("aPlc" + aPlc);
                     //if token goes to the end, make it back to the beginning
                     aPlc = aPlc % partches.size();
+                }
 
-                    i=i+3;
+                i = i + 3;
+
             }
         }
         return true;
@@ -355,19 +363,35 @@ public class PatchworkGame {
             System.out.println("rotation wrong"+rotate);
             return null;
         }
+        int[] topleft = expose[0];
+        for (int[] xs:expose){
+            if (topleft[0]>xs[0]) topleft[0] = xs[0];
+            if (topleft[1]>xs[1]) topleft[1] = xs[1];
+        }
+        topleft[0] = 0-topleft[0];
+        topleft[1] = 0-topleft[1];
+        for (int[] xs:expose){
+            xs[0] += topleft[0];
+            xs[1] += topleft[1];
+        }
         return expose;
     }
 
     private static boolean isValidOnePlacement(String placement){
-        if (placement.length()!=4)
+        if (placement.length()!=4) {
+//         throw new Error("invalid length"+placement.length());
             return false;
+        }
         char tile = placement.charAt(0),row = placement.charAt(2),col = placement.charAt(1),
                 rotate = placement.charAt(3);
         if (!((tile>='A'&& tile<='Z') || (tile>='a' && tile<='h')))
-            return false;
+//            throw new Error("tile wrong "+tile);
+             return false;
         else if (!(row>='A'&& row<='I'&& col>='A' && col<='I'))
+//            throw new Error("row col wrong"+row+" "+col);
             return false;
         else if (!(rotate>='A'&&rotate<='H'))
+//            throw new Error("rotate "+rotate+" "+placement);
             return false;
         return true;
     }
@@ -402,15 +426,8 @@ public class PatchworkGame {
             rotate = (char) ('A' + rotate - 'E');
             result = rotateHandle(rotate, flipHandle(tile, expo));
         }
-/*expo: [[1, 0], [2, 0], [0, 1], [1, 1], [1, 2], [2, 2]]
-result before: [[-1, 0], [-2, 0], [0, -1], [-1, -1], [-1, -2], [-2, -2]]
-result after: [[0, 5], [-2, 0], [0, -1], [-1, -1], [-1, -2], [-2, -2]]
-result before: [[0, 5], [-2, 0], [0, -1], [-1, -1], [-1, -2], [-2, -2]]
-result after: [[0, 5], [-1, 5], [0, -1], [-1, -1], [-1, -2], [-2, -2]]*/
-
-
         for (int[] xs:result){
-            System.out.println("result before: "+Arrays.deepToString(result));
+            System.out.println("result before: "+rotate+" "+Arrays.deepToString(result));
             xs[0] += rowN;xs[1] += colN;
             System.out.println("result after: "+Arrays.deepToString(result));
             if (!(xs[0]>=0 && xs[0]<=9 && xs[1]>=0 && xs[1]<=9))
