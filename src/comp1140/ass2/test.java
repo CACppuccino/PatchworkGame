@@ -18,7 +18,7 @@ import java.nio.file.Path;
 public class test{
     public static void main(String[] args) {
         String abc = "ABCD";
-        String s = abc.substring(0,3);
-        System.out.println(s);
+        char c= 'C';
+        System.out.println(abc.contains(String.valueOf(c)));
     }
 }
