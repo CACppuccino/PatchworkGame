@@ -25,6 +25,7 @@ public class PatchworkGame {
             {4,3},{2,2},{4,2},{3,2},{4,2},{4,1},{1,5},{4,2},{4,2},{3,3},{4,3},{3,2},{3,3},
             {3,3},{4,3},{5,2},{3,3},{4,2},{4,3},{3,2},{4,3},{3,3},{2,3},{4,2},{2,3},{3,3},{1,1}};
 
+    //{row,col}
     public static final int [][][] tileSpace = {{{0,0},{1,0}},{{0,1},{1,0},{1,1}},{{0,1},{1,0},{1,1}},
             {{0,0},{1,0},{2,0}},{{0,1},{1,0},{1,1},{2,0}},{{0,0},{1,0},{2,0},{1,1},{1,2}},{{1,0},{1,1},{1,2},{1,3},{1,4},{0,2},{2,2}},
             {{0,1},{1,0},{1,1},{1,2},{2,1},{3,1}},{{0,0},{0,1},{1,0},{1,1}},{{0,0},{1,0},{2,0},{1,1},{2,1},
@@ -131,7 +132,7 @@ public class PatchworkGame {
                     }
                     patchposition.add(i);
                     result = isPatchPlacementWellFormed(SubSting);
-                    if (result == true) {
+                    if (result) {
                         count = count + 1;
                     }
                     else
@@ -147,8 +148,7 @@ public class PatchworkGame {
         for ( int i = 0; i < patchposition.size();i++){
             for ( int j = i + 1;j < patchposition.size();j++){
                 if ( placement.charAt(patchposition.get(i)) == placement.charAt(patchposition.get(j)) && placement.charAt(patchposition.get(i)) != 'h'){
-                    result = false;
-                    return result;
+                    return false;
                 }
             }
         }
@@ -173,6 +173,8 @@ public class PatchworkGame {
     * */
     static boolean isPlacementValid(String patchCircle, String placement) {
         // FIXME Task 6: determine whether a placement is valid
+        System.out.println("&&&:"+placement);
+        System.out.println("###:"+patchCircle);
         if (!PatchworkGame.isPlacementWellFormed(placement))   {
             System.out.println("isPlacementWellFormed");return false;}
         int aPlc = 0;
@@ -181,7 +183,7 @@ public class PatchworkGame {
             System.out.println("circle null");return false;}
         for (int i=0;i<patchCircle.length();i++){
             if (patchCircle.charAt(i)=='A')
-                aPlc=i;
+                aPlc=i+1;
             partches.add(i,patchCircle.charAt(i));
         }
         boolean fstPlayer = true;
@@ -197,41 +199,54 @@ public class PatchworkGame {
                     String plc = placement.substring(i,i+4);
                     if (fstPlayer) {
                         fstPlc = fstPlc + plc;
-                        if (checkOverlap(fstPlc) || outOfBoard(plc)) {
-                            System.out.println("out of Board/Overlap"+checkOverlap(fstPlc)+outOfBoard(plc));
+                        if (!checkOverlap(fstPlc) || !outOfBoard(plc,1)) {
+                            System.out.println("out of Board/Overlap1"+checkOverlap(fstPlc)+outOfBoard(plc,2));
                             return false;}
                     }
                     else {
                         secPlc = secPlc + plc;
-                        if (checkOverlap(secPlc) || outOfBoard(plc)) return false;
+                        if (!checkOverlap(secPlc) || !outOfBoard(plc,1)){
+                            System.out.println("out of Board/Overlap2"+checkOverlap(fstPlc)+outOfBoard(plc,2));
+                            return false;}
                     }
                     try {
                         State.buyPartches(p1, p2, plc.charAt(0));
                     }catch (Error e){
+                        System.out.println("buyparches error");
+                        System.out.println(p1.buttonCount+" "+p2.buttonCount);
                         return false;
                     }
 
-                    char[] three = {partches.get(aPlc),partches.get(aPlc+1),partches.get(aPlc+2)};
+
+                    char[] three = {partches.get(aPlc),partches.get((aPlc+1)%partches.size()),partches.get((aPlc+2)%partches.size())};
                     //move the nertral token
+                //if the parches left in the partches circle doesn't contain the current
+                //wanted partches,then is invalid
+                    if (!partches.contains(plc.charAt(0))) {
+                    System.out.println("not cotains anymore"+plc.charAt(0));
+                    return false;}
+
                     if (!(plc.charAt(0)==three[0] ||plc.charAt(0)==three[1] || plc.charAt(0)==three[2]))
+                    {
+                        System.out.println("three error:"+plc.charAt(0)+" "+patchCircle);
                         return false;
+                    }
                     else if (plc.charAt(0)==three[0]){
                         partches.remove(aPlc);
-                        aPlc++;
+
                     }
                     else if (plc.charAt(0)==three[1]) {
                         partches.remove(aPlc + 1);
-                        aPlc +=2;
+                        aPlc ++;
                     }
                     else {
                         partches.remove(aPlc + 2);
-                        aPlc +=3;
+                        aPlc +=2;
                     }
+                System.out.println("aPlc"+aPlc);
                     //if token goes to the end, make it back to the beginning
                     aPlc = aPlc % partches.size();
-                    //if the parches left in the partches circle doesn't contain the current
-                //wanted partches,then is invalid
-                    if (!partches.contains(plc.charAt(0))) return false;
+
                     i=i+3;
             }
         }
@@ -346,7 +361,7 @@ public class PatchworkGame {
     private static boolean isValidOnePlacement(String placement){
         if (placement.length()!=4)
             return false;
-        char tile = placement.charAt(0),row = placement.charAt(1),col = placement.charAt(2),
+        char tile = placement.charAt(0),row = placement.charAt(2),col = placement.charAt(1),
                 rotate = placement.charAt(3);
         if (!((tile>='A'&& tile<='Z') || (tile>='a' && tile<='h')))
             return false;
@@ -356,20 +371,30 @@ public class PatchworkGame {
             return false;
         return true;
     }
+    private static int[][] getTileSpace(int index){return tileSpace[index];}
     //false for out of the board, true for in
-    public static boolean outOfBoard(String placement){
-        if (!isValidOnePlacement(placement))
-            return false;
+    public static boolean outOfBoard(String placement,int sign){
+        if (!isValidOnePlacement(placement)){
+            System.out.println("invalid one placement");
+            return false;}
 
-        char row = placement.charAt(1),col = placement.charAt(2);
+        char row = placement.charAt(2),col = placement.charAt(1);
         int rowN = row - 'A',colN = col -'A' ;
         char tile = placement.charAt(0);
         char rotate = placement.charAt(3);
         int index;
-        int[][] expo,result;
+        int[][] expo ,result;
         //get the relevant position and
         index = getIndex(tile);
-        expo = tileSpace[index];
+        expo =  new int[tileSpace[index].length][2];
+        for (int i=0;i<tileSpace[index].length;i++)
+        {
+            expo[i][0] = tileSpace[index][i][0];
+            expo[i][1] = tileSpace[index][i][1];
+        }
+
+        System.out.println("expo: "+Arrays.deepToString(expo));
+
         if (rotate >= 'A' && rotate <= 'D') {
             result=rotateHandle(rotate,expo);
         }
@@ -377,13 +402,25 @@ public class PatchworkGame {
             rotate = (char) ('A' + rotate - 'E');
             result = rotateHandle(rotate, flipHandle(tile, expo));
         }
-
+/*expo: [[1, 0], [2, 0], [0, 1], [1, 1], [1, 2], [2, 2]]
+result before: [[-1, 0], [-2, 0], [0, -1], [-1, -1], [-1, -2], [-2, -2]]
+result after: [[0, 5], [-2, 0], [0, -1], [-1, -1], [-1, -2], [-2, -2]]
+result before: [[0, 5], [-2, 0], [0, -1], [-1, -1], [-1, -2], [-2, -2]]
+result after: [[0, 5], [-1, 5], [0, -1], [-1, -1], [-1, -2], [-2, -2]]*/
 
 
         for (int[] xs:result){
+            System.out.println("result before: "+Arrays.deepToString(result));
             xs[0] += rowN;xs[1] += colN;
-            if (!(xs[0]>=0 && xs[0]<=7 && xs[1]>=0 && xs[1]<=7))
+            System.out.println("result after: "+Arrays.deepToString(result));
+            if (!(xs[0]>=0 && xs[0]<=9 && xs[1]>=0 && xs[1]<=9))
+            {
+                for (int[] sxs:result){
+                    System.out.println(sxs[0]+" "+sxs[1]);
+                }
+                System.out.println("out of board"+placement+" "+xs[0]+" "+xs[1]+"//"+sign);
                 return false;
+            }
         }
 
 

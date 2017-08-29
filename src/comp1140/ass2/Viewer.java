@@ -65,7 +65,7 @@ public class Viewer extends Application {
         }
         else {
 
-            char tileName = placement.charAt(0),col = placement.charAt(1),row = placement.charAt(2),
+            char tileName = placement.charAt(0),col = placement.charAt(2),row = placement.charAt(1),
                     rotate = placement.charAt(3) ;
 //            if ()
             /*get the image path*/
@@ -75,13 +75,13 @@ public class Viewer extends Application {
             ImageView tileView = new ImageView(tile);
             /*resize the tile to fit the squiltboard*/
             double w = tile.getWidth()/50,h = tile.getHeight()/50;
-            w *= 40; h*=40;
+            w *= 30; h*=30;
             tileView.setFitWidth(w);tileView.setFitHeight(h);
             /*rotation*/
             double r = rotation[rotate-'A'];
             tileView.setRotate(r);
             /* set the coordinate according to the input* */
-            int x = (row-'A')*40,y = (col - 'A')*40;
+            int x = (row-'A')*30,y = (col - 'A')*30;
             //indicates which board is going to be placed on the tile
 //            int player = State.check_turn()==1?0:601;
             int player = 1;
@@ -143,14 +143,14 @@ public class Viewer extends Application {
 
     //displays the squilt board for player 1.
     public void squiltBoard1(){
-        Rectangle[][] sq = new Rectangle[7][7];
+        Rectangle[][] sq = new Rectangle[9][9];
         HBox sq1 = new HBox();
         Random gen = new Random();
         sq1.setPrefSize(280,280);
-        for (int i=0;i<7;i++){
-            for (int j=0;j<7;j++){
-                sq[i][j] = new Rectangle(20+i*40,290+j*40,40,40);
-                sq[i][j].setStroke(Color.color((double)i/7,(double) j/7,(double)(i+j)/14));
+        for (int i=0;i<9;i++){
+            for (int j=0;j<9;j++){
+                sq[i][j] = new Rectangle(20+i*30,290+j*30,30,30);
+                sq[i][j].setStroke(Color.color((double)i/9,(double) j/9,(double)(i+j)/18));
                 sq[i][j].setFill(Color.WHEAT);
                 root.getChildren().add(sq[i][j]);
             }
@@ -161,13 +161,13 @@ public class Viewer extends Application {
 
     //displays the squilt board for player 2.
     public void squiltBoard2(){
-        Rectangle[][] sq2 = new Rectangle[7][7];
+        Rectangle[][] sq2 = new Rectangle[9][9];
         HBox sq1 = new HBox();
         sq1.setPrefSize(280,280);
-        for (int i=0;i<7;i++){
-            for (int j=0;j<7;j++){
-                sq2[i][j] = new Rectangle(621+i*40,290+j*40,40,40);
-                sq2[i][j].setStroke(Color.color((double)i/7,(double) j/7,(double)(i+j)/14));
+        for (int i=0;i<9;i++){
+            for (int j=0;j<9;j++){
+                sq2[i][j] = new Rectangle(621+i*30,290+j*30,30,30);
+                sq2[i][j].setStroke(Color.color((double)i/9,(double) j/9,(double)(i+j)/18));
                 root.getChildren().add(sq2[i][j]);
             }
         }

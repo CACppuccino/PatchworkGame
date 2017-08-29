@@ -14,7 +14,7 @@ public class State {
     int timecount = 0;
 
 //    calculating the button of each player holds
-    int buttonCount = 0;
+    int buttonCount = 5;
 
     // how many buttons should a player be rewarded each special event of button event
     int specialButton = 0;
@@ -62,12 +62,19 @@ public class State {
 
     public static void advanced(State p1,State p2){
         int t =check_turn(p1,p2);
-        if (t==1)
+        int diff =0;
+        if (t==1) {
             //be infront of the p2
-            p1.timecount = p2.timecount + 1 > GRIDS ? GRIDS:p2.timecount+1;
-        else
-            p2.timecount = p1.timecount + 1 > GRIDS ? GRIDS:p1.timecount+1;
+            diff = p2.timecount+1<=GRIDS?(p2.timecount-p1.timecount)+1:GRIDS-p2.timecount;
+            p1.buttonCount += diff;
+            p1.timecount = p2.timecount + 1 > GRIDS ? GRIDS : p2.timecount + 1;
 
+        }
+        else {
+            diff = p1.timecount+1<=GRIDS?(p1.timecount-p2.timecount)+1:GRIDS-p1.timecount;
+            p2.buttonCount += diff;
+            p2.timecount = p1.timecount + 1 > GRIDS ? GRIDS : p1.timecount + 1;
+        }
     }
 
     public static void buyPartches(State p1,State p2,char p){
@@ -75,19 +82,21 @@ public class State {
         if (p>='A' && p<='Z') index = p-'A';
         else    index = p-'a'+26;
         //get the time decrement from the array
-        int timeInc = PatchworkGame.tileTimetoken[index];
-        int buttonDec = PatchworkGame.tileCost[index];
-        int specialButton= PatchworkGame.tileButton[index];
+        final int timeInc = PatchworkGame.tileTimetoken[index];
+        final int buttonDec = PatchworkGame.tileCost[index];
+        final int specialButton= PatchworkGame.tileButton[index];
 
         int t = check_turn(p1,p2);
+        System.out.println("player"+t+"buying "+p+" hosts"+(t==1?p1.buttonCount:p2.buttonCount)+"and cost him"+buttonDec);
         if (t==1) {
             p1.buttonCount = p1.buttonCount - buttonDec;
             if (p1.buttonCount<0)
                 //suppose to notice the Viewer
-                throw new Error("cant afford the tile");
+                throw new Error("cant afford the tile"+p);
+            p1.specialButton += specialButton;
             specialEvent(p1,p1.timecount,timeInc);
             p1.timecount = p1.timecount+timeInc>GRIDS ? GRIDS : p1.timecount+timeInc;
-            p1.specialButton += specialButton;
+            System.out.println("now get special Button "+p1.specialButton+" now get button"+p1.buttonCount);
             //considering the timetoken overlap situation
             if (p1.timecount==p2.timecount)
             {
@@ -99,10 +108,11 @@ public class State {
             p2.buttonCount = p2.buttonCount - buttonDec;
             if (p2.buttonCount<0)
                 //suppose to notice the Viewer
-                throw new Error("cant afford the tile");
+                throw new Error("cant afford the tile"+p);
+            p2.specialButton += specialButton;
             specialEvent(p2,p2.timecount,timeInc);
             p2.timecount = p2.timecount+timeInc>GRIDS ? GRIDS : p2.timecount+timeInc;
-            p2.specialButton += specialButton;
+            System.out.println("now get special Button "+p2.specialButton+" now get button"+p2.buttonCount);
             if (p1.timecount==p2.timecount)
             {
                 p2.onTop = true;
@@ -113,11 +123,11 @@ public class State {
     }
     public static void specialEvent(State player,int start,int steps){
         for (int sb:PatchworkGame.specialButton){
-            if (sb>=start+1 && sb<=steps)
+            if (sb>=start+1 && sb<=start+steps)
                 player.buttonCount += player.specialButton;
         }
         for (int st:PatchworkGame.specialTile){
-            if (st>=start+1 && st<=steps)
+            if (st>=start+1 && st<=start+steps)
                 player.tiles.add('h');
         }
     }
