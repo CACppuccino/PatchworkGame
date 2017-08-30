@@ -6,6 +6,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ObjectPropertyBase;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Point3D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -17,6 +18,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 
 import java.awt.*;
@@ -51,7 +53,7 @@ public class Viewer extends Application {
      * @param placement A valid placement string
      */
     void makePlacement(String placement) {//throws Exception  {
-        final double[] rotation = {0,90,180,270};
+        final double[] rotation = {0,90,180,270,0,90,180,270};
         // FIXME Task 5: implement the simple placement viewer
         HBox mPlacement = new HBox();
         Label error = new Label("invalide placement");
@@ -65,28 +67,39 @@ public class Viewer extends Application {
         }
         else {
 
-            char tileName = placement.charAt(0),col = placement.charAt(2),row = placement.charAt(1),
-                    rotate = placement.charAt(3) ;
+            char tileName = placement.charAt(0), col = placement.charAt(2), row = placement.charAt(1),
+                    rotate = placement.charAt(3);
 //            if ()
             /*get the image path*/
-            String tileN = tileName+(tileName>'a' && tileName<'h'?"_.png":".png");
-            String tilePath = "file:"+(new File("src/comp1140/ass2/gui/assets/"+tileN)).getAbsolutePath();
+            String tileN = tileName + (tileName > 'a' && tileName < 'h' ? "_.png" : ".png");
+            String tilePath = "file:" + (new File("src/comp1140/ass2/gui/assets/" + tileN)).getAbsolutePath();
             Image tile = new Image(tilePath);
             ImageView tileView = new ImageView(tile);
             /*resize the tile to fit the squiltboard*/
-            double w = tile.getWidth()/50,h = tile.getHeight()/50;
-            w *= 30; h*=30;
-            tileView.setFitWidth(w);tileView.setFitHeight(h);
+            double w = tile.getWidth() / 50, h = tile.getHeight() / 50;
+            w *= 30;
+            h *= 30;
+            tileView.setFitWidth(w);
+            tileView.setFitHeight(h);
             /*rotation*/
             /*haven't included the E-H*/
-            double r = rotation[rotate-'A'];
+            double r = rotation[rotate - 'A'];
+            if (rotate>'D'){
+                tileView.setScaleX(-1);
+            }
             tileView.setRotate(r);
             /* set the coordinate according to the input* */
-            int x = (row-'A')*30,y = (col - 'A')*30;
+            int x = (row - 'A') * 30;
+            int y = (col - 'A') * 30;
+            if ((int) (r / 90) % 2 == 1) {
+                x += (int)(h/2-w/2);
+                y += (int)(w/2-h/2);
+            }
             //indicates which board is going to be placed on the tile
 //            int player = State.check_turn()==1?0:601;
             int player = 1;
-            mPlacement.setLayoutX(player+20+x);mPlacement.setLayoutY(290+y);
+            mPlacement.setLayoutX(player + 20 + x);
+            mPlacement.setLayoutY(290 + y);
             mPlacement.getChildren().add(tileView);
 
         }
