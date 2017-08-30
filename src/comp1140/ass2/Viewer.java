@@ -55,7 +55,7 @@ public class Viewer extends Application {
     void makePlacement(String placement) {
         controls.getChildren().clear();
         for (int i = 0; i < placement.length(); ) {
-            if (placement.charAt(0) == '.') {
+            if (placement.charAt(i) == '.') {
                 i++;
                 continue;
             }
