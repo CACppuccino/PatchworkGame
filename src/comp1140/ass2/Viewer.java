@@ -6,6 +6,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ObjectPropertyBase;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Point3D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
@@ -52,60 +53,58 @@ public class Viewer extends Application {
      *
      * @param placement A valid placement string
      */
-    void makePlacement(String placement) {//throws Exception  {
-        final double[] rotation = {0,90,180,270};
-        // FIXME Task 5: implement the simple placement viewer
-        HBox mPlacement = new HBox();
-        Label error = new Label("invalide placement");
-        if (placement.length()!=4 )
-        {
-//            throw new Exception("invalid placement");
-            error.setTextFill(Color.valueOf("#3367D6"));
-            mPlacement.getChildren().add(error);
-            mPlacement.setLayoutX(300);
-            mPlacement.setLayoutY(VIEWER_HEIGHT-30);
-        }
-        else {
+    void makePlacement(String placement) {
+        controls.getChildren().clear();
+        for (int i = 0; i < placement.length(); ) {
+            if (placement.charAt(0) == '.') {
+                i++;
+                continue;
+            }
+            String p = placement.substring(i, i + 4);
+            final double[] rotation = {0, 90, 180, 270, 0, 90, 180, 270};
+            // FIXME Task 5: implement the simple placement viewer
+            HBox mPlacement = new HBox();
+            Label error = new Label("invalide placement");
 
-            char tileName = placement.charAt(0),col = placement.charAt(2),row = placement.charAt(1),
-                    rotate = placement.charAt(3) ;
+            char tileName = p.charAt(0), col = p.charAt(2), row = p.charAt(1),
+                    rotate = p.charAt(3);
 //            if ()
             /*get the image path*/
-            String tileN = tileName+(tileName>'a' && tileName<'h'?"_.png":".png");
-            String tilePath = "file:"+(new File("src/comp1140/ass2/gui/assets/"+tileN)).getAbsolutePath();
+            String tileN = tileName + (tileName > 'a' && tileName < 'h' ? "_.png" : ".png");
+            String tilePath = "file:" + (new File("src/comp1140/ass2/gui/assets/" + tileN)).getAbsolutePath();
             Image tile = new Image(tilePath);
             ImageView tileView = new ImageView(tile);
             /*resize the tile to fit the squiltboard*/
-            double w = tile.getWidth()/50,h = tile.getHeight()/50;
-            w *= 30; h*=30;
-            if (rotate>='E' && rotate<='H')
-            {
-                tileView.setRotationAxis(Rotate.Y_AXIS);
-                rotate = (char)(rotate-'E'+'A');
-                tileView.setRotate(180);
-            }
-            tileView.setFitWidth(w);tileView.setFitHeight(h);
+
+            double w = tile.getWidth() / 50, h = tile.getHeight() / 50;
+            w *= 30;
+            h *= 30;
+            tileView.setFitWidth(w);
+            tileView.setFitHeight(h);
             /*rotation*/
             /*haven't included the E-H*/
-            ObjectProperty<Image> tmp = tileView.imageProperty();
-//            ImageView tmp = new ImageView();
-            System.out.println(rotate);
-            double r = rotation[rotate-'A'];
-            ImageView tileNView = new ImageView();
-            tileNView.setImage(tmp.getValue());
-//            tileNView.setRotate(r);
+            double r = rotation[rotate - 'A'];
+            if (rotate > 'D') {
+                tileView.setScaleX(-1);
+            }
+            tileView.setRotate(r);
             /* set the coordinate according to the input* */
-            int x = (row-'A')*30,y = (col - 'A')*30;
-            tileNView.setFitHeight(h);tileNView.setFitWidth(w);
+            int x = (row - 'A') * 30;
+            int y = (col - 'A') * 30;
+            if ((int) (r / 90) % 2 == 1) {
+                x += (int) (h / 2 - w / 2);
+                y += (int) (w / 2 - h / 2);
+            }
             //indicates which board is going to be placed on the tile
-//            int player = State.check_turn()==1?0:601;
+            //int player = State.check_turn()==1?0:601;
             int player = 1;
-            mPlacement.setLayoutX(player+20+x);mPlacement.setLayoutY(290+y);
+            mPlacement.setLayoutX(player + 20 + x);
+            mPlacement.setLayoutY(290 + y);
+            mPlacement.getChildren().add(tileView);
 
-            mPlacement.getChildren().add(tileNView);
-
+            controls.getChildren().add(mPlacement);
+            i += 4;
         }
-        controls.getChildren().add(mPlacement);
     }
 
 
@@ -128,7 +127,7 @@ public class Viewer extends Application {
         hb.setSpacing(10);
         hb.setLayoutX(250);
         hb.setLayoutY(VIEWER_HEIGHT - 50);
-        controls.getChildren().add(hb);
+        root.getChildren().add(hb);
         root.getChildren().add(controls);
 //        root.getChildren().add(sqiltBoard);
     }
@@ -137,6 +136,7 @@ public class Viewer extends Application {
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Patchwork Viewer");
         Scene scene = new Scene(root, VIEWER_WIDTH, VIEWER_HEIGHT);
+        root.getChildren().add(sqiltBoard);
         timeBoard();
         timeToken1(0);
         squiltBoard1();
@@ -203,7 +203,7 @@ public class Viewer extends Application {
         timeboard.getChildren().add(tbView);
         timeboard.setLayoutX(331.5);
         timeboard.setLayoutY(290);
-        controls.getChildren().add(timeboard);
+        root.getChildren().add(timeboard);
 
     }
 

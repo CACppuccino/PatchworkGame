@@ -447,7 +447,7 @@ public class PatchworkGame {
             else {
                 player.printSquiltBoard();
 //                fals++;
-            if (fals<=7)
+//            if (fals<=7)
                 return false;
             }
 
