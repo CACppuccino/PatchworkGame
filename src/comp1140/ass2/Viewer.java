@@ -52,23 +52,21 @@ public class Viewer extends Application {
      *
      * @param placement A valid placement string
      */
-    void makePlacement(String placement) {//throws Exception  {
-        final double[] rotation = {0,90,180,270,0,90,180,270};
-        // FIXME Task 5: implement the simple placement viewer
-        HBox mPlacement = new HBox();
-        Label error = new Label("invalide placement");
-        if (placement.length()!=4 )
-        {
-//            throw new Exception("invalid placement");
-            error.setTextFill(Color.valueOf("#3367D6"));
-            mPlacement.getChildren().add(error);
-            mPlacement.setLayoutX(300);
-            mPlacement.setLayoutY(VIEWER_HEIGHT-30);
-        }
-        else {
+    void makePlacement(String placement) {
+        controls.getChildren().clear();
+        for (int i = 0; i < placement.length(); ) {
+            if (placement.charAt(0) == '.') {
+                i++;
+                continue;
+            }
+            String p = placement.substring(i, i + 4);
+            final double[] rotation = {0, 90, 180, 270, 0, 90, 180, 270};
+            // FIXME Task 5: implement the simple placement viewer
+            HBox mPlacement = new HBox();
+            Label error = new Label("invalide placement");
 
-            char tileName = placement.charAt(0), col = placement.charAt(2), row = placement.charAt(1),
-                    rotate = placement.charAt(3);
+            char tileName = p.charAt(0), col = p.charAt(2), row = p.charAt(1),
+                    rotate = p.charAt(3);
 //            if ()
             /*get the image path*/
             String tileN = tileName + (tileName > 'a' && tileName < 'h' ? "_.png" : ".png");
@@ -84,7 +82,7 @@ public class Viewer extends Application {
             /*rotation*/
             /*haven't included the E-H*/
             double r = rotation[rotate - 'A'];
-            if (rotate>'D'){
+            if (rotate > 'D') {
                 tileView.setScaleX(-1);
             }
             tileView.setRotate(r);
@@ -92,18 +90,20 @@ public class Viewer extends Application {
             int x = (row - 'A') * 30;
             int y = (col - 'A') * 30;
             if ((int) (r / 90) % 2 == 1) {
-                x += (int)(h/2-w/2);
-                y += (int)(w/2-h/2);
+                x += (int) (h / 2 - w / 2);
+                y += (int) (w / 2 - h / 2);
             }
             //indicates which board is going to be placed on the tile
-//            int player = State.check_turn()==1?0:601;
+            //int player = State.check_turn()==1?0:601;
             int player = 1;
             mPlacement.setLayoutX(player + 20 + x);
             mPlacement.setLayoutY(290 + y);
             mPlacement.getChildren().add(tileView);
 
+
+            controls.getChildren().add(mPlacement);
+            i += 4;
         }
-        controls.getChildren().add(mPlacement);
     }
 
 
@@ -126,7 +126,7 @@ public class Viewer extends Application {
         hb.setSpacing(10);
         hb.setLayoutX(250);
         hb.setLayoutY(VIEWER_HEIGHT - 50);
-        controls.getChildren().add(hb);
+        root.getChildren().add(hb);
         root.getChildren().add(controls);
 //        root.getChildren().add(sqiltBoard);
     }
@@ -135,6 +135,7 @@ public class Viewer extends Application {
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Patchwork Viewer");
         Scene scene = new Scene(root, VIEWER_WIDTH, VIEWER_HEIGHT);
+        root.getChildren().add(sqiltBoard);
         timeBoard();
         timeToken1(0);
         squiltBoard1();
@@ -201,7 +202,7 @@ public class Viewer extends Application {
         timeboard.getChildren().add(tbView);
         timeboard.setLayoutX(331.5);
         timeboard.setLayoutY(290);
-        controls.getChildren().add(timeboard);
+        root.getChildren().add(timeboard);
 
     }
 
