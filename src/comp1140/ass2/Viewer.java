@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -17,6 +18,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 
 import java.awt.*;
@@ -76,18 +78,31 @@ public class Viewer extends Application {
             /*resize the tile to fit the squiltboard*/
             double w = tile.getWidth()/50,h = tile.getHeight()/50;
             w *= 30; h*=30;
+            if (rotate>='E' && rotate<='H')
+            {
+                tileView.setRotationAxis(Rotate.Y_AXIS);
+                rotate = (char)(rotate-'E'+'A');
+                tileView.setRotate(180);
+            }
             tileView.setFitWidth(w);tileView.setFitHeight(h);
             /*rotation*/
             /*haven't included the E-H*/
+            ObjectProperty<Image> tmp = tileView.imageProperty();
+//            ImageView tmp = new ImageView();
+            System.out.println(rotate);
             double r = rotation[rotate-'A'];
-            tileView.setRotate(r);
+            ImageView tileNView = new ImageView();
+            tileNView.setImage(tmp.getValue());
+//            tileNView.setRotate(r);
             /* set the coordinate according to the input* */
             int x = (row-'A')*30,y = (col - 'A')*30;
+            tileNView.setFitHeight(h);tileNView.setFitWidth(w);
             //indicates which board is going to be placed on the tile
 //            int player = State.check_turn()==1?0:601;
             int player = 1;
             mPlacement.setLayoutX(player+20+x);mPlacement.setLayoutY(290+y);
-            mPlacement.getChildren().add(tileView);
+
+            mPlacement.getChildren().add(tileNView);
 
         }
         controls.getChildren().add(mPlacement);
