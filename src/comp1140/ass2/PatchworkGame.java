@@ -175,8 +175,8 @@ public class PatchworkGame {
     * */
     static boolean isPlacementValid(String patchCircle, String placement) {
         // FIXME Task 6: determine whether a placement is valid
-        System.out.println("&&&:"+placement);
-        System.out.println("###:"+patchCircle);
+//        System.out.println("&&&:"+placement);
+//        System.out.println("###:"+patchCircle);
         if (!PatchworkGame.isPlacementWellFormed(placement))   {
             System.out.println("isPlacementWellFormed");return false;}
         int aPlc = 0;
@@ -201,7 +201,7 @@ public class PatchworkGame {
             }
             else {
                 String plc = placement.substring(i, i + 4);
-                System.out.println("%%%%"+plc);
+//                System.out.println("%%%%"+plc);
                 if (State.check_turn(p1,p2)==1) fstPlayer = true;
                 else fstPlayer = false;
                 if (fstPlayer) {
@@ -261,7 +261,7 @@ public class PatchworkGame {
 
                     //if token goes to the end, make it back to the beginning
                     aPlc = aPlc > partches.size()? aPlc %(partches.size()+1):aPlc%partches.size();//aPlc >= partches.size()? (aPlc % partches.size())-1:aPlc;
-                    System.out.println("aPlc" + aPlc+" "+partches.size());
+//                    System.out.println("aPlc" + aPlc+" "+partches.size());
                 }
 
                 i = i + 3;
@@ -312,15 +312,19 @@ public class PatchworkGame {
         }
 
 
-        System.out.println("copy:"+index+" "+Arrays.deepToString(copy));
         //flip on tiles that width is 2
         if (tileCover[index][1]==2)
             for (int[] xs:copy)
                 xs[1] = (xs[1]==1?2:1);
         //flip on tiles that width is 3
-        else
-            for (int[] xs:copy)
-                xs[1] = (xs[1]==1?3:1);
+        else {
+            for (int[] xs : copy) {
+                if (xs[1]==1) xs[1]=3;
+                else if (xs[1]==3) xs[1]=1;
+            }
+
+        }
+//        System.out.println("flip:"+index+" "+Arrays.deepToString(copy));
     return copy;
     }
     private static int getIndex(char tile){
@@ -371,6 +375,7 @@ public class PatchworkGame {
             xs[0] += topleft[0];
             xs[1] += topleft[1];
         }
+//        System.out.println("rotate:"+Arrays.deepToString(expose));
         return expose;
     }
 
@@ -414,7 +419,7 @@ public class PatchworkGame {
             expo[i][1] = tileSpace[index][i][1]+1;
         }
 
-        System.out.println("expo: "+Arrays.deepToString(expo));
+//        System.out.println("expo: "+Arrays.deepToString(expo));
 
         if (rotate >= 'A' && rotate <= 'D') {
             result=rotateHandle(rotate,expo);
@@ -430,18 +435,18 @@ public class PatchworkGame {
             xs[1] += colN;
 //            System.out.println("result after: "+Arrays.deepToString(result));
         }
-                    System.out.println("result after: "+Arrays.deepToString(result));
+//                    System.out.println("result after: "+Arrays.deepToString(result));
         for (int[] xs:result){
             if (!(xs[0]>=1 && xs[0]<=9 && xs[1]>=1 && xs[1]<=9))
             {
-                for (int[] sxs:result){
-                    System.out.println(sxs[0]+" "+sxs[1]);
-                }
+//                for (int[] sxs:result){
+//                    System.out.println(sxs[0]+" "+sxs[1]);
+//                }
                 System.out.println("out of board"+placement+" "+xs[0]+" "+xs[1]+"//");
                 return false;
             }
-            System.out.println("id:"+player.id);
-            System.out.println();
+//            System.out.println("id:"+player.id);
+//            System.out.println();
             if (!player.squiltBoard[xs[0]-1][xs[1]-1])
                 player.squiltBoard[xs[0]-1][xs[1]-1] = true;
             else {
