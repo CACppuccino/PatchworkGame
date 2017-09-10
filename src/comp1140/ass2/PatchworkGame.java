@@ -446,8 +446,6 @@ public class PatchworkGame {
                 player.squiltBoard[xs[0]-1][xs[1]-1] = true;
             else {
                 player.printSquiltBoard();
-//                fals++;
-//            if (fals<=7)
                 return false;
             }
 
