@@ -175,43 +175,56 @@ public class PatchworkGame {
     * */
     static boolean isPlacementValid(String patchCircle, String placement) {
         // FIXME Task 6: determine whether a placement is valid
-//        System.out.println("&&&:"+placement);
-//        System.out.println("###:"+patchCircle);
+      /*
+        Well formed judgement
+        * */
         if (!PatchworkGame.isPlacementWellFormed(placement))   {
             System.out.println("isPlacementWellFormed");return false;}
-        int aPlc = 0;
+        /*---------------------------------------*/
 
+        /*
+        Move data to a linked list , and get the tile 'A' position
+        * */
+        int aPlc = 0;
         LinkedList<Character> partches = new LinkedList<>();
         if (patchCircle==null || patchCircle.isEmpty()) {
             System.out.println("circle null");return false;}
-        fals++;
         for (int i=0;i<patchCircle.length();i++){
             if (patchCircle.charAt(i)=='A')
                 aPlc=i+1;
             partches.add(i,patchCircle.charAt(i));
         }
+
+        /*--------------------------------------*/
+
+        /*initialise the first player to be first*/
         boolean fstPlayer = true;
-        String fstPlc = new String(),secPlc = new String();
+        /*instantiate two players in each round*/
         State p1 = new State(1), p2 = new State(2);
+        /*let player1 on the top in the initial sate*/
         p1.onTop=true;
+        /*cut the placement in length 4 in each round*/
         for (int i=0;i<placement.length();i++){
+            /*for the action of advance*/
             if (placement.charAt(i)=='.'){
                 fstPlayer = !fstPlayer;
                 State.advanced(p1,p2);
             }
             else {
+                /*
+                * for the action of buying parches*/
+                //slice the placement for this round
                 String plc = placement.substring(i, i + 4);
-//                System.out.println("%%%%"+plc);
+                //check the turn
                 if (State.check_turn(p1,p2)==1) fstPlayer = true;
                 else fstPlayer = false;
+
                 if (fstPlayer) {
-                    fstPlc = fstPlc + plc;
                     if ( !outOfBoard(plc, p1)) {
                         System.out.println("out of Board/Overlap1"  );
                         return false;
                     }
                 } else {
-                    secPlc = secPlc + plc;
                     if ( !outOfBoard(plc, p2)) {
                         System.out.println("out of Board/Overlap2"  );
                         return false;
@@ -275,23 +288,6 @@ public class PatchworkGame {
 //    public static boolean checkOverlap(String placement){
 //
 //    }
-
-    // this block is to get the tile's cost and token
-    public static int[] getDetails(char tile){
-        String tiles = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefgh";
-        int tilePosition = 0;
-        for (int i = 0; i < tiles.length();i++){
-            if ( tile == tiles.charAt(i)){
-                tilePosition = i;
-                break;
-            }
-        }
-        PatchworkGame a = new PatchworkGame();
-        int timeToken = a.tileTimetoken[tilePosition];
-        int tileCost = a.tileCost[tilePosition];
-        int [] details  =  {timeToken,tileCost};
-        return details;
-    }
 
     private static int[][] flipHandle(char tile,int[][] expose){
         int index = getIndex(tile);
@@ -459,22 +455,6 @@ public class PatchworkGame {
 
         return true;
     }
-//    public static int checkTurn(char [] player1,char [] player2){
-//        int timeToken1 = 0;
-//        int timeToken2 = 0;
-//        for ( int i = 0;i < player1.length;i++){
-//            timeToken1 = getDetails(player1[i])[1];
-//        }
-//        for ( int i = 0;i < player2.length;i++){
-//            timeToken1 = getDetails(player2[i])[1];
-//        }
-//        if ( timeToken1 > timeToken2){
-//            return 0;
-//        }
-//        else{
-//            return 1;
-//        }
-//    }
 
     /**
      * Determine the score for a player given a placement, following the

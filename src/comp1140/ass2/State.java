@@ -14,8 +14,10 @@ public class State {
 
 //    calculating the time left in the time board of two players
     int timecount = 0;
-
-//    calculating the button of each player holds
+// for counting each player's score
+    //when the game finshed, the score should be scoreCount = scoreCount + buttonCount - squareleft*2
+    int scoreCount = 0;
+    //    calculating the button of each player holds
     int buttonCount = 5;
 
     // how many buttons should a player be rewarded each special event of button event
@@ -29,6 +31,8 @@ public class State {
 // then the patch i,i+1,i+2 should be displayed in the candidate area.
     int ntState = 0;
 
+    //for the special tile event
+    static boolean spt = false;
     //for special h to be paied out
     boolean specialH = false;
 
@@ -173,6 +177,20 @@ public class State {
         }
 
     }
+
+    private boolean isSeven(){
+
+        return false;
+    }
+    /*
+    * The function is only called when the signal is True
+    * */
+    public static void specialTile(State player){
+        player.scoreCount +=7;
+        //this event should only be touched once
+        spt = false;
+    }
+
     public static void specialEvent(State player,State oplyaer,int start,int steps){
         for (int sb:PatchworkGame.specialButton){
             if (sb>=start+1 && sb<=start+steps)
@@ -191,5 +209,9 @@ public class State {
     }
     //    the functions is called to get two players' score,
 // first int is for player 1, second for player 2
-    public int getScore(){return buttonCount-squareleft*2;}
+
+    //this function should only be called at the final of the game
+    public int getScore(){
+        scoreCount = scoreCount + buttonCount - squareleft*2;
+        return scoreCount;}
 }
