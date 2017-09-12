@@ -9,14 +9,14 @@ import java.util.*;
  */
 public class PatchworkGame {
 
-
+    static State p1 = new State(1), p2 = new State(2);
     public PatchworkGame(String patchCircleString) {
     }
 
     public PatchworkGame() {
 
     }
-    public static final int [] specialButton = {5,11,17,23,29,35,41,47};
+    public static final int [] specialButton = {5,11,17,23,29,35,41,47,53};
     public static final int [] specialTile = {20,26,32,44,50};
     public static final int [] tileCost = {2,1,3,2,3,2,1,0,6,
                                     4,2,1,3,7,3,7,3,
@@ -181,7 +181,8 @@ public class PatchworkGame {
         if (!PatchworkGame.isPlacementWellFormed(placement))   {
             System.out.println("isPlacementWellFormed");return false;}
         /*---------------------------------------*/
-
+        p1 = new State(1);
+        p2 = new State(2);
         /*
         Move data to a linked list , and get the tile 'A' position
         * */
@@ -200,7 +201,6 @@ public class PatchworkGame {
         /*initialise the first player to be first*/
         boolean fstPlayer = true;
         /*instantiate two players in each round*/
-        State p1 = new State(1), p2 = new State(2);
         /*let player1 on the top in the initial sate*/
         p1.onTop=true;
         /*cut the placement in length 4 in each round*/
@@ -230,6 +230,7 @@ public class PatchworkGame {
                         return false;
                     }
                 }
+                //try to buy a parch
                 try {
                     State.buyPartches(p1, p2, plc.charAt(0));
                 } catch (Error e) {
@@ -446,7 +447,7 @@ public class PatchworkGame {
             if (!player.squiltBoard[xs[0]-1][xs[1]-1])
                 player.squiltBoard[xs[0]-1][xs[1]-1] = true;
             else {
-                player.printSquiltBoard();
+//                player.printSquiltBoard();
                 return false;
             }
 
@@ -467,8 +468,11 @@ public class PatchworkGame {
      */
     static int getScoreForPlacement(String patchCircle, String placement, boolean firstPlayer) {
         // FIXME Task 7: determine the score for a player given a placement
+        System.out.println("*******************************************");
         boolean ss = isPlacementValid(patchCircle,placement);
-
+        if (ss)
+            if (firstPlayer)    return p1.getScore();
+            else    return p2.getScore();
         return 0;
     }
 

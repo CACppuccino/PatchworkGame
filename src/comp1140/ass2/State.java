@@ -10,7 +10,7 @@ public class State {
     final int id;
     List<Character> tiles = new ArrayList<Character>();
 //    calculating the squares left in two quilt boards.
-    int squareleft = 49;
+    int squareleft = 81;
 
 //    calculating the time left in the time board of two players
     int timecount = 0;
@@ -88,18 +88,18 @@ public class State {
     }
     public static void advanced(State p1,State p2){
         int t =check_turn(p1,p2);
-        int diff =0;
+        int diff ;
 
         if (t==1) {
             //be infront of the p2
-            diff = p2.timecount+1<=GRIDS?(p2.timecount-p1.timecount)+1:GRIDS-p2.timecount;
+            diff = p2.timecount+1<=GRIDS?(p2.timecount-p1.timecount)+1:GRIDS-p1.timecount;
             p1.buttonCount += diff;
             State.specialEvent(p1,p2,p1.timecount,diff);
             p1.timecount = p2.timecount + 1 > GRIDS ? GRIDS : p2.timecount + 1;
             System.out.println("player "+t+"make advance "+diff+"steps and now in "+p1.timecount);
         }
         else {
-            diff = p1.timecount+1<=GRIDS?(p1.timecount-p2.timecount)+1:GRIDS-p1.timecount;
+            diff = p1.timecount+1<=GRIDS?(p1.timecount-p2.timecount)+1:GRIDS-p2.timecount;
 
             p2.buttonCount += diff;
             State.specialEvent(p2,p1,p2.timecount,diff);
@@ -125,6 +125,7 @@ public class State {
                 {
                     p1.tiles.remove(p1.tiles.size()-1);
                     p1.specialH = false;
+                    p1.squareleft --;
                     throw new Error("spend a h");
                 }
                 else {
@@ -138,8 +139,10 @@ public class State {
             p1.specialButton += specialButton;
             specialEvent(p1,p2,p1.timecount,timeInc);
             p1.timecount = p1.timecount+timeInc>GRIDS ? GRIDS : p1.timecount+timeInc;
+            p1.squareleft -= PatchworkGame.tileSpace[index].length;
             System.out.println("now get special Button "+p1.specialButton+" now get button"+p1.buttonCount);
             System.out.println("make forward "+timeInc+" now stepping "+p1.timecount);
+            System.out.println("now have "+p1.squareleft+" squares left");
             //considering the timetoken overlap situation
             if (p1.timecount==p2.timecount)
             {
@@ -153,6 +156,7 @@ public class State {
                 if (p2.tiles.size()>0){
                     p2.tiles.remove(p2.tiles.size()-1);
                     p2.specialH = false;
+                    p2.squareleft--;
                     throw new Error("spend a h");
                 }
                 else {
@@ -166,8 +170,10 @@ public class State {
             p2.specialButton += specialButton;
             specialEvent(p2,p1,p2.timecount,timeInc);
             p2.timecount = p2.timecount+timeInc>GRIDS ? GRIDS : p2.timecount+timeInc;
+            p2.squareleft -= PatchworkGame.tileSpace[index].length;
             System.out.println("now get special Button "+p2.specialButton+" now get button"+p2.buttonCount);
             System.out.println("make forward "+timeInc+" now stepping "+p2.timecount);
+            System.out.println("now have "+p2.squareleft+" squares left");
 
             if (p1.timecount==p2.timecount)
             {
@@ -177,20 +183,24 @@ public class State {
         }
 
     }
-
-    private boolean isSeven(){
+/* SPECIAL TILE - NOT COMPLETE YET
+    private static boolean isSeven(State player){
+        //special tile is alreay owned by one of the player
+        if (spt) return false;
+        //haven't filled 49 squares even
+        if (player.squareleft>32) return false;
 
         return false;
     }
     /*
     * The function is only called when the signal is True
-    * */
+
     public static void specialTile(State player){
         player.scoreCount +=7;
         //this event should only be touched once
-        spt = false;
+        spt = true;
     }
-
+*/
     public static void specialEvent(State player,State oplyaer,int start,int steps){
         for (int sb:PatchworkGame.specialButton){
             if (sb>=start+1 && sb<=start+steps)
@@ -213,5 +223,6 @@ public class State {
     //this function should only be called at the final of the game
     public int getScore(){
         scoreCount = scoreCount + buttonCount - squareleft*2;
+        System.out.println("the player"+id+"have "+buttonCount+" buttons and"+ squareleft+" squares left");
         return scoreCount;}
 }
