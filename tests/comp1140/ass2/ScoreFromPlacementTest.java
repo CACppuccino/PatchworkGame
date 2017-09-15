@@ -2,6 +2,10 @@ package comp1140.ass2;
 
 import org.junit.Test;
 
+import javax.jws.soap.SOAPBinding;
+
+import java.util.Arrays;
+
 import static comp1140.ass2.TestUtility.PATCH_CIRCLES;
 import static comp1140.ass2.TestUtility.PLACEMENTS;
 import static comp1140.ass2.TestUtility.SCORES;

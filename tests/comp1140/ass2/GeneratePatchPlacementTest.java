@@ -53,11 +53,11 @@ public class GeneratePatchPlacementTest {
         for (int i = 0; i < numNormalPatches; i++) {
             int patchIndex = rand.nextInt(numNormalPatches);
             char patchId;
-            if (patchIndex > 26) patchId = (char)('a' + (patchIndex - 26));
+            if (patchIndex >= 26) patchId = (char)('a' + (patchIndex - 26));
             else patchId = (char)('A' + patchIndex);
             while (patchCircleString.indexOf(patchId) > -1) {
                 patchIndex = (patchIndex + 1) % numNormalPatches;
-                if (patchIndex > 26) patchId = (char) ('a' + (patchIndex - 26));
+                if (patchIndex >= 26) patchId = (char) ('a' + (patchIndex - 26));
                 else patchId = (char) ('A' + patchIndex);
             }
             patchCircleString += patchId;
