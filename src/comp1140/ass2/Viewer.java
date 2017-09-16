@@ -315,10 +315,15 @@ public class Viewer extends Application {
                 snap();
             });
         }
-        void snap(){
-            if (onBoard()) {
-                setLayoutX((((int)getLayoutX()-621)/30) *30+621);
-                setLayoutY((((int)getLayoutY()-290)/30 )*30+290);
+        void snap() {
+            if (State.check_turn(PatchworkGame.p1, PatchworkGame.p2) == 1 && getLayoutX() > 20 && (getLayoutX() < (290))
+                    && getLayoutY() > 290 && (getLayoutY() < 560)) {
+                setLayoutX((((int) getLayoutX() - 20) / 30) * 30 + 20);
+                setLayoutY((((int) getLayoutY() - 290) / 30) * 30 + 290);
+            } else if (State.check_turn(PatchworkGame.p1, PatchworkGame.p2) == 2 && getLayoutX() > 621 && (getLayoutX() < (891))
+                    && getLayoutY() > 290 && (getLayoutY() < 560)) {
+                setLayoutX((((int) getLayoutX() - 621) / 30) * 30 + 621);
+                setLayoutY((((int) getLayoutY() - 290) / 30) * 30 + 290);
             } else {
                 setLayoutX(homeX);
                 setLayoutY(homeY);
