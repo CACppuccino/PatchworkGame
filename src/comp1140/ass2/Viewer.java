@@ -176,13 +176,13 @@ public class Viewer extends Application {
         sq1.setPrefSize(280,280);
         for (int i=0;i<9;i++){
             for (int j=0;j<9;j++){
-                sq[i][j] = new Rectangle(20+i*30,290+j*30,30,30);
+                sq[i][j] = new Rectangle(BOARD1X+i*30,BOARDY+j*30,30,30);
                 sq[i][j].setStroke(Color.color((double)i/9,(double) j/9,(double)(i+j)/18));
                 sq[i][j].setFill(Color.WHEAT);
                 root.getChildren().add(sq[i][j]);
             }
         }
-        sq1.setLayoutX(20);sq1.setLayoutY(290);
+        sq1.setLayoutX(BOARD1X);sq1.setLayoutY(BOARDY);
 //        sqiltBoard.getChildren().add(sq1);
     }
 
@@ -193,12 +193,12 @@ public class Viewer extends Application {
         sq1.setPrefSize(280,280);
         for (int i=0;i<9;i++){
             for (int j=0;j<9;j++){
-                sq2[i][j] = new Rectangle(621+i*30,290+j*30,30,30);
+                sq2[i][j] = new Rectangle(BOARD2X+i*30,BOARDY+j*30,30,30);
                 sq2[i][j].setStroke(Color.color((double)i/9,(double) j/9,(double)(i+j)/18));
                 root.getChildren().add(sq2[i][j]);
             }
         }
-        sq1.setLayoutX(20);sq1.setLayoutY(290);
+        sq1.setLayoutX(BOARD1X);sq1.setLayoutY(BOARDY);
     }
 
     //displays the time board for players.
@@ -344,8 +344,8 @@ public class Viewer extends Application {
 
         String makeString() {
             int x = (int) getLayoutX();
-            x -= x > 600 ? 621 : 20;
-            int y = (int) getLayoutY() - 290;
+            x -= x > 600 ? BOARD2X : BOARD1X;
+            int y = (int) getLayoutY() - BOARDY;
             String s = "A";
             s += (char) ('A' + x / 30);
             s += (char) ('A' + y / 30);
@@ -354,14 +354,14 @@ public class Viewer extends Application {
         }
 
         void snap() {
-            if (State.check_turn(PatchworkGame.p1, PatchworkGame.p2) == 1 && getLayoutX() > 20 && (getLayoutX() < (290))
-                    && getLayoutY() > 290 && (getLayoutY() < 560)) {
-                setLayoutX((((int) getLayoutX() - 20) / 30) * 30 + 20);
-                setLayoutY((((int) getLayoutY() - 290) / 30) * 30 + 290);
-            } else if (State.check_turn(PatchworkGame.p1, PatchworkGame.p2) == 2 && getLayoutX() > 621 && (getLayoutX() < (891))
-                    && getLayoutY() > 290 && (getLayoutY() < 560)) {
-                setLayoutX((((int) getLayoutX() - 621) / 30) * 30 + 621);
-                setLayoutY((((int) getLayoutY() - 290) / 30) * 30 + 290);
+            if (State.check_turn(PatchworkGame.p1, PatchworkGame.p2) == 1 && getLayoutX() > BOARD1X && (getLayoutX() < BOARD1X+BOARD_SIZE)
+                    && getLayoutY() > BOARDY && (getLayoutY() < BOARDY+BOARD_SIZE)) {
+                setLayoutX((((int) getLayoutX() - BOARD1X) / 30) * 30 + BOARD1X);
+                setLayoutY((((int) getLayoutY() - BOARDY) / 30) * 30 + BOARDY);
+            } else if (State.check_turn(PatchworkGame.p1, PatchworkGame.p2) == 2 && getLayoutX() > BOARD2X && (getLayoutX() < BOARD2X+BOARD_SIZE)
+                    && getLayoutY() > BOARDY && (getLayoutY() < BOARDY+BOARD_SIZE)) {
+                setLayoutX((((int) getLayoutX() - BOARD2X) / 30) * 30 + BOARD2X);
+                setLayoutY((((int) getLayoutY() - BOARDY) / 30) * 30 + BOARDY);
             } else {
                 setLayoutX(homeX);
                 setLayoutY(homeY);
