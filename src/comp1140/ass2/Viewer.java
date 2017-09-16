@@ -263,7 +263,7 @@ public class Viewer extends Application {
     // displays the two button, undo and confirm, call the relevant functions
     // about the interaction
     public void clickArea(){
-        DraggableTile t1 = new DraggableTile('A',311,20,50);//, t2 = new DraggableTile('B',311+50,20,50),
+        DraggableTile t1 = new DraggableTile('A',311,20,30);//, t2 = new DraggableTile('B',311+50,20,50),
                 //t3 = new DraggableTile('C',311+2*50,20,50);
         root.getChildren().add(t1);
 //        root.getChildren().add(t2.tilehb);
@@ -273,7 +273,11 @@ public class Viewer extends Application {
     class DraggableTile extends ImageView{
 
         char tName;
+        int homeX,homeY;
+        double mouseX,mouseY;
         DraggableTile(char tName,int x,int y,int scale) {
+            homeX=x;
+            homeY=y;
             this.tName = tName;
             String tS;
             if (tName <= 'Z')
@@ -292,6 +296,44 @@ public class Viewer extends Application {
                 setRotate((getRotate() + 90) % 360);
                 event.consume();
             });
+
+            setOnMousePressed(event -> {      // mouse press indicates begin of drag
+                mouseX = event.getSceneX();
+                mouseY = event.getSceneY();
+            });
+            setOnMouseDragged(event -> {      // mouse is being dragged
+                toFront();
+                double movementX = event.getSceneX() - mouseX;
+                double movementY = event.getSceneY() - mouseY;
+                setLayoutX(getLayoutX() + movementX);
+                setLayoutY(getLayoutY() + movementY);
+                mouseX = event.getSceneX();
+                mouseY = event.getSceneY();
+                event.consume();
+            });
+            setOnMouseReleased(event -> {     // drag is complete
+                snap();
+            });
+        }
+        void snap(){
+            if (onBoard()) {
+                setLayoutX((((int)getLayoutX()-621)/30) *30+621);
+                setLayoutY((((int)getLayoutY()-290)/30 )*30+290);
+            } else {
+                setLayoutX(homeX);
+                setLayoutY(homeY);
+            }
+        }
+
+        boolean onBoard() {
+            if (State.check_turn(PatchworkGame.p1,PatchworkGame.p2)==1){
+                return getLayoutX() > 20 && (getLayoutX() < (290))
+                        && getLayoutY() > 290 && (getLayoutY() < 560);
+            }
+            else{
+                return getLayoutX() > 621 && (getLayoutX() < (891))
+                        && getLayoutY() > 290 && (getLayoutY() < 560);
+            }
         }
 
     }
