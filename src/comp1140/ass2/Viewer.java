@@ -265,7 +265,7 @@ public class Viewer extends Application {
     public void clickArea(){
         DraggableTile t1 = new DraggableTile('A',311,20,50);//, t2 = new DraggableTile('B',311+50,20,50),
                 //t3 = new DraggableTile('C',311+2*50,20,50);
-        root.getChildren().add(t1.tilehb);
+        root.getChildren().add(t1);
 //        root.getChildren().add(t2.tilehb);
 //        root.getChildren().add(t3.tilehb);
     }
@@ -273,34 +273,26 @@ public class Viewer extends Application {
     class DraggableTile extends ImageView{
 
         char tName;
-        Image tile;
-        ImageView tileView;
-        HBox tilehb;
-        DraggableTile(char tName,int x,int y,int scale){
+        DraggableTile(char tName,int x,int y,int scale) {
             this.tName = tName;
             String tS;
-            if (tName<='Z')
-                tS = tName+".png";
-            else tS = tName+"_.png";
+            if (tName <= 'Z')
+                tS = tName + ".png";
+            else tS = tName + "_.png";
             File tPath = new File("src/comp1140/ass2/gui/assets/" + tS);
             System.out.println(tPath);
-            tile = new Image("file:"+tPath.getAbsolutePath());
-            tileView = new ImageView(tile);
-            tileView.setFitWidth(scale);tileView.setFitHeight(scale);
-            tilehb = new HBox();
-            tilehb.getChildren().add(tileView);
-            tilehb.setLayoutX(x);
-            tilehb.setLayoutY(y);
+            setImage(new Image("file:" + tPath.getAbsolutePath()));
+            setFitWidth(scale);
+            setFitHeight(scale);
+            setLayoutX(x);
+            setLayoutY(y);
 
             /* event handler*/
             setOnScroll(event -> {
-//                tileView.
-// setRotate((getRotate()+90) % 360);
-//                event.consume();
+                setRotate((getRotate() + 90) % 360);
+                event.consume();
             });
         }
 
-
     }
-
 }
