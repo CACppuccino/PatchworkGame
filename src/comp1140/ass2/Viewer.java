@@ -271,18 +271,25 @@ public class Viewer extends Application {
     }
 
     class DraggableTile extends ImageView{
-
+        int tileCost;
         char tName;
         int homeX,homeY;
         double mouseX,mouseY;
+        boolean draggable = true;
         DraggableTile(char tName,int x,int y,int scale) {
             homeX=x;
             homeY=y;
             this.tName = tName;
+            int index;
             String tS;
-            if (tName <= 'Z')
+            if (tName <= 'Z'){
                 tS = tName + ".png";
-            else tS = tName + "_.png";
+                index = tName - 'A';
+            }
+            else {
+                tS = tName + "_.png";
+                index = tName-'a'+26;
+            }
             File tPath = new File("src/comp1140/ass2/gui/assets/" + tS);
             System.out.println(tPath);
             setImage(new Image("file:" + tPath.getAbsolutePath()));
@@ -290,6 +297,7 @@ public class Viewer extends Application {
             setFitHeight(scale);
             setLayoutX(x);
             setLayoutY(y);
+            tileCost = PatchworkGame.tileCost[index];
 
             /* event handler*/
             setOnScroll(event -> {
@@ -298,10 +306,22 @@ public class Viewer extends Application {
             });
 
             setOnMousePressed(event -> {      // mouse press indicates begin of drag
+                if (State.check_turn(PatchworkGame.p1,PatchworkGame.p2)==1){
+                    if (!State.affordPartch(PatchworkGame.p1.buttonCount,tileCost))
+                        draggable = false;
+                }
+                else {
+                    if (!State.affordPartch(PatchworkGame.p1.buttonCount,tileCost)){
+                        draggable = false;
+                    }
+                }
+                if (!draggable)
+                    event.consume();
                 mouseX = event.getSceneX();
                 mouseY = event.getSceneY();
             });
             setOnMouseDragged(event -> {      // mouse is being dragged
+                if (!draggable) event.consume();
                 toFront();
                 double movementX = event.getSceneX() - mouseX;
                 double movementY = event.getSceneY() - mouseY;

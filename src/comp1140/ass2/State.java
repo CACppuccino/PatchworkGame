@@ -133,10 +133,10 @@ public class State {
                     throw new Error("no enough h");
                 }
             }
-            p1.buttonCount = p1.buttonCount - buttonDec;
-            if (p1.buttonCount < 0)
+            if (!affordPartch(p1.buttonCount, buttonDec))
                 //suppose to notice the Viewer
                 throw new Error("cant afford the tile" + p);
+            p1.buttonCount = p1.buttonCount - buttonDec;
             p1.specialButton += specialButton;
             specialEvent(p1, p2, p1.timecount, timeInc);
             p1.timecount = p1.timecount + timeInc > GRIDS ? GRIDS : p1.timecount + timeInc;
@@ -161,10 +161,10 @@ public class State {
                     throw new Error("no enough h");
                 }
             }
-            p2.buttonCount = p2.buttonCount - buttonDec;
-            if (p2.buttonCount < 0)
+            if (!affordPartch(p2.buttonCount,buttonDec))
                 //suppose to notice the Viewer
                 throw new Error("cant afford the tile" + p);
+            p2.buttonCount = p2.buttonCount - buttonDec;
             p2.specialButton += specialButton;
             specialEvent(p2, p1, p2.timecount, timeInc);
             p2.timecount = p2.timecount + timeInc > GRIDS ? GRIDS : p2.timecount + timeInc;
@@ -181,6 +181,10 @@ public class State {
 
     }
 
+    static boolean affordPartch(int buttonCount, int cost){
+        if (buttonCount - cost< 0) return false;
+        return true;
+    }
     private static boolean isSeven(State player) {
         //special tile is alreay owned by one of the player
         if (spt) return false;

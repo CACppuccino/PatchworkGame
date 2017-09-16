@@ -485,7 +485,6 @@ public class PatchworkGame {
      */
     static int getScoreForPlacement(String patchCircle, String placement, boolean firstPlayer) {
         // FIXME Task 7: determine the score for a player given a placement
-        System.out.println("*******************************************");
         boolean ss = isPlacementValid(patchCircle,placement);
         if (ss)
             if (firstPlayer)    return p1.getScore();
