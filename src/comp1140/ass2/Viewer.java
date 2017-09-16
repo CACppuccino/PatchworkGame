@@ -42,6 +42,11 @@ import java.util.Random;
 public class Viewer extends Application {
     private static final int VIEWER_WIDTH = 933;
     private static final int VIEWER_HEIGHT = 700;
+    private static final int BOARD1X = 20;
+    private static final int BOARD2X = 621;
+    private static final int BOARDY = 290;
+    private static final int BOARD_SIZE = 270;
+
 
     private static final String URI_BASE = "assets/";
 
@@ -86,7 +91,6 @@ public class Viewer extends Application {
             tileView.setFitWidth(w);
             tileView.setFitHeight(h);
             /*rotation*/
-            /*haven't included the E-H*/
             double r = rotation[rotate - 'A'];
             if (rotate > 'D') {
                 tileView.setScaleX(-1);
@@ -276,8 +280,8 @@ public class Viewer extends Application {
         int homeX,homeY;
         double mouseX,mouseY;
         DraggableTile(char tName,int x,int y,int scale) {
-            homeX=x;
-            homeY=y;
+            homeX = x;
+            homeY = y;
             this.tName = tName;
             String tS;
             if (tName <= 'Z')
@@ -300,6 +304,7 @@ public class Viewer extends Application {
             setOnMousePressed(event -> {      // mouse press indicates begin of drag
                 mouseX = event.getSceneX();
                 mouseY = event.getSceneY();
+                event.consume();
             });
             setOnMouseDragged(event -> {      // mouse is being dragged
                 toFront();
@@ -313,8 +318,21 @@ public class Viewer extends Application {
             });
             setOnMouseReleased(event -> {     // drag is complete
                 snap();
+                if (getLayoutX() != homeX) System.out.println(makeString());
             });
         }
+
+        String makeString() {
+            int x = (int) getLayoutX();
+            x -= x > 600 ? 621 : 20;
+            int y = (int) getLayoutY() - 290;
+            String s = "A";
+            s += (char) ('A' + x / 30);
+            s += (char) ('A' + y / 30);
+            s += (char) ('A' + (int) getRotate() / 90);
+            return s;
+        }
+
         void snap() {
             if (State.check_turn(PatchworkGame.p1, PatchworkGame.p2) == 1 && getLayoutX() > 20 && (getLayoutX() < (290))
                     && getLayoutY() > 290 && (getLayoutY() < 560)) {
@@ -327,17 +345,6 @@ public class Viewer extends Application {
             } else {
                 setLayoutX(homeX);
                 setLayoutY(homeY);
-            }
-        }
-
-        boolean onBoard() {
-            if (State.check_turn(PatchworkGame.p1,PatchworkGame.p2)==1){
-                return getLayoutX() > 20 && (getLayoutX() < (290))
-                        && getLayoutY() > 290 && (getLayoutY() < 560);
-            }
-            else{
-                return getLayoutX() > 621 && (getLayoutX() < (891))
-                        && getLayoutY() > 290 && (getLayoutY() < 560);
             }
         }
 
