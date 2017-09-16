@@ -49,7 +49,6 @@ public class PatchworkGame {
                                               2,0,1,2,2,3,0,1,
                                               2,3,0,1,3,3,0};
 
-    static int fals;
     /**
      * Determine whether a patch placement is well-formed according to the following:
      * - either it is the single character string ".", or
@@ -96,6 +95,24 @@ public class PatchworkGame {
         return result;
     }
 
+    static String initPathCircle(){
+        StringBuilder res = new StringBuilder();
+        for (char i='A';i<='Z';i++)
+            res.append(i);
+        for (char i='a';i<='g';i++)
+            res.append(i);
+        Random rng = new Random();
+        char[] result = res.toString().toCharArray();
+        for (int i=0;i<100;i++)
+        {
+            int x = rng.nextInt(33);
+            int y = rng.nextInt(33);
+            char tmp = result[x];
+            result[x] = result[y];
+            result[y] = tmp;
+        }
+        return new String(result);
+    }
     /**
      * Determine whether a game placement string is well-formed:
      * - it consists of a sequence of patch placement strings, where

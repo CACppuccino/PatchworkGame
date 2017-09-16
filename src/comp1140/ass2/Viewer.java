@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Point3D;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
@@ -15,6 +16,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.Node.*;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -23,6 +26,7 @@ import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 
 import java.awt.*;
+import java.io.Console;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
@@ -68,7 +72,7 @@ public class Viewer extends Application {
 
             char tileName = p.charAt(0), col = p.charAt(2), row = p.charAt(1),
                     rotate = p.charAt(3);
-//            if ()
+//
             /*get the image path*/
             String tileN = tileName + (tileName > 'a' && tileName < 'h' ? "_.png" : ".png");
             String tilePath = "file:" + (new File("src/comp1140/ass2/gui/assets/" + tileN)).getAbsolutePath();
@@ -138,10 +142,13 @@ public class Viewer extends Application {
         Scene scene = new Scene(root, VIEWER_WIDTH, VIEWER_HEIGHT);
         root.getChildren().add(sqiltBoard);
         timeBoard();
+        String c = PatchworkGame.initPathCircle();
+        candidateArea(c);
         timeToken1(0);
         squiltBoard1();
         squiltBoard2();
         makeControls();
+        clickArea();
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -225,13 +232,75 @@ public class Viewer extends Application {
     public void timeToken2(double steps){}
 
 //    displays the candidates area which shows the three available tiles.
-    public void candidateArea(){
+    public void candidateArea(String init){
+        HBox[] hb = new HBox[init.length()];
+        for (int i =0; i<init.length();i++) {
+            hb[i] = new HBox();
+            String cc;
+            if (init.charAt(i) <= 'Z') cc = "" + init.charAt(i);
+            else cc = init.charAt(i) + "_";
+            File imgTimeboard = new File("src/comp1140/ass2/gui/assets/" + cc + ".png");
+            String tPath = "file:" + imgTimeboard.getAbsolutePath();
+//            System.out.println(tPath);
+            Image tile = new Image(tPath);
+            ImageView tbView = new ImageView();
+            tbView.setImage(tile);
+            tbView.setFitHeight(25);
+            tbView.setFitWidth(25);
 
+            hb[i].getChildren().add(tbView);
+            hb[i].setLayoutX(200 + 30 * (i % 17));
+            hb[i].setLayoutY(VIEWER_HEIGHT-(i < 17 ? 130 : 100));
+
+            root.getChildren().add(hb[i]);
+        }
+        //        hb.setLayoutX(270);
+//        hb.setLayoutY(120);
+//        tilesArea.getChildren().add(hb);
+//        root.getChildren().add(tilesArea);
     }
 
     // displays the two button, undo and confirm, call the relevant functions
     // about the interaction
-    public void clickArea(){}
+    public void clickArea(){
+        DraggableTile t1 = new DraggableTile('A',311,20,50);//, t2 = new DraggableTile('B',311+50,20,50),
+                //t3 = new DraggableTile('C',311+2*50,20,50);
+        root.getChildren().add(t1.tilehb);
+//        root.getChildren().add(t2.tilehb);
+//        root.getChildren().add(t3.tilehb);
+    }
 
+    class DraggableTile extends ImageView{
+
+        char tName;
+        Image tile;
+        ImageView tileView;
+        HBox tilehb;
+        DraggableTile(char tName,int x,int y,int scale){
+            this.tName = tName;
+            String tS;
+            if (tName<='Z')
+                tS = tName+".png";
+            else tS = tName+"_.png";
+            File tPath = new File("src/comp1140/ass2/gui/assets/" + tS);
+            System.out.println(tPath);
+            tile = new Image("file:"+tPath.getAbsolutePath());
+            tileView = new ImageView(tile);
+            tileView.setFitWidth(scale);tileView.setFitHeight(scale);
+            tilehb = new HBox();
+            tilehb.getChildren().add(tileView);
+            tilehb.setLayoutX(x);
+            tilehb.setLayoutY(y);
+
+            /* event handler*/
+            setOnScroll(event -> {
+//                tileView.
+// setRotate((getRotate()+90) % 360);
+//                event.consume();
+            });
+        }
+
+
+    }
 
 }
