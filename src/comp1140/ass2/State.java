@@ -33,6 +33,7 @@ public class State {
 
     //for the special tile event
     static boolean spt = false;
+
     //for special h to be paied out
     boolean specialH = false;
 
@@ -42,16 +43,16 @@ public class State {
     final static char[] PATCHES = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W',
             'X','Y','Z','a','b','c','d','e','f','g'};
 
-    State(int id){
+    State(int id) {
         this.id = id;
-        for (boolean[] sq: squiltBoard)
-            for (boolean sqq: sq)
+        for (boolean[] sq : squiltBoard)
+            for (boolean sqq : sq)
                 sqq = false;
     }
 //    this list should be changed when being initialised randomly by the initialization()/
 // once the player buys an patch/ choose undo after placed a patch
     ArrayList<Character> currentPatch = new ArrayList<Character>();
-    boolean[][] squiltBoard = new boolean[9][9];
+    static boolean[][] squiltBoard = new boolean[9][9];
 
     //    this function is used for recognizing the end of the game.
 // Both of the players' time consumption is full,
@@ -183,24 +184,35 @@ public class State {
         }
 
     }
-/* SPECIAL TILE - NOT COMPLETE YET
-    private static boolean isSeven(State player){
+
+    private static boolean isSeven(State player) {
         //special tile is alreay owned by one of the player
         if (spt) return false;
         //haven't filled 49 squares even
-        if (player.squareleft>32) return false;
-
+        if (player.squareleft > 32) return false;
+        for (int i = 0; i < 20; ) {
+            boolean b = true;
+            for (int j = i; j < i + 60; ) {
+                if (!squiltBoard[j / 9][j % 9]) {
+                    b = false;
+                    break;
+                }
+                j += j - i == 6 ? 3 : 1;
+            }
+            if (b) return true;
+            i += i % 9 == 2 ? 7 : 1;
+        }
         return false;
     }
-    /*
-    * The function is only called when the signal is True
+
+    // The function is only called when the signal is True
 
     public static void specialTile(State player){
         player.scoreCount +=7;
         //this event should only be touched once
         spt = true;
     }
-*/
+
     public static void specialEvent(State player,State oplyaer,int start,int steps){
         for (int sb:PatchworkGame.specialButton){
             if (sb>=start+1 && sb<=start+steps)
