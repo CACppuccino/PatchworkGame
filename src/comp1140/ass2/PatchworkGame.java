@@ -48,7 +48,8 @@ public class PatchworkGame {
                                               0,1,1,1,1,2,2,0,2,
                                               2,0,1,2,2,3,0,1,
                                               2,3,0,1,3,3,0};
-
+    public static char[] three;
+    public static LinkedList<Character> partches;
     /**
      * Determine whether a patch placement is well-formed according to the following:
      * - either it is the single character string ".", or
@@ -94,6 +95,7 @@ public class PatchworkGame {
         }
         return result;
     }
+
 
     static String initPathCircle(){
         StringBuilder res = new StringBuilder();
@@ -262,8 +264,7 @@ public class PatchworkGame {
                     }
                 }
 
-
-                char[] three = {partches.get(aPlc%partches.size()), partches.get((aPlc + 1) % partches.size()), partches.get((aPlc + 2) % partches.size())};
+                three = new char[]{partches.get(aPlc%partches.size()), partches.get((aPlc + 1) % partches.size()), partches.get((aPlc + 2) % partches.size())};
                 //move the nertral token
                 //if the parches left in the partches circle doesn't contain the current
                 //wanted partches,then is invalid

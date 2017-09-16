@@ -31,6 +31,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static comp1140.ass2.PatchworkGame.isPlacementValid;
+
 
 /**
  * A very simple viewer for piece placements in the Patchwork game.
@@ -47,7 +49,8 @@ public class Viewer extends Application {
     private static final int BOARDY = 290;
     private static final int BOARD_SIZE = 270;
 
-
+    private static String c;
+    private static String p="";
     private static final String URI_BASE = "assets/";
 
     private final Group root = new Group();
@@ -146,12 +149,14 @@ public class Viewer extends Application {
         Scene scene = new Scene(root, VIEWER_WIDTH, VIEWER_HEIGHT);
         root.getChildren().add(sqiltBoard);
         timeBoard();
-        String c = PatchworkGame.initPathCircle();
+        c = PatchworkGame.initPathCircle();
+        c=c.substring(c.indexOf('A')+1)+c.substring(0,c.indexOf('A')-1);
         candidateArea(c);
         timeToken1(0);
         squiltBoard1();
         squiltBoard2();
         makeControls();
+        PatchworkGame.three=c.substring(0,3).toCharArray();
         clickArea();
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -267,11 +272,9 @@ public class Viewer extends Application {
     // displays the two button, undo and confirm, call the relevant functions
     // about the interaction
     public void clickArea(){
-        DraggableTile t1 = new DraggableTile('A',311,20,30);//, t2 = new DraggableTile('B',311+50,20,50),
-                //t3 = new DraggableTile('C',311+2*50,20,50);
-        root.getChildren().add(t1);
-//        root.getChildren().add(t2.tilehb);
-//        root.getChildren().add(t3.tilehb);
+        for(int i=0;i<3;i++){
+            root.getChildren().add(new DraggableTile(PatchworkGame.three[i],300+i*100,20,30));
+        }
     }
 
     class DraggableTile extends ImageView{
@@ -297,8 +300,9 @@ public class Viewer extends Application {
             File tPath = new File("src/comp1140/ass2/gui/assets/" + tS);
             System.out.println(tPath);
             setImage(new Image("file:" + tPath.getAbsolutePath()));
-            setFitWidth(scale);
-            setFitHeight(scale);
+            setFitWidth((int)getImage().getWidth()/50 *scale);
+            setFitHeight((int)getImage().getHeight()/50 *scale);
+
             setLayoutX(x);
             setLayoutY(y);
             tileCost = PatchworkGame.tileCost[index];
@@ -338,7 +342,17 @@ public class Viewer extends Application {
             });
             setOnMouseReleased(event -> {     // drag is complete
                 snap();
-                if (getLayoutX() != homeX) System.out.println(makeString());
+                if (getLayoutX() != homeX){
+                    String m=makeString();
+                    if (PatchworkGame.isPlacementValid(c,p+m)){
+                        p+=m;
+                    }
+                    else{
+                        PatchworkGame.p1.printSquiltBoard();
+                        setLayoutX(homeX);
+                        setLayoutY(homeY);
+                    }
+                }
             });
         }
 
@@ -346,7 +360,7 @@ public class Viewer extends Application {
             int x = (int) getLayoutX();
             x -= x > 600 ? BOARD2X : BOARD1X;
             int y = (int) getLayoutY() - BOARDY;
-            String s = "A";
+            String s = ""+tName;
             s += (char) ('A' + x / 30);
             s += (char) ('A' + y / 30);
             s += (char) ('A' + (int) getRotate() / 90);
@@ -354,12 +368,12 @@ public class Viewer extends Application {
         }
 
         void snap() {
-            if (State.check_turn(PatchworkGame.p1, PatchworkGame.p2) == 1 && getLayoutX() > BOARD1X && (getLayoutX() < BOARD1X+BOARD_SIZE)
-                    && getLayoutY() > BOARDY && (getLayoutY() < BOARDY+BOARD_SIZE)) {
+            if (State.check_turn(PatchworkGame.p1, PatchworkGame.p2) == 1 && getLayoutX() > BOARD1X && (getLayoutX()+getFitWidth() < BOARD1X+BOARD_SIZE+30)
+                    && getLayoutY() > BOARDY && (getLayoutY()+getFitHeight() < BOARDY+BOARD_SIZE+30)) {
                 setLayoutX((((int) getLayoutX() - BOARD1X) / 30) * 30 + BOARD1X);
                 setLayoutY((((int) getLayoutY() - BOARDY) / 30) * 30 + BOARDY);
-            } else if (State.check_turn(PatchworkGame.p1, PatchworkGame.p2) == 2 && getLayoutX() > BOARD2X && (getLayoutX() < BOARD2X+BOARD_SIZE)
-                    && getLayoutY() > BOARDY && (getLayoutY() < BOARDY+BOARD_SIZE)) {
+            } else if (State.check_turn(PatchworkGame.p1, PatchworkGame.p2) == 2 && getLayoutX() > BOARD2X && (getLayoutX()+getFitWidth() < BOARD2X+BOARD_SIZE+30)
+                    && getLayoutY() > BOARDY && (getLayoutY()+getFitHeight() < BOARDY+BOARD_SIZE+30)) {
                 setLayoutX((((int) getLayoutX() - BOARD2X) / 30) * 30 + BOARD2X);
                 setLayoutY((((int) getLayoutY() - BOARDY) / 30) * 30 + BOARDY);
             } else {
