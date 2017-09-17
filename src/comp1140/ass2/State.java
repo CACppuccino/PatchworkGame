@@ -1,11 +1,13 @@
 package comp1140.ass2;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
 public class State {
     final static int GRIDS = 53;
+    final int id;
     List<Character> tiles = new ArrayList<Character>();
 //    calculating the squares left in two quilt boards.
     int squareleft = 49;
@@ -36,10 +38,16 @@ public class State {
     final static char[] PATCHES = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W',
             'X','Y','Z','a','b','c','d','e','f','g'};
 
+    State(int id){
+        this.id = id;
+        for (boolean[] sq: squiltBoard)
+            for (boolean sqq: sq)
+                sqq = false;
+    }
 //    this list should be changed when being initialised randomly by the initialization()/
 // once the player buys an patch/ choose undo after placed a patch
     ArrayList<Character> currentPatch = new ArrayList<Character>();
-
+    boolean[][] squiltBoard = new boolean[9][9];
 
     //    this function is used for recognizing the end of the game.
 // Both of the players' time consumption is full,
@@ -65,6 +73,15 @@ public class State {
         }
     }
 
+    void printSquiltBoard(){
+        for (boolean[] sq: squiltBoard){
+            for (boolean sqq: sq) {
+                if(!sqq) System.out.print("@");
+                else System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
     public static void advanced(State p1,State p2){
         int t =check_turn(p1,p2);
         int diff =0;
@@ -73,7 +90,7 @@ public class State {
             //be infront of the p2
             diff = p2.timecount+1<=GRIDS?(p2.timecount-p1.timecount)+1:GRIDS-p2.timecount;
             p1.buttonCount += diff;
-            State.specialEvent(p1,p1.timecount,diff);
+            State.specialEvent(p1,p2,p1.timecount,diff);
             p1.timecount = p2.timecount + 1 > GRIDS ? GRIDS : p2.timecount + 1;
             System.out.println("player "+t+"make advance "+diff+"steps and now in "+p1.timecount);
         }
@@ -81,7 +98,7 @@ public class State {
             diff = p1.timecount+1<=GRIDS?(p1.timecount-p2.timecount)+1:GRIDS-p1.timecount;
 
             p2.buttonCount += diff;
-            State.specialEvent(p2,p2.timecount,diff);
+            State.specialEvent(p2,p1,p2.timecount,diff);
             p2.timecount = p1.timecount + 1 > GRIDS ? GRIDS : p1.timecount + 1;
             System.out.println("player "+t+"make advance "+diff+"steps and now in "+p2.timecount);
         }
@@ -100,7 +117,8 @@ public class State {
         System.out.println("player "+t+" buying "+p+" hosts"+(t==1?p1.buttonCount:p2.buttonCount)+"and cost him"+buttonDec);
         if (t==1) {
             if (p=='h'){
-                if (p1.tiles.size()>0){
+                if (p1.tiles.size()>0)
+                {
                     p1.tiles.remove(p1.tiles.size()-1);
                     p1.specialH = false;
                     throw new Error("spend a h");
@@ -114,7 +132,7 @@ public class State {
                 //suppose to notice the Viewer
                 throw new Error("cant afford the tile"+p);
             p1.specialButton += specialButton;
-            specialEvent(p1,p1.timecount,timeInc);
+            specialEvent(p1,p2,p1.timecount,timeInc);
             p1.timecount = p1.timecount+timeInc>GRIDS ? GRIDS : p1.timecount+timeInc;
             System.out.println("now get special Button "+p1.specialButton+" now get button"+p1.buttonCount);
             System.out.println("make forward "+timeInc+" now stepping "+p1.timecount);
@@ -142,7 +160,7 @@ public class State {
                 //suppose to notice the Viewer
                 throw new Error("cant afford the tile"+p);
             p2.specialButton += specialButton;
-            specialEvent(p2,p2.timecount,timeInc);
+            specialEvent(p2,p1,p2.timecount,timeInc);
             p2.timecount = p2.timecount+timeInc>GRIDS ? GRIDS : p2.timecount+timeInc;
             System.out.println("now get special Button "+p2.specialButton+" now get button"+p2.buttonCount);
             System.out.println("make forward "+timeInc+" now stepping "+p2.timecount);
@@ -155,14 +173,18 @@ public class State {
         }
 
     }
-    public static void specialEvent(State player,int start,int steps){
+    public static void specialEvent(State player,State oplyaer,int start,int steps){
         for (int sb:PatchworkGame.specialButton){
             if (sb>=start+1 && sb<=start+steps)
                 player.buttonCount += player.specialButton;
         }
-        for (int st:PatchworkGame.specialTile){
-            if (st>=start+1 && st<=start+steps)
+        for (int i=0;i<PatchworkGame.specialTile.length;i++)
+        {
+            if (PatchworkGame.specialTile[i]>=start+1 && PatchworkGame.specialTile[i]<=start+steps
+                    && oplyaer.timecount<PatchworkGame.specialTile[i] ){
                 player.tiles.add('h');
+                player.specialH = true;
+            }
         }
         if (player.tiles.size()>0)
             player.specialH = true;
