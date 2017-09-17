@@ -9,14 +9,14 @@ import java.util.*;
  */
 public class PatchworkGame {
 
-
+    static State p1 = new State(1), p2 = new State(2);
     public PatchworkGame(String patchCircleString) {
     }
 
     public PatchworkGame() {
 
     }
-    public static final int [] specialButton = {5,11,17,23,29,35,41,47};
+    public static final int [] specialButton = {5,11,17,23,29,35,41,47,53};
     public static final int [] specialTile = {20,26,32,44,50};
     public static final int [] tileCost = {2,1,3,2,3,2,1,0,6,
                                     4,2,1,3,7,3,7,3,
@@ -48,8 +48,8 @@ public class PatchworkGame {
                                               0,1,1,1,1,2,2,0,2,
                                               2,0,1,2,2,3,0,1,
                                               2,3,0,1,3,3,0};
-
-    static int fals;
+    public static char[] three;
+    public static LinkedList<Character> partches;
     /**
      * Determine whether a patch placement is well-formed according to the following:
      * - either it is the single character string ".", or
@@ -96,6 +96,25 @@ public class PatchworkGame {
         return result;
     }
 
+
+    static String initPathCircle(){
+        StringBuilder res = new StringBuilder();
+        for (char i='A';i<='Z';i++)
+            res.append(i);
+        for (char i='a';i<='g';i++)
+            res.append(i);
+        Random rng = new Random();
+        char[] result = res.toString().toCharArray();
+        for (int i=0;i<100;i++)
+        {
+            int x = rng.nextInt(33);
+            int y = rng.nextInt(33);
+            char tmp = result[x];
+            result[x] = result[y];
+            result[y] = tmp;
+        }
+        return new String(result);
+    }
     /**
      * Determine whether a game placement string is well-formed:
      * - it consists of a sequence of patch placement strings, where
@@ -175,48 +194,62 @@ public class PatchworkGame {
     * */
     static boolean isPlacementValid(String patchCircle, String placement) {
         // FIXME Task 6: determine whether a placement is valid
-//        System.out.println("&&&:"+placement);
-//        System.out.println("###:"+patchCircle);
+      /*
+        Well formed judgement
+        * */
         if (!PatchworkGame.isPlacementWellFormed(placement))   {
             System.out.println("isPlacementWellFormed");return false;}
+        /*---------------------------------------*/
+        p1 = new State(1);
+        p2 = new State(2);
+        /*
+        Move data to a linked list , and get the tile 'A' position
+        * */
         int aPlc = 0;
-
         LinkedList<Character> partches = new LinkedList<>();
         if (patchCircle==null || patchCircle.isEmpty()) {
             System.out.println("circle null");return false;}
-        fals++;
         for (int i=0;i<patchCircle.length();i++){
             if (patchCircle.charAt(i)=='A')
                 aPlc=i+1;
             partches.add(i,patchCircle.charAt(i));
         }
+
+        /*--------------------------------------*/
+
+        /*initialise the first player to be first*/
         boolean fstPlayer = true;
-        String fstPlc = new String(),secPlc = new String();
-        State p1 = new State(1), p2 = new State(2);
+        /*instantiate two players in each round*/
+        /*let player1 on the top in the initial sate*/
         p1.onTop=true;
+        /*cut the placement in length 4 in each round*/
         for (int i=0;i<placement.length();i++){
+            /*for the action of advance*/
             if (placement.charAt(i)=='.'){
                 fstPlayer = !fstPlayer;
                 State.advanced(p1,p2);
             }
             else {
+                /*
+                * for the action of buying parches*/
+                //slice the placement for this round
                 String plc = placement.substring(i, i + 4);
-//                System.out.println("%%%%"+plc);
+                //check the turn
                 if (State.check_turn(p1,p2)==1) fstPlayer = true;
                 else fstPlayer = false;
+
                 if (fstPlayer) {
-                    fstPlc = fstPlc + plc;
                     if ( !outOfBoard(plc, p1)) {
                         System.out.println("out of Board/Overlap1"  );
                         return false;
                     }
                 } else {
-                    secPlc = secPlc + plc;
                     if ( !outOfBoard(plc, p2)) {
                         System.out.println("out of Board/Overlap2"  );
                         return false;
                     }
                 }
+                //try to buy a parch
                 try {
                     State.buyPartches(p1, p2, plc.charAt(0));
                 } catch (Error e) {
@@ -231,8 +264,7 @@ public class PatchworkGame {
                     }
                 }
 
-
-                char[] three = {partches.get(aPlc%partches.size()), partches.get((aPlc + 1) % partches.size()), partches.get((aPlc + 2) % partches.size())};
+                three = new char[]{partches.get(aPlc%partches.size()), partches.get((aPlc + 1) % partches.size()), partches.get((aPlc + 2) % partches.size())};
                 //move the nertral token
                 //if the parches left in the partches circle doesn't contain the current
                 //wanted partches,then is invalid
@@ -275,23 +307,6 @@ public class PatchworkGame {
 //    public static boolean checkOverlap(String placement){
 //
 //    }
-
-    // this block is to get the tile's cost and token
-    public static int[] getDetails(char tile){
-        String tiles = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefgh";
-        int tilePosition = 0;
-        for (int i = 0; i < tiles.length();i++){
-            if ( tile == tiles.charAt(i)){
-                tilePosition = i;
-                break;
-            }
-        }
-        PatchworkGame a = new PatchworkGame();
-        int timeToken = a.tileTimetoken[tilePosition];
-        int tileCost = a.tileCost[tilePosition];
-        int [] details  =  {timeToken,tileCost};
-        return details;
-    }
 
     private static int[][] flipHandle(char tile,int[][] expose){
         int index = getIndex(tile);
@@ -450,7 +465,7 @@ public class PatchworkGame {
             if (!player.squiltBoard[xs[0]-1][xs[1]-1])
                 player.squiltBoard[xs[0]-1][xs[1]-1] = true;
             else {
-                player.printSquiltBoard();
+//                player.printSquiltBoard();
                 return false;
             }
 
@@ -459,22 +474,6 @@ public class PatchworkGame {
 
         return true;
     }
-//    public static int checkTurn(char [] player1,char [] player2){
-//        int timeToken1 = 0;
-//        int timeToken2 = 0;
-//        for ( int i = 0;i < player1.length;i++){
-//            timeToken1 = getDetails(player1[i])[1];
-//        }
-//        for ( int i = 0;i < player2.length;i++){
-//            timeToken1 = getDetails(player2[i])[1];
-//        }
-//        if ( timeToken1 > timeToken2){
-//            return 0;
-//        }
-//        else{
-//            return 1;
-//        }
-//    }
 
     /**
      * Determine the score for a player given a placement, following the
@@ -488,7 +487,9 @@ public class PatchworkGame {
     static int getScoreForPlacement(String patchCircle, String placement, boolean firstPlayer) {
         // FIXME Task 7: determine the score for a player given a placement
         boolean ss = isPlacementValid(patchCircle,placement);
-
+        if (ss)
+            if (firstPlayer)    return p1.getScore();
+            else    return p2.getScore();
         return 0;
     }
 

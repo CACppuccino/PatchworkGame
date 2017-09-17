@@ -1,3 +1,6 @@
 ./out/
 ./.idea/
 ./.idea/workspace.xml
+out/
+out
+.idea
