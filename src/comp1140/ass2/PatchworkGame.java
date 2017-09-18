@@ -1,14 +1,23 @@
 package comp1140.ass2;
 
 import com.sun.xml.internal.bind.v2.TODO;
+import gittest.A;
+import sun.util.locale.provider.SPILocaleProviderAdapter;
 
 import java.util.*;
+
+import static comp1140.ass2.State.isSeven;
+import static comp1140.ass2.State.specialTile;
 
 /**
  * Represents the state of a Patchwork game in progress.
  */
 public class PatchworkGame {
 
+    static State p1 = new State(1), p2 = new State(2);
+
+    //for the special tile event
+    static boolean spt = false;
 
     public PatchworkGame(String patchCircleString) {
     }
@@ -16,12 +25,13 @@ public class PatchworkGame {
     public PatchworkGame() {
 
     }
-    public static final int [] specialButton = {5,11,17,23,29,35,41,47};
+
+    public static final int [] specialButton = {5,11,17,23,29,35,41,47,53};
     public static final int [] specialTile = {20,26,32,44,50};
     public static final int [] tileCost = {2,1,3,2,3,2,1,0,6,
-                                    4,2,1,3,7,3,7,3,
-                                    2,4,5,2,5,10,5,10,
-                                    1,4,7,10,1,2,7,8,0};
+            4,2,1,3,7,3,7,3,
+            2,4,5,2,5,10,5,10,
+            1,4,7,10,1,2,7,8,0};
 
     public static final int [][] tileCover = {{2,1},{2,2},{2,2},{3,1},{3,2},{3,2},{3,5},
             {4,3},{2,2},{4,2},{3,2},{4,2},{4,1},{1,5},{4,2},{4,2},{3,3},{4,3},{3,2},{3,3},
@@ -40,14 +50,14 @@ public class PatchworkGame {
             {{1,0},{0,1},{1,1},{0,2}},{{2,0},{0,1},{1,1},{2,1},{0,2},{1,2}},{{0,0}}};
 
     public static final int [] tileTimetoken = {1,3,1,2,2,2,4,3,5,
-                                         2,2,5,3,1,4,4,6,
-                                         1,6,4,3,3,3,5,5,
-                                         2,2,2,4,2,3,6,6,0};
+            2,2,5,3,1,4,4,6,
+            1,6,4,3,3,3,5,5,
+            2,2,2,4,2,3,6,6,0};
 
     public static final int [ ] tileButton = {0,0,0,0,1,0,1,1,2,0,
-                                              0,1,1,1,1,2,2,0,2,
-                                              2,0,1,2,2,3,0,1,
-                                              2,3,0,1,3,3,0};
+            0,1,1,1,1,2,2,0,2,
+            2,0,1,2,2,3,0,1,
+            2,3,0,1,3,3,0};
 
     static int fals;
     /**
@@ -175,48 +185,63 @@ public class PatchworkGame {
     * */
     static boolean isPlacementValid(String patchCircle, String placement) {
         // FIXME Task 6: determine whether a placement is valid
-        System.out.println("&&&:"+placement);
-        System.out.println("###:"+patchCircle);
+      /*
+        Well formed judgement
+        * */
         if (!PatchworkGame.isPlacementWellFormed(placement))   {
             System.out.println("isPlacementWellFormed");return false;}
+        /*---------------------------------------*/
+        p1 = new State(1);
+        p2 = new State(2);
+        /*
+        Move data to a linked list , and get the tile 'A' position
+        * */
         int aPlc = 0;
-
         LinkedList<Character> partches = new LinkedList<>();
+        ArrayList<String> p1String = new ArrayList<>();
+        ArrayList<String> p2String = new ArrayList<>();
         if (patchCircle==null || patchCircle.isEmpty()) {
             System.out.println("circle null");return false;}
-        fals++;
         for (int i=0;i<patchCircle.length();i++){
             if (patchCircle.charAt(i)=='A')
                 aPlc=i+1;
             partches.add(i,patchCircle.charAt(i));
         }
+
+        /*--------------------------------------*/
+
+        /*initialise the first player to be first*/
         boolean fstPlayer = true;
-        String fstPlc = new String(),secPlc = new String();
-        State p1 = new State(1), p2 = new State(2);
+        /*instantiate two players in each round*/
+        /*let player1 on the top in the initial sate*/
         p1.onTop=true;
+        /*cut the placement in length 4 in each round*/
         for (int i=0;i<placement.length();i++){
+            /*for the action of advance*/
             if (placement.charAt(i)=='.'){
                 fstPlayer = !fstPlayer;
                 State.advanced(p1,p2);
             }
             else {
+                /*
+                * for the action of buying parches*/
+                //slice the placement for this round
                 String plc = placement.substring(i, i + 4);
-                System.out.println("%%%%"+plc);
+                //check the turn
                 if (State.check_turn(p1,p2)==1) fstPlayer = true;
                 else fstPlayer = false;
                 if (fstPlayer) {
-                    fstPlc = fstPlc + plc;
                     if ( !outOfBoard(plc, p1)) {
                         System.out.println("out of Board/Overlap1"  );
                         return false;
                     }
                 } else {
-                    secPlc = secPlc + plc;
                     if ( !outOfBoard(plc, p2)) {
                         System.out.println("out of Board/Overlap2"  );
                         return false;
                     }
                 }
+                //try to buy a parch
                 try {
                     State.buyPartches(p1, p2, plc.charAt(0));
                 } catch (Error e) {
@@ -231,6 +256,8 @@ public class PatchworkGame {
                     }
                 }
 
+                if(fstPlayer) p1String.add(plc);
+                else p2String.add(plc);
 
                 char[] three = {partches.get(aPlc%partches.size()), partches.get((aPlc + 1) % partches.size()), partches.get((aPlc + 2) % partches.size())};
                 //move the nertral token
@@ -261,13 +288,11 @@ public class PatchworkGame {
 
                     //if token goes to the end, make it back to the beginning
                     aPlc = aPlc > partches.size()? aPlc %(partches.size()+1):aPlc%partches.size();//aPlc >= partches.size()? (aPlc % partches.size())-1:aPlc;
-                    System.out.println("aPlc" + aPlc+" "+partches.size());
+//                    System.out.println("aPlc" + aPlc+" "+partches.size());
                 }
-
                 i = i + 3;
 
             }
-            System.out.println(fstPlc);
         }
         return true;
 
@@ -276,23 +301,6 @@ public class PatchworkGame {
 //    public static boolean checkOverlap(String placement){
 //
 //    }
-
-    // this block is to get the tile's cost and token
-    public static int[] getDetails(char tile){
-        String tiles = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefgh";
-        int tilePosition = 0;
-        for (int i = 0; i < tiles.length();i++){
-            if ( tile == tiles.charAt(i)){
-                tilePosition = i;
-                break;
-            }
-        }
-        PatchworkGame a = new PatchworkGame();
-        int timeToken = a.tileTimetoken[tilePosition];
-        int tileCost = a.tileCost[tilePosition];
-        int [] details  =  {timeToken,tileCost};
-        return details;
-    }
 
     private static int[][] flipHandle(char tile,int[][] expose){
         int index = getIndex(tile);
@@ -313,16 +321,20 @@ public class PatchworkGame {
         }
 
 
-        System.out.println("copy:"+index+" "+Arrays.deepToString(copy));
         //flip on tiles that width is 2
         if (tileCover[index][1]==2)
             for (int[] xs:copy)
                 xs[1] = (xs[1]==1?2:1);
-        //flip on tiles that width is 3
-        else
-            for (int[] xs:copy)
-                xs[1] = (xs[1]==1?3:1);
-    return copy;
+            //flip on tiles that width is 3
+        else {
+            for (int[] xs : copy) {
+                if (xs[1]==1) xs[1]=3;
+                else if (xs[1]==3) xs[1]=1;
+            }
+
+        }
+//        System.out.println("flip:"+index+" "+Arrays.deepToString(copy));
+        return copy;
     }
     private static int getIndex(char tile){
         int index;
@@ -372,6 +384,7 @@ public class PatchworkGame {
             xs[0] += topleft[0];
             xs[1] += topleft[1];
         }
+//        System.out.println("rotate:"+Arrays.deepToString(expose));
         return expose;
     }
 
@@ -384,7 +397,7 @@ public class PatchworkGame {
                 rotate = placement.charAt(3);
         if (!((tile>='A'&& tile<='Z') || (tile>='a' && tile<='h')))
 //            throw new Error("tile wrong "+tile);
-             return false;
+            return false;
         else if (!(row>='A'&& row<='I'&& col>='A' && col<='I'))
 //            throw new Error("row col wrong"+row+" "+col);
             return false;
@@ -399,7 +412,8 @@ public class PatchworkGame {
         if (!isValidOnePlacement(placement)){
             System.out.println("invalid one placement");
             return false;}
-
+        char [][] a = new char[9][9];
+        char [][] b = new char[9][9];
         char row = placement.charAt(2),col = placement.charAt(1);
         int rowN = row - 'A',colN = col -'A' ;
         char tile = placement.charAt(0);
@@ -415,7 +429,7 @@ public class PatchworkGame {
             expo[i][1] = tileSpace[index][i][1]+1;
         }
 
-        System.out.println("expo: "+Arrays.deepToString(expo));
+//        System.out.println("expo: "+Arrays.deepToString(expo));
 
         if (rotate >= 'A' && rotate <= 'D') {
             result=rotateHandle(rotate,expo);
@@ -431,48 +445,32 @@ public class PatchworkGame {
             xs[1] += colN;
 //            System.out.println("result after: "+Arrays.deepToString(result));
         }
-                    System.out.println("result after: "+Arrays.deepToString(result));
+//                    System.out.println("result after: "+Arrays.deepToString(result));
         for (int[] xs:result){
             if (!(xs[0]>=1 && xs[0]<=9 && xs[1]>=1 && xs[1]<=9))
             {
-                for (int[] sxs:result){
-                    System.out.println(sxs[0]+" "+sxs[1]);
-                }
+//                for (int[] sxs:result){
+//                    System.out.println(sxs[0]+" "+sxs[1]);
+//                }
                 System.out.println("out of board"+placement+" "+xs[0]+" "+xs[1]+"//");
                 return false;
             }
-            System.out.println("id:"+player.id);
-            System.out.println();
+//            System.out.println("id:"+player.id);
+//            System.out.println();
             if (!player.squiltBoard[xs[0]-1][xs[1]-1])
                 player.squiltBoard[xs[0]-1][xs[1]-1] = true;
             else {
-                player.printSquiltBoard();
-//                fals++;
-            if (fals<=7)
+//                player.printSquiltBoard();
+                  a = player.printPlayerBoard();
                 return false;
             }
 
         }
         player.printSquiltBoard();
+        b = player.printPlayerBoard();
 
         return true;
     }
-//    public static int checkTurn(char [] player1,char [] player2){
-//        int timeToken1 = 0;
-//        int timeToken2 = 0;
-//        for ( int i = 0;i < player1.length;i++){
-//            timeToken1 = getDetails(player1[i])[1];
-//        }
-//        for ( int i = 0;i < player2.length;i++){
-//            timeToken1 = getDetails(player2[i])[1];
-//        }
-//        if ( timeToken1 > timeToken2){
-//            return 0;
-//        }
-//        else{
-//            return 1;
-//        }
-//    }
 
     /**
      * Determine the score for a player given a placement, following the
@@ -485,6 +483,11 @@ public class PatchworkGame {
      */
     static int getScoreForPlacement(String patchCircle, String placement, boolean firstPlayer) {
         // FIXME Task 7: determine the score for a player given a placement
+        System.out.println("*******************************************");
+        boolean ss = isPlacementValid(patchCircle,placement);
+        if (ss)
+            if (firstPlayer)    return p1.getScore();
+            else    return p2.getScore();
         return 0;
     }
 
