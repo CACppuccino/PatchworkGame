@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="65da6ae4-3a7c-4801-b171-39bf72c9367f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/PatchworkGame.class" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/PatchworkGame.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/State.class" afterPath="$PROJECT_DIR$/out/production/comp1140-ass2/comp1140/ass2/State.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/comp1140/ass2/PatchworkGame.java" afterPath="$PROJECT_DIR$/src/comp1140/ass2/PatchworkGame.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/comp1140/ass2/State.java" afterPath="$PROJECT_DIR$/src/comp1140/ass2/State.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -42,8 +38,8 @@
       <file leaf-file-name="State.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/State.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="182" column="49" lean-forward="false" selection-start-line="182" selection-start-column="49" selection-end-line="182" selection-end-column="49" />
+            <state relative-caret-position="75">
+              <caret line="212" column="40" lean-forward="true" selection-start-line="212" selection-start-column="40" selection-end-line="212" selection-end-column="40" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -195,7 +191,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ScoreFromPlacementTest">
+  <component name="RunManager" selected="JUnit.PlacementValidTest">
     <configuration name="Matrix" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -411,20 +407,11 @@
       <option name="presentableId" value="Default" />
       <updated>1502865802357</updated>
       <workItem from="1504068322951" duration="5522000" />
-      <workItem from="1505727081893" duration="4644000" />
+      <workItem from="1505727081893" duration="4797000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="PlacementValidTest - 2017.09.18 at 19h 31m 29s.xml">
-      <configuration name="PlacementValidTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="PlacementValidTest - 2017.09.18 at 19h 32m 00s.xml">
-      <configuration name="PlacementValidTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="PlacementValidTest - 2017.09.18 at 19h 43m 55s.xml">
-      <configuration name="PlacementValidTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="PlacementValidTest - 2017.09.18 at 20h 39m 55s.xml">
       <configuration name="PlacementValidTest" configurationId="JUnit" />
     </history-entry>
@@ -446,9 +433,18 @@
     <history-entry file="PlacementValidTest - 2017.09.18 at 21h 18m 52s.xml">
       <configuration name="PlacementValidTest" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="PlacementValidTest - 2017.09.18 at 21h 21m 02s.xml">
+      <configuration name="PlacementValidTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ScoreFromPlacementTest - 2017.09.18 at 21h 18m 59s.xml">
+      <configuration name="ScoreFromPlacementTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ScoreFromPlacementTest - 2017.09.18 at 21h 20m 52s.xml">
+      <configuration name="ScoreFromPlacementTest" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21024000" />
+    <option name="totallyTimeSpent" value="21177000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -471,9 +467,9 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.41577062" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18160096" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17921147" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14336918" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18432432" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
@@ -862,8 +858,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/State.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="182" column="49" lean-forward="false" selection-start-line="182" selection-start-column="49" selection-end-line="182" selection-end-column="49" />
+        <state relative-caret-position="75">
+          <caret line="212" column="40" lean-forward="true" selection-start-line="212" selection-start-column="40" selection-end-line="212" selection-end-column="40" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

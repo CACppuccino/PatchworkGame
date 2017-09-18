@@ -214,14 +214,13 @@ public class State {
         if (player.squareleft>32) return false;
 
         // this block is to check player's board is full 7 * 7
-        State p1 = new State(1);
-        p1.printSquiltBoard();
+        player.printSquiltBoard();
         int positionMark = 100;
         int counterCol = 0;
-        for ( int i = 0; i < p1.printPlayerBoard().length;i++){
+        for ( int i = 0; i < player.printPlayerBoard().length;i++){
             int counterRow = 0;
-            for (int j = (positionMark != 100)? positionMark:0; j < p1.printPlayerBoard()[i].length;j++){
-                if(p1.printPlayerBoard()[i][j] == '*'){
+            for (int j = (positionMark != 100)? positionMark:0; j < player.printPlayerBoard()[i].length;j++){
+                if(player.printPlayerBoard()[i][j] == '*'){
                     if ( positionMark > j) positionMark = j;
                     counterRow++;
                 }
