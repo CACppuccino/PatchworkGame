@@ -1,20 +1,21 @@
 package comp1140.ass2;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Stack;
+import gittest.A;
+
+import java.util.*;
 
 public class State {
     final static int GRIDS = 53;
     final int id;
     List<Character> tiles = new ArrayList<Character>();
-//    calculating the squares left in two quilt boards.
+    //    calculating the squares left in two quilt boards.
     int squareleft = 81;
 
-//    calculating the time left in the time board of two players
+    //    calculating the time left in the time board of two players
     int timecount = 0;
-// for counting each player's score
+    // for counting each player's score
+
     //when the game finshed, the score should be scoreCount = scoreCount + buttonCount - squareleft*2
     int scoreCount = 0;
     //    calculating the button of each player holds
@@ -22,12 +23,12 @@ public class State {
 
     // how many buttons should a player be rewarded each special event of button event
     int specialButton = 0;
-//    showing two players' states on the time board,
+    //    showing two players' states on the time board,
 // 1 indicates moving first, 0 indicates moving later,
 // 2 indicates the player has reached the final point.
     int tbState = 0;
 
-//    indicating the place of the neutral token, if ntState is i,
+    //    indicating the place of the neutral token, if ntState is i,
 // then the patch i,i+1,i+2 should be displayed in the candidate area.
     int ntState = 0;
 
@@ -48,7 +49,7 @@ public class State {
             for (boolean sqq: sq)
                 sqq = false;
     }
-//    this list should be changed when being initialised randomly by the initialization()/
+    //    this list should be changed when being initialised randomly by the initialization()/
 // once the player buys an patch/ choose undo after placed a patch
     ArrayList<Character> currentPatch = new ArrayList<Character>();
     boolean[][] squiltBoard = new boolean[9][9];
@@ -180,27 +181,68 @@ public class State {
                 p2.onTop = true;
                 p1.onTop = false;
             }
+            if (isSeven(p1)) specialTile(p1);
+            else if (isSeven(p2)) specialTile(p2);
         }
 
     }
-/* SPECIAL TILE - NOT COMPLETE YET
-    private static boolean isSeven(State player){
-        //special tile is alreay owned by one of the player
+
+    char [][] printPlayerBoard(){
+        int counter1 = 0;
+        char [][] playerBoardPrint = new char[9][9];
+
+        for(boolean [] sq1 : squiltBoard){
+            int counter2 = 0;
+            for ( boolean sqq1:sq1){
+                if(!sqq1) {
+                    playerBoardPrint[counter1][counter2] = '@';
+                    counter2++;
+                }
+                else {
+                    playerBoardPrint[counter1][counter2] = '*';
+                    counter2++;
+                }
+            }
+            counter1++;
+        }
+        return playerBoardPrint;
+    }
+
+    public static boolean isSeven(State player) {
+        // check whether the player's board is 7 * 7 full
+        //special tile is already owned by one of the player
         if (spt) return false;
         //haven't filled 49 squares even
         if (player.squareleft>32) return false;
 
-        return false;
+        // this block is to check player's board is full 7 * 7
+        player.printSquiltBoard();
+        int positionMark = 100;
+        int counterCol = 0;
+        for ( int i = 0; i < player.printPlayerBoard().length;i++){
+            int counterRow = 0;
+            for (int j = (positionMark != 100)? positionMark:0; j < player.printPlayerBoard()[i].length;j++){
+                if(player.printPlayerBoard()[i][j] == '*'){
+                    if ( positionMark > j) positionMark = j;
+                    counterRow++;
+                }
+            }
+            counterCol++;
+            if (counterRow < 7 && counterCol < 2) positionMark = 100;
+            else if (counterRow < 7 && counterCol > 2) return false;
+        }
+        return true;
     }
+
     /*
     * The function is only called when the signal is True
+    */
 
     public static void specialTile(State player){
         player.scoreCount +=7;
         //this event should only be touched once
         spt = true;
     }
-*/
     public static void specialEvent(State player,State oplyaer,int start,int steps){
         for (int sb:PatchworkGame.specialButton){
             if (sb>=start+1 && sb<=start+steps)

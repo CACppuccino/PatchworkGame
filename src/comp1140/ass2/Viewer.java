@@ -83,10 +83,13 @@ public class Viewer extends Application {
             tileView.setFitHeight(h);
             /*rotation*/
             /*haven't included the E-H*/
-            double r = rotation[rotate - 'A'];
-            if (rotate > 'D') {
-                tileView.setScaleX(-1);
-            }
+
+//            double r = rotation[rotate - 'A'];
+//            if (rotate > 'D') {
+//                tileView.setScaleX(-1);
+//            }
+            double r = rotation[rotate-'A'];
+
             tileView.setRotate(r);
             /* set the coordinate according to the input* */
             int x = (row - 'A') * 30;

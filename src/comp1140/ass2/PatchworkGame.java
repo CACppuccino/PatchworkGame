@@ -1,8 +1,12 @@
 package comp1140.ass2;
 
 import com.sun.xml.internal.bind.v2.TODO;
-
+import gittest.A;
+import sun.util.locale.provider.SPILocaleProviderAdapter;
 import java.util.*;
+
+import static comp1140.ass2.State.isSeven;
+import static comp1140.ass2.State.specialTile;
 
 /**
  * Represents the state of a Patchwork game in progress.
@@ -10,6 +14,10 @@ import java.util.*;
 public class PatchworkGame {
 
     static State p1 = new State(1), p2 = new State(2);
+
+    //for the special tile event
+    static boolean spt = false;
+
     public PatchworkGame(String patchCircleString) {
     }
 
@@ -19,9 +27,9 @@ public class PatchworkGame {
     public static final int [] specialButton = {5,11,17,23,29,35,41,47,53};
     public static final int [] specialTile = {20,26,32,44,50};
     public static final int [] tileCost = {2,1,3,2,3,2,1,0,6,
-                                    4,2,1,3,7,3,7,3,
-                                    2,4,5,2,5,10,5,10,
-                                    1,4,7,10,1,2,7,8,0};
+            4,2,1,3,7,3,7,3,
+            2,4,5,2,5,10,5,10,
+            1,4,7,10,1,2,7,8,0};
 
     public static final int [][] tileCover = {{2,1},{2,2},{2,2},{3,1},{3,2},{3,2},{3,5},
             {4,3},{2,2},{4,2},{3,2},{4,2},{4,1},{1,5},{4,2},{4,2},{3,3},{4,3},{3,2},{3,3},
@@ -40,14 +48,14 @@ public class PatchworkGame {
             {{1,0},{0,1},{1,1},{0,2}},{{2,0},{0,1},{1,1},{2,1},{0,2},{1,2}},{{0,0}}};
 
     public static final int [] tileTimetoken = {1,3,1,2,2,2,4,3,5,
-                                         2,2,5,3,1,4,4,6,
-                                         1,6,4,3,3,3,5,5,
-                                         2,2,2,4,2,3,6,6,0};
+            2,2,5,3,1,4,4,6,
+            1,6,4,3,3,3,5,5,
+            2,2,2,4,2,3,6,6,0};
 
     public static final int [ ] tileButton = {0,0,0,0,1,0,1,1,2,0,
-                                              0,1,1,1,1,2,2,0,2,
-                                              2,0,1,2,2,3,0,1,
-                                              2,3,0,1,3,3,0};
+            0,1,1,1,1,2,2,0,2,
+            2,0,1,2,2,3,0,1,
+            2,3,0,1,3,3,0};
 
     static int fals;
     /**
@@ -188,6 +196,8 @@ public class PatchworkGame {
         * */
         int aPlc = 0;
         LinkedList<Character> partches = new LinkedList<>();
+        ArrayList<String> p1String = new ArrayList<>();
+        ArrayList<String> p2String = new ArrayList<>();
         if (patchCircle==null || patchCircle.isEmpty()) {
             System.out.println("circle null");return false;}
         for (int i=0;i<patchCircle.length();i++){
@@ -218,7 +228,6 @@ public class PatchworkGame {
                 //check the turn
                 if (State.check_turn(p1,p2)==1) fstPlayer = true;
                 else fstPlayer = false;
-
                 if (fstPlayer) {
                     if ( !outOfBoard(plc, p1)) {
                         System.out.println("out of Board/Overlap1"  );
@@ -245,6 +254,8 @@ public class PatchworkGame {
                     }
                 }
 
+                if(fstPlayer) p1String.add(plc);
+                else p2String.add(plc);
 
                 char[] three = {partches.get(aPlc%partches.size()), partches.get((aPlc + 1) % partches.size()), partches.get((aPlc + 2) % partches.size())};
                 //move the nertral token
@@ -277,7 +288,6 @@ public class PatchworkGame {
                     aPlc = aPlc > partches.size()? aPlc %(partches.size()+1):aPlc%partches.size();//aPlc >= partches.size()? (aPlc % partches.size())-1:aPlc;
 //                    System.out.println("aPlc" + aPlc+" "+partches.size());
                 }
-
                 i = i + 3;
 
             }
@@ -313,7 +323,7 @@ public class PatchworkGame {
         if (tileCover[index][1]==2)
             for (int[] xs:copy)
                 xs[1] = (xs[1]==1?2:1);
-        //flip on tiles that width is 3
+            //flip on tiles that width is 3
         else {
             for (int[] xs : copy) {
                 if (xs[1]==1) xs[1]=3;
@@ -322,7 +332,7 @@ public class PatchworkGame {
 
         }
 //        System.out.println("flip:"+index+" "+Arrays.deepToString(copy));
-    return copy;
+        return copy;
     }
     private static int getIndex(char tile){
         int index;
@@ -385,7 +395,7 @@ public class PatchworkGame {
                 rotate = placement.charAt(3);
         if (!((tile>='A'&& tile<='Z') || (tile>='a' && tile<='h')))
 //            throw new Error("tile wrong "+tile);
-             return false;
+            return false;
         else if (!(row>='A'&& row<='I'&& col>='A' && col<='I'))
 //            throw new Error("row col wrong"+row+" "+col);
             return false;
@@ -400,7 +410,8 @@ public class PatchworkGame {
         if (!isValidOnePlacement(placement)){
             System.out.println("invalid one placement");
             return false;}
-
+        char [][] a = new char[9][9];
+        char [][] b = new char[9][9];
         char row = placement.charAt(2),col = placement.charAt(1);
         int rowN = row - 'A',colN = col -'A' ;
         char tile = placement.charAt(0);
@@ -448,12 +459,14 @@ public class PatchworkGame {
                 player.squiltBoard[xs[0]-1][xs[1]-1] = true;
             else {
 //                player.printSquiltBoard();
+
+                  a = player.printPlayerBoard();
                 return false;
             }
 
         }
         player.printSquiltBoard();
-
+        b = player.printPlayerBoard();
         return true;
     }
 
