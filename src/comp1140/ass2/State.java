@@ -237,6 +237,11 @@ public class State {
     /*
     * The function is only called when the signal is True
     */
+    static boolean affordPartch(int buttonCount, int cost){
+        if (buttonCount - cost< 0) return false;
+        return true;
+    }
+
 
     public static void specialTile(State player){
         player.scoreCount +=7;

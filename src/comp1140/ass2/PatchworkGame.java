@@ -58,6 +58,7 @@ public class PatchworkGame {
             2,3,0,1,3,3,0};
 
     static int fals;
+    public static char[] three;
     /**
      * Determine whether a patch placement is well-formed according to the following:
      * - either it is the single character string ".", or
@@ -102,6 +103,24 @@ public class PatchworkGame {
             result = true;
         }
         return result;
+    }
+
+    static String initPathCircle() {
+        StringBuilder res = new StringBuilder();
+        for (char i = 'A'; i <= 'Z'; i++)
+            res.append(i);
+        for (char i = 'a'; i <= 'g'; i++)
+            res.append(i);
+        Random rng = new Random();
+        char[] result = res.toString().toCharArray();
+        for (int i = 0; i < 100; i++) {
+            int x = rng.nextInt(33);
+            int y = rng.nextInt(33);
+            char tmp = result[x];
+            result[x] = result[y];
+            result[y] = tmp;
+        }
+        return new String(result);
     }
 
     /**
@@ -257,7 +276,7 @@ public class PatchworkGame {
                 if(fstPlayer) p1String.add(plc);
                 else p2String.add(plc);
 
-                char[] three = {partches.get(aPlc%partches.size()), partches.get((aPlc + 1) % partches.size()), partches.get((aPlc + 2) % partches.size())};
+                 three = new char[] {partches.get(aPlc%partches.size()), partches.get((aPlc + 1) % partches.size()), partches.get((aPlc + 2) % partches.size())};
                 //move the nertral token
                 //if the parches left in the partches circle doesn't contain the current
                 //wanted partches,then is invalid
