@@ -73,8 +73,8 @@ public class State {
             return 1;
         else {
             if (p1.onTop && p2.onTop)   throw new Error("both player token on the top");
-            else if (p1.onTop)  return 1;
-            else    return 2;
+            else if (p2.onTop)  return 2;
+            else    return 1;
         }
     }
 
@@ -134,9 +134,10 @@ public class State {
                 }
             }
             p1.buttonCount = p1.buttonCount - buttonDec;
-            if (p1.buttonCount<0)
+            if (p1.buttonCount<0){
+                p1.buttonCount+=buttonDec;
                 //suppose to notice the Viewer
-                throw new Error("cant afford the tile"+p);
+                throw new Error("cant afford the tile"+p);}
             p1.specialButton += specialButton;
             specialEvent(p1,p2,p1.timecount,timeInc);
             p1.timecount = p1.timecount+timeInc>GRIDS ? GRIDS : p1.timecount+timeInc;
@@ -165,9 +166,10 @@ public class State {
                 }
             }
             p2.buttonCount = p2.buttonCount - buttonDec;
-            if (p2.buttonCount<0)
+            if (p2.buttonCount<0){
+                p2.buttonCount+=buttonDec;
                 //suppose to notice the Viewer
-                throw new Error("cant afford the tile"+p);
+                throw new Error("cant afford the tile"+p);}
             p2.specialButton += specialButton;
             specialEvent(p2,p1,p2.timecount,timeInc);
             p2.timecount = p2.timecount+timeInc>GRIDS ? GRIDS : p2.timecount+timeInc;

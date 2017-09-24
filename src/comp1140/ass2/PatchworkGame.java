@@ -5,8 +5,6 @@ import com.sun.xml.internal.bind.v2.TODO;
 import sun.util.locale.provider.SPILocaleProviderAdapter;
 import java.util.*;
 
-import static comp1140.ass2.State.isSeven;
-import static comp1140.ass2.State.specialTile;
 
 /**
  * Represents the state of a Patchwork game in progress.
@@ -59,6 +57,7 @@ public class PatchworkGame {
 
     static int fals;
     public static char[] three;
+    static int aPlc;
     /**
      * Determine whether a patch placement is well-formed according to the following:
      * - either it is the single character string ".", or
@@ -111,7 +110,7 @@ public class PatchworkGame {
             res.append(i);
         for (char i = 'a'; i <= 'g'; i++)
             res.append(i);
-        Random rng = new Random();
+        Random rng = new Random(1);
         char[] result = res.toString().toCharArray();
         for (int i = 0; i < 100; i++) {
             int x = rng.nextInt(33);
@@ -213,7 +212,7 @@ public class PatchworkGame {
         /*
         Move data to a linked list , and get the tile 'A' position
         * */
-        int aPlc = 0;
+        aPlc = 0;
         LinkedList<Character> partches = new LinkedList<>();
         ArrayList<String> p1String = new ArrayList<>();
         ArrayList<String> p2String = new ArrayList<>();
@@ -276,7 +275,7 @@ public class PatchworkGame {
                 if(fstPlayer) p1String.add(plc);
                 else p2String.add(plc);
 
-                 three = new char[] {partches.get(aPlc%partches.size()), partches.get((aPlc + 1) % partches.size()), partches.get((aPlc + 2) % partches.size())};
+                three = new char[] {partches.get(aPlc%partches.size()), partches.get((aPlc + 1) % partches.size()), partches.get((aPlc + 2) % partches.size())};
                 //move the nertral token
                 //if the parches left in the partches circle doesn't contain the current
                 //wanted partches,then is invalid
@@ -285,7 +284,6 @@ public class PatchworkGame {
                         System.out.println("not cotains anymore" + plc.charAt(0));
                         return false;
                     }
-
 
                     if (!(plc.charAt(0) == three[0] || plc.charAt(0) == three[1] || plc.charAt(0) == three[2])) {
                         System.out.println("three error:" + plc.charAt(0) + " " + patchCircle+" "+three[0]+" "+three[1]+" "+three[2]);
@@ -305,7 +303,9 @@ public class PatchworkGame {
 
                     //if token goes to the end, make it back to the beginning
                     aPlc = aPlc > partches.size()? aPlc %(partches.size()+1):aPlc%partches.size();//aPlc >= partches.size()? (aPlc % partches.size())-1:aPlc;
-//                    System.out.println("aPlc" + aPlc+" "+partches.size());
+                    System.out.println(aPlc);
+                    //                    System.out.println("aPlc" + aPlc+" "+partches.size());
+                    three = new char[] {partches.get(aPlc%partches.size()), partches.get((aPlc + 1) % partches.size()), partches.get((aPlc + 2) % partches.size())};
                 }
                 i = i + 3;
 
