@@ -19,6 +19,7 @@ public class test{
     public static void main(String[] args) {
         String abc = "ABCD";
         char c= 'C';
+        char c= 'C';
         System.out.println(abc.contains(String.valueOf(c)));
     }
 }
