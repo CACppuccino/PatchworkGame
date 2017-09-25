@@ -305,6 +305,7 @@ public class PatchworkGame {
                     aPlc = aPlc > partches.size()? aPlc %(partches.size()+1):aPlc%partches.size();//aPlc >= partches.size()? (aPlc % partches.size())-1:aPlc;
                     System.out.println(aPlc);
                     //                    System.out.println("aPlc" + aPlc+" "+partches.size());
+                    three = new char[] {partches.get(aPlc%partches.size()), partches.get((aPlc + 1) % partches.size()), partches.get((aPlc + 2) % partches.size())};
                 }
                 i = i + 3;
 

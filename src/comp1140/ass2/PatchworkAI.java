@@ -10,7 +10,8 @@ public class PatchworkAI {
 
     final static char[] PATCHES = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W',
             'X','Y','Z','a','b','c','d','e','f','g'};
-
+    public static char [] three;
+    public static String [] validTileStr;
     public PatchworkAI(PatchworkGame game) {
         this.game = game;
     }
@@ -29,12 +30,13 @@ public class PatchworkAI {
         int aPosition = 0;
         Random r = new Random();
         ArrayList<Character> newPatchCircle = new ArrayList<>();
+        ArrayList<String> validTileString = new ArrayList<>();
         for (int j = 0; j < patchCircle.length();j++)
             newPatchCircle.add(patchCircle.charAt(j));
         for (int i=0;i<patchCircle.length();i++)
             if (patchCircle.charAt(i)=='A')
                 aPosition=i+1;
-        char [] three = new char[] {newPatchCircle.get(aPosition%newPatchCircle.size()), newPatchCircle.get((aPosition + 1) % newPatchCircle.size()), newPatchCircle.get((aPosition + 2) % newPatchCircle.size())};
+        three = new char[] {newPatchCircle.get(aPosition%newPatchCircle.size()), newPatchCircle.get((aPosition + 1) % newPatchCircle.size()), newPatchCircle.get((aPosition + 2) % newPatchCircle.size())};
         int [] tileCost = new int[three.length];
         for ( int i = 0; i < three.length; i++)
             for ( int j = 0; j < PATCHES.length;j++)
@@ -47,21 +49,22 @@ public class PatchworkAI {
                 vaildPlacement = ".";
             else {
                 String threeTile = new String(three);
-                ArrayList<String> validTileString = vaildPatchStirng(placement, threeTile);
+                validTileString = vaildPatchStirng(placement, threeTile);
 
-                int indexAdd = r.nextInt(3);
-                vaildPlacement = validTileString.get(indexAdd);
+                int indexAdd = r.nextInt(validTileString.size());
+                vaildPlacement = (validTileString.get(indexAdd));
             }
         else
             if (minimalCost - p2.buttonCount < 0)
                 vaildPlacement = ".";
             else {
                 String threeTile = new String(three);
-                ArrayList<String> validTileString = vaildPatchStirng(placement, threeTile);
+                validTileString = vaildPatchStirng(placement, threeTile);
 
-                int indexAdd = r.nextInt(3);
+                int indexAdd = r.nextInt(validTileString.size());
                 vaildPlacement = validTileString.get(indexAdd);
             }
+        validTileStr = (String[])validTileString.toArray(new String[validTileString.size()]);
         return vaildPlacement;
     }
 
