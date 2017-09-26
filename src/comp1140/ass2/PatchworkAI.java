@@ -51,6 +51,7 @@ public class PatchworkAI {
                 String threeTile = new String(three);
                 validTileString = vaildPatchStirng(placement, threeTile);
 
+                if (validTileString.size() == 0) return vaildPlacement = ".";
                 int indexAdd = r.nextInt(validTileString.size());
                 vaildPlacement = (validTileString.get(indexAdd));
             }
@@ -61,6 +62,7 @@ public class PatchworkAI {
                 String threeTile = new String(three);
                 validTileString = vaildPatchStirng(placement, threeTile);
 
+                if (validTileString.size() == 0) return vaildPlacement = ".";
                 int indexAdd = r.nextInt(validTileString.size());
                 vaildPlacement = validTileString.get(indexAdd);
             }

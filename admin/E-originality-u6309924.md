@@ -5,4 +5,4 @@ following documented exceptions:
 
 * The code in class <...> uses an idea suggested by <...>
 
-Signed: Mary Jones (u23445678)
+Signed: Weitao Chen(u6309924)
