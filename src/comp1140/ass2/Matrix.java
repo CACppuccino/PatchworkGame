@@ -1,6 +1,7 @@
 package comp1140.ass2;
 
 import java.awt.*;
+import java.util.Arrays;
 
 public class Matrix{
     int col,row;
@@ -9,6 +10,18 @@ public class Matrix{
         this.col = col;
         matrix = new double[row][col];
     }
+    Matrix(int row,int col,double ele){
+        this.col = col;
+        this.row = row;
+        matrix = new double[row][col];
+        for (int i=0;i<row;i++)
+            for (int j=0;j<col;j++)
+                matrix[i][j] = ele;
+        //this one is not working, dont know why
+//        for (double[] cc :matrix)
+//            for (double c : cc)
+//                c = ele;
+    }
     public double[][] getMatrix(){return matrix;}
     void setZero(){
         for (int i =0;i<row;i++)
@@ -16,6 +29,11 @@ public class Matrix{
                 matrix[i][j] = 0;
     }
 
+    boolean equals(Matrix another){
+        if (this.row!=another.row || this.col != another.col) return false;
+        if (!Arrays.deepToString(this.matrix).equals(Arrays.deepToString(another.matrix))) return false;
+        return true;
+    }
     public void setMatrix (int coordR, int coordC, double element) throws Exception{
         if (coordR>= row || coordC >= col)
             throw new Exception("Matrix out of bound, should be ("+row+','+col+") but have " +
@@ -54,7 +72,11 @@ public class Matrix{
         return c;
     }
     public Matrix addBy (Matrix a) throws Exception{
-
+        if (col != a.col || row != a.row)
+            throw new Exception("Matrix not the same size");
+        for (int i = 0;i < row;i++)
+            for (int j = 0; j < col;j++)
+                matrix[i][j] += a.matrix[i][j];
         return this;
     }
 
@@ -62,6 +84,60 @@ public class Matrix{
         Matrix a = new Matrix(9,3);
         a.setZero();
         a.printMatrix();
+    }
+
+    public void scalar (double s){
+
+        for (double[] cc: matrix){
+            for (double ccc:cc)
+                ccc *= s;
+        }
+    }
+
+    public Matrix transpose(){
+        Matrix c = this;
+        for (int i=0;i<row;i++)
+            for (int j = 0;j<col;j++)
+                c.matrix[i][j] = this.matrix[j][i];
+        return c;
+    }
+
+    public boolean isSquare(){return row==col;}
+
+    //for the two methods below
+    //referencing from https://www.codeproject.com/Articles/405128/Matrix-operations-in-Java
+    public static double determinant(Matrix matrix) throws Exception {
+        if (!matrix.isSquare())
+            throw new Exception("matrix need to be square.");
+        if (matrix.row == 1) {
+            return matrix.matrix[0][0];
+        }
+        if (matrix.row==2) {
+            return (matrix.getElement(0, 0) * matrix.getElement(1, 1)) -
+                    ( matrix.getElement(0, 1) * matrix.getElement(1, 0));
+        }
+        double sum = 0.0;
+        for (int i=0; i<matrix.col; i++) {
+            sum += (-i) * matrix.getElement(0, i) * determinant(createSubMatrix(matrix, 0, i));
+        }
+        return sum;
+    }
+
+    public static Matrix createSubMatrix(Matrix matrix, int excluding_row, int excluding_col) throws Exception{
+        Matrix mat = new Matrix(matrix.row-1, matrix.col-1);
+        int r = -1;
+        for (int i=0;i<matrix.row;i++) {
+            if (i==excluding_row)
+                continue;
+            r++;
+            int c = -1;
+            for (int j=0;j<matrix.col;j++) {
+                if (j==excluding_col)
+                    continue;
+                mat.setMatrix(r, ++c, matrix.getElement(i,j));
+            }
+        }
+        return mat;
     }
 }
 //public class Matrix {
