@@ -90,4 +90,39 @@ public class MatrixTest {
                 assertTrue ("not equal when using addBy function",a.matrix[i][j]==c.matrix[i][j]);
     }
 
+    @Test
+    public void TestTranspose() throws Exception{
+        int r;
+        double ele;
+        for (int i=0;i<TESTROUNDS;i++){
+            r = rng.nextInt(7);
+            Matrix a = new Matrix(r,r);
+            Matrix b = new Matrix(r,r);
+            for (int j = 0; j < r;j++){
+                for ( int k = 0; k < r;k++){
+                    ele = rng.nextDouble();
+                    a.matrix[j][k] = ele;
+                    b.matrix[k][j] = ele;
+                }
+            }
+            assertTrue ("The transpose of a  " + Arrays.deepToString(a.transpose().matrix) + " is not equal to b " + Arrays.deepToString(b.matrix) ,Arrays.deepEquals(a.transpose().matrix,b.matrix));
+        }
+    }
+
+    @Test
+    public void TestIsquare() throws Exception{
+        int c,r;
+        for ( int i = 0;i < TESTROUNDS;i++){
+            c = rng.nextInt(7);
+            r = rng.nextInt(7);
+            Matrix a = new Matrix(c,r);
+            System.out.println(r);
+            System.out.println(c);
+            System.out.println(a.isSquare());
+            if (c == r) assertTrue("The matrix is not square ", a.isSquare());
+            else assertFalse("The matrix is square ", a.isSquare());
+        }
+
+    }
+
 }
