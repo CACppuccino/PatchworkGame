@@ -177,7 +177,9 @@ public class MatrixTest {
                     a.matrix[j][k] = rng.nextDouble();
                 }
             }
-            assertTrue("Incorrect Determinant", det(a)==Matrix.determinant(a));
+            System.out.println(det(a));
+            System.out.println(Matrix.determinant(a));
+            assertTrue("Incorrect Determinant", det(a)-Matrix.determinant((a))<Math.pow(10,-6));
         }
     }
 }
