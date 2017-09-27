@@ -1,6 +1,7 @@
 package comp1140.ass2;
 
 import java.awt.*;
+import java.util.Arrays;
 
 public class Matrix{
     int col,row;
@@ -9,6 +10,18 @@ public class Matrix{
         this.col = col;
         matrix = new double[row][col];
     }
+    Matrix(int row,int col,double ele){
+        this.col = col;
+        this.row = row;
+        matrix = new double[row][col];
+        for (int i=0;i<row;i++)
+            for (int j=0;j<col;j++)
+                matrix[i][j] = ele;
+        //this one is not working, dont know why
+//        for (double[] cc :matrix)
+//            for (double c : cc)
+//                c = ele;
+    }
     public double[][] getMatrix(){return matrix;}
     void setZero(){
         for (int i =0;i<row;i++)
@@ -16,6 +29,11 @@ public class Matrix{
                 matrix[i][j] = 0;
     }
 
+    boolean equals(Matrix another){
+        if (this.row!=another.row || this.col != another.col) return false;
+        if (!Arrays.deepToString(this.matrix).equals(Arrays.deepToString(another.matrix))) return false;
+        return true;
+    }
     public void setMatrix (int coordR, int coordC, double element) throws Exception{
         if (coordR>= row || coordC >= col)
             throw new Exception("Matrix out of bound, should be ("+row+','+col+") but have " +
@@ -54,7 +72,11 @@ public class Matrix{
         return c;
     }
     public Matrix addBy (Matrix a) throws Exception{
-
+        if (col != a.col || row != a.row)
+            throw new Exception("Matrix not the same size");
+        for (int i = 0;i < row;i++)
+            for (int j = 0; j < col;j++)
+                matrix[i][j] += a.matrix[i][j];
         return this;
     }
 
@@ -63,6 +85,7 @@ public class Matrix{
         a.setZero();
         a.printMatrix();
     }
+
 }
 //public class Matrix {
 //    int dimension;
