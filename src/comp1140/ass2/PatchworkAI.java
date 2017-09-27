@@ -56,16 +56,16 @@ public class PatchworkAI {
                 vaildPlacement = (validTileString.get(indexAdd));
             }
         else
-        if (minimalCost - p2.buttonCount < 0)
-            vaildPlacement = ".";
-        else {
-            String threeTile = new String(three);
-            validTileString = vaildPatchStirng(placement, threeTile);
+            if (minimalCost - p2.buttonCount < 0)
+                vaildPlacement = ".";
+            else {
+                String threeTile = new String(three);
+                validTileString = vaildPatchStirng(placement, threeTile);
 
-            if (validTileString.size() == 0) return vaildPlacement = ".";
-            int indexAdd = r.nextInt(validTileString.size());
-            vaildPlacement = validTileString.get(indexAdd);
-        }
+                if (validTileString.size() == 0) return vaildPlacement = ".";
+                int indexAdd = r.nextInt(validTileString.size());
+                vaildPlacement = validTileString.get(indexAdd);
+            }
         validTileStr = (String[])validTileString.toArray(new String[validTileString.size()]);
         return vaildPlacement;
     }

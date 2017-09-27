@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7ef992b8-4541-4e4c-9966-fafe6c28927b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/E-originality-u6210090.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/E-originality-u6309924.md" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/E-originality-u1234567.md" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/admin/E-originality-u1234567.md" afterPath="$PROJECT_DIR$/admin/E-originality-u6385898.md" />
-    </list>
+    <list default="true" id="1a8125e6-7baa-46ea-8267-6acde0fe87eb" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,73 +15,16 @@
       <file leaf-file-name="PatchworkAI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/PatchworkAI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-213">
+            <state relative-caret-position="687">
               <caret line="43" column="38" lean-forward="false" selection-start-line="43" selection-start-column="38" selection-end-line="43" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <marker date="1506438408194" expanded="true" signature="3334:3770" ph="{...}" />
+                <marker date="1506438408194" expanded="false" signature="3853:3863" ph=" { " />
+                <marker date="1506438408194" expanded="false" signature="3872:3878" ph=" }" />
+                <marker date="1506438408194" expanded="true" signature="3975:3983" ph="{}" />
+                <marker date="1506438408194" expanded="true" signature="4133:4141" ph="{}" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="E-originality-u6210090.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/E-originality-u6210090.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="0">
-                <caret line="0" column="52" lean-forward="false" selection-start-line="0" selection-start-column="52" selection-end-line="0" selection-end-column="52" />
-                <folding />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="E-originality-u6309924.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/E-originality-u6309924.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="0">
-                <caret line="0" column="52" lean-forward="false" selection-start-line="0" selection-start-column="52" selection-end-line="0" selection-end-column="52" />
-                <folding />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="E-originality-u6385898.md" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/admin/E-originality-u6385898.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="150">
-                <caret line="6" column="32" lean-forward="true" selection-start-line="6" selection-start-column="32" selection-end-line="6" selection-end-column="32" />
-                <folding />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="D-originality-u6385898.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/D-originality-u6385898.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="0">
-                <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                <folding />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AITraining.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/AITraining.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="12" column="15" lean-forward="false" selection-start-line="12" selection-start-column="15" selection-end-line="12" selection-end-column="15" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -94,24 +32,29 @@
       <file leaf-file-name="Matrix.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/Matrix.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-425">
-              <caret line="8" column="18" lean-forward="false" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
+            <state relative-caret-position="-450">
+              <caret line="7" column="18" lean-forward="false" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PatchworkGame.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="PatchworkGame.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/PatchworkGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="387">
-              <caret line="493" column="5" lean-forward="true" selection-start-line="493" selection-start-column="5" selection-end-line="493" selection-end-column="5" />
+            <state relative-caret-position="262">
+              <caret line="136" column="53" lean-forward="false" selection-start-line="136" selection-start-column="50" selection-end-line="136" selection-end-column="53" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>isseven</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -124,11 +67,14 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/comp1140/ass2/PatchworkAI.java" />
+        <option value="$PROJECT_DIR$/src/comp1140/ass2/State.java" />
         <option value="$PROJECT_DIR$/src/comp1140/ass2/PatchworkGame.java" />
-        <option value="$PROJECT_DIR$/admin/E-originality-u6210090.md" />
-        <option value="$PROJECT_DIR$/admin/E-originality-u6309924.md" />
+        <option value="$PROJECT_DIR$/admin/E-originality-u1234567.md" />
         <option value="$PROJECT_DIR$/admin/E-originality-u6385898.md" />
+        <option value="$PROJECT_DIR$/admin/E-originality-u6309924.md" />
+        <option value="$PROJECT_DIR$/admin/E-originality-u6210090.md" />
+        <option value="$PROJECT_DIR$/src/comp1140/ass2/PatchworkAI.java" />
+        <option value="$PROJECT_DIR$/tests/comp1140/ass2/GeneratePatchPlacementTest.java" />
       </list>
     </option>
   </component>
@@ -138,7 +84,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-10" />
     <option name="width" value="980" />
     <option name="height" value="1030" />
@@ -172,11 +118,6 @@
             <path>
               <item name="comp1140-ass2-wed15" type="b2602c69:ProjectViewProjectNode" />
               <item name="comp1140-ass2-wed15" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="comp1140-ass2-wed15" type="b2602c69:ProjectViewProjectNode" />
-              <item name="comp1140-ass2-wed15" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -190,6 +131,10 @@
         </subPane>
       </pane>
     </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -208,7 +153,51 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.GeneratePatchPlacementTest">
+  <component name="RunManager" selected="JUnit.PlacementValidTest">
+    <configuration name="GeneratePatchPlacementTest.testMove" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="comp1140.ass2.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="comp1140-ass2" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="comp1140.ass2" />
+      <option name="MAIN_CLASS_NAME" value="comp1140.ass2.GeneratePatchPlacementTest" />
+      <option name="METHOD_NAME" value="testMove" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration name="Viewer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="comp1140.ass2.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="comp1140.ass2.Viewer" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="comp1140-ass2" />
+      <envs />
+    </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
@@ -290,34 +279,70 @@
       <properties />
       <listeners />
     </configuration>
-    <list size="5">
+    <list size="7">
       <item index="0" class="java.lang.String" itemvalue="JUnit.GeneratePatchPlacementTest" />
       <item index="1" class="java.lang.String" itemvalue="JUnit.PatchPlacementWellFormedTest" />
       <item index="2" class="java.lang.String" itemvalue="JUnit.PlacementValidTest" />
       <item index="3" class="java.lang.String" itemvalue="JUnit.PlacementWellFormedTest" />
       <item index="4" class="java.lang.String" itemvalue="JUnit.ScoreFromPlacementTest" />
+      <item index="5" class="java.lang.String" itemvalue="Application.Viewer" />
+      <item index="6" class="java.lang.String" itemvalue="JUnit.GeneratePatchPlacementTest.testMove" />
     </list>
+    <recent_temporary>
+      <list size="2">
+        <item index="0" class="java.lang.String" itemvalue="JUnit.GeneratePatchPlacementTest.testMove" />
+        <item index="1" class="java.lang.String" itemvalue="Application.Viewer" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="7ef992b8-4541-4e4c-9966-fafe6c28927b" name="Default" comment="" />
-      <created>1502863000183</created>
+      <changelist id="1a8125e6-7baa-46ea-8267-6acde0fe87eb" name="Default" comment="" />
+      <created>1506241164057</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1502863000183</updated>
+      <updated>1506241164057</updated>
+      <workItem from="1506241165918" duration="18332000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="GeneratePatchPlacementTest - 2017.09.27 at 00h 49m 09s.xml">
+    <history-entry file="GeneratePatchPlacementTest - 2017.09.27 at 00h 33m 04s.xml">
+      <configuration name="GeneratePatchPlacementTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="GeneratePatchPlacementTest - 2017.09.27 at 00h 33m 06s.xml">
+      <configuration name="GeneratePatchPlacementTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="GeneratePatchPlacementTest - 2017.09.27 at 00h 33m 40s.xml">
+      <configuration name="GeneratePatchPlacementTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="GeneratePatchPlacementTest - 2017.09.27 at 00h 33m 43s.xml">
+      <configuration name="GeneratePatchPlacementTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="GeneratePatchPlacementTest - 2017.09.27 at 00h 33m 59s.xml">
+      <configuration name="GeneratePatchPlacementTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="GeneratePatchPlacementTest - 2017.09.27 at 00h 34m 02s.xml">
+      <configuration name="GeneratePatchPlacementTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="GeneratePatchPlacementTest - 2017.09.27 at 00h 34m 05s.xml">
+      <configuration name="GeneratePatchPlacementTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="GeneratePatchPlacementTest - 2017.09.27 at 00h 34m 08s.xml">
+      <configuration name="GeneratePatchPlacementTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="GeneratePatchPlacementTest - 2017.09.27 at 00h 34m 11s.xml">
+      <configuration name="GeneratePatchPlacementTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="GeneratePatchPlacementTest - 2017.09.27 at 00h 34m 13s.xml">
       <configuration name="GeneratePatchPlacementTest" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="633000" />
+    <option name="totallyTimeSpent" value="18402000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-11" y="-11" width="1942" height="1042" extended-state="6" />
@@ -354,25 +379,25 @@
       <window_info id="Execute Anonymous" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24972972" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Salesforce" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36439666" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18757467" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24108107" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -407,6 +432,9 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
     </layout-to-restore>
   </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
@@ -415,50 +443,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/tests/comp1140/ass2/TestUtility.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-255">
-          <caret line="10" column="31" lean-forward="false" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/comp1140/ass2/GeneratePatchPlacementTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="68" column="0" lean-forward="false" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/PatchworkGame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11550">
-          <caret line="464" column="53" lean-forward="true" selection-start-line="464" selection-start-column="53" selection-end-line="464" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/PatchworkAI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1125">
-          <caret line="15" column="25" lean-forward="false" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/BDCA.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/BDCAUAAAEACA.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/gui/assets/A.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -470,6 +454,11 @@
           <caret line="31" column="28" lean-forward="false" selection-start-line="31" selection-start-column="28" selection-end-line="31" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
+            <marker date="1506438408194" expanded="true" signature="3334:3770" ph="{...}" />
+            <marker date="1506438408194" expanded="false" signature="3853:3863" ph=" { " />
+            <marker date="1506438408194" expanded="false" signature="3872:3878" ph=" }" />
+            <marker date="1506438408194" expanded="true" signature="3975:3983" ph="{}" />
+            <marker date="1506438408194" expanded="true" signature="4133:4141" ph="{}" />
           </folding>
         </state>
       </provider>
@@ -527,6 +516,11 @@
           <caret line="31" column="28" lean-forward="false" selection-start-line="31" selection-start-column="28" selection-end-line="31" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
+            <marker date="1506438408194" expanded="true" signature="3334:3770" ph="{...}" />
+            <marker date="1506438408194" expanded="false" signature="3853:3863" ph=" { " />
+            <marker date="1506438408194" expanded="false" signature="3872:3878" ph=" }" />
+            <marker date="1506438408194" expanded="true" signature="3975:3983" ph="{}" />
+            <marker date="1506438408194" expanded="true" signature="4133:4141" ph="{}" />
           </folding>
         </state>
       </provider>
@@ -584,6 +578,11 @@
           <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
+            <marker date="1506438408194" expanded="true" signature="3334:3770" ph="{...}" />
+            <marker date="1506438408194" expanded="false" signature="3853:3863" ph=" { " />
+            <marker date="1506438408194" expanded="false" signature="3872:3878" ph=" }" />
+            <marker date="1506438408194" expanded="true" signature="3975:3983" ph="{}" />
+            <marker date="1506438408194" expanded="true" signature="4133:4141" ph="{}" />
           </folding>
         </state>
       </provider>
@@ -625,6 +624,11 @@
           <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
+            <marker date="1506438408194" expanded="true" signature="3334:3770" ph="{...}" />
+            <marker date="1506438408194" expanded="false" signature="3853:3863" ph=" { " />
+            <marker date="1506438408194" expanded="false" signature="3872:3878" ph=" }" />
+            <marker date="1506438408194" expanded="true" signature="3975:3983" ph="{}" />
+            <marker date="1506438408194" expanded="true" signature="4133:4141" ph="{}" />
           </folding>
         </state>
       </provider>
@@ -666,6 +670,11 @@
           <caret line="31" column="28" lean-forward="false" selection-start-line="31" selection-start-column="28" selection-end-line="31" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
+            <marker date="1506438408194" expanded="true" signature="3334:3770" ph="{...}" />
+            <marker date="1506438408194" expanded="false" signature="3853:3863" ph=" { " />
+            <marker date="1506438408194" expanded="false" signature="3872:3878" ph=" }" />
+            <marker date="1506438408194" expanded="true" signature="3975:3983" ph="{}" />
+            <marker date="1506438408194" expanded="true" signature="4133:4141" ph="{}" />
           </folding>
         </state>
       </provider>
@@ -674,22 +683,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
           <caret line="5" column="3" lean-forward="false" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/State.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="27" column="4" lean-forward="false" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/Viewer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="337">
-          <caret line="74" column="0" lean-forward="true" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -714,49 +707,104 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <marker date="1506438408194" expanded="true" signature="3334:3770" ph="{...}" />
+            <marker date="1506438408194" expanded="false" signature="3853:3863" ph=" { " />
+            <marker date="1506438408194" expanded="false" signature="3872:3878" ph=" }" />
+            <marker date="1506438408194" expanded="true" signature="3975:3983" ph="{}" />
+            <marker date="1506438408194" expanded="true" signature="4133:4141" ph="{}" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/AITraining.java">
+    <entry file="file://$PROJECT_DIR$/tests/comp1140/ass2/PlacementValidTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="12" column="15" lean-forward="false" selection-start-line="12" selection-start-column="15" selection-end-line="12" selection-end-column="15" />
+        <state relative-caret-position="375">
+          <caret line="47" column="16" lean-forward="false" selection-start-line="47" selection-start-column="16" selection-end-line="47" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/Viewer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="94" column="0" lean-forward="false" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="17" column="13" lean-forward="false" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/Matrix.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-425">
-          <caret line="8" column="18" lean-forward="false" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
+        <state relative-caret-position="-450">
+          <caret line="7" column="18" lean-forward="false" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/AITraining.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="8" column="25" lean-forward="false" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/State.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4650">
+          <caret line="42" column="4" lean-forward="false" selection-start-line="42" selection-start-column="4" selection-end-line="43" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_141/src.zip!/java/util/ArrayList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="652" column="0" lean-forward="false" selection-start-line="652" selection-start-column="0" selection-end-line="652" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/PatchworkGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="493" column="5" lean-forward="true" selection-start-line="493" selection-start-column="5" selection-end-line="493" selection-end-column="5" />
+        <state relative-caret-position="262">
+          <caret line="136" column="53" lean-forward="false" selection-start-line="136" selection-start-column="50" selection-end-line="136" selection-end-column="53" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/PatchworkAI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-213">
-          <caret line="43" column="38" lean-forward="false" selection-start-line="43" selection-start-column="38" selection-end-line="43" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+    <entry file="file://$PROJECT_DIR$/admin/C-originality.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="200">
+            <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="82" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/E-originality-u1234567.md">
+    <entry file="file://$PROJECT_DIR$/admin/F-contribution.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="0">
             <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/E-originality-u6309924.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="175">
+            <caret line="7" column="29" lean-forward="true" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
             <folding />
           </first_editor>
           <second_editor />
@@ -766,19 +814,19 @@
     <entry file="file://$PROJECT_DIR$/admin/E-originality-u6210090.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="0">
-            <caret line="0" column="52" lean-forward="false" selection-start-line="0" selection-start-column="52" selection-end-line="0" selection-end-column="52" />
+          <first_editor relative-caret-position="175">
+            <caret line="7" column="7" lean-forward="false" selection-start-line="7" selection-start-column="7" selection-end-line="7" selection-end-column="7" />
             <folding />
           </first_editor>
           <second_editor />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/E-originality-u6309924.md">
+    <entry file="file://$PROJECT_DIR$/admin/E-originality-u6385898.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="0">
-            <caret line="0" column="52" lean-forward="false" selection-start-line="0" selection-start-column="52" selection-end-line="0" selection-end-column="52" />
+          <first_editor relative-caret-position="175">
+            <caret line="7" column="31" lean-forward="false" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
             <folding />
           </first_editor>
           <second_editor />
@@ -790,20 +838,38 @@
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="0">
             <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-            <folding />
           </first_editor>
           <second_editor />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/E-originality-u6385898.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="150">
-            <caret line="6" column="32" lean-forward="true" selection-start-line="6" selection-start-column="32" selection-end-line="6" selection-end-column="32" />
-            <folding />
-          </first_editor>
-          <second_editor />
+    <entry file="file://$PROJECT_DIR$/tests/comp1140/ass2/TestUtility.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-255">
+          <caret line="10" column="31" lean-forward="false" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/comp1140/ass2/GeneratePatchPlacementTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="68" column="0" lean-forward="false" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/PatchworkAI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="687">
+          <caret line="43" column="38" lean-forward="false" selection-start-line="43" selection-start-column="38" selection-end-line="43" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <marker date="1506438408194" expanded="true" signature="3334:3770" ph="{...}" />
+            <marker date="1506438408194" expanded="false" signature="3853:3863" ph=" { " />
+            <marker date="1506438408194" expanded="false" signature="3872:3878" ph=" }" />
+            <marker date="1506438408194" expanded="true" signature="3975:3983" ph="{}" />
+            <marker date="1506438408194" expanded="true" signature="4133:4141" ph="{}" />
+          </folding>
         </state>
       </provider>
     </entry>
