@@ -6,12 +6,8 @@ import java.util.Random;
 import static java.lang.Math.min;
 
 public class PatchworkAI {
+    public static ArrayList<String> candidates = new ArrayList<>();
     private final PatchworkGame game;
-
-//    final static char[] PATCHES = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W',
-//            'X','Y','Z','a','b','c','d','e','f','g'};
-//    public static char [] three;
-//    public static String [] validTileStr;
     public PatchworkAI(PatchworkGame game) {
         this.game = game;
     }
@@ -24,35 +20,95 @@ public class PatchworkAI {
      */
     public static String generatePatchPlacement(String patchCircle, String placement) {
         // FIXME Task 10: generate a valid move
-        patchCircle=patchCircle.substring(patchCircle.indexOf('A')+1)+patchCircle.substring(0,patchCircle.indexOf('A')-1);
-        PatchworkGame.three=patchCircle.substring(0,3).toCharArray();
-        PatchworkGame.isPlacementValid(patchCircle,placement);
-        State p = State.check_turn(PatchworkGame.p1, PatchworkGame.p2) == 1 ? PatchworkGame.p1 : PatchworkGame.p2;
-        String choices = ".";
-        for (char c : PatchworkGame.three) {
-            int n = c > 'Z' ? c - 'a' : c - 'A';
-            if (State.affordPartch(p.buttonCount, PatchworkGame.tileCost[n])) choices += c;
+        String pC;
+        State cp1 = new State(1),cp2 = new State(2);
+        //inittialization
+        PatchworkGame.p1 = new State(1);
+        PatchworkGame.p2 = new State(2);
+//        PatchworkGame.aPlc = 0;
+        PatchworkGame.three = new char[3];
+
+        if (patchCircle.indexOf('A')==0)
+            pC = patchCircle.substring(1)+'A';
+        else if (patchCircle.indexOf('A')!=patchCircle.length()-1)
+            pC = patchCircle.substring(patchCircle.indexOf('A')+1)+patchCircle.substring(0,patchCircle.indexOf('A')+1);
+        else pC = patchCircle.toString();
+        if (placement.equals(""))
+            //nothing to record since its the start of the game
+            PatchworkGame.three = pC.substring(0,3).toCharArray();
+        else
+            //record the current state according to placement
+            PatchworkGame.isPlacementValid(patchCircle,placement);
+
+
+        int turn = State.check_turn(PatchworkGame.p1,PatchworkGame.p2)==1?1:2;
+        //backup state data in order to revert it back when find the try is invalid
+        State player = turn==1?PatchworkGame.p1:PatchworkGame.p2;
+        cp1.copy(PatchworkGame.p1);
+        cp2.copy(PatchworkGame.p2);
+
+        //back up the game data
+
+        int cpaPlc;
+        char[] cpThree = new char[3];
+        for (int i=0;i<3;i++) cpThree[i] = PatchworkGame.three[i];
+        cpaPlc = PatchworkGame.aPlc;
+        System.out.println("aplc: "+PatchworkGame.aPlc);
+
+        //specialCase--holding tile 'h'
+        if (player.specialH){
         }
-        Random r = new Random();
-        char t = choices.charAt(r.nextInt(choices.length()));
-        if (t=='.') return ".";
-        State a=PatchworkGame.p1,b=PatchworkGame.p2;
-        int c = PatchworkGame.aPlc;
-        char[] d = PatchworkGame.three;
-        for (char i = 'A'; i < 'J'; i++) {
-            for (char j = 'A'; j < 'J'; j++) {
-                for (char k = 'A'; k < 'I'; k++) {
-                    if (PatchworkGame.isPlacementValid(patchCircle, placement + t + i + j + k)) {
-                        return "" + t + i + j + k;
+        //brute force trying
+        boolean isValid;
+        if (player.buttonCount==0) return ".";
+        for (int l = 0; l < 3;l++) {
+            char t = PatchworkGame.three[l];
+            int n = t > 'Z' ? t - 'a' : t - 'A';
+            for (char i = 'A'; i < 'J'; i++) {
+                if (!State.affordPartch(player.buttonCount,PatchworkGame.tileCost[n]))  continue;
+                for (char j = 'A'; j < 'J'; j++) {
+                    for (char k = 'A'; k < 'I'; k++) {
+                        isValid = PatchworkGame.isPlacementValid(patchCircle, placement + t + i + j + k);
+                        if (isValid) {
+                            return "" + t + i + j + k;
+                        }
+                        System.out.println(placement+t+i+j+k);
+                        PatchworkGame.p1.copy(cp1);
+                        PatchworkGame.p2.copy(cp2);
+                        PatchworkGame.aPlc = cpaPlc;
+                        for (int lve = 0; lve < 3;lve++) PatchworkGame.three[lve] = cpThree[lve];
                     }
-                    PatchworkGame.p1=a;
-                    PatchworkGame.p2=b;
-                    PatchworkGame.aPlc=c;
-                    PatchworkGame.three=d;
                 }
             }
         }
-        return "";
+        return ".";
+//        PatchworkGame.isPlacementValid(patchCircle,placement);
+//        State p = State.check_turn(PatchworkGame.p1, PatchworkGame.p2) == 1 ? PatchworkGame.p1 : PatchworkGame.p2;
+//        String choices = ".";
+//        for (char c : PatchworkGame.three) {
+//            int n = c > 'Z' ? c - 'a' : c - 'A';
+//            if (State.affordPartch(p.buttonCount, PatchworkGame.tileCost[n])) choices += c;
+//        }
+//        Random r = new Random();
+//        char t = choices.charAt(r.nextInt(choices.length()));
+//        if (t=='.') return ".";
+//        State a=PatchworkGame.p1,b=PatchworkGame.p2;
+//        int c = PatchworkGame.aPlc;
+//        char[] d = PatchworkGame.three;
+//        for (char i = 'A'; i < 'J'; i++) {
+//            for (char j = 'A'; j < 'J'; j++) {
+//                for (char k = 'A'; k < 'I'; k++) {
+//                    if (PatchworkGame.isPlacementValid(patchCircle, placement + t + i + j + k)) {
+//                        return "" + t + i + j + k;
+//                    }
+//                    PatchworkGame.p1=a;
+//                    PatchworkGame.p2=b;
+//                    PatchworkGame.aPlc=c;
+//                    PatchworkGame.three=d;
+//                }
+//            }
+//        }
+//        return "";
     }
 
 

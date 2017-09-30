@@ -16,7 +16,8 @@ import static org.junit.Assert.assertTrue;
  */
 public class GeneratePatchPlacementTest {
 
-    @Test(timeout = 10000)
+    //@Test(timeout = 10000)
+    @Test
     public void testMove() {
 
         /* first ensure that the game correctly identifies broken placements */

@@ -26,11 +26,11 @@ public class State {
     //    showing two players' states on the time board,
 // 1 indicates moving first, 0 indicates moving later,
 // 2 indicates the player has reached the final point.
-    int tbState = 0;
+//    int tbState = 0;
 
     //    indicating the place of the neutral token, if ntState is i,
 // then the patch i,i+1,i+2 should be displayed in the candidate area.
-    int ntState = 0;
+//    int ntState = 0;
 
     //for the special tile event
     static boolean spt = false;
@@ -49,6 +49,7 @@ public class State {
             for (boolean sqq: sq)
                 sqq = false;
     }
+
     //    this list should be changed when being initialised randomly by the initialization()/
 // once the player buys an patch/ choose undo after placed a patch
     ArrayList<Character> currentPatch = new ArrayList<Character>();
@@ -59,7 +60,21 @@ public class State {
 // i.e. players' time token have reached the end square of the time board.
     public boolean check_fullstate(){
         return this.timecount==GRIDS;}
-
+//for copying the state instance
+    public void copy(State target){
+        squareleft = target.squareleft;
+        timecount = target.timecount;
+        scoreCount = target.scoreCount;
+        buttonCount = target.buttonCount;
+        specialButton = target.specialButton;
+        specialH = target.specialH;
+        onTop = target.onTop;
+        for (int i = 0;i < 9; i++){
+            for (int j = 0;j < 9;j++){
+                this.squiltBoard[i][j] = target.squiltBoard[i][j];
+            }
+        }
+    }
     //    this function is used for checking the who should be the person doing the next turn.
 //    Two situation should be considered: if they are not in the same square of the time board,
 // the one fall behind should take the turn. If they are in the same square, the player who

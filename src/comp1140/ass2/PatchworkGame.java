@@ -55,7 +55,6 @@ public class PatchworkGame {
             2,0,1,2,2,3,0,1,
             2,3,0,1,3,3,0};
 
-    static int fals;
     public static char[] three;
     static int aPlc;
     /**
@@ -164,10 +163,7 @@ public class PatchworkGame {
                         count = count + 1;
                     }
                     else
-                    {
-                        result = false;
-                        return result;
-                    }
+                        return false;
                     i = i + 3;
                 }
             }
@@ -214,8 +210,8 @@ public class PatchworkGame {
         * */
         aPlc = 0;
         LinkedList<Character> partches = new LinkedList<>();
-        ArrayList<String> p1String = new ArrayList<>();
-        ArrayList<String> p2String = new ArrayList<>();
+//        ArrayList<String> p1String = new ArrayList<>();
+//        ArrayList<String> p2String = new ArrayList<>();
         if (patchCircle==null || patchCircle.isEmpty()) {
             System.out.println("circle null");return false;}
         for (int i=0;i<patchCircle.length();i++){
@@ -272,8 +268,8 @@ public class PatchworkGame {
                     }
                 }
 
-                if(fstPlayer) p1String.add(plc);
-                else p2String.add(plc);
+//                if(fstPlayer) p1String.add(plc);
+//                else p2String.add(plc);
 
                 three = new char[] {partches.get(aPlc%partches.size()), partches.get((aPlc + 1) % partches.size()), partches.get((aPlc + 2) % partches.size())};
                 //move the nertral token

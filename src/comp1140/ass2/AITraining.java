@@ -12,6 +12,12 @@ public class AITraining {
 
     //for training, recursive training
     public static void main(String[] args) {
-
+        String patchCircle = PatchworkGame.initPathCircle(),placement = new String("");
+        while (PatchworkGame.p1.timecount != 53 && PatchworkGame.p2.timecount!=53){
+            placement = placement + PatchworkAI.generatePatchPlacement(patchCircle,placement);
+        }
+        System.out.println("----------------------------------");
+        System.out.println(placement);
+        System.out.println("----------------------------------");
     }
 }
