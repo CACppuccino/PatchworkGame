@@ -16,8 +16,8 @@ import static org.junit.Assert.assertTrue;
  */
 public class GeneratePatchPlacementTest {
 
-//    @Test(timeout = 10000)
-    @Test
+    @Test(timeout = 10000)
+//    @Test
     public void testMove() {
 
         /* first ensure that the game correctly identifies broken placements */
@@ -31,7 +31,7 @@ public class GeneratePatchPlacementTest {
         for (int j = 0; j < BASE_ITERATIONS / 10; j++) {
 
             String patchCircle = generateRandomPatchCircleString();
-//            System.out.println(patchCircle);
+            System.out.println(patchCircle);
             String game = "";
 
             String move;
@@ -64,7 +64,7 @@ public class GeneratePatchPlacementTest {
             }
             patchCircleString += patchId;
         }
-//       return  "CGDaUESVRFJcTHLWXbBIKYdMPeANOfQZg";
+//       return  "APfcdQegIHXEBCUDRJKTSZaMVFGOYLbNW";
         return patchCircleString;
     }
 
@@ -72,5 +72,12 @@ public class GeneratePatchPlacementTest {
         assertFalse("Null move returned", move == null);
         //assertTrue("Move '"+move+"' does not correctly use piece '"+piece, move.charAt(2) == piece);
         assertTrue("Invalid move '" + move + "', given starting point '" + start, PatchworkGame.isPlacementValid(patchCircle, start + move));
+    }
+
+    @Test
+
+    public void testTestMove(){
+        for (int i=1;i<=100;i++)
+            testMove();
     }
 }

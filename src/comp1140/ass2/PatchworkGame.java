@@ -72,13 +72,15 @@ public class PatchworkGame {
      */
     static boolean isPatchPlacementWellFormed(String placement) {
         // FIXME Task 3: determine whether a patch placement is well-formed
+        char tile,b,c,d;
         if ( placement.charAt(0) == '.')
             return true;
         else if (placement.length() != 4)
             return false;
         else {
-            char tile = placement.charAt(0), b = placement.charAt(1), c = placement.charAt(2), d = placement.charAt(3);
-            return d >= 'A' && d <= 'H' && b >= 'A' && b <= 'I' && c >= 'A' && c <= 'I' && ((tile >= 'A' && tile <= 'Z') || (tile >= 'a' && tile <= 'h'));
+            tile = placement.charAt(0); b = placement.charAt(1); c = placement.charAt(2); d = placement.charAt(3);
+            return d >= 'A' && d <= 'H' && b >= 'A' && b <= 'I' && c >= 'A' && c <= 'I' && ((tile >= 'A' && tile <= 'Z')
+                    || (tile >= 'a' && tile <= 'h'));
         }
     }
 
@@ -88,7 +90,7 @@ public class PatchworkGame {
             res.append(i);
         for (char i = 'a'; i <= 'g'; i++)
             res.append(i);
-        Random rng = new Random(1);
+        Random rng = new Random();
         char[] result = res.toString().toCharArray();
         for (int i = 0; i < 100; i++) {
             int x = rng.nextInt(33);
@@ -112,44 +114,24 @@ public class PatchworkGame {
      */
     static boolean isPlacementWellFormed(String placement) {
         // FIXME Task 4: determine whether a placement is well-formed`
+        if (placement == null || placement.isEmpty())
+            return false;
         //initialize a List<Integer> to store all the position of the patch
         List<Integer> patchposition = new ArrayList();
-        // to count the time of the String placement when it has more tiles
-        int count = 0;
-        // the count1 is to count how many times the '.' show
-        int count1 = 0;
-        boolean result ;
         String SubSting;
-        if (placement == null || placement.isEmpty())
-        {
-//            System.out.println("f1");
-            return false;}
-        else {
-            for (int i = 0; i < placement.length(); i++) {
-                if (placement.charAt(i) == '.') {
-                    count = count + 1;
-                    count1 = count1 + 1;
-                } else {
-                    if ( placement.length() - i < 4)
-                    {
-                        SubSting = placement.substring(i, placement.length());
-                    }
-                    else
-                    {
-                        SubSting = placement.substring(i, i + 4);
-                    }
-                    patchposition.add(i);
-                    result = isPatchPlacementWellFormed(SubSting);
-                    if (result) {
-                        count = count + 1;
-                    }
-                    else {
-//                        System.out.println("f2");
-                        return false;
-                    }i = i + 3;
-                }
+        for (int i = 0; i < placement.length(); i++) {
+            if (placement.charAt(i) != '.') {
+                if ( placement.length() - i < 4)
+                    SubSting = placement.substring(i, placement.length());
+                else
+                    SubSting = placement.substring(i, i + 4);
+                patchposition.add(i);
+                if (!isPatchPlacementWellFormed(SubSting))
+                    return false;
+                i = i + 3;
             }
         }
+
         // check whether there is a patch appear more than once
         for ( int i = 0; i < patchposition.size();i++){
             for ( int j = i + 1;j < patchposition.size();j++){
@@ -193,17 +175,13 @@ public class PatchworkGame {
         * */
         aPlc = 0;
         LinkedList<Character> partches = new LinkedList<>();
-//        ArrayList<String> p1String = new ArrayList<>();
-//        ArrayList<String> p2String = new ArrayList<>();
         if (patchCircle==null || patchCircle.isEmpty()) {
             if (DEBUG)   System.out.println("circle null");
             return false;
         }
-        for (int i=0;i<patchCircle.length();i++){
-            if (patchCircle.charAt(i)=='A')
-                aPlc=i+1;
+        for (int i=0;i<patchCircle.length();i++)
             partches.add(i,patchCircle.charAt(i));
-        }
+        aPlc=patchCircle.indexOf('A')+1;
 
         /*--------------------------------------*/
 
@@ -282,7 +260,6 @@ public class PatchworkGame {
                         partches.remove((aPlc + 2)%partches.size());
                         aPlc += 2;
                     }
-
                     //if token goes to the end, make it back to the beginning
                     aPlc = aPlc > partches.size()? aPlc %(partches.size()+1):aPlc%partches.size();//aPlc >= partches.size()? (aPlc % partches.size())-1:aPlc;
 //                    System.out.println(aPlc);
@@ -387,32 +364,9 @@ public class PatchworkGame {
         return expose;
     }
 
-    private static boolean isValidOnePlacement(String placement){
-        if (placement.length()!=4) {
-//         throw new Error("invalid length"+placement.length());
-            return false;
-        }
-        char tile = placement.charAt(0),row = placement.charAt(2),col = placement.charAt(1),
-                rotate = placement.charAt(3);
-        if (!((tile>='A'&& tile<='Z') || (tile>='a' && tile<='h')))
-//            throw new Error("tile wrong "+tile);
-            return false;
-        else if (!(row>='A'&& row<='I'&& col>='A' && col<='I'))
-//            throw new Error("row col wrong"+row+" "+col);
-            return false;
-        else if (!(rotate>='A'&&rotate<='H'))
-//            throw new Error("rotate "+rotate+" "+placement);
-            return false;
-        return true;
-    }
     private static int[][] getTileSpace(int index){return tileSpace[index];}
     //false for out of the board, true for in
     public static boolean outOfBoard(String placement,State player){
-        if (!isValidOnePlacement(placement)){
-            if (DEBUG) System.out.println("invalid one placement");
-            return false;}
-        char [][] a = new char[9][9];
-        char [][] b = new char[9][9];
         char row = placement.charAt(2),col = placement.charAt(1);
         int rowN = row - 'A',colN = col -'A' ;
         char tile = placement.charAt(0);
@@ -460,14 +414,13 @@ public class PatchworkGame {
                 player.squiltBoard[xs[0]-1][xs[1]-1] = true;
             else {
 //                player.printSquiltBoard();
-
-                  a = player.printPlayerBoard();
+//                  a = player.printPlayerBoard();
                 return false;
             }
 
         }
 //        player.printSquiltBoard();
-        b = player.printPlayerBoard();
+//        b = player.printPlayerBoard();
         return true;
     }
 

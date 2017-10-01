@@ -116,7 +116,6 @@ public class State {
         }
         else {
             diff = p1.timecount+1<=GRIDS?(p1.timecount-p2.timecount)+1:GRIDS-p2.timecount;
-
             p2.buttonCount += diff;
             State.specialEvent(p2,p1,p2.timecount,diff);
             p2.timecount = p1.timecount + 1 > GRIDS ? GRIDS : p1.timecount + 1;
@@ -265,7 +264,7 @@ public class State {
         //this event should only be touched once
         spt = true;
     }
-    public static void specialEvent(State player,State oplyaer,int start,int steps){
+    public static void specialEvent(State player,State oplayer,int start,int steps){
         for (int sb:PatchworkGame.specialButton){
             if (sb>=start+1 && sb<=start+steps)
                 player.buttonCount += player.specialButton;
@@ -273,7 +272,7 @@ public class State {
         for (int i=0;i<PatchworkGame.specialTile.length;i++)
         {
             if (PatchworkGame.specialTile[i]>=start+1 && PatchworkGame.specialTile[i]<=start+steps
-                    && oplyaer.timecount<PatchworkGame.specialTile[i] ){
+                    && oplayer.timecount<PatchworkGame.specialTile[i] ){
                 player.tiles.add('h');
                 player.specialH = true;
             }
