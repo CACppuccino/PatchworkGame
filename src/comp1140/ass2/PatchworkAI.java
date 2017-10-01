@@ -53,7 +53,7 @@ public class PatchworkAI {
         char[] cpThree = new char[3];
         for (int i=0;i<3;i++) cpThree[i] = PatchworkGame.three[i];
         cpaPlc = PatchworkGame.aPlc;
-        System.out.println("aplc: "+PatchworkGame.aPlc);
+//        System.out.println("aplc: "+PatchworkGame.aPlc);
 
         //specialCase--holding tile 'h'
         if (player.specialH){
@@ -70,7 +70,7 @@ public class PatchworkAI {
 
         }
         //brute force trying
-        boolean isValid;
+        boolean isValid = false;
         if (player.buttonCount==0) {
             State.advanced(PatchworkGame.p1,PatchworkGame.p2);
             return ".";}
@@ -81,11 +81,11 @@ public class PatchworkAI {
                 if (!State.affordPartch(player.buttonCount,PatchworkGame.tileCost[n]))  continue;
                 for (char j = 'A'; j < 'J'; j++) {
                     for (char k = 'A'; k < 'I'; k++) {
-                        isValid = PatchworkGame.isPlacementValid(patchCircle, placement + t + i + j + k);
+                            isValid = PatchworkGame.isPlacementValid(patchCircle, placement + t + i + j + k);
                         if (isValid) {
                             return "" + t + i + j + k;
                         }
-                        System.out.println(placement+t+i+j+k);
+//                        System.out.println(placement+t+i+j+k);
                         PatchworkGame.p1.copy(cp1);
                         PatchworkGame.p2.copy(cp2);
                         PatchworkGame.aPlc = cpaPlc;

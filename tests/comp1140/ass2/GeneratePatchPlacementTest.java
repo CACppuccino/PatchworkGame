@@ -16,7 +16,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class GeneratePatchPlacementTest {
 
-    //@Test(timeout = 10000)
+//    @Test(timeout = 10000)
     @Test
     public void testMove() {
 
@@ -31,6 +31,7 @@ public class GeneratePatchPlacementTest {
         for (int j = 0; j < BASE_ITERATIONS / 10; j++) {
 
             String patchCircle = generateRandomPatchCircleString();
+//            System.out.println(patchCircle);
             String game = "";
 
             String move;
@@ -38,9 +39,9 @@ public class GeneratePatchPlacementTest {
                 move = PatchworkAI.generatePatchPlacement(patchCircle, game);
                 checkMove(patchCircle, game, move);
                 game += move;
-                System.out.println("game " + game);
+//                System.out.println("game " + game);
                 move = PatchworkAI.generatePatchPlacement(patchCircle, game);
-                System.out.println("move " + move);
+//                System.out.println("move " + move);
                 checkMove(patchCircle, game, move);
                 game += move;
             }
@@ -63,8 +64,8 @@ public class GeneratePatchPlacementTest {
             }
             patchCircleString += patchId;
         }
-       return  "GDaUESVRFJcTHLWXbBIKYdMPeNOfQZgAC";
-//        return patchCircleString;
+//       return  "CGDaUESVRFJcTHLWXbBIKYdMPeANOfQZg";
+        return patchCircleString;
     }
 
     void checkMove(String patchCircle, String start, String move) {

@@ -93,15 +93,15 @@ public class State {
         }
     }
 
-    void printSquiltBoard(){
-        for (boolean[] sq: squiltBoard){
-            for (boolean sqq: sq) {
-                if(!sqq) System.out.print("@");
-                else System.out.print("*");
-            }
-            System.out.println();
-        }
-    }
+//    void printSquiltBoard(){
+//        for (boolean[] sq: squiltBoard){
+//            for (boolean sqq: sq) {
+//                if(!sqq) System.out.print("@");
+//                else System.out.print("*");
+//            }
+//            System.out.println();
+//        }
+//    }
     public static void advanced(State p1,State p2){
         int t =check_turn(p1,p2);
         int diff ;
@@ -112,7 +112,7 @@ public class State {
             p1.buttonCount += diff;
             State.specialEvent(p1,p2,p1.timecount,diff);
             p1.timecount = p2.timecount + 1 > GRIDS ? GRIDS : p2.timecount + 1;
-            System.out.println("player "+t+"make advance "+diff+"steps and now in "+p1.timecount);
+//            System.out.println("player "+t+"make advance "+diff+"steps and now in "+p1.timecount);
         }
         else {
             diff = p1.timecount+1<=GRIDS?(p1.timecount-p2.timecount)+1:GRIDS-p2.timecount;
@@ -120,7 +120,7 @@ public class State {
             p2.buttonCount += diff;
             State.specialEvent(p2,p1,p2.timecount,diff);
             p2.timecount = p1.timecount + 1 > GRIDS ? GRIDS : p1.timecount + 1;
-            System.out.println("player "+t+"make advance "+diff+"steps and now in "+p2.timecount);
+//            System.out.println("player "+t+"make advance "+diff+"steps and now in "+p2.timecount);
         }
     }
 
@@ -134,7 +134,7 @@ public class State {
         final int specialButton= PatchworkGame.tileButton[index];
 
         int t = check_turn(p1,p2);
-        System.out.println("player "+t+" buying "+p+" hosts"+(t==1?p1.buttonCount:p2.buttonCount)+"and cost him"+buttonDec);
+//        System.out.println("player "+t+" buying "+p+" hosts"+(t==1?p1.buttonCount:p2.buttonCount)+"and cost him"+buttonDec);
         if (t==1) {
             if (p=='h'){
                 if (p1.tiles.size()>0)
@@ -157,9 +157,9 @@ public class State {
             specialEvent(p1,p2,p1.timecount,timeInc);
             p1.timecount = p1.timecount+timeInc>GRIDS ? GRIDS : p1.timecount+timeInc;
             p1.squareleft -= PatchworkGame.tileSpace[index].length;
-            System.out.println("now get special Button "+p1.specialButton+" now get button"+p1.buttonCount);
-            System.out.println("make forward "+timeInc+" now stepping "+p1.timecount);
-            System.out.println("now have "+p1.squareleft+" squares left");
+//            System.out.println("now get special Button "+p1.specialButton+" now get button"+p1.buttonCount);
+//            System.out.println("make forward "+timeInc+" now stepping "+p1.timecount);
+//            System.out.println("now have "+p1.squareleft+" squares left");
             //considering the timetoken overlap situation
             if (p1.timecount==p2.timecount)
             {
@@ -189,9 +189,9 @@ public class State {
             specialEvent(p2,p1,p2.timecount,timeInc);
             p2.timecount = p2.timecount+timeInc>GRIDS ? GRIDS : p2.timecount+timeInc;
             p2.squareleft -= PatchworkGame.tileSpace[index].length;
-            System.out.println("now get special Button "+p2.specialButton+" now get button"+p2.buttonCount);
-            System.out.println("make forward "+timeInc+" now stepping "+p2.timecount);
-            System.out.println("now have "+p2.squareleft+" squares left");
+//            System.out.println("now get special Button "+p2.specialButton+" now get button"+p2.buttonCount);
+//            System.out.println("make forward "+timeInc+" now stepping "+p2.timecount);
+//            System.out.println("now have "+p2.squareleft+" squares left");
 
             if (p1.timecount==p2.timecount)
             {
@@ -233,7 +233,7 @@ public class State {
         if (player.squareleft>32) return false;
 
         // this block is to check player's board is full 7 * 7
-        player.printSquiltBoard();
+//        player.printSquiltBoard();
         int positionMark = 100;
         int counterCol = 0;
         for ( int i = 0; i < player.printPlayerBoard().length;i++){
@@ -287,6 +287,6 @@ public class State {
     //this function should only be called at the final of the game
     public int getScore(){
         scoreCount = scoreCount + buttonCount - squareleft*2;
-        System.out.println("the player"+id+"have "+buttonCount+" buttons and"+ squareleft+" squares left");
+//        System.out.println("the player"+id+"have "+buttonCount+" buttons and"+ squareleft+" squares left");
         return scoreCount;}
 }

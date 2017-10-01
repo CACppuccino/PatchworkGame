@@ -3,7 +3,7 @@ package comp1140.ass2;
 import java.util.Random;
 
 public class TestUtility {
-    static final int BASE_ITERATIONS = 100;
+    static final int BASE_ITERATIONS = 1000;
     static final int ROWS = 9;
     static final int COLS = 9;
     static final int TILES = 33;

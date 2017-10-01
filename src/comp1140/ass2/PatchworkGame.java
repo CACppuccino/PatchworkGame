@@ -11,6 +11,7 @@ import java.util.*;
  */
 public class PatchworkGame {
 
+    static boolean DEBUG = false;
     static State p1 = new State(1), p2 = new State(2);
 
     //for the special tile event
@@ -153,9 +154,6 @@ public class PatchworkGame {
         for ( int i = 0; i < patchposition.size();i++){
             for ( int j = i + 1;j < patchposition.size();j++){
                 if ( placement.charAt(patchposition.get(i)) == placement.charAt(patchposition.get(j)) && placement.charAt(patchposition.get(i)) != 'h'){
-                    System.out.println(i+" "+placement.charAt(patchposition.get(i))+"**"+j+" "+placement.charAt(patchposition.get(j))+"**"
-                    );
-                    System.out.println(placement);
                     return false;
                 }
             }
@@ -185,7 +183,8 @@ public class PatchworkGame {
         Well formed judgement
         * */
         if (!PatchworkGame.isPlacementWellFormed(placement))   {
-            System.out.println("isPlacementWellFormed");return false;}
+         if (DEBUG)  System.out.println("isPlacementWellFormed");
+            return false;}
         /*---------------------------------------*/
         p1 = new State(1);
         p2 = new State(2);
@@ -197,7 +196,9 @@ public class PatchworkGame {
 //        ArrayList<String> p1String = new ArrayList<>();
 //        ArrayList<String> p2String = new ArrayList<>();
         if (patchCircle==null || patchCircle.isEmpty()) {
-            System.out.println("circle null");return false;}
+            if (DEBUG)   System.out.println("circle null");
+            return false;
+        }
         for (int i=0;i<patchCircle.length();i++){
             if (patchCircle.charAt(i)=='A')
                 aPlc=i+1;
@@ -228,12 +229,12 @@ public class PatchworkGame {
                 else fstPlayer = false;
                 if (fstPlayer) {
                     if ( !outOfBoard(plc, p1)) {
-                        System.out.println("out of Board/Overlap1"  );
+                        if (DEBUG) System.out.println("out of Board/Overlap1"  );
                         return false;
                     }
                 } else {
                     if ( !outOfBoard(plc, p2)) {
-                        System.out.println("out of Board/Overlap2"  );
+                        if (DEBUG) System.out.println("out of Board/Overlap2"  );
                         return false;
                     }
                 }
@@ -242,12 +243,12 @@ public class PatchworkGame {
                     State.buyPartches(p1, p2, plc.charAt(0));
                 } catch (Error e) {
                     if (e.getMessage().equals("cant afford the tile" + plc.charAt(0))) {
-                        System.out.println("buyparches error");
-                        System.out.println(p1.buttonCount + " " + p2.buttonCount);
+                        if (DEBUG) System.out.println("buyparches error");
+//                        System.out.println(p1.buttonCount + " " + p2.buttonCount);
                         return false;
                     } else if (e.getMessage().equals("no enough h")) {
-                        System.out.println("no enough h");
-                        System.out.println(p1.specialH+" "+p2.specialH);
+                        if (DEBUG) System.out.println("no enough h");
+//                        System.out.println(p1.specialH+" "+p2.specialH);
                         return false;
                     }
                 }
@@ -261,17 +262,18 @@ public class PatchworkGame {
                 //wanted partches,then is invalid
                 if (plc.charAt(0) != 'h') {
                     if (!partches.contains(plc.charAt(0))) {
-                        System.out.println("not cotains anymore" + plc.charAt(0));
+                        if (DEBUG) System.out.println("not cotains anymore" + plc.charAt(0));
                         return false;
                     }
 
                     if (!(plc.charAt(0) == three[0] || plc.charAt(0) == three[1] || plc.charAt(0) == three[2])) {
-                        System.out.println("three error:" + plc.charAt(0) + " " + patchCircle+" "+three[0]+" "+three[1]+" "+three[2]);
-                        for (int j=0;j<partches.size();j++)
-                            System.out.println(partches.get(j));
+                        if (DEBUG) System.out.println("three error:" + plc.charAt(0) + " " + patchCircle+" "+three[0]+" "+three[1]+" "+three[2]);
+                        if (DEBUG)
+                            for (int j=0;j<partches.size();j++)
+                                System.out.println(partches.get(j));
                         return false;
                     } else if (plc.charAt(0) == three[0]) {
-                        partches.remove(aPlc);
+                        partches.remove(aPlc%partches.size());
 
                     } else if (plc.charAt(0) == three[1]) {
                         partches.remove((aPlc + 1)%partches.size());
@@ -283,7 +285,7 @@ public class PatchworkGame {
 
                     //if token goes to the end, make it back to the beginning
                     aPlc = aPlc > partches.size()? aPlc %(partches.size()+1):aPlc%partches.size();//aPlc >= partches.size()? (aPlc % partches.size())-1:aPlc;
-                    System.out.println(aPlc);
+//                    System.out.println(aPlc);
                     //                    System.out.println("aPlc" + aPlc+" "+partches.size());
                     three = new char[] {partches.get(aPlc%partches.size()), partches.get((aPlc + 1) % partches.size()), partches.get((aPlc + 2) % partches.size())};
                 }
@@ -365,7 +367,7 @@ public class PatchworkGame {
             }
         }
         else {
-            System.out.println("rotation wrong"+rotate);
+            if (DEBUG) System.out.println("rotation wrong"+rotate);
             return null;
         }
         int[] topleft =new int[2];
@@ -407,7 +409,7 @@ public class PatchworkGame {
     //false for out of the board, true for in
     public static boolean outOfBoard(String placement,State player){
         if (!isValidOnePlacement(placement)){
-            System.out.println("invalid one placement");
+            if (DEBUG) System.out.println("invalid one placement");
             return false;}
         char [][] a = new char[9][9];
         char [][] b = new char[9][9];
@@ -449,7 +451,7 @@ public class PatchworkGame {
 //                for (int[] sxs:result){
 //                    System.out.println(sxs[0]+" "+sxs[1]);
 //                }
-                System.out.println("out of board"+placement+" "+xs[0]+" "+xs[1]+"//");
+                if (DEBUG) System.out.println("out of board"+placement+" "+xs[0]+" "+xs[1]+"//");
                 return false;
             }
 //            System.out.println("id:"+player.id);
@@ -464,7 +466,7 @@ public class PatchworkGame {
             }
 
         }
-        player.printSquiltBoard();
+//        player.printSquiltBoard();
         b = player.printPlayerBoard();
         return true;
     }
@@ -480,7 +482,7 @@ public class PatchworkGame {
      */
     static int getScoreForPlacement(String patchCircle, String placement, boolean firstPlayer) {
         // FIXME Task 7: determine the score for a player given a placement
-        System.out.println("*******************************************");
+//        System.out.println("*******************************************");
         boolean ss = isPlacementValid(patchCircle,placement);
         if (ss)
             if (firstPlayer)    return p1.getScore();

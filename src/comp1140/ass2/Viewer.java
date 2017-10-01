@@ -348,7 +348,7 @@ public class Viewer extends Application {
                         p+=m;
                     }
                     else{
-                        PatchworkGame.p1.printSquiltBoard();
+//                        PatchworkGame.p1.printSquiltBoard();
                         setLayoutX(homeX);
                         setLayoutY(homeY);
                     }
