@@ -57,10 +57,23 @@ public class PatchworkAI {
 
         //specialCase--holding tile 'h'
         if (player.specialH){
+            for (char i = 'A'; i < 'J'; i++){
+                for (char j = 'A'; j < 'J'; j++){
+                    if (PatchworkGame.outOfBoard("h"+""+i+""+j+"A",player)){
+                        try {
+                            State.buyPartches(PatchworkGame.p1, PatchworkGame.p2, 'h');
+                        }catch (Error e){return "h"+""+i+""+j+"A";}
+                    }
+
+                }
+            }
+
         }
         //brute force trying
         boolean isValid;
-        if (player.buttonCount==0) return ".";
+        if (player.buttonCount==0) {
+            State.advanced(PatchworkGame.p1,PatchworkGame.p2);
+            return ".";}
         for (int l = 0; l < 3;l++) {
             char t = PatchworkGame.three[l];
             int n = t > 'Z' ? t - 'a' : t - 'A';
@@ -81,6 +94,8 @@ public class PatchworkAI {
                 }
             }
         }
+
+        State.advanced(PatchworkGame.p1,PatchworkGame.p2);
         return ".";
 //        PatchworkGame.isPlacementValid(patchCircle,placement);
 //        State p = State.check_turn(PatchworkGame.p1, PatchworkGame.p2) == 1 ? PatchworkGame.p1 : PatchworkGame.p2;

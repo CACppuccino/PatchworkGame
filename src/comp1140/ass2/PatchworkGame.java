@@ -71,36 +71,14 @@ public class PatchworkGame {
      */
     static boolean isPatchPlacementWellFormed(String placement) {
         // FIXME Task 3: determine whether a patch placement is well-formed
-        String [] allchars = new String[4];
-        allchars[0] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefgh";
-        allchars[1] = "ABCDEFGHI";
-        allchars[2] = "ABCDEFGHI";
-        allchars[3] = "ABCDEFGH";
-        int count = 0;
-        boolean result = false;
         if ( placement.charAt(0) == '.')
-        {
-            result = true;
-        }
+            return true;
         else if (placement.length() != 4)
-        {
-            result = false;
+            return false;
+        else {
+            char tile = placement.charAt(0), b = placement.charAt(1), c = placement.charAt(2), d = placement.charAt(3);
+            return d >= 'A' && d <= 'H' && b >= 'A' && b <= 'I' && c >= 'A' && c <= 'I' && ((tile >= 'A' && tile <= 'Z') || (tile >= 'a' && tile <= 'h'));
         }
-        else
-        {
-            for (int i = 0; i < placement.length(); i++) {
-                for (int j = 0; j < allchars[i].length(); j++) {
-                    if (placement.charAt(i) == allchars[i].charAt(j)) {
-                        count = count + 1;
-                    }
-                }
-            }
-        }
-
-        if ( count == 4){
-            result = true;
-        }
-        return result;
     }
 
     static String initPathCircle() {
@@ -139,10 +117,12 @@ public class PatchworkGame {
         int count = 0;
         // the count1 is to count how many times the '.' show
         int count1 = 0;
-        boolean result = false;
+        boolean result ;
         String SubSting;
         if (placement == null || placement.isEmpty())
-            return false;
+        {
+//            System.out.println("f1");
+            return false;}
         else {
             for (int i = 0; i < placement.length(); i++) {
                 if (placement.charAt(i) == '.') {
@@ -162,9 +142,10 @@ public class PatchworkGame {
                     if (result) {
                         count = count + 1;
                     }
-                    else
+                    else {
+//                        System.out.println("f2");
                         return false;
-                    i = i + 3;
+                    }i = i + 3;
                 }
             }
         }
@@ -172,6 +153,9 @@ public class PatchworkGame {
         for ( int i = 0; i < patchposition.size();i++){
             for ( int j = i + 1;j < patchposition.size();j++){
                 if ( placement.charAt(patchposition.get(i)) == placement.charAt(patchposition.get(j)) && placement.charAt(patchposition.get(i)) != 'h'){
+                    System.out.println(i+" "+placement.charAt(patchposition.get(i))+"**"+j+" "+placement.charAt(patchposition.get(j))+"**"
+                    );
+                    System.out.println(placement);
                     return false;
                 }
             }

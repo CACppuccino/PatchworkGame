@@ -63,7 +63,8 @@ public class GeneratePatchPlacementTest {
             }
             patchCircleString += patchId;
         }
-        return patchCircleString;
+       return  "GDaUESVRFJcTHLWXbBIKYdMPeNOfQZgAC";
+//        return patchCircleString;
     }
 
     void checkMove(String patchCircle, String start, String move) {
