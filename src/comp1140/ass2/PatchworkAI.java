@@ -9,6 +9,7 @@ public class PatchworkAI {
 
     /**
      * Generate a valid move that follows from the given patch circle and game placement string.
+     * If the game is already finished, return null.
      * @param patchCircle a patch circle string to initialize the game
      * @param placement  A valid placement string indicating a game state
      * @return a valid patch placement string, which will be "." if the player chooses to advance

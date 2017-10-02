@@ -15,6 +15,7 @@ import static org.junit.Assert.assertTrue;
  * play, and the piece the opponent will play next.
  */
 public class GeneratePatchPlacementTest {
+    private static final int[] PATCH_COST = {1, 3, 1, 2, 2, 2, 4, 3, 5, 2, 2, 5, 3, 1, 4, 4, 6, 1, 6, 4, 3, 3, 3, 5, 5, 2, 2, 2, 4, 2, 3, 6, 6, 0};
 
     @Test(timeout = 10000)
     public void testMove() {
@@ -28,22 +29,39 @@ public class GeneratePatchPlacementTest {
 
         /* now run a series of tests */
         for (int j = 0; j < BASE_ITERATIONS / 10; j++) {
-
             String patchCircle = generateRandomPatchCircleString();
             String game = "";
 
-            String move;
-            for (int i = 0; i < 20; i++) {
-                move = PatchworkAI.generatePatchPlacement(patchCircle, game);
+            String move = PatchworkAI.generatePatchPlacement(patchCircle, game);
+            while (move != null) {
                 checkMove(patchCircle, game, move);
                 game += move;
                 System.out.println("game " + game);
                 move = PatchworkAI.generatePatchPlacement(patchCircle, game);
-                System.out.println("move " + move);
-                checkMove(patchCircle, game, move);
-                game += move;
+            }
+            // it should be possible for a player to have made it to the end
+            int totalTime = getTotalTime(game);
+            assertTrue("Returned a null move, but game is not yet finished!", totalTime > 54);
+            System.out.println("total time " + totalTime);
+        }
+    }
+
+    private int getTotalTime(String placement) {
+        int timeCost = 0;
+        int i = 0;
+        while (i < placement.length()) {
+            char patchId = placement.charAt(i);
+            if (patchId == '.') {
+                i += 1;
+                timeCost += 1;
+            } else {
+                i += 4;
+                int patchIdx = patchId - 'A';
+                if (patchId > 'a') patchIdx = patchId - 'a';
+                timeCost += PATCH_COST[patchIdx];
             }
         }
+        return timeCost;
     }
 
     static String generateRandomPatchCircleString() {
@@ -53,8 +71,8 @@ public class GeneratePatchPlacementTest {
         for (int i = 0; i < numNormalPatches; i++) {
             int patchIndex = rand.nextInt(numNormalPatches);
             char patchId;
-            if (patchIndex >= 26) patchId = (char)('a' + (patchIndex - 26));
-            else patchId = (char)('A' + patchIndex);
+            if (patchIndex >= 26) patchId = (char) ('a' + (patchIndex - 26));
+            else patchId = (char) ('A' + patchIndex);
             while (patchCircleString.indexOf(patchId) > -1) {
                 patchIndex = (patchIndex + 1) % numNormalPatches;
                 if (patchIndex >= 26) patchId = (char) ('a' + (patchIndex - 26));
