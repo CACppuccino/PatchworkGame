@@ -40,13 +40,13 @@ public class State {
     //showing whether the player is on the top
     boolean onTop = false;
 
-    final static char[] PATCHES = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W',
-            'X','Y','Z','a','b','c','d','e','f','g'};
+    final static char[] PATCHES = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W',
+            'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g'};
 
-    State(int id){
+    State(int id) {
         this.id = id;
-        for (boolean[] sq: squiltBoard)
-            for (boolean sqq: sq)
+        for (boolean[] sq : squiltBoard)
+            for (boolean sqq : sq)
                 sqq = false;
     }
 
@@ -58,10 +58,12 @@ public class State {
     //    this function is used for recognizing the end of the game.
 // Both of the players' time consumption is full,
 // i.e. players' time token have reached the end square of the time board.
-    public boolean check_fullstate(){
-        return this.timecount==GRIDS;}
-//for copying the state instance
-    public void copy(State target){
+    public boolean check_fullstate() {
+        return this.timecount == GRIDS;
+    }
+
+    //for copying the state instance
+    public void copy(State target) {
         squareleft = target.squareleft;
         timecount = target.timecount;
         scoreCount = target.scoreCount;
@@ -69,31 +71,32 @@ public class State {
         specialButton = target.specialButton;
         specialH = target.specialH;
         onTop = target.onTop;
-        for (int i = 0;i < 9; i++){
-            for (int j = 0;j < 9;j++){
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
                 this.squiltBoard[i][j] = target.squiltBoard[i][j];
             }
         }
     }
+
     //    this function is used for checking the who should be the person doing the next turn.
 //    Two situation should be considered: if they are not in the same square of the time board,
 // the one fall behind should take the turn. If they are in the same square, the player who
 // last moved to that space takes the turn.
-    public static int check_turn(State p1,State p2){
-        if (p1.specialH)    return 1;
+    public static int check_turn(State p1, State p2) {
+        if (p1.specialH) return 1;
         else if (p2.specialH) return 2;
-        if (p1.timecount>p2.timecount)
+        if (p1.timecount > p2.timecount)
             return 2;
-        else if (p1.timecount<p2.timecount)
+        else if (p1.timecount < p2.timecount)
             return 1;
         else {
-            if (p1.onTop && p2.onTop)   throw new Error("both player token on the top");
-            else if (p2.onTop)  return 2;
-            else    return 1;
+            if (p1.onTop && p2.onTop) throw new Error("both player token on the top");
+            else if (p2.onTop) return 2;
+            else return 1;
         }
     }
 
-//    void printSquiltBoard(){
+    //    void printSquiltBoard(){
 //        for (boolean[] sq: squiltBoard){
 //            for (boolean sqq: sq) {
 //                if(!sqq) System.out.print("@");
@@ -102,98 +105,93 @@ public class State {
 //            System.out.println();
 //        }
 //    }
-    public static void advanced(State p1,State p2){
-        int t =check_turn(p1,p2);
-        int diff ;
+    public static void advanced(State p1, State p2) {
+        int t = check_turn(p1, p2);
+        int diff;
 
-        if (t==1) {
+        if (t == 1) {
             //be infront of the p2
-            diff = p2.timecount+1<=GRIDS?(p2.timecount-p1.timecount)+1:GRIDS-p1.timecount;
+            diff = p2.timecount + 1 <= GRIDS ? (p2.timecount - p1.timecount) + 1 : GRIDS - p1.timecount;
             p1.buttonCount += diff;
-            State.specialEvent(p1,p2,p1.timecount,diff);
+            State.specialEvent(p1, p2, p1.timecount, diff);
             p1.timecount = p2.timecount + 1 > GRIDS ? GRIDS : p2.timecount + 1;
 //            System.out.println("player "+t+"make advance "+diff+"steps and now in "+p1.timecount);
-        }
-        else {
-            diff = p1.timecount+1<=GRIDS?(p1.timecount-p2.timecount)+1:GRIDS-p2.timecount;
+        } else {
+            diff = p1.timecount + 1 <= GRIDS ? (p1.timecount - p2.timecount) + 1 : GRIDS - p2.timecount;
             p2.buttonCount += diff;
-            State.specialEvent(p2,p1,p2.timecount,diff);
+            State.specialEvent(p2, p1, p2.timecount, diff);
             p2.timecount = p1.timecount + 1 > GRIDS ? GRIDS : p1.timecount + 1;
 //            System.out.println("player "+t+"make advance "+diff+"steps and now in "+p2.timecount);
         }
     }
 
-    public static void buyPartches(State p1,State p2,char p){
+    public static void buyPartches(State p1, State p2, char p) {
         int index;
-        if (p>='A' && p<='Z') index = p-'A';
-        else    index = p-'a'+26;
+        if (p >= 'A' && p <= 'Z') index = p - 'A';
+        else index = p - 'a' + 26;
         //get the time decrement from the array
         final int timeInc = PatchworkGame.tileTimetoken[index];
         final int buttonDec = PatchworkGame.tileCost[index];
-        final int specialButton= PatchworkGame.tileButton[index];
+        final int specialButton = PatchworkGame.tileButton[index];
 
-        int t = check_turn(p1,p2);
+        int t = check_turn(p1, p2);
 //        System.out.println("player "+t+" buying "+p+" hosts"+(t==1?p1.buttonCount:p2.buttonCount)+"and cost him"+buttonDec);
-        if (t==1) {
-            if (p=='h'){
-                if (p1.tiles.size()>0)
-                {
-                    p1.tiles.remove(p1.tiles.size()-1);
+        if (t == 1) {
+            if (p == 'h') {
+                if (p1.tiles.size() > 0) {
+                    p1.tiles.remove(p1.tiles.size() - 1);
                     p1.specialH = false;
-                    p1.squareleft --;
+                    p1.squareleft--;
                     throw new Error("spend a h");
-                }
-                else {
+                } else {
                     throw new Error("no enough h");
                 }
             }
             p1.buttonCount = p1.buttonCount - buttonDec;
-            if (p1.buttonCount<0){
-                p1.buttonCount+=buttonDec;
+            if (p1.buttonCount < 0) {
+                p1.buttonCount += buttonDec;
                 //suppose to notice the Viewer
-                throw new Error("cant afford the tile"+p);}
+                throw new Error("cant afford the tile" + p);
+            }
             p1.specialButton += specialButton;
-            specialEvent(p1,p2,p1.timecount,timeInc);
-            p1.timecount = p1.timecount+timeInc>GRIDS ? GRIDS : p1.timecount+timeInc;
+            specialEvent(p1, p2, p1.timecount, timeInc);
+            p1.timecount = p1.timecount + timeInc > GRIDS ? GRIDS : p1.timecount + timeInc;
             p1.squareleft -= PatchworkGame.tileSpace[index].length;
 //            System.out.println("now get special Button "+p1.specialButton+" now get button"+p1.buttonCount);
 //            System.out.println("make forward "+timeInc+" now stepping "+p1.timecount);
 //            System.out.println("now have "+p1.squareleft+" squares left");
             //considering the timetoken overlap situation
-            if (p1.timecount==p2.timecount)
-            {
+            if (p1.timecount == p2.timecount) {
                 p1.onTop = true;
                 p2.onTop = false;
             }
 
-        }
-        else {
-            if (p=='h'){
-                if (p2.tiles.size()>0){
-                    p2.tiles.remove(p2.tiles.size()-1);
+        } else {
+            if (p == 'h') {
+                if (p2.tiles.size() > 0) {
+                    p2.tiles.remove(p2.tiles.size() - 1);
                     p2.specialH = false;
                     p2.squareleft--;
                     throw new Error("spend a h");
-                }
-                else {
+                } else {
                     throw new Error("no enough h");
                 }
             }
             p2.buttonCount = p2.buttonCount - buttonDec;
-            if (p2.buttonCount<0){
-                p2.buttonCount+=buttonDec;
+            if (p2.buttonCount < 0) {
+                p2.buttonCount += buttonDec;
                 //suppose to notice the Viewer
-                throw new Error("cant afford the tile"+p);}
+                throw new Error("cant afford the tile" + p);
+            }
             p2.specialButton += specialButton;
-            specialEvent(p2,p1,p2.timecount,timeInc);
-            p2.timecount = p2.timecount+timeInc>GRIDS ? GRIDS : p2.timecount+timeInc;
+            specialEvent(p2, p1, p2.timecount, timeInc);
+            p2.timecount = p2.timecount + timeInc > GRIDS ? GRIDS : p2.timecount + timeInc;
             p2.squareleft -= PatchworkGame.tileSpace[index].length;
 //            System.out.println("now get special Button "+p2.specialButton+" now get button"+p2.buttonCount);
 //            System.out.println("make forward "+timeInc+" now stepping "+p2.timecount);
 //            System.out.println("now have "+p2.squareleft+" squares left");
 
-            if (p1.timecount==p2.timecount)
-            {
+            if (p1.timecount == p2.timecount) {
                 p2.onTop = true;
                 p1.onTop = false;
             }
@@ -203,18 +201,17 @@ public class State {
 
     }
 
-    char [][] printPlayerBoard(){
+    char[][] printPlayerBoard() {
         int counter1 = 0;
-        char [][] playerBoardPrint = new char[9][9];
+        char[][] playerBoardPrint = new char[9][9];
 
-        for(boolean [] sq1 : squiltBoard){
+        for (boolean[] sq1 : squiltBoard) {
             int counter2 = 0;
-            for ( boolean sqq1:sq1){
-                if(!sqq1) {
+            for (boolean sqq1 : sq1) {
+                if (!sqq1) {
                     playerBoardPrint[counter1][counter2] = '@';
                     counter2++;
-                }
-                else {
+                } else {
                     playerBoardPrint[counter1][counter2] = '*';
                     counter2++;
                 }
@@ -229,17 +226,17 @@ public class State {
         //special tile is already owned by one of the player
         if (spt) return false;
         //haven't filled 49 squares even
-        if (player.squareleft>32) return false;
+        if (player.squareleft > 32) return false;
 
         // this block is to check player's board is full 7 * 7
 //        player.printSquiltBoard();
         int positionMark = 100;
         int counterCol = 0;
-        for ( int i = 0; i < player.printPlayerBoard().length;i++){
+        for (int i = 0; i < player.printPlayerBoard().length; i++) {
             int counterRow = 0;
-            for (int j = (positionMark != 100)? positionMark:0; j < player.printPlayerBoard()[i].length;j++){
-                if(player.printPlayerBoard()[i][j] == '*'){
-                    if ( positionMark > j) positionMark = j;
+            for (int j = (positionMark != 100) ? positionMark : 0; j < player.printPlayerBoard()[i].length; j++) {
+                if (player.printPlayerBoard()[i][j] == '*') {
+                    if (positionMark > j) positionMark = j;
                     counterRow++;
                 }
             }
@@ -253,39 +250,40 @@ public class State {
     /*
     * The function is only called when the signal is True
     */
-    static boolean affordPartch(int buttonCount, int cost){
-        if (buttonCount - cost< 0) return false;
+    static boolean affordPartch(int buttonCount, int cost) {
+        if (buttonCount - cost < 0) return false;
         return true;
     }
 
 
-    public static void specialTile(State player){
-        player.scoreCount +=7;
+    public static void specialTile(State player) {
+        player.scoreCount += 7;
         //this event should only be touched once
         spt = true;
     }
-    public static void specialEvent(State player,State oplayer,int start,int steps){
-        for (int sb:PatchworkGame.specialButton){
-            if (sb>=start+1 && sb<=start+steps)
+
+    public static void specialEvent(State player, State oplayer, int start, int steps) {
+        for (int sb : PatchworkGame.specialButton) {
+            if (sb >= start + 1 && sb <= start + steps)
                 player.buttonCount += player.specialButton;
         }
-        for (int i=0;i<PatchworkGame.specialTile.length;i++)
-        {
-            if (PatchworkGame.specialTile[i]>=start+1 && PatchworkGame.specialTile[i]<=start+steps
-                    && oplayer.timecount<PatchworkGame.specialTile[i] ){
+        for (int i = 0; i < PatchworkGame.specialTile.length; i++) {
+            if (PatchworkGame.specialTile[i] >= start + 1 && PatchworkGame.specialTile[i] <= start + steps
+                    && oplayer.timecount < PatchworkGame.specialTile[i]) {
                 player.tiles.add('h');
                 player.specialH = true;
             }
         }
-        if (player.tiles.size()>0)
+        if (player.tiles.size() > 0)
             player.specialH = true;
     }
     //    the functions is called to get two players' score,
 // first int is for player 1, second for player 2
 
     //this function should only be called at the final of the game
-    public int getScore(){
-        scoreCount = scoreCount + buttonCount - squareleft*2;
+    public int getScore() {
+        scoreCount = scoreCount + buttonCount - squareleft * 2;
 //        System.out.println("the player"+id+"have "+buttonCount+" buttons and"+ squareleft+" squares left");
-        return scoreCount;}
+        return scoreCount;
+    }
 }

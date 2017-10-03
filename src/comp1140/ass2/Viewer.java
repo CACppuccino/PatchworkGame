@@ -11,7 +11,7 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -47,7 +47,7 @@ public class Viewer extends Application {
     private static final int VIEWER_WIDTH = 933;
     private static final int VIEWER_HEIGHT = 700;
     private static final int BOARD1X = 20;
-    private static final int BOARD2X = 621;
+    private static final int BOARD2X = 640;
     private static final int BOARDY = 290;
     private static final int BOARD_SIZE = 270;
 
@@ -58,15 +58,25 @@ public class Viewer extends Application {
     private final Group controls = new Group();
     private final Group sqiltBoard = new Group();
     private final Group tilesArea = new Group();
+    private final Group startScreen = new Group();
+    private final Group playScreen = new Group();
     ArrayList<Character> candi;
     TextField textField;
+
+    boolean AI = false;
 
     static Text turn;
     static Button confirm;
     static Button advance;
+    static Button menu;
     static Circle tt1;
     static Circle tt2;
-    static String p = "";
+    static Text btn1;
+    static Text btn2;
+    static Alert err;
+    static Alert warn;
+    static String p;
+
 
     /**
      * Draw a placement in the window, removing any previously drawn one
@@ -74,7 +84,7 @@ public class Viewer extends Application {
      * @param placement A valid placement string
      */
     void makePlacement(String placement) {
-        controls.getChildren().clear();
+        if (!AI) controls.getChildren().clear();
         for (int i = 0; i < placement.length(); ) {
             if (placement.charAt(i) == '.') {
                 i++;
@@ -116,9 +126,8 @@ public class Viewer extends Application {
             }
             //indicates which board is going to be placed on the tile
             //int player = State.check_turn()==1?0:601;
-            int player = 1;
-            mPlacement.setLayoutX(player + 20 + x);
-            mPlacement.setLayoutY(290 + y);
+            mPlacement.setLayoutX((AI?BOARD2X:BOARD1X) + x);
+            mPlacement.setLayoutY(BOARDY + y);
             mPlacement.getChildren().add(tileView);
 
             controls.getChildren().add(mPlacement);
@@ -142,7 +151,6 @@ public class Viewer extends Application {
                 System.out.println(new String(three));
                 if (PatchworkGame.isPlacementValid(c, textField.getText())) System.out.println("b");
                 clickArea();
-
             }
         });
         HBox hb = new HBox();
@@ -159,41 +167,96 @@ public class Viewer extends Application {
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Patchwork Viewer");
         Scene scene = new Scene(root, VIEWER_WIDTH, VIEWER_HEIGHT);
-        root.getChildren().add(sqiltBoard);
+        scene.setFill(Color.ANTIQUEWHITE);
+        Text title = new Text("PATCHWORK");
+        title.setLayoutX(400);
+        title.setLayoutY(200);
+        title.setScaleX(5);
+        title.setScaleY(5);
+        ToggleGroup option = new ToggleGroup();
+        RadioButton option1 = new RadioButton("1 player");
+        option1.setLayoutX(400);
+        option1.setLayoutY(250);
+        option1.setToggleGroup(option);
+        RadioButton option2 = new RadioButton("2 player");
+        option2.setLayoutX(400);
+        option2.setLayoutY(280);
+        option2.setToggleGroup(option);
+        option2.setSelected(true);
+        Button begin = new Button("Start Game");
+        begin.setLayoutX(400);
+        begin.setLayoutY(320);
+        begin.setOnMouseClicked(event -> {
+            AI = option1.isSelected();
+            game();
+        });
+        startScreen.getChildren().addAll(title, option1, option2, begin);
+        root.getChildren().add(startScreen);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    public void game() {
+        root.getChildren().remove(startScreen);
         timeBoard();
+        p="";
         c = PatchworkGame.initPathCircle();
-        if (c.indexOf('A') != 0) c = c.substring(c.indexOf('A') + 1) + c.substring(0, c.indexOf('A') - 1);
+        if (c.indexOf('A') != 0) c = c.substring(c.indexOf('A') + 1) + c.substring(0, c.indexOf('A') + 1);
         candidateArea(c);
         timeToken();
         squiltBoard1();
         squiltBoard2();
         makeControls();
         PatchworkGame.three = c.substring(0, 3).toCharArray();
-        root.getChildren().add(tilesArea);
         clickArea();
+        err = new Alert(Alert.AlertType.ERROR);
         turn = new Text("Player 1's Turn");
         turn.setLayoutX(400);
         turn.setLayoutY(200);
-        root.getChildren().add(turn);
-        confirm = new Button("Are you sure?");
+        confirm = new Button("End Turn");
         confirm.setDisable(true);
-        confirm.setLayoutX(10);
-        confirm.setLayoutY(10);
-        root.getChildren().add(confirm);
+        confirm.setLayoutX(380);
+        confirm.setLayoutY(250);
         advance = new Button("Advance");
-        advance.setLayoutX(10);
-        advance.setLayoutY(200);
+        advance.setLayoutX(460);
+        advance.setLayoutY(250);
         advance.setOnMouseClicked(event -> {
             p += ".";
-            int t=State.check_turn(PatchworkGame.p1, PatchworkGame.p2);
+            int t = State.check_turn(PatchworkGame.p1, PatchworkGame.p2);
             PatchworkGame.isPlacementValid(c, p);
-            moveToken(t,(t==1?p1:p2).timecount);
+            moveToken(t, (t == 1 ? p1 : p2).timecount);
             turn.setText("Player " + t + "'s turn");
+            btn1.setText(p1.buttonCount + " buttons");
+            btn2.setText(p2.buttonCount + " buttons");
             clickArea();
+            if (AI) {
+                while (t == 2) {
+                    aiTurn();
+                    t = State.check_turn(PatchworkGame.p1, PatchworkGame.p2);
+                }
+            }
         });
-        root.getChildren().add(advance);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        btn1 = new Text("5 buttons");
+        btn1.setLayoutX(30);
+        btn1.setLayoutY(580);
+        btn2 = new Text("5 buttons");
+        btn2.setLayoutX(910 - 70);
+        btn2.setLayoutY(580);
+        warn = new Alert(Alert.AlertType.CONFIRMATION);
+        menu = new Button("Back to main");
+        menu.setLayoutX(10);
+        menu.setLayoutY(10);
+        menu.setOnMouseClicked(event -> {
+            warn.setContentText("This will end the current game.\nAre you sure?");
+                if (warn.showAndWait().get() == ButtonType.OK){
+                    root.getChildren().clear();
+                    controls.getChildren().clear();
+                    root.getChildren().add(startScreen);
+                    PatchworkGame.p1=new State(1);
+                    PatchworkGame.p2=new State(2);
+                }
+        });
+        root.getChildren().addAll(sqiltBoard,tilesArea,turn,confirm,advance,btn1,btn2,menu);
     }
 
     //describe the window attributes
@@ -256,7 +319,7 @@ public class Viewer extends Application {
         timeboard.setLayoutX(331.5);
         timeboard.setLayoutY(290);
         timeboard.setOnMouseClicked(event -> {
-            System.out.println(event.getSceneX()+", "+event.getSceneY());
+            System.out.println(event.getSceneX() + ", " + event.getSceneY());
         });
         root.getChildren().add(timeboard);
 
@@ -267,13 +330,13 @@ public class Viewer extends Application {
     public void timeToken() {
         tt1 = new Circle();
         tt1.setRadius(10);
-        tt1.setCenterX(321);
-        tt1.setCenterY(300);
+        tt1.setCenterX(360);
+        tt1.setCenterY(310);
         tt1.setFill(Color.YELLOW);
         tt2 = new Circle();
         tt2.setRadius(10);
-        tt2.setCenterX(321);
-        tt2.setCenterY(300);
+        tt2.setCenterX(390);
+        tt2.setCenterY(310);
         tt2.setFill(Color.BLUE);
         root.getChildren().add(tt1);
         root.getChildren().add(tt2);
@@ -333,6 +396,7 @@ public class Viewer extends Application {
             homeX = x;
             homeY = y;
             this.tName = tName;
+            setUserData(tName);
             int index;
             String tS;
             if (tName <= 'Z') {
@@ -386,31 +450,41 @@ public class Viewer extends Application {
                 event.consume();
             });
             setOnMouseReleased(event -> {     // drag is complete
+                snap();
                 confirm.setDisable(false);
                 confirm.setOnMouseClicked(event1 -> {
                     if (getLayoutX() != homeX) {
                         String m = makeString();
                         System.out.println(new String(PatchworkGame.three));
                         System.out.println(c);
-                        int t=State.check_turn(PatchworkGame.p1, PatchworkGame.p2);
+                        int t = State.check_turn(PatchworkGame.p1, PatchworkGame.p2);
                         if (PatchworkGame.isPlacementValid(c, p + m)) {
                             p += m;
                             root.getChildren().add(this);
                             tilesArea.getChildren().remove(this);
                             setOnScroll(null);
-                            moveToken(t, (t==1?p1:p2).timecount);
-                            t=State.check_turn(PatchworkGame.p1, PatchworkGame.p2);
+                            moveToken(t, (t == 1 ? p1 : p2).timecount);
+                            t = State.check_turn(PatchworkGame.p1, PatchworkGame.p2);
                             turn.setText("Player " + t + "'s turn");
+                            btn1.setText(p1.buttonCount + " buttons");
+                            btn2.setText(p2.buttonCount + " buttons");
                             clickArea();
-
+                            if (AI) {
+                                while (t == 2) {
+                                    aiTurn();
+                                    t = State.check_turn(PatchworkGame.p1, PatchworkGame.p2);
+                                }
+                            }
                         } else {
+                            err.setContentText("Invalid Placement\nMake sure you have enough buttons");
+                            err.showAndWait();
                             setLayoutX(homeX);
                             setLayoutY(homeY);
                         }
                         event.consume();
                     }
                 });
-                snap();
+
             });
         }
 
@@ -425,6 +499,7 @@ public class Viewer extends Application {
             return s;
         }
 
+
         void snap() {
             if (State.check_turn(PatchworkGame.p1, PatchworkGame.p2) == 1 && getLayoutX() > BOARD1X && (getLayoutX() + getFitWidth() < BOARD1X + BOARD_SIZE + 30)
                     && getLayoutY() > BOARDY && (getLayoutY() + getFitHeight() < BOARDY + BOARD_SIZE + 30)) {
@@ -435,12 +510,30 @@ public class Viewer extends Application {
                 setLayoutX((((int) getLayoutX() - BOARD2X) / 30) * 30 + BOARD2X);
                 setLayoutY((((int) getLayoutY() - BOARDY) / 30) * 30 + BOARDY);
             } else {
+                if (getLayoutY() > BOARDY && getLayoutY() < BOARDY + BOARD_SIZE) {
+                    err.setContentText("It's Player " + State.check_turn(PatchworkGame.p1, PatchworkGame.p2) + "'s Turn");
+                    err.showAndWait();
+                }
                 setLayoutX(homeX);
                 setLayoutY(homeY);
             }
         }
     }
 
+    void aiTurn() {
+        String s = PatchworkAI.generatePatchPlacement(c, p);
+        System.out.println(s);
+        p += s;
+        makePlacement(s);
+        PatchworkGame.isPlacementValid(c, p);
+        moveToken(2, p2.timecount);
+        int t = State.check_turn(PatchworkGame.p1, PatchworkGame.p2);
+        turn.setText("Player " + t + "'s turn");
+        btn1.setText(p1.buttonCount + " buttons");
+        btn2.setText(p2.buttonCount + " buttons");
+        clickArea();
+
+    }
     void moveToken(int player, int position) {
         Circle tt = player == 1 ? tt1 : tt2;
         System.out.println(position);
@@ -452,8 +545,8 @@ public class Viewer extends Application {
                 {2, 6}, {3, 6}, {5, 6}, {6, 6}, {6, 5}, {6, 4}, {6, 3}, {6, 2}, {6, 1},
                 {5, 1}, {4, 1}, {3, 1}, {2, 1}, {2, 2}, {2, 4}, {2, 5},
                 {3, 5}, {4, 5}, {5, 5}, {5, 4}, {5, 2}, {4, 2}, {3, 2}, {3, 3}}[position];
-        tt.setCenterY(p[0]*33+310);
-        tt.setCenterX(p[1]*33+350);
+        tt.setCenterY(p[0] * 33 + 310);
+        tt.setCenterX(p[1] * 33 + 350);
     }
 
 
