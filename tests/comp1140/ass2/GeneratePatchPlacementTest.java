@@ -74,10 +74,10 @@ public class GeneratePatchPlacementTest {
         assertTrue("Invalid move '" + move + "', given starting point '" + start, PatchworkGame.isPlacementValid(patchCircle, start + move));
     }
 
-    @Test
-
-    public void testTestMove(){
-        for (int i=1;i<=100;i++)
-            testMove();
-    }
+//    @Test
+//
+//    public void testTestMove(){
+//        for (int i=1;i<=100;i++)
+//            testMove();
+//    }
 }
