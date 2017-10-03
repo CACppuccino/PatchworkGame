@@ -1,6 +1,6 @@
 package comp1140.ass2;
 
-import gittest.A;
+//import gittest.A;
 
 import javax.jws.soap.SOAPBinding;
 import java.awt.*;
