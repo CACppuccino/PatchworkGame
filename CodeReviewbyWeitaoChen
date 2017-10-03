@@ -1,0 +1,15 @@
+The code I reviewed was wrote by Adonis, which is the method isSeven and printPlayerBoard. 
+What are the best features of this code?
+From my aspect, the best features of this code is to separate the big problem into small pieces and then solve the small problems one by one, that will make the program more efficiently and the code more readable.
+Is the code well-documented?
+NOt really, for example, he didn't write the comment about the initialize in the nest for loop, also, no comments about why to check '*' instead of others. Also, he write nothing about the help method printPlayerBoard.
+Is the program decomposition ( class and method structure) appropriate?
+Yes, he write another method named printPlayerBoard, which is the help method to print the current state of the player's board. Also, in the isSeven method, he divided the method into two parts, one is to check whether the special tile is already token by the player, the other one is to check whether the amount of the squares left in the player's board is more than 32. If so, then check the '*', which is print by the method printPlayerBoard, if all good, the player will get the tile. 
+Does it follow Java code conventions (for example, are methods and variables properly named), and is the style consistent throughout?
+From the name of the method and variables, yes, it does follow the java code conventions.
+From the code, it is obviously follow the code conventions. For example, the if and for block.
+5. If you suspect an error in the code, suggest a particular situation in which the program will not function correctly.
+This method is already check all the situation, if I really want to suspect the error of this code, it may happend in the help method printPlayerBoard. If the help method can't print the player's board in a right way, that may cause a error when the isSeven method runs.
+	
+	
+	
