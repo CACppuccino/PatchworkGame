@@ -1,5 +1,5 @@
-# Code Review for Adonis Mouti (u6385898)
-### By Ziyang Liu
+# Code Review for Ziyang Liu (u6210090)
+### By Adonis Mouti
 
 #### Coding part
 `Viewer.java`,`Matrix.java`
