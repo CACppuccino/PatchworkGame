@@ -1,0 +1,5 @@
+The code I reviewed was of Ziyang's, isPlacementValid and its associated methods in particular.
+The best feature of his code is his use of separate methods to avoid repetition of code, increasing readability and reducing the chance of errors occuring if something needed to be changed.
+His code is very well documented making it easy to understand what he was trying to achieve without having have his code explained.
+The majority of the variables are named appropriately in a way that their use is clear. The naming of these variables follow the Java convention, except for his constants where instead of using CAPS he uses the standard variable naming convention.
+The code also contains a lot of tests for possible errors such as null/empty strings making it very robust. The only way an error could happen would be if one of the associated methods is changed or has an error in it.
