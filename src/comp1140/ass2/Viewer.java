@@ -19,6 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.Node.*;
 import javafx.scene.input.ScrollEvent;
+import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -73,10 +74,14 @@ public class Viewer extends Application {
     private static Circle tt2;
     private static Text btn1;
     private static Text btn2;
+    private static Text player1;
+    private static Text player2;
     private static Alert err;
     private static Alert warn;
     private static Alert win;
     private static String p;
+    private static File bgFile;
+    private static ImageView bg;
 
 
     /**
@@ -141,21 +146,21 @@ public class Viewer extends Application {
      * Create a basic text field for input and a refresh button.
      */
     private void makeControls() {
-        Label label1 = new Label("Placement:");
-        textField = new TextField();
-        textField.setPrefWidth(300);
-        Button button = new Button("Display");
-        button.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-                makePlacement(textField.getText());
-                System.out.println(new String(three));
-                if (PatchworkGame.isPlacementValid(c, textField.getText())) System.out.println("b");
-                clickArea();
-            }
-        });
+        //Label label1 = new Label("Placement:");
+//        textField = new TextField();
+//        textField.setPrefWidth(300);
+//        Button button = new Button("Display");
+//        button.setOnAction(new EventHandler<ActionEvent>() {
+//            @Override
+//            public void handle(ActionEvent e) {
+//                makePlacement(textField.getText());
+//                System.out.println(new String(three));
+//                if (PatchworkGame.isPlacementValid(c, textField.getText())) System.out.println("b");
+//                clickArea();
+//            }
+//        });
         HBox hb = new HBox();
-        hb.getChildren().addAll(label1, textField, button);
+        //hb.getChildren().addAll(label1, textField, button);
         hb.setSpacing(10);
         hb.setLayoutX(250);
         hb.setLayoutY(VIEWER_HEIGHT - 50);
@@ -169,20 +174,27 @@ public class Viewer extends Application {
 
         primaryStage.setTitle("Patchwork Viewer");
         Scene scene = new Scene(root, VIEWER_WIDTH, VIEWER_HEIGHT);
-        scene.setFill(Color.ANTIQUEWHITE);
+        bgFile = new File("src/comp1140/ass2/gui/assets/bg.jpg");
+        //http://www.planwallpaper.com/static/images/cool-background.jpg
+        bg = new ImageView(new Image("file:"+bgFile.getAbsolutePath()));
+        bg.toBack();
+        root.getChildren().add(bg);
         Text title = new Text("PATCHWORK");
         title.setLayoutX(400);
         title.setLayoutY(200);
         title.setScaleX(5);
         title.setScaleY(5);
+        title.setFill(Color.WHITE);
         ToggleGroup option = new ToggleGroup();
         RadioButton option1 = new RadioButton("Play with AI (1P)");
         option1.setLayoutX(400);
         option1.setLayoutY(250);
+        option1.setTextFill(Color.WHITE);
         option1.setToggleGroup(option);
         RadioButton option2 = new RadioButton("Human to human (2P)");
         option2.setLayoutX(400);
         option2.setLayoutY(280);
+        option2.setTextFill(Color.WHITE);
         option2.setToggleGroup(option);
         option2.setSelected(true);
         Button begin = new Button("Start Game");
@@ -199,6 +211,9 @@ public class Viewer extends Application {
     }
 
     public void game() {
+        bgFile = new File("src/comp1140/ass2/gui/assets/bg2.jpg");
+        //https://i.ytimg.com/vi/bOlIncfaVOU/maxresdefault.jpg
+        bg.setImage(new Image("file:"+bgFile.getAbsolutePath()));
         root.getChildren().remove(startScreen);
         timeBoard();
         p = "";
@@ -250,7 +265,7 @@ public class Viewer extends Application {
         btn1.setLayoutX(30);
         btn1.setLayoutY(580);
         btn2 = new Text("5 buttons");
-        btn2.setLayoutX(910 - 70);
+        btn2.setLayoutX(840);
         btn2.setLayoutY(580);
         warn = new Alert(Alert.AlertType.CONFIRMATION);
         menu = new Button("Back to main");
@@ -262,7 +277,15 @@ public class Viewer extends Application {
                 reset();
             }
         });
-        root.getChildren().addAll(sqiltBoard, tilesArea, turn, confirm, advance, btn1, btn2, menu);
+        player1 = new Text("Player 1: Yellow");
+        player1.setLayoutX(30);
+        player1.setLayoutY(280);
+        player1.setFill(Color.YELLOW);
+        player2 = new Text("Player 2"+(AI?" (AI)":"")+": Blue");
+        player2.setLayoutX(800);
+        player2.setLayoutY(280);
+        player2.setFill(Color.BLUE);
+        root.getChildren().addAll(sqiltBoard, tilesArea, turn, confirm, advance, btn1, btn2, menu,player1,player2);
     }
 
     public void reset() {
@@ -285,6 +308,7 @@ public class Viewer extends Application {
         HBox sq1 = new HBox();
         Random gen = new Random();
         sq1.setPrefSize(280, 280);
+        
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 sq[i][j] = new Rectangle(BOARD1X + i * 30, BOARDY + j * 30, 30, 30);
@@ -353,6 +377,11 @@ public class Viewer extends Application {
 
     //    displays the candidates area which shows the three available tiles.
     public void candidateArea(String init) {
+        Rectangle box = new Rectangle(180,560,540,70);
+
+        box.setFill(Color.WHITE);
+        box.setOpacity(0.5);
+        root.getChildren().add(box);
         HBox[] hb = new HBox[init.length()];
         for (int i = 0; i < init.length(); i++) {
             hb[i] = new HBox();
