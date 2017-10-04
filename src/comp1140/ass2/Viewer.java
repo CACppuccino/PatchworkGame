@@ -11,6 +11,7 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -22,6 +23,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 
@@ -31,7 +33,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
-import static comp1140.ass2.PatchworkGame.isPlacementValid;
+import static comp1140.ass2.PatchworkGame.*;
 
 
 /**
@@ -45,28 +47,44 @@ public class Viewer extends Application {
     private static final int VIEWER_WIDTH = 933;
     private static final int VIEWER_HEIGHT = 700;
     private static final int BOARD1X = 20;
-    private static final int BOARD2X = 621;
+    private static final int BOARD2X = 640;
     private static final int BOARDY = 290;
     private static final int BOARD_SIZE = 270;
 
     private static String c;
-    private static String p="";
     private static final String URI_BASE = "assets/";
 
     private final Group root = new Group();
     private final Group controls = new Group();
     private final Group sqiltBoard = new Group();
     private final Group tilesArea = new Group();
-    ArrayList<Character> candi;
-    TextField textField;
+    private final Group startScreen = new Group();
+//    private final Group playScreen = new Group();
+//    ArrayList<Character> candi;
+    private TextField textField;
+
+    private boolean AI = false;
+
+    private static Text turn;
+    private static Button confirm;
+    private static Button advance;
+    private static Button menu;
+    private static Circle tt1;
+    private static Circle tt2;
+    private static Text btn1;
+    private static Text btn2;
+    private static Alert err;
+    private static Alert warn;
+    private static String p;
+
 
     /**
      * Draw a placement in the window, removing any previously drawn one
      *
      * @param placement A valid placement string
      */
-    void makePlacement(String placement) {
-        controls.getChildren().clear();
+    private void makePlacement(String placement) {
+        if (!AI) controls.getChildren().clear();
         for (int i = 0; i < placement.length(); ) {
             if (placement.charAt(i) == '.') {
                 i++;
@@ -108,9 +126,8 @@ public class Viewer extends Application {
             }
             //indicates which board is going to be placed on the tile
             //int player = State.check_turn()==1?0:601;
-            int player = 1;
-            mPlacement.setLayoutX(player + 20 + x);
-            mPlacement.setLayoutY(290 + y);
+            mPlacement.setLayoutX((AI?BOARD2X:BOARD1X) + x);
+            mPlacement.setLayoutY(BOARDY + y);
             mPlacement.getChildren().add(tileView);
 
             controls.getChildren().add(mPlacement);
@@ -131,6 +148,9 @@ public class Viewer extends Application {
             @Override
             public void handle(ActionEvent e) {
                 makePlacement(textField.getText());
+                System.out.println(new String(three));
+                if (PatchworkGame.isPlacementValid(c, textField.getText())) System.out.println("b");
+                clickArea();
             }
         });
         HBox hb = new HBox();
@@ -147,19 +167,96 @@ public class Viewer extends Application {
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Patchwork Viewer");
         Scene scene = new Scene(root, VIEWER_WIDTH, VIEWER_HEIGHT);
-        root.getChildren().add(sqiltBoard);
+        scene.setFill(Color.ANTIQUEWHITE);
+        Text title = new Text("PATCHWORK");
+        title.setLayoutX(400);
+        title.setLayoutY(200);
+        title.setScaleX(5);
+        title.setScaleY(5);
+        ToggleGroup option = new ToggleGroup();
+        RadioButton option1 = new RadioButton("1 player");
+        option1.setLayoutX(400);
+        option1.setLayoutY(250);
+        option1.setToggleGroup(option);
+        RadioButton option2 = new RadioButton("2 player");
+        option2.setLayoutX(400);
+        option2.setLayoutY(280);
+        option2.setToggleGroup(option);
+        option2.setSelected(true);
+        Button begin = new Button("Start Game");
+        begin.setLayoutX(400);
+        begin.setLayoutY(320);
+        begin.setOnMouseClicked(event -> {
+            AI = option1.isSelected();
+            game();
+        });
+        startScreen.getChildren().addAll(title, option1, option2, begin);
+        root.getChildren().add(startScreen);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    public void game() {
+        root.getChildren().remove(startScreen);
         timeBoard();
+        p="";
         c = PatchworkGame.initPathCircle();
-        c=c.substring(c.indexOf('A')+1)+c.substring(0,c.indexOf('A')-1);
+        if (c.indexOf('A') != 0) c = c.substring(c.indexOf('A') + 1) + c.substring(0, c.indexOf('A') + 1);
         candidateArea(c);
-        timeToken1(0);
+        timeToken();
         squiltBoard1();
         squiltBoard2();
         makeControls();
-        PatchworkGame.three=c.substring(0,3).toCharArray();
+        PatchworkGame.three = c.substring(0, 3).toCharArray();
         clickArea();
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        err = new Alert(Alert.AlertType.ERROR);
+        turn = new Text("Player 1's Turn");
+        turn.setLayoutX(400);
+        turn.setLayoutY(200);
+        confirm = new Button("End Turn");
+        confirm.setDisable(true);
+        confirm.setLayoutX(380);
+        confirm.setLayoutY(250);
+        advance = new Button("Advance");
+        advance.setLayoutX(460);
+        advance.setLayoutY(250);
+        advance.setOnMouseClicked(event -> {
+            p += ".";
+            int t = State.check_turn(PatchworkGame.p1, PatchworkGame.p2);
+            PatchworkGame.isPlacementValid(c, p);
+            moveToken(t, (t == 1 ? p1 : p2).timecount);
+            turn.setText("Player " + t + "'s turn");
+            btn1.setText(p1.buttonCount + " buttons");
+            btn2.setText(p2.buttonCount + " buttons");
+            clickArea();
+            if (AI) {
+                while (t == 2) {
+                    aiTurn();
+                    t = State.check_turn(PatchworkGame.p1, PatchworkGame.p2);
+                }
+            }
+        });
+        btn1 = new Text("5 buttons");
+        btn1.setLayoutX(30);
+        btn1.setLayoutY(580);
+        btn2 = new Text("5 buttons");
+        btn2.setLayoutX(910 - 70);
+        btn2.setLayoutY(580);
+        warn = new Alert(Alert.AlertType.CONFIRMATION);
+        menu = new Button("Back to main");
+        menu.setLayoutX(10);
+        menu.setLayoutY(10);
+        menu.setOnMouseClicked(event -> {
+            warn.setContentText("This will end the current game.\nAre you sure?");
+                if (warn.showAndWait().get() == ButtonType.OK){
+                    root.getChildren().clear();
+                    controls.getChildren().clear();
+                    root.getChildren().add(startScreen);
+                    PatchworkGame.p1=new State(1);
+                    PatchworkGame.p2=new State(2);
+                }
+        });
+        root.getChildren().addAll(sqiltBoard,tilesArea,turn,confirm,advance,btn1,btn2,menu);
     }
 
     //describe the window attributes
@@ -169,47 +266,49 @@ public class Viewer extends Application {
 
     // show the final window when the game ends.Including two players'
     // socres and who wins the game. Show a restart button as well.
-    public void finalWindow(){
+    public void finalWindow() {
 
     }
 
     //displays the squilt board for player 1.
-    public void squiltBoard1(){
+    private void squiltBoard1() {
         Rectangle[][] sq = new Rectangle[9][9];
         HBox sq1 = new HBox();
         Random gen = new Random();
-        sq1.setPrefSize(280,280);
-        for (int i=0;i<9;i++){
-            for (int j=0;j<9;j++){
-                sq[i][j] = new Rectangle(BOARD1X+i*30,BOARDY+j*30,30,30);
-                sq[i][j].setStroke(Color.color((double)i/9,(double) j/9,(double)(i+j)/18));
+        sq1.setPrefSize(280, 280);
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                sq[i][j] = new Rectangle(BOARD1X + i * 30, BOARDY + j * 30, 30, 30);
+                sq[i][j].setStroke(Color.color((double) i / 9, (double) j / 9, (double) (i + j) / 18));
                 sq[i][j].setFill(Color.WHEAT);
                 root.getChildren().add(sq[i][j]);
             }
         }
-        sq1.setLayoutX(BOARD1X);sq1.setLayoutY(BOARDY);
+        sq1.setLayoutX(BOARD1X);
+        sq1.setLayoutY(BOARDY);
 //        sqiltBoard.getChildren().add(sq1);
     }
 
     //displays the squilt board for player 2.
-    public void squiltBoard2(){
+    private void squiltBoard2() {
         Rectangle[][] sq2 = new Rectangle[9][9];
         HBox sq1 = new HBox();
-        sq1.setPrefSize(280,280);
-        for (int i=0;i<9;i++){
-            for (int j=0;j<9;j++){
-                sq2[i][j] = new Rectangle(BOARD2X+i*30,BOARDY+j*30,30,30);
-                sq2[i][j].setStroke(Color.color((double)i/9,(double) j/9,(double)(i+j)/18));
+        sq1.setPrefSize(280, 280);
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                sq2[i][j] = new Rectangle(BOARD2X + i * 30, BOARDY + j * 30, 30, 30);
+                sq2[i][j].setStroke(Color.color((double) i / 9, (double) j / 9, (double) (i + j) / 18));
                 root.getChildren().add(sq2[i][j]);
             }
         }
-        sq1.setLayoutX(BOARD1X);sq1.setLayoutY(BOARDY);
+        sq1.setLayoutX(BOARD1X);
+        sq1.setLayoutY(BOARDY);
     }
 
     //displays the time board for players.
-    public void timeBoard(){
+    private void timeBoard() {
         File imgTimeboard = new File("src/comp1140/ass2/gui/assets/timeBoard.png");
-        String tbPath = new String("file:"+imgTimeboard.getAbsolutePath());
+        String tbPath = "file:" + imgTimeboard.getAbsolutePath();
         Image tb = new Image(tbPath);
         ImageView tbView = new ImageView();
         tbView.setImage(tb);
@@ -219,31 +318,34 @@ public class Viewer extends Application {
         timeboard.getChildren().add(tbView);
         timeboard.setLayoutX(331.5);
         timeboard.setLayoutY(290);
+        timeboard.setOnMouseClicked(event -> {
+            System.out.println(event.getSceneX() + ", " + event.getSceneY());
+        });
         root.getChildren().add(timeboard);
 
     }
 
     //displays the time token of player1,
     // call the drag() when token is dragged.
-    public void timeToken1(double steps){
-        Circle tt1 = new Circle();
+    private void timeToken() {
+        tt1 = new Circle();
         tt1.setRadius(10);
-        tt1.setCenterX(321);
-        tt1.setCenterY(300);
+        tt1.setCenterX(360);
+        tt1.setCenterY(310);
         tt1.setFill(Color.YELLOW);
-        HBox tT1 = new HBox();
+        tt2 = new Circle();
+        tt2.setRadius(10);
+        tt2.setCenterX(390);
+        tt2.setCenterY(310);
+        tt2.setFill(Color.BLUE);
         root.getChildren().add(tt1);
-
+        root.getChildren().add(tt2);
     }
 
-    //displays the time token of player2,
-    // call the drag() when token is dragged.
-    public void timeToken2(double steps){}
-
-//    displays the candidates area which shows the three available tiles.
-    public void candidateArea(String init){
+    //    displays the candidates area which shows the three available tiles.
+    public void candidateArea(String init) {
         HBox[] hb = new HBox[init.length()];
-        for (int i =0; i<init.length();i++) {
+        for (int i = 0; i < init.length(); i++) {
             hb[i] = new HBox();
             String cc;
             if (init.charAt(i) <= 'Z') cc = "" + init.charAt(i);
@@ -259,7 +361,7 @@ public class Viewer extends Application {
 
             hb[i].getChildren().add(tbView);
             hb[i].setLayoutX(200 + 30 * (i % 17));
-            hb[i].setLayoutY(VIEWER_HEIGHT-(i < 17 ? 130 : 100));
+            hb[i].setLayoutY(VIEWER_HEIGHT - (i < 17 ? 130 : 100));
 
             root.getChildren().add(hb[i]);
         }
@@ -269,43 +371,51 @@ public class Viewer extends Application {
 //        root.getChildren().add(tilesArea);
     }
 
+
     // displays the two button, undo and confirm, call the relevant functions
     // about the interaction
-    public void clickArea(){
-        for(int i=0;i<3;i++){
-            root.getChildren().add(new DraggableTile(PatchworkGame.three[i],300+i*100,20,30));
+    private void clickArea() {
+        tilesArea.getChildren().clear();
+        if (p1.specialH || p2.specialH) {
+            tilesArea.getChildren().add(new DraggableTile('h', 400, 20, 30));
+        } else {
+            for (int i = 0; i < 3; i++) {
+                tilesArea.getChildren().add(new DraggableTile(PatchworkGame.three[i], 250 + i * 150, 20, 30));
+            }
         }
     }
 
-    class DraggableTile extends ImageView{
+    class DraggableTile extends ImageView {
         int tileCost;
         char tName;
-        int homeX,homeY;
-        double mouseX,mouseY;
+        int homeX, homeY;
+        double mouseX, mouseY;
         boolean draggable = true;
-        DraggableTile(char tName,int x,int y,int scale) {
+
+        DraggableTile(char tName, int x, int y, int scale) {
             homeX = x;
             homeY = y;
             this.tName = tName;
+            setUserData(tName);
             int index;
             String tS;
-            if (tName <= 'Z'){
+            if (tName <= 'Z') {
                 tS = tName + ".png";
                 index = tName - 'A';
-            }
-            else {
+            } else {
                 tS = tName + "_.png";
-                index = tName-'a'+26;
+                index = tName - 'a' + 26;
             }
             File tPath = new File("src/comp1140/ass2/gui/assets/" + tS);
             System.out.println(tPath);
             setImage(new Image("file:" + tPath.getAbsolutePath()));
-            setFitWidth((int)getImage().getWidth()/50 *scale);
-            setFitHeight((int)getImage().getHeight()/50 *scale);
+            setFitWidth((int) (getImage().getWidth() / 50 * scale));
+            setFitHeight((int) (getImage().getHeight() / 50 * scale));
 
             setLayoutX(x);
             setLayoutY(y);
             tileCost = PatchworkGame.tileCost[index];
+
 
             /* event handler*/
             setOnScroll(event -> {
@@ -314,12 +424,11 @@ public class Viewer extends Application {
             });
 
             setOnMousePressed(event -> {      // mouse press indicates begin of drag
-                if (State.check_turn(PatchworkGame.p1,PatchworkGame.p2)==1){
-                    if (!State.affordPartch(PatchworkGame.p1.buttonCount,tileCost))
+                if (State.check_turn(PatchworkGame.p1, PatchworkGame.p2) == 1) {
+                    if (!State.affordPartch(PatchworkGame.p1.buttonCount, tileCost))
                         draggable = false;
-                }
-                else {
-                    if (!State.affordPartch(PatchworkGame.p1.buttonCount,tileCost)){
+                } else {
+                    if (!State.affordPartch(PatchworkGame.p1.buttonCount, tileCost)) {
                         draggable = false;
                     }
                 }
@@ -342,17 +451,40 @@ public class Viewer extends Application {
             });
             setOnMouseReleased(event -> {     // drag is complete
                 snap();
-                if (getLayoutX() != homeX){
-                    String m=makeString();
-                    if (PatchworkGame.isPlacementValid(c,p+m)){
-                        p+=m;
+                confirm.setDisable(false);
+                confirm.setOnMouseClicked(event1 -> {
+                    if (getLayoutX() != homeX) {
+                        String m = makeString();
+                        System.out.println(new String(PatchworkGame.three));
+                        System.out.println(c);
+                        int t = State.check_turn(PatchworkGame.p1, PatchworkGame.p2);
+                        if (PatchworkGame.isPlacementValid(c, p + m)) {
+                            p += m;
+                            root.getChildren().add(this);
+                            tilesArea.getChildren().remove(this);
+                            setOnScroll(null);
+                            moveToken(t, (t == 1 ? p1 : p2).timecount);
+                            t = State.check_turn(PatchworkGame.p1, PatchworkGame.p2);
+                            turn.setText("Player " + t + "'s turn");
+                            btn1.setText(p1.buttonCount + " buttons");
+                            btn2.setText(p2.buttonCount + " buttons");
+                            clickArea();
+                            if (AI) {
+                                while (t == 2) {
+                                    aiTurn();
+                                    t = State.check_turn(PatchworkGame.p1, PatchworkGame.p2);
+                                }
+                            }
+                        } else {
+                            err.setContentText("Invalid Placement\nMake sure you have enough buttons");
+                            err.showAndWait();
+                            setLayoutX(homeX);
+                            setLayoutY(homeY);
+                        }
+                        event.consume();
                     }
-                    else{
-                        PatchworkGame.p1.printSquiltBoard();
-                        setLayoutX(homeX);
-                        setLayoutY(homeY);
-                    }
-                }
+                });
+
             });
         }
 
@@ -360,27 +492,62 @@ public class Viewer extends Application {
             int x = (int) getLayoutX();
             x -= x > 600 ? BOARD2X : BOARD1X;
             int y = (int) getLayoutY() - BOARDY;
-            String s = ""+tName;
+            String s = "" + tName;
             s += (char) ('A' + x / 30);
             s += (char) ('A' + y / 30);
             s += (char) ('A' + (int) getRotate() / 90);
             return s;
         }
 
+
         void snap() {
-            if (State.check_turn(PatchworkGame.p1, PatchworkGame.p2) == 1 && getLayoutX() > BOARD1X && (getLayoutX()+getFitWidth() < BOARD1X+BOARD_SIZE+30)
-                    && getLayoutY() > BOARDY && (getLayoutY()+getFitHeight() < BOARDY+BOARD_SIZE+30)) {
+            if (State.check_turn(PatchworkGame.p1, PatchworkGame.p2) == 1 && getLayoutX() > BOARD1X && (getLayoutX() + getFitWidth() < BOARD1X + BOARD_SIZE + 30)
+                    && getLayoutY() > BOARDY && (getLayoutY() + getFitHeight() < BOARDY + BOARD_SIZE + 30)) {
                 setLayoutX((((int) getLayoutX() - BOARD1X) / 30) * 30 + BOARD1X);
                 setLayoutY((((int) getLayoutY() - BOARDY) / 30) * 30 + BOARDY);
-            } else if (State.check_turn(PatchworkGame.p1, PatchworkGame.p2) == 2 && getLayoutX() > BOARD2X && (getLayoutX()+getFitWidth() < BOARD2X+BOARD_SIZE+30)
-                    && getLayoutY() > BOARDY && (getLayoutY()+getFitHeight() < BOARDY+BOARD_SIZE+30)) {
+            } else if (State.check_turn(PatchworkGame.p1, PatchworkGame.p2) == 2 && getLayoutX() > BOARD2X && (getLayoutX() + getFitWidth() < BOARD2X + BOARD_SIZE + 30)
+                    && getLayoutY() > BOARDY && (getLayoutY() + getFitHeight() < BOARDY + BOARD_SIZE + 30)) {
                 setLayoutX((((int) getLayoutX() - BOARD2X) / 30) * 30 + BOARD2X);
                 setLayoutY((((int) getLayoutY() - BOARDY) / 30) * 30 + BOARDY);
             } else {
+                if (getLayoutY() > BOARDY && getLayoutY() < BOARDY + BOARD_SIZE) {
+                    err.setContentText("It's Player " + State.check_turn(PatchworkGame.p1, PatchworkGame.p2) + "'s Turn");
+                    err.showAndWait();
+                }
                 setLayoutX(homeX);
                 setLayoutY(homeY);
             }
         }
+    }
+
+    private void aiTurn() {
+        String s = PatchworkAI.generatePatchPlacement(c, p);
+        System.out.println(s);
+        p += s;
+        makePlacement(s);
+        PatchworkGame.isPlacementValid(c, p);
+        moveToken(2, p2.timecount);
+        int t = State.check_turn(PatchworkGame.p1, PatchworkGame.p2);
+        turn.setText("Player " + t + "'s turn");
+        btn1.setText(p1.buttonCount + " buttons");
+        btn2.setText(p2.buttonCount + " buttons");
+        clickArea();
 
     }
+    private void moveToken(int player, int position) {
+        Circle tt = player == 1 ? tt1 : tt2;
+        System.out.println(position);
+        int[] p = new int[][]{{0, 1}, {0, 3}, {0, 4}, {0, 5}, {0, 6}, {0, 7},
+                {1, 7}, {2, 7}, {3, 7}, {4, 7}, {5, 7}, {6, 7}, {7, 7},
+                {7, 6}, {7, 5}, {7, 4}, {7, 3}, {7, 2}, {7, 1}, {7, 0},
+                {5, 0}, {4, 0}, {3, 0}, {2, 0}, {1, 0},
+                {1, 1}, {1, 3}, {1, 4}, {1, 5}, {1, 6},
+                {2, 6}, {3, 6}, {5, 6}, {6, 6}, {6, 5}, {6, 4}, {6, 3}, {6, 2}, {6, 1},
+                {5, 1}, {4, 1}, {3, 1}, {2, 1}, {2, 2}, {2, 4}, {2, 5},
+                {3, 5}, {4, 5}, {5, 5}, {5, 4}, {5, 2}, {4, 2}, {3, 2}, {3, 3}}[position];
+        tt.setCenterY(p[0] * 33 + 310);
+        tt.setCenterX(p[1] * 33 + 350);
+    }
+
+
 }
