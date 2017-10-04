@@ -174,11 +174,11 @@ public class Viewer extends Application {
         title.setScaleX(5);
         title.setScaleY(5);
         ToggleGroup option = new ToggleGroup();
-        RadioButton option1 = new RadioButton("1 player");
+        RadioButton option1 = new RadioButton("Play with AI (1P)");
         option1.setLayoutX(400);
         option1.setLayoutY(250);
         option1.setToggleGroup(option);
-        RadioButton option2 = new RadioButton("2 player");
+        RadioButton option2 = new RadioButton("Human to human (2P)");
         option2.setLayoutX(400);
         option2.setLayoutY(280);
         option2.setToggleGroup(option);
@@ -259,10 +259,6 @@ public class Viewer extends Application {
         root.getChildren().addAll(sqiltBoard,tilesArea,turn,confirm,advance,btn1,btn2,menu);
     }
 
-    //describe the window attributes
-//    public void canvas(){
-//
-//    }
 
     // show the final window when the game ends.Including two players'
     // socres and who wins the game. Show a restart button as well.

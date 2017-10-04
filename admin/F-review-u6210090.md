@@ -1,5 +1,8 @@
 # Code Review for Ziyang Liu (u6210090)
-### By Audonis Mouti
+### By Weitao Chen
+
+#### Coding part
+`PatchworkGame.java`, `PatchworkAI.java`,`State.java`, `Matrix.java`
 
 #### Best Features
 1. Good exception and error handling
