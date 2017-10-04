@@ -59,7 +59,7 @@ public class Viewer extends Application {
     private final Group sqiltBoard = new Group();
     private final Group tilesArea = new Group();
     private final Group startScreen = new Group();
-//    private final Group playScreen = new Group();
+    //    private final Group playScreen = new Group();
 //    ArrayList<Character> candi;
     private TextField textField;
 
@@ -75,6 +75,7 @@ public class Viewer extends Application {
     private static Text btn2;
     private static Alert err;
     private static Alert warn;
+    private static Alert win;
     private static String p;
 
 
@@ -126,7 +127,7 @@ public class Viewer extends Application {
             }
             //indicates which board is going to be placed on the tile
             //int player = State.check_turn()==1?0:601;
-            mPlacement.setLayoutX((AI?BOARD2X:BOARD1X) + x);
+            mPlacement.setLayoutX((AI ? BOARD2X : BOARD1X) + x);
             mPlacement.setLayoutY(BOARDY + y);
             mPlacement.getChildren().add(tileView);
 
@@ -165,6 +166,7 @@ public class Viewer extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
         primaryStage.setTitle("Patchwork Viewer");
         Scene scene = new Scene(root, VIEWER_WIDTH, VIEWER_HEIGHT);
         scene.setFill(Color.ANTIQUEWHITE);
@@ -199,7 +201,7 @@ public class Viewer extends Application {
     public void game() {
         root.getChildren().remove(startScreen);
         timeBoard();
-        p="";
+        p = "";
         c = PatchworkGame.initPathCircle();
         if (c.indexOf('A') != 0) c = c.substring(c.indexOf('A') + 1) + c.substring(0, c.indexOf('A') + 1);
         candidateArea(c);
@@ -224,13 +226,21 @@ public class Viewer extends Application {
             p += ".";
             int t = State.check_turn(PatchworkGame.p1, PatchworkGame.p2);
             PatchworkGame.isPlacementValid(c, p);
+            if (p1.timecount >= 53 && p2.timecount >= 53) {
+                win = new Alert(Alert.AlertType.INFORMATION);
+                boolean w = PatchworkGame.getScoreForPlacement(p, c, true) > PatchworkGame.getScoreForPlacement(p, c, false);
+                win.setContentText("Player " + (w ? 1 : 2) + " wins");
+                win.showAndWait();
+                reset();
+            }
             moveToken(t, (t == 1 ? p1 : p2).timecount);
+            t = State.check_turn(PatchworkGame.p1, PatchworkGame.p2);
             turn.setText("Player " + t + "'s turn");
             btn1.setText(p1.buttonCount + " buttons");
             btn2.setText(p2.buttonCount + " buttons");
             clickArea();
             if (AI) {
-                while (t == 2) {
+                while (t == 2 && p2.timecount < 53) {
                     aiTurn();
                     t = State.check_turn(PatchworkGame.p1, PatchworkGame.p2);
                 }
@@ -248,17 +258,20 @@ public class Viewer extends Application {
         menu.setLayoutY(10);
         menu.setOnMouseClicked(event -> {
             warn.setContentText("This will end the current game.\nAre you sure?");
-                if (warn.showAndWait().get() == ButtonType.OK){
-                    root.getChildren().clear();
-                    controls.getChildren().clear();
-                    root.getChildren().add(startScreen);
-                    PatchworkGame.p1=new State(1);
-                    PatchworkGame.p2=new State(2);
-                }
+            if (warn.showAndWait().get() == ButtonType.OK) {
+                reset();
+            }
         });
-        root.getChildren().addAll(sqiltBoard,tilesArea,turn,confirm,advance,btn1,btn2,menu);
+        root.getChildren().addAll(sqiltBoard, tilesArea, turn, confirm, advance, btn1, btn2, menu);
     }
 
+    public void reset() {
+        root.getChildren().clear();
+        controls.getChildren().clear();
+        root.getChildren().add(startScreen);
+        PatchworkGame.p1 = new State(1);
+        PatchworkGame.p2 = new State(2);
+    }
 
     // show the final window when the game ends.Including two players'
     // socres and who wins the game. Show a restart button as well.
@@ -455,6 +468,13 @@ public class Viewer extends Application {
                         System.out.println(c);
                         int t = State.check_turn(PatchworkGame.p1, PatchworkGame.p2);
                         if (PatchworkGame.isPlacementValid(c, p + m)) {
+                            if (p1.timecount >= 53 && p2.timecount >= 53) {
+                                win = new Alert(Alert.AlertType.INFORMATION);
+                                boolean w = PatchworkGame.getScoreForPlacement(p, c, true) > PatchworkGame.getScoreForPlacement(p, c, false);
+                                win.setContentText("Player " + (w ? 1 : 2) + " wins");
+                                win.showAndWait();
+                                reset();
+                            }
                             p += m;
                             root.getChildren().add(this);
                             tilesArea.getChildren().remove(this);
@@ -466,7 +486,7 @@ public class Viewer extends Application {
                             btn2.setText(p2.buttonCount + " buttons");
                             clickArea();
                             if (AI) {
-                                while (t == 2) {
+                                while (t == 2 && p2.timecount < 53) {
                                     aiTurn();
                                     t = State.check_turn(PatchworkGame.p1, PatchworkGame.p2);
                                 }
@@ -530,6 +550,7 @@ public class Viewer extends Application {
         clickArea();
 
     }
+
     private void moveToken(int player, int position) {
         Circle tt = player == 1 ? tt1 : tt2;
         System.out.println(position);
