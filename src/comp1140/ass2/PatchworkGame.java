@@ -268,8 +268,6 @@ public class PatchworkGame {
                     }
                     //if token goes to the end, make it back to the beginning
                     aPlc = aPlc > partches.size() ? aPlc % (partches.size() + 1) : aPlc % partches.size();//aPlc >= partches.size()? (aPlc % partches.size())-1:aPlc;
-//                    System.out.println(aPlc);
-                    //                    System.out.println("aPlc" + aPlc+" "+partches.size());
                     three = new char[]{partches.get(aPlc % partches.size()), partches.get((aPlc + 1) % partches.size()), partches.get((aPlc + 2) % partches.size())};
                 }
                 i = i + 3;
@@ -312,9 +310,7 @@ public class PatchworkGame {
                 if (xs[1] == 1) xs[1] = 3;
                 else if (xs[1] == 3) xs[1] = 1;
             }
-
         }
-//        System.out.println("flip:"+index+" "+Arrays.deepToString(copy));
         return copy;
     }
 
@@ -364,7 +360,6 @@ public class PatchworkGame {
             xs[0] += topleft[0];
             xs[1] += topleft[1];
         }
-//        System.out.println("rotate:"+Arrays.deepToString(expose));
         return expose;
     }
 
@@ -392,39 +387,26 @@ public class PatchworkGame {
 
         if (rotate >= 'A' && rotate <= 'D') {
             result = rotateHandle(rotate, expo);
-        } else {
+        }
+        else {
             rotate = (char) ('A' + rotate - 'E');
             result = rotateHandle(rotate, flipHandle(tile, expo));
-//            System.out.println("rotate result: "+ Arrays.deepToString(result));
         }
         for (int[] xs : result) {
-//            System.out.println("result before: "+rotate+" "+Arrays.deepToString(result));
             xs[0] += rowN;
             xs[1] += colN;
-//            System.out.println("result after: "+Arrays.deepToString(result));
+
         }
-//                    System.out.println("result after: "+Arrays.deepToString(result));
         for (int[] xs : result) {
             if (!(xs[0] >= 1 && xs[0] <= 9 && xs[1] >= 1 && xs[1] <= 9)) {
-//                for (int[] sxs:result){
-//                    System.out.println(sxs[0]+" "+sxs[1]);
-//                }
                 if (DEBUG) System.out.println("out of board" + placement + " " + xs[0] + " " + xs[1] + "//");
                 return false;
             }
-//            System.out.println("id:"+player.id);
-//            System.out.println();
             if (!player.squiltBoard[xs[0] - 1][xs[1] - 1])
                 player.squiltBoard[xs[0] - 1][xs[1] - 1] = true;
-            else {
-//                player.printSquiltBoard();
-//                  a = player.printPlayerBoard();
-                return false;
-            }
-
+            else
+                   return false;
         }
-//        player.printSquiltBoard();
-//        b = player.printPlayerBoard();
         return true;
     }
 
@@ -439,7 +421,6 @@ public class PatchworkGame {
      */
     static int getScoreForPlacement(String patchCircle, String placement, boolean firstPlayer) {
         // FIXME Task 7: determine the score for a player given a placement
-//        System.out.println("*******************************************");
         boolean ss = isPlacementValid(patchCircle, placement);
         if (ss)
             if (firstPlayer) return p1.getScore();
