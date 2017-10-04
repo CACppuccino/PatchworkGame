@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="comp1140-ass2:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="1a8125e6-7baa-46ea-8267-6acde0fe87eb" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/META-INF/MANIFEST.MF" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/game.jar" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/comp1140/ass2/Viewer.java" afterPath="$PROJECT_DIR$/src/comp1140/ass2/Viewer.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -48,11 +54,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Viewer.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Viewer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/Viewer.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="218">
               <caret line="234" column="13" lean-forward="false" selection-start-line="234" selection-start-column="13" selection-end-line="234" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="E-originality-u6210090.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin/E-originality-u6210090.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -83,6 +99,26 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="F-review-u6309924.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin/F-review-u6309924.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="F-review-u6385898.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/admin/F-review-u6385898.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="20" column="33" lean-forward="true" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -177,8 +213,8 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Artifacts" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -198,7 +234,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Viewer">
+  <component name="RunManager" selected="JAR Application.game.jar">
     <configuration name="AITraining" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -387,8 +423,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Application.Viewer" />
-        <item index="1" class="java.lang.String" itemvalue="JAR Application.game.jar" />
+        <item index="0" class="java.lang.String" itemvalue="JAR Application.game.jar" />
+        <item index="1" class="java.lang.String" itemvalue="Application.Viewer" />
         <item index="2" class="java.lang.String" itemvalue="JUnit.MatrixTest" />
         <item index="3" class="java.lang.String" itemvalue="Application.AITraining" />
         <item index="4" class="java.lang.String" itemvalue="JUnit.GeneratePatchPlacementTest.testTestMove" />
@@ -443,7 +479,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="30" width="1922" height="1027" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -712,7 +747,6 @@
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_141/src.zip!/java/util/ArrayList.java" />
     <entry file="file://$PROJECT_DIR$/admin/C-originality.md" />
     <entry file="file://$PROJECT_DIR$/admin/E-originality-u6309924.md" />
-    <entry file="file://$PROJECT_DIR$/admin/E-originality-u6210090.md" />
     <entry file="file://$PROJECT_DIR$/admin/D-originality-u6385898.md" />
     <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/test.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -732,6 +766,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1206">
           <caret line="81" column="7" lean-forward="false" selection-start-line="81" selection-start-column="7" selection-end-line="81" selection-end-column="7" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -752,7 +787,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/C-contribution.md" />
-    <entry file="file://$PROJECT_DIR$/admin/F-review-u6309924.md" />
     <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/State.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1440">
@@ -777,7 +811,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/F-review-u6385898.md" />
     <entry file="file://$PROJECT_DIR$/admin/F-originality.md">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -787,14 +820,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/F-contribution.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/F-review-u6210090.md">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -824,6 +849,38 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="218">
           <caret line="234" column="13" lean-forward="false" selection-start-line="234" selection-start-column="13" selection-end-line="234" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/E-originality-u6210090.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/F-review-u6210090.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/F-review-u6309924.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/F-review-u6385898.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="20" column="33" lean-forward="true" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
           <folding />
         </state>
       </provider>
