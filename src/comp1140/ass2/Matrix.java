@@ -1,6 +1,6 @@
 package comp1140.ass2;
 
-import gittest.A;
+//import gittest.A;
 
 import javax.jws.soap.SOAPBinding;
 import java.awt.*;
@@ -84,12 +84,6 @@ public class Matrix{
         return this;
     }
 
-    public static void main(String[] args) {
-        Matrix a = new Matrix(9,3);
-        a.setZero();
-        a.printMatrix();
-
-    }
 
     public void scalar (double s){
 
@@ -123,7 +117,7 @@ public class Matrix{
         }
         double sum = 0.0;
         for (int i=0; i<matrix.col; i++) {
-            sum += (-i) * matrix.getElement(0, i) * determinant(createSubMatrix(matrix, 0, i));
+            sum += Math.pow(-1,i) * matrix.getElement(0, i) * determinant(createSubMatrix(matrix, 0, i));
         }
         return sum;
     }
@@ -144,6 +138,21 @@ public class Matrix{
         }
         return mat;
     }
+
+
+    public static void main(String[] args) throws Exception{
+//        Matrix a = new Matrix(9,3);
+//        a.setZero();
+//        a.printMatrix();
+        Matrix a = new Matrix(5, 5);
+        for(int i=0;i<5;i++) {
+            for (int j = 0; j < 5; j++) a.setMatrix(i, j, i + j);
+        }
+        a.printMatrix();
+        Matrix.createSubMatrix(a, 1, 0).printMatrix();
+
+    }
+
 }
 //public class Matrix {
 //    int dimension;
