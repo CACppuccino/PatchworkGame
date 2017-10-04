@@ -59,23 +59,23 @@ public class Viewer extends Application {
     private final Group sqiltBoard = new Group();
     private final Group tilesArea = new Group();
     private final Group startScreen = new Group();
-    private final Group playScreen = new Group();
-    ArrayList<Character> candi;
-    TextField textField;
+//    private final Group playScreen = new Group();
+//    ArrayList<Character> candi;
+    private TextField textField;
 
-    boolean AI = false;
+    private boolean AI = false;
 
-    static Text turn;
-    static Button confirm;
-    static Button advance;
-    static Button menu;
-    static Circle tt1;
-    static Circle tt2;
-    static Text btn1;
-    static Text btn2;
-    static Alert err;
-    static Alert warn;
-    static String p;
+    private static Text turn;
+    private static Button confirm;
+    private static Button advance;
+    private static Button menu;
+    private static Circle tt1;
+    private static Circle tt2;
+    private static Text btn1;
+    private static Text btn2;
+    private static Alert err;
+    private static Alert warn;
+    private static String p;
 
 
     /**
@@ -83,7 +83,7 @@ public class Viewer extends Application {
      *
      * @param placement A valid placement string
      */
-    void makePlacement(String placement) {
+    private void makePlacement(String placement) {
         if (!AI) controls.getChildren().clear();
         for (int i = 0; i < placement.length(); ) {
             if (placement.charAt(i) == '.') {
@@ -271,7 +271,7 @@ public class Viewer extends Application {
     }
 
     //displays the squilt board for player 1.
-    public void squiltBoard1() {
+    private void squiltBoard1() {
         Rectangle[][] sq = new Rectangle[9][9];
         HBox sq1 = new HBox();
         Random gen = new Random();
@@ -290,7 +290,7 @@ public class Viewer extends Application {
     }
 
     //displays the squilt board for player 2.
-    public void squiltBoard2() {
+    private void squiltBoard2() {
         Rectangle[][] sq2 = new Rectangle[9][9];
         HBox sq1 = new HBox();
         sq1.setPrefSize(280, 280);
@@ -306,9 +306,9 @@ public class Viewer extends Application {
     }
 
     //displays the time board for players.
-    public void timeBoard() {
+    private void timeBoard() {
         File imgTimeboard = new File("src/comp1140/ass2/gui/assets/timeBoard.png");
-        String tbPath = new String("file:" + imgTimeboard.getAbsolutePath());
+        String tbPath = "file:" + imgTimeboard.getAbsolutePath();
         Image tb = new Image(tbPath);
         ImageView tbView = new ImageView();
         tbView.setImage(tb);
@@ -327,7 +327,7 @@ public class Viewer extends Application {
 
     //displays the time token of player1,
     // call the drag() when token is dragged.
-    public void timeToken() {
+    private void timeToken() {
         tt1 = new Circle();
         tt1.setRadius(10);
         tt1.setCenterX(360);
@@ -374,7 +374,7 @@ public class Viewer extends Application {
 
     // displays the two button, undo and confirm, call the relevant functions
     // about the interaction
-    public void clickArea() {
+    private void clickArea() {
         tilesArea.getChildren().clear();
         if (p1.specialH || p2.specialH) {
             tilesArea.getChildren().add(new DraggableTile('h', 400, 20, 30));
@@ -520,7 +520,7 @@ public class Viewer extends Application {
         }
     }
 
-    void aiTurn() {
+    private void aiTurn() {
         String s = PatchworkAI.generatePatchPlacement(c, p);
         System.out.println(s);
         p += s;
@@ -534,7 +534,7 @@ public class Viewer extends Application {
         clickArea();
 
     }
-    void moveToken(int player, int position) {
+    private void moveToken(int player, int position) {
         Circle tt = player == 1 ? tt1 : tt2;
         System.out.println(position);
         int[] p = new int[][]{{0, 1}, {0, 3}, {0, 4}, {0, 5}, {0, 6}, {0, 7},
