@@ -1,5 +1,5 @@
-# Code Review for Ziyang Liu (u6210090)
-### By Weitao Chen
+# Code Review for Weitao Chen (u6309924)
+### By Ziyang Liu
 
 #### Coding part
 `PatchworkGame.java`, `PatchworkAI.java`,`State.java`, `Matrix.java`
