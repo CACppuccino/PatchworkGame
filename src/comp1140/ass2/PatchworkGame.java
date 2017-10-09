@@ -314,7 +314,7 @@ public class PatchworkGame {
         return copy;
     }
 
-    private static int getIndex(char tile) {
+    static int getIndex(char tile) {
         int index;
         if (tile >= 'A' && tile <= 'Z')
             index = tile - 'A';
