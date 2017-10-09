@@ -29,18 +29,20 @@ public class PatchworkAI {
         PatchworkGame.p2 = new State(2);
         PatchworkGame.three = new char[3];
         Boolean dot = allDot(placement);
-
+//patchCircle adjustment
         if (patchCircle.indexOf('A') == 0)
             pC = patchCircle.substring(1) + 'A';
         else if (patchCircle.indexOf('A') != patchCircle.length() - 1)
             pC = patchCircle.substring(patchCircle.indexOf('A') + 1) + patchCircle.substring(0, patchCircle.indexOf('A') + 1);
         else pC = patchCircle;
+
+            //record the current state according to placement
+        PatchworkGame.isPlacementValid(patchCircle, placement);
+
         if (placement.equals("") || dot)
             //nothing to record since its the start of the game
+            //or current placement only has dots, need to generate the `three` manually or will have an exception/error
             for (int i = 0; i < 3; i++) PatchworkGame.three[i] = pC.charAt(i);
-        else
-            //record the current state according to placement
-            PatchworkGame.isPlacementValid(patchCircle, placement);
 
 
         int turn = State.check_turn(PatchworkGame.p1, PatchworkGame.p2) == 1 ? 1 : 2;
