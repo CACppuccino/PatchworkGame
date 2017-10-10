@@ -1,10 +1,13 @@
 package comp1140.ass2;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class AITraining {
-    static final int ROUNDS = 10;
+    static final int ROUNDS = 20000;
     public double loss(){
         return 0;
     }
@@ -18,16 +21,22 @@ public class AITraining {
     public static void main(String[] args) {
         int winer;
         int[] stat = {0,0,0};
+        File data = new File("./dataset1.csv");
+        try {
+            data.createNewFile();
+            BufferedWriter writer = new BufferedWriter( new FileWriter(data));
+
         for (int i=1;i<=ROUNDS;i++) {
-            String patchCircle = "fOVECdZAYIPgTabHJUFDcBGKXQeNWSLRM";//PatchworkGame.initPathCircle();
+            String patchCircle = PatchworkGame.initPathCircle();
             String placement = new String("");
             System.out.println(patchCircle);
+            writer.write(patchCircle+",");
             while (PatchworkGame.p1.timecount != 53 && PatchworkGame.p2.timecount != 53) {
 //                System.out.print("sol");
 //                for (String sol: PatchworkAI.generateAllPatchPlacement(patchCircle,placement)){
 //                    System.out.print(sol+" ");
 //                }
-//                placement = placement + PatchworkAI.smarterGenerator(patchCircle,placement);
+                placement = placement + PatchworkAI.smarterGenerator(patchCircle,placement);
 //
 //                if (!PatchworkGame.isPlacementValid(patchCircle, placement)) throw new Error("wrong plc");
                 placement = placement + PatchworkAI.generatePatchPlacement(patchCircle, placement);
@@ -36,6 +45,7 @@ public class AITraining {
             winer = PatchworkGame.getScoreForPlacement(patchCircle,placement,true)>
                     PatchworkGame.getScoreForPlacement(patchCircle,placement,false)?1:2;
             stat[winer]++;
+            writer.write(placement+","+winer+"\n");
             System.out.println(placement);
             System.out.println(winer);
 //            if (PatchworkGame.isPlacementValid(patchCircle,placement)) System.out.println("OK");
@@ -44,5 +54,10 @@ public class AITraining {
 
         }
         System.out.println(stat[1]+" "+stat[2]);
+        writer.flush();
+        writer.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
