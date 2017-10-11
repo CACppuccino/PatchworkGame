@@ -80,7 +80,8 @@ public class Viewer extends Application {
     private static Alert warn;
     private static Alert win;
     private static String p;
-    private static File bgFile;
+    private static final File BG1 = new File("src/comp1140/ass2/gui/assets/bg.jpg");
+    private static final File BG2 = new File("src/comp1140/ass2/gui/assets/bg2.jpg"); //https://i.ytimg.com/vi/bOlIncfaVOU/maxresdefault.jpg
     private static ImageView bg;
 
 
@@ -174,9 +175,8 @@ public class Viewer extends Application {
 
         primaryStage.setTitle("Patchwork Viewer");
         Scene scene = new Scene(root, VIEWER_WIDTH, VIEWER_HEIGHT);
-        bgFile = new File("src/comp1140/ass2/gui/assets/bg.jpg");
         //http://www.planwallpaper.com/static/images/cool-background.jpg
-        bg = new ImageView(new Image("file:"+bgFile.getAbsolutePath()));
+        bg = new ImageView(new Image("file:" + BG1.getAbsolutePath()));
         bg.toBack();
         root.getChildren().add(bg);
         Text title = new Text("PATCHWORK");
@@ -211,9 +211,7 @@ public class Viewer extends Application {
     }
 
     public void game() {
-        bgFile = new File("src/comp1140/ass2/gui/assets/bg2.jpg");
-        //https://i.ytimg.com/vi/bOlIncfaVOU/maxresdefault.jpg
-        bg.setImage(new Image("file:"+bgFile.getAbsolutePath()));
+        bg.setImage(new Image("file:" + BG2.getAbsolutePath()));
         root.getChildren().remove(startScreen);
         timeBoard();
         p = "";
@@ -254,6 +252,7 @@ public class Viewer extends Application {
             btn1.setText(p1.buttonCount + " buttons");
             btn2.setText(p2.buttonCount + " buttons");
             clickArea();
+            confirm.setDisable(true);
             if (AI) {
                 while (t == 2 && p2.timecount < 53) {
                     aiTurn();
@@ -281,17 +280,19 @@ public class Viewer extends Application {
         player1.setLayoutX(30);
         player1.setLayoutY(280);
         player1.setFill(Color.YELLOW);
-        player2 = new Text("Player 2"+(AI?" (AI)":"")+": Blue");
+        player2 = new Text("Player 2" + (AI ? " (AI)" : "") + ": Blue");
         player2.setLayoutX(800);
         player2.setLayoutY(280);
         player2.setFill(Color.BLUE);
-        root.getChildren().addAll(sqiltBoard, tilesArea, turn, confirm, advance, btn1, btn2, menu,player1,player2);
+        root.getChildren().addAll(sqiltBoard, tilesArea, turn, confirm, advance, btn1, btn2, menu, player1, player2);
     }
 
     public void reset() {
         root.getChildren().clear();
         controls.getChildren().clear();
-        root.getChildren().add(startScreen);
+        bg.setImage(new Image("file:" + BG1.getAbsolutePath()));
+        bg.toBack();
+        root.getChildren().addAll(bg, startScreen);
         PatchworkGame.p1 = new State(1);
         PatchworkGame.p2 = new State(2);
     }
@@ -308,7 +309,7 @@ public class Viewer extends Application {
         HBox sq1 = new HBox();
         Random gen = new Random();
         sq1.setPrefSize(280, 280);
-        
+
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 sq[i][j] = new Rectangle(BOARD1X + i * 30, BOARDY + j * 30, 30, 30);
@@ -377,7 +378,7 @@ public class Viewer extends Application {
 
     //    displays the candidates area which shows the three available tiles.
     public void candidateArea(String init) {
-        Rectangle box = new Rectangle(180,560,540,70);
+        Rectangle box = new Rectangle(180, 560, 540, 70);
 
         box.setFill(Color.WHITE);
         box.setOpacity(0.5);
@@ -420,6 +421,7 @@ public class Viewer extends Application {
             for (int i = 0; i < 3; i++) {
                 tilesArea.getChildren().add(new DraggableTile(PatchworkGame.three[i], 250 + i * 150, 20, 30));
             }
+
         }
     }
 
@@ -489,7 +491,7 @@ public class Viewer extends Application {
             });
             setOnMouseReleased(event -> {     // drag is complete
                 snap();
-                confirm.setDisable(false);
+                confirm.setDisable(getLayoutX() == homeX);
                 confirm.setOnMouseClicked(event1 -> {
                     if (getLayoutX() != homeX) {
                         String m = makeString();
@@ -514,6 +516,7 @@ public class Viewer extends Application {
                             btn1.setText(p1.buttonCount + " buttons");
                             btn2.setText(p2.buttonCount + " buttons");
                             clickArea();
+                            confirm.setDisable(true);
                             if (AI) {
                                 while (t == 2 && p2.timecount < 53) {
                                     aiTurn();
@@ -523,6 +526,7 @@ public class Viewer extends Application {
                         } else {
                             err.setContentText("Invalid Placement\nMake sure you have enough buttons");
                             err.showAndWait();
+                            confirm.setDisable(true);
                             setLayoutX(homeX);
                             setLayoutY(homeY);
                         }
@@ -594,6 +598,4 @@ public class Viewer extends Application {
         tt.setCenterY(p[0] * 33 + 310);
         tt.setCenterX(p[1] * 33 + 350);
     }
-
-
 }
