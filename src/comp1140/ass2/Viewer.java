@@ -107,7 +107,7 @@ public class Viewer extends Application {
                     rotate = p.charAt(3);
 //
             /*get the image path*/
-            String tileN = tileName + (tileName > 'a' && tileName < 'h' ? "_.png" : ".png");
+            String tileN = tileName + (tileName > 'a' && tileName < 'i' ? "_.png" : ".png");
             String tilePath = "file:" + (new File("src/comp1140/ass2/gui/assets/" + tileN)).getAbsolutePath();
             Image tile = new Image(tilePath);
             ImageView tileView = new ImageView(tile);
@@ -216,7 +216,7 @@ public class Viewer extends Application {
         timeBoard();
         p = "";
         c = PatchworkGame.initPathCircle();
-        if (c.indexOf('A') != 0) c = c.substring(c.indexOf('A') + 1) + c.substring(0, c.indexOf('A') + 1);
+        if (c.indexOf('A') != c.length()-1) c = c.substring(c.indexOf('A') + 1) + c.substring(0, c.indexOf('A') + 1);
         candidateArea(c);
         timeToken();
         squiltBoard1();
@@ -235,24 +235,27 @@ public class Viewer extends Application {
         advance = new Button("Advance");
         advance.setLayoutX(460);
         advance.setLayoutY(250);
+        advance.setDisable(false);
         advance.setOnMouseClicked(event -> {
             p += ".";
             int t = State.check_turn(PatchworkGame.p1, PatchworkGame.p2);
             PatchworkGame.isPlacementValid(c, p);
+            System.out.println("P1:"+p);
+            moveToken(t, (t == 1 ? p1 : p2).timecount);
             if (p1.timecount >= 53 && p2.timecount >= 53) {
                 win = new Alert(Alert.AlertType.INFORMATION);
-                boolean w = PatchworkGame.getScoreForPlacement(p, c, true) > PatchworkGame.getScoreForPlacement(p, c, false);
-                win.setContentText("Player " + (w ? 1 : 2) + " wins");
+                int s1= PatchworkGame.getScoreForPlacement(c,p, true);
+                int s2=PatchworkGame.getScoreForPlacement(c,p, false);
+                System.out.println(p);
+                win.setContentText("Player " + (s1>s2 ? 1 : 2) + " wins\n"+s1+" "+s2);
                 win.showAndWait();
                 reset();
             }
-            moveToken(t, (t == 1 ? p1 : p2).timecount);
             t = State.check_turn(PatchworkGame.p1, PatchworkGame.p2);
             turn.setText("Player " + t + "'s turn");
             btn1.setText(p1.buttonCount + " buttons");
             btn2.setText(p2.buttonCount + " buttons");
             clickArea();
-            confirm.setDisable(true);
             if (AI) {
                 while (t == 2 && p2.timecount < 53) {
                     aiTurn();
@@ -492,6 +495,7 @@ public class Viewer extends Application {
             setOnMouseReleased(event -> {     // drag is complete
                 snap();
                 confirm.setDisable(getLayoutX() == homeX);
+                advance.setDisable(!confirm.isDisabled());
                 confirm.setOnMouseClicked(event1 -> {
                     if (getLayoutX() != homeX) {
                         String m = makeString();
@@ -499,14 +503,17 @@ public class Viewer extends Application {
                         System.out.println(c);
                         int t = State.check_turn(PatchworkGame.p1, PatchworkGame.p2);
                         if (PatchworkGame.isPlacementValid(c, p + m)) {
+                            p += m;
+                            System.out.println("P1:" + p);
                             if (p1.timecount >= 53 && p2.timecount >= 53) {
                                 win = new Alert(Alert.AlertType.INFORMATION);
-                                boolean w = PatchworkGame.getScoreForPlacement(p, c, true) > PatchworkGame.getScoreForPlacement(p, c, false);
-                                win.setContentText("Player " + (w ? 1 : 2) + " wins");
+                                int s1 = PatchworkGame.getScoreForPlacement(c, p, true);
+                                int s2 = PatchworkGame.getScoreForPlacement(c, p, false);
+                                System.out.println(s1 + s2);
+                                win.setContentText("Player " + (s1 > s2 ? 1 : 2) + " wins\n" + s1 + " " + s2);
                                 win.showAndWait();
                                 reset();
                             }
-                            p += m;
                             root.getChildren().add(this);
                             tilesArea.getChildren().remove(this);
                             setOnScroll(null);
@@ -517,6 +524,7 @@ public class Viewer extends Application {
                             btn2.setText(p2.buttonCount + " buttons");
                             clickArea();
                             confirm.setDisable(true);
+                            advance.setDisable(false);
                             if (AI) {
                                 while (t == 2 && p2.timecount < 53) {
                                     aiTurn();
@@ -524,9 +532,12 @@ public class Viewer extends Application {
                                 }
                             }
                         } else {
-                            err.setContentText("Invalid Placement\nMake sure you have enough buttons");
+                            if ((t == 1 ? p1 : p2).buttonCount < tileCost)
+                                err.setContentText("You can't afford this patch");
+                            else err.setContentText("Invalid placement");
                             err.showAndWait();
                             confirm.setDisable(true);
+                            advance.setDisable(false);
                             setLayoutX(homeX);
                             setLayoutY(homeY);
                         }
@@ -550,19 +561,31 @@ public class Viewer extends Application {
 
 
         void snap() {
-            if (State.check_turn(PatchworkGame.p1, PatchworkGame.p2) == 1 && getLayoutX() > BOARD1X && (getLayoutX() + getFitWidth() < BOARD1X + BOARD_SIZE + 30)
-                    && getLayoutY() > BOARDY && (getLayoutY() + getFitHeight() < BOARDY + BOARD_SIZE + 30)) {
-                setLayoutX((((int) getLayoutX() - BOARD1X) / 30) * 30 + BOARD1X);
-                setLayoutY((((int) getLayoutY() - BOARDY) / 30) * 30 + BOARDY);
-            } else if (State.check_turn(PatchworkGame.p1, PatchworkGame.p2) == 2 && getLayoutX() > BOARD2X && (getLayoutX() + getFitWidth() < BOARD2X + BOARD_SIZE + 30)
-                    && getLayoutY() > BOARDY && (getLayoutY() + getFitHeight() < BOARDY + BOARD_SIZE + 30)) {
-                setLayoutX((((int) getLayoutX() - BOARD2X) / 30) * 30 + BOARD2X);
-                setLayoutY((((int) getLayoutY() - BOARDY) / 30) * 30 + BOARDY);
-            } else {
-                if (getLayoutY() > BOARDY && getLayoutY() < BOARDY + BOARD_SIZE) {
-                    err.setContentText("It's Player " + State.check_turn(PatchworkGame.p1, PatchworkGame.p2) + "'s Turn");
-                    err.showAndWait();
+            if (State.check_turn(PatchworkGame.p1, PatchworkGame.p2) == 1 && getLayoutY() > BOARDY && getLayoutY() + getFitHeight() < BOARDY + BOARD_SIZE + 30) {
+                if (getLayoutX() > BOARD1X && getLayoutX() + getFitWidth() < BOARD1X + BOARD_SIZE + 30) {
+                    setLayoutX((((int) getLayoutX() - BOARD1X) / 30) * 30 + BOARD1X);
+                    setLayoutY((((int) getLayoutY() - BOARDY) / 30) * 30 + BOARDY);
+                } else {
+                    if (getLayoutX() > BOARD2X && getLayoutX() + getFitWidth() < BOARD2X + BOARD_SIZE + 30) {
+                        err.setContentText("It's Player 1's Turn");
+                        err.showAndWait();
+                    }
+                    setLayoutX(homeX);
+                    setLayoutY(homeY);
                 }
+            } else if (State.check_turn(PatchworkGame.p1, PatchworkGame.p2) == 2 && getLayoutY() > BOARDY && getLayoutY() + getFitHeight() < BOARDY + BOARD_SIZE + 30) {
+                if (getLayoutX() > BOARD2X && getLayoutX() + getFitWidth() < BOARD2X + BOARD_SIZE + 30) {
+                    setLayoutX((((int) getLayoutX() - BOARD2X) / 30) * 30 + BOARD2X);
+                    setLayoutY((((int) getLayoutY() - BOARDY) / 30) * 30 + BOARDY);
+                } else {
+                    if (getLayoutX() > BOARD1X && getLayoutX() + getFitWidth() < BOARD1X + BOARD_SIZE + 30) {
+                        err.setContentText("It's Player 2's Turn");
+                        err.showAndWait();
+                    }
+                    setLayoutX(homeX);
+                    setLayoutY(homeY);
+                }
+            } else {
                 setLayoutX(homeX);
                 setLayoutY(homeY);
             }
@@ -573,6 +596,7 @@ public class Viewer extends Application {
         String s = PatchworkAI.generatePatchPlacement(c, p);
         System.out.println(s);
         p += s;
+        System.out.println("AI:"+p);
         makePlacement(s);
         PatchworkGame.isPlacementValid(c, p);
         moveToken(2, p2.timecount);
