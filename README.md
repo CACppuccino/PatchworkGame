@@ -263,9 +263,8 @@ time board.
 
 Tiles must be placed according to the [rules](http://lookout-spiele.de/wp-content/uploads/Patchwork_Rules_US.pdf)
 of the game, with the additional constraint that no part of the tile may extend
-beyond the 9x9 square playing board:
-* Tiles may be placed adjacent to any other tile (edge touching edge).
-* No two tiles may overlap.
+beyond the 9x9 square playing board.
+No two tiles may overlap.
 
 ##### Special Events
 
