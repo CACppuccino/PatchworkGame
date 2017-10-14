@@ -1,8 +1,6 @@
 package comp1140.ass2;
 
 import java.util.ArrayList;
-
-
 import java.util.*;
 
 public class State {

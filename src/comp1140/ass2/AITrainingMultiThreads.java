@@ -1,19 +1,38 @@
 package comp1140.ass2;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 
 
-public class AITraining {
-    static final int ROUNDS = 5000;
-    public double loss(){
-        return 0;
+public class AITrainingMultiThreads implements Runnable {
+    static final int ROUNDS = 10;
+    Thread t;
+    String threadName;
+
+    AITrainingMultiThreads(String tName){
+        threadName = tName;
+        System.out.println("Thread created:"+tName);
     }
 
-    //adjusting the parameters
-    public void adjust(){
+    public void run(){
+        System.out.println("Thread running:"+threadName);
+        try {
+            fileIO("./s-rDataset-"+threadName+".csv");
+        } catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
-    public static void fileIO(String pathName){
+
+    public void start(){
+        System.out.println("Starting " +  threadName );
+        if (t == null) {
+            t = new Thread (this, threadName);
+            t.start ();
+        }
+    }
+    public  void fileIO(String pathName){
         int winer;
         int[] stat = {0,0,0};
         File data = new File(pathName);
@@ -31,7 +50,7 @@ public class AITraining {
 //                for (String sol: PatchworkAI.generateAllPatchPlacement(patchCircle,placement)){
 //                    System.out.print(sol+" ");
 //                }
-                    placement = placement + PatchworkAI.randomGenerator(patchCircle,placement);
+                    placement = placement + PatchworkAI.smarterGenerator(patchCircle,placement);
 //
 //                if (!PatchworkGame.isPlacementValid(patchCircle, placement)) throw new Error("wrong plc");
                     placement = placement + PatchworkAI.randomGenerator(patchCircle, placement);
@@ -86,32 +105,8 @@ public class AITraining {
             }
             System.out.println(stat[1]+" "+stat[2]);
     }
-    //used to difference two players'scores
-    public static void absoluteScore(String fileName, String newFileName){
-        //File data = new File("file:/home/cup/IdeaProjects/comp1140-ass2-wed15c/"+fileName);
-        File data = new File(fileName);
-        String line = new String();
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(data));
-            BufferedWriter writer = new BufferedWriter(new FileWriter(data));
-            while((line=reader.readLine())!=null){
-                String[] res = line.split(",");
-                System.out.println(res[0]+" "+res[1]);
-            }
-            reader.close();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-    }
     //for training, recursive training
-    public static void main(String[] args) {
-//        AITrainingMultiThreads[] trainingThreads = new AITrainingMultiThreads[10];
-//        for (int i=0;i<10;i++){
-//            trainingThreads[i] = new AITrainingMultiThreads("thread"+i);
-//            trainingThreads[i].start();
-//        }
-        absoluteScore("r-rDataset-5000.csv","./r-rDataset-5000-S.csv");
-
-    }
+//    public static void main(String[] args) {
+//        fileIO("./s-rDataset.csv");
+//    }
 }

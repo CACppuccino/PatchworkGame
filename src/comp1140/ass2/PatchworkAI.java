@@ -3,7 +3,6 @@ package comp1140.ass2;
 import java.util.ArrayList;
 import java.util.Random;
 
-import static java.lang.Math.min;
 
 public class PatchworkAI {
     public static ArrayList<String> candidates = new ArrayList<>();

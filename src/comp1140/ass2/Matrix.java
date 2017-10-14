@@ -1,11 +1,7 @@
 package comp1140.ass2;
 
-//import gittest.A;
 
-import javax.jws.soap.SOAPBinding;
-import java.awt.*;
 import java.util.Arrays;
-import java.util.Random;
 
 public class Matrix{
     int col,row;
