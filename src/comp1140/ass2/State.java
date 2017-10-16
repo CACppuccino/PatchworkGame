@@ -195,57 +195,60 @@ public class State {
                 p2.onTop = true;
                 p1.onTop = false;
             }
-            if (isSeven(p1)) specialTile(p1);
-            else if (isSeven(p2)) specialTile(p2);
+//            if (isSeven(p1)) specialTile(p1);
+//            else if (isSeven(p2)) specialTile(p2);
         }
 
     }
 
-    char[][] printPlayerBoard() {
-        int counter1 = 0;
-        char[][] playerBoardPrint = new char[9][9];
 
-        for (boolean[] sq1 : squiltBoard) {
-            int counter2 = 0;
-            for (boolean sqq1 : sq1) {
-                if (!sqq1) {
-                    playerBoardPrint[counter1][counter2] = '@';
-                    counter2++;
-                } else {
-                    playerBoardPrint[counter1][counter2] = '*';
-                    counter2++;
-                }
-            }
-            counter1++;
-        }
-        return playerBoardPrint;
-    }
+//    char[][] printPlayerBoard() {
+//        int counter1 = 0;
+//        char[][] playerBoardPrint = new char[9][9];
+//
+//        for (boolean[] sq1 : squiltBoard) {
+//            int counter2 = 0;
+//            for (boolean sqq1 : sq1) {
+//                if (!sqq1) {
+//                    playerBoardPrint[counter1][counter2] = '@';
+//                    counter2++;
+//                } else {
+//                    playerBoardPrint[counter1][counter2] = '*';
+//                    counter2++;
+//                }
+//            }
+//            counter1++;
+//        }
+//        return playerBoardPrint;
+//    }
 
-    public static boolean isSeven(State player) {
-        // check whether the player's board is 7 * 7 full
-        //special tile is already owned by one of the player
-        if (spt) return false;
-        //haven't filled 49 squares even
-        if (player.squareleft > 32) return false;
 
-        // this block is to check player's board is full 7 * 7
-//        player.printSquiltBoard();
-        int positionMark = 100;
-        int counterCol = 0;
-        for (int i = 0; i < player.printPlayerBoard().length; i++) {
-            int counterRow = 0;
-            for (int j = (positionMark != 100) ? positionMark : 0; j < player.printPlayerBoard()[i].length; j++) {
-                if (player.printPlayerBoard()[i][j] == '*') {
-                    if (positionMark > j) positionMark = j;
-                    counterRow++;
-                }
-            }
-            counterCol++;
-            if (counterRow < 7 && counterCol < 2) positionMark = 100;
-            else if (counterRow < 7 && counterCol > 2) return false;
-        }
-        return true;
-    }
+// for the sake of efficiency
+//    public static boolean isSeven(State player) {
+//        // check whether the player's board is 7 * 7 full
+//        //special tile is already owned by one of the player
+//        if (spt) return false;
+//        //haven't filled 49 squares even
+//        if (player.squareleft > 32) return false;
+//
+//        // this block is to check player's board is full 7 * 7
+////        player.printSquiltBoard();
+//        int positionMark = 100;
+//        int counterCol = 0;
+//        for (int i = 0; i < player.printPlayerBoard().length; i++) {
+//            int counterRow = 0;
+//            for (int j = (positionMark != 100) ? positionMark : 0; j < player.printPlayerBoard()[i].length; j++) {
+//                if (player.printPlayerBoard()[i][j] == '*') {
+//                    if (positionMark > j) positionMark = j;
+//                    counterRow++;
+//                }
+//            }
+//            counterCol++;
+//            if (counterRow < 7 && counterCol < 2) positionMark = 100;
+//            else if (counterRow < 7 && counterCol > 2) return false;
+//        }
+//        return true;
+//    }
 
     /*
     * The function is only called when the signal is True

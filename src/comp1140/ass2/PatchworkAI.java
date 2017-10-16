@@ -15,7 +15,7 @@ public class PatchworkAI {
 
     /**
      * Generate a valid move that follows from the given patch circle and game placement string.
-     *
+     * If the game is already finished, return null.
      * @param patchCircle a patch circle string to initialize the game
      * @param placement   A valid placement string indicating a game state
      * @return a valid patch placement string, which will be "." if the player chooses to advance
@@ -44,6 +44,8 @@ public class PatchworkAI {
             //or current placement only has dots, need to generate the `three` manually or will have an exception/error
             for (int i = 0; i < 3; i++) PatchworkGame.three[i] = pC.charAt(i);
 
+        //check whether the game ends
+        if (PatchworkGame.p1.timecount==53&&PatchworkGame.p2.timecount==53) return null;
 
         int turn = State.check_turn(PatchworkGame.p1, PatchworkGame.p2) == 1 ? 1 : 2;
         //backup state data in order to revert it back when find the try is invalid
