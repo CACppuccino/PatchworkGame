@@ -113,7 +113,7 @@ public class AITraining {
                 System.out.println(patchCircle);
 
                 while (PatchworkGame.p1.timecount != 53 && PatchworkGame.p2.timecount != 53) {
-                    placement = placement + PatchworkAI.smarterGenerator(patchCircle,placement);
+                    placement = placement + PatchworkAI.randomGenerator(patchCircle,placement);
                 }
                 score1 =PatchworkGame.getScoreForPlacement(patchCircle,placement,true) ;
                 score2 = PatchworkGame.getScoreForPlacement(patchCircle,placement,false);
@@ -125,7 +125,7 @@ public class AITraining {
                 placement = new String();
                 while (PatchworkGame.p1.timecount != 53 && PatchworkGame.p2.timecount != 53) {
                     if (State.check_turn(PatchworkGame.p1,PatchworkGame.p2)==winer){
-                        int order =tileToNum(PatchworkAI.smarterGenerator(patchCircle,placement).charAt(0));
+                        int order =tileToNum(PatchworkAI.randomGenerator(patchCircle,placement).charAt(0));
 
                         //for tile info
                         if (order!=34) {
@@ -178,7 +178,7 @@ public class AITraining {
     }
     //for training, recursive training
     public static void main(String[] args) {
-        fileIO2("./DetailDataset02.csv","Dataset02.csv");
+        fileIO2("./data/DetailDataset03.csv","./data/Dataset03.csv");
 
     }
 }
