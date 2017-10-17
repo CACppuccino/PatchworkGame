@@ -1,37 +1,21 @@
 package comp1140.ass2;
 
 import javafx.application.Application;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.ObjectPropertyBase;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Point3D;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.Node.*;
-import javafx.scene.input.ScrollEvent;
-import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
-
-import java.awt.*;
-import java.io.Console;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Random;
 
 import static comp1140.ass2.PatchworkGame.*;
@@ -53,7 +37,6 @@ public class Viewer extends Application {
     private static final int BOARD_SIZE = 270;
 
     private static String c;
-    private static final String URI_BASE = "assets/";
 
     private final Group root = new Group();
     private final Group controls = new Group();
@@ -132,9 +115,7 @@ public class Viewer extends Application {
                 y += (int) (w / 2 - h / 2);
             }
             //indicates which board is going to be placed on the tile
-            //int player = State.check_turn()==1?0:601;
-            mPlacement.setLayoutX((AI ? BOARD2X : BOARD1X) + x);
-            mPlacement.setLayoutY(BOARDY + y);
+            setHboxPos(mPlacement,(AI ? BOARD2X : BOARD1X) + x,BOARDY + y);
             mPlacement.getChildren().add(tileView);
 
             controls.getChildren().add(mPlacement);
@@ -142,32 +123,28 @@ public class Viewer extends Application {
         }
     }
 
+    private static void setTextPos(Text obj, double LayoutX, double LayoutY){
+        obj.setLayoutX(LayoutX);
+        obj.setLayoutY(LayoutY);
+    }
+    private static void setBtnPos(Button obj, double LayoutX, double LayoutY){
+        obj.setLayoutX(LayoutX);
+        obj.setLayoutY(LayoutY);
+    }
+    private static void setHboxPos(HBox obj, double LayoutX, double LayoutY){
+        obj.setLayoutX(LayoutX);
+        obj.setLayoutY(LayoutY);
+    }
 
     /**
      * Create a basic text field for input and a refresh button.
      */
     private void makeControls() {
-        //Label label1 = new Label("Placement:");
-//        textField = new TextField();
-//        textField.setPrefWidth(300);
-//        Button button = new Button("Display");
-//        button.setOnAction(new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent e) {
-//                makePlacement(textField.getText());
-//                System.out.println(new String(three));
-//                if (PatchworkGame.isPlacementValid(c, textField.getText())) System.out.println("b");
-//                clickArea();
-//            }
-//        });
         HBox hb = new HBox();
-        //hb.getChildren().addAll(label1, textField, button);
         hb.setSpacing(10);
-        hb.setLayoutX(250);
-        hb.setLayoutY(VIEWER_HEIGHT - 50);
+        setHboxPos(hb,250,VIEWER_HEIGHT - 50);
         root.getChildren().add(hb);
         root.getChildren().add(controls);
-//        root.getChildren().add(sqiltBoard);
     }
 
     @Override
@@ -180,8 +157,7 @@ public class Viewer extends Application {
         bg.toBack();
         root.getChildren().add(bg);
         Text title = new Text("PATCHWORK");
-        title.setLayoutX(400);
-        title.setLayoutY(200);
+        setTextPos(title,400,200);
         title.setScaleX(5);
         title.setScaleY(5);
         title.setFill(Color.WHITE);
@@ -198,8 +174,7 @@ public class Viewer extends Application {
         option2.setToggleGroup(option);
         option2.setSelected(true);
         Button begin = new Button("Start Game");
-        begin.setLayoutX(400);
-        begin.setLayoutY(320);
+        setBtnPos(begin,400,320);
         begin.setOnMouseClicked(event -> {
             AI = option1.isSelected();
             game();
@@ -226,15 +201,12 @@ public class Viewer extends Application {
         clickArea();
         err = new Alert(Alert.AlertType.ERROR);
         turn = new Text("Player 1's Turn");
-        turn.setLayoutX(400);
-        turn.setLayoutY(200);
+        setTextPos(turn,400,200);
         confirm = new Button("End Turn");
         confirm.setDisable(true);
-        confirm.setLayoutX(380);
-        confirm.setLayoutY(250);
+        setBtnPos(confirm,380,250);
         advance = new Button("Advance");
-        advance.setLayoutX(460);
-        advance.setLayoutY(250);
+        setBtnPos(advance,460,250);
         advance.setDisable(false);
         advance.setOnMouseClicked(event -> {
             p += ".";
@@ -264,15 +236,12 @@ public class Viewer extends Application {
             }
         });
         btn1 = new Text("5 buttons");
-        btn1.setLayoutX(30);
-        btn1.setLayoutY(580);
+        setTextPos(btn1,30,580);
         btn2 = new Text("5 buttons");
-        btn2.setLayoutX(840);
-        btn2.setLayoutY(580);
+        setTextPos(btn2,840,580);
         warn = new Alert(Alert.AlertType.CONFIRMATION);
         menu = new Button("Back to main");
-        menu.setLayoutX(10);
-        menu.setLayoutY(10);
+        setBtnPos(menu,10,10);
         menu.setOnMouseClicked(event -> {
             warn.setContentText("This will end the current game.\nAre you sure?");
             if (warn.showAndWait().get() == ButtonType.OK) {
@@ -280,12 +249,10 @@ public class Viewer extends Application {
             }
         });
         player1 = new Text("Player 1: Yellow");
-        player1.setLayoutX(30);
-        player1.setLayoutY(280);
+        setTextPos(player1,30,280);
         player1.setFill(Color.YELLOW);
         player2 = new Text("Player 2" + (AI ? " (AI)" : "") + ": Blue");
-        player2.setLayoutX(800);
-        player2.setLayoutY(280);
+        setTextPos(player2,800,280);
         player2.setFill(Color.BLUE);
         root.getChildren().addAll(sqiltBoard, tilesArea, turn, confirm, advance, btn1, btn2, menu, player1, player2);
     }
@@ -300,47 +267,27 @@ public class Viewer extends Application {
         PatchworkGame.p2 = new State(2);
     }
 
-    // show the final window when the game ends.Including two players'
-    // socres and who wins the game. Show a restart button as well.
-    public void finalWindow() {
+    private void setSquiltBoard(int x, Color color){
+        Rectangle[][] sq = new Rectangle[9][9];
+        HBox sq1 = new HBox();
+        sq1.setPrefSize(280, 280);
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                sq[i][j] = new Rectangle(x + i * 30, BOARDY + j * 30, 30, 30);
+                sq[i][j].setStroke(Color.color((double) i / 9, (double) j / 9, (double) (i + j) / 18));
+                sq[i][j].setFill(color);
+                root.getChildren().add(sq[i][j]);
+            }
+        }
+        setHboxPos(sq1,BOARD1X,BOARDY);
 
     }
 
     //displays the squilt board for player 1.
-    private void squiltBoard1() {
-        Rectangle[][] sq = new Rectangle[9][9];
-        HBox sq1 = new HBox();
-        Random gen = new Random();
-        sq1.setPrefSize(280, 280);
-
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                sq[i][j] = new Rectangle(BOARD1X + i * 30, BOARDY + j * 30, 30, 30);
-                sq[i][j].setStroke(Color.color((double) i / 9, (double) j / 9, (double) (i + j) / 18));
-                sq[i][j].setFill(Color.WHEAT);
-                root.getChildren().add(sq[i][j]);
-            }
-        }
-        sq1.setLayoutX(BOARD1X);
-        sq1.setLayoutY(BOARDY);
-//        sqiltBoard.getChildren().add(sq1);
-    }
+    private void squiltBoard1() {setSquiltBoard(BOARD1X,Color.WHEAT);}
 
     //displays the squilt board for player 2.
-    private void squiltBoard2() {
-        Rectangle[][] sq2 = new Rectangle[9][9];
-        HBox sq1 = new HBox();
-        sq1.setPrefSize(280, 280);
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                sq2[i][j] = new Rectangle(BOARD2X + i * 30, BOARDY + j * 30, 30, 30);
-                sq2[i][j].setStroke(Color.color((double) i / 9, (double) j / 9, (double) (i + j) / 18));
-                root.getChildren().add(sq2[i][j]);
-            }
-        }
-        sq1.setLayoutX(BOARD1X);
-        sq1.setLayoutY(BOARDY);
-    }
+    private void squiltBoard2() {setSquiltBoard(BOARD2X,Color.BLACK);}
 
     //displays the time board for players.
     private void timeBoard() {
@@ -353,8 +300,7 @@ public class Viewer extends Application {
         tbView.setFitWidth(270);
         HBox timeboard = new HBox();
         timeboard.getChildren().add(tbView);
-        timeboard.setLayoutX(331.5);
-        timeboard.setLayoutY(290);
+        setHboxPos(timeboard,331.5,290);
         timeboard.setOnMouseClicked(event -> {
             System.out.println(event.getSceneX() + ", " + event.getSceneY());
         });
@@ -394,7 +340,6 @@ public class Viewer extends Application {
             else cc = init.charAt(i) + "_";
             File imgTimeboard = new File("src/comp1140/ass2/gui/assets/" + cc + ".png");
             String tPath = "file:" + imgTimeboard.getAbsolutePath();
-//            System.out.println(tPath);
             Image tile = new Image(tPath);
             ImageView tbView = new ImageView();
             tbView.setImage(tile);
@@ -402,15 +347,9 @@ public class Viewer extends Application {
             tbView.setFitWidth(25);
 
             hb[i].getChildren().add(tbView);
-            hb[i].setLayoutX(200 + 30 * (i % 17));
-            hb[i].setLayoutY(VIEWER_HEIGHT - (i < 17 ? 130 : 100));
-
+            setHboxPos(hb[i],200 + 30 * (i % 17),VIEWER_HEIGHT - (i < 17 ? 130 : 100));
             root.getChildren().add(hb[i]);
         }
-        //        hb.setLayoutX(270);
-//        hb.setLayoutY(120);
-//        tilesArea.getChildren().add(hb);
-//        root.getChildren().add(tilesArea);
     }
 
 
@@ -510,7 +449,7 @@ public class Viewer extends Application {
                                 int s1 = PatchworkGame.getScoreForPlacement(c, p, true);
                                 int s2 = PatchworkGame.getScoreForPlacement(c, p, false);
                                 System.out.println(s1 + s2);
-                                win.setContentText("Player " + (s1 > s2 ? 1 : 2) + " wins\n" + s1 + " " + s2);
+                                win.setContentText("Player " + (s1 > s2 ? 1 : 2) + " wins\n" + "Player 1: " + s1 + " Player 2: " + s2);
                                 win.showAndWait();
                                 reset();
                             }

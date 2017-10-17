@@ -17,8 +17,8 @@ import static org.junit.Assert.assertTrue;
 public class GeneratePatchPlacementTest {
     private static final int[] PATCH_COST = {1, 3, 1, 2, 2, 2, 4, 3, 5, 2, 2, 5, 3, 1, 4, 4, 6, 1, 6, 4, 3, 3, 3, 5, 5, 2, 2, 2, 4, 2, 3, 6, 6, 0};
 
-    @Test(timeout = 10000)
-//    @Test
+//    @Test(timeout = 10000)
+    @Test
     public void testMove() {
 
         /* first ensure that the game correctly identifies broken placements */

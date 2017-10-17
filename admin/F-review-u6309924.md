@@ -1,5 +1,5 @@
-# Code Review for Adonis Mouti (u6385898)
-### By Weitao Chen
+# Code Review for Weitao Chen (u6309924)
+### By Ziyang Liu
 
 #### Coding part
 `PatchworkGame.java: isSeven()`, `State.java: printPlayerBoard()`

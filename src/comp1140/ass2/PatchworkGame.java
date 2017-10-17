@@ -1,8 +1,5 @@
 package comp1140.ass2;
 
-import com.sun.xml.internal.bind.v2.TODO;
-
-import sun.util.locale.provider.SPILocaleProviderAdapter;
 import java.util.*;
 
 
@@ -225,20 +222,12 @@ public class PatchworkGame {
                 try {
                     State.buyPartches(p1, p2, plc.charAt(0));
                 } catch (Error e) {
-                    if (e.getMessage().equals("cant afford the tile" + plc.charAt(0))) {
-                        if (DEBUG) System.out.println("buyparches error");
-//                        System.out.println(p1.buttonCount + " " + p2.buttonCount);
-                        return false;
-                    } else if (e.getMessage().equals("no enough h")) {
-                        if (DEBUG) System.out.println("no enough h");
-//                        System.out.println(p1.specialH+" "+p2.specialH);
+                    if (e.getMessage().equals("cant afford the tile" + plc.charAt(0))
+                            || e.getMessage().equals("no enough h")) {
+                        if (DEBUG) System.out.println(e.getMessage());
                         return false;
                     }
                 }
-
-//                if(fstPlayer) p1String.add(plc);
-//                else p2String.add(plc);
-
                 three = new char[]{partches.get(aPlc % partches.size()), partches.get((aPlc + 1) % partches.size()), partches.get((aPlc + 2) % partches.size())};
                 //move the nertral token
                 //if the parches left in the partches circle doesn't contain the current
@@ -271,16 +260,10 @@ public class PatchworkGame {
                     three = new char[]{partches.get(aPlc % partches.size()), partches.get((aPlc + 1) % partches.size()), partches.get((aPlc + 2) % partches.size())};
                 }
                 i = i + 3;
-
             }
         }
         return true;
-
     }
-
-//    public static boolean checkOverlap(String placement){
-//
-//    }
 
     private static int[][] flipHandle(char tile, int[][] expose) {
         int index = getIndex(tile);
@@ -363,10 +346,6 @@ public class PatchworkGame {
         return expose;
     }
 
-    private static int[][] getTileSpace(int index) {
-        return tileSpace[index];
-    }
-
     //false for out of the board, true for in
     public static boolean outOfBoard(String placement, State player) {
         char row = placement.charAt(2), col = placement.charAt(1);
@@ -395,7 +374,6 @@ public class PatchworkGame {
         for (int[] xs : result) {
             xs[0] += rowN;
             xs[1] += colN;
-
         }
         for (int[] xs : result) {
             if (!(xs[0] >= 1 && xs[0] <= 9 && xs[1] >= 1 && xs[1] <= 9)) {
