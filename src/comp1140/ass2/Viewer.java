@@ -240,6 +240,7 @@ public class Viewer extends Application {
         });
         btn1 = new Text("5 buttons");
         setTextPos(btn1,30,580);
+        btn1.setFill(Color.WHITE);
         btn2 = new Text("5 buttons");
         setTextPos(btn2,840,580);
         warn = new Alert(Alert.AlertType.CONFIRMATION);
@@ -436,7 +437,16 @@ public class Viewer extends Application {
                 event.consume();
             });
             setOnMouseReleased(event -> {     // drag is complete
+                root.getChildren().remove(this);
+                root.getChildren().add(this);
+                tilesArea.getChildren().remove(this);
+                tilesArea.setDisable(true);
                 snap();
+                if (getLayoutX()==homeX){
+                    tilesArea.setDisable(false);
+                    tilesArea.getChildren().add(this);
+                    root.getChildren().remove(this);
+                }
                 confirm.setDisable(getLayoutX() == homeX);
                 advance.setDisable(!confirm.isDisabled());
                 confirm.setOnMouseClicked(event1 -> {
@@ -458,11 +468,10 @@ public class Viewer extends Application {
                                 win.showAndWait();
                                 reset();
                             }
-                            root.getChildren().add(this);
-                            tilesArea.getChildren().remove(this);
                             setOnScroll(null);
                             setOnMouseReleased(null);
                             setOnMouseDragged(null);
+                            tilesArea.setDisable(false);
                             moveToken(t, (t == 1 ? p1 : p2).timecount);
                             t = State.check_turn(PatchworkGame.p1, PatchworkGame.p2);
                             turn.setText("Player " + t + "'s turn");

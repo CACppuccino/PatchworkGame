@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3620fb09-b960-47df-bbff-71ea1ea3c09b" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/comp1140/ass2/Test.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/game.jar" afterPath="$PROJECT_DIR$/game.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/comp1140/ass2/PatchworkGame.java" afterPath="$PROJECT_DIR$/src/comp1140/ass2/PatchworkGame.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/comp1140/ass2/Viewer.java" afterPath="$PROJECT_DIR$/src/comp1140/ass2/Viewer.java" />
     </list>
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,8 +17,8 @@
       <file leaf-file-name="MCTS.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/MCTS.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="309">
-              <caret line="29" column="31" lean-forward="false" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="31" />
+            <state relative-caret-position="324">
+              <caret line="18" column="2" lean-forward="true" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="2" />
               <folding />
             </state>
           </provider>
@@ -29,8 +27,8 @@
       <file leaf-file-name="Viewer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/Viewer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="327">
-              <caret line="508" column="9" lean-forward="false" selection-start-line="508" selection-start-column="9" selection-end-line="508" selection-end-column="9" />
+            <state relative-caret-position="111">
+              <caret line="439" column="46" lean-forward="false" selection-start-line="439" selection-start-column="46" selection-end-line="439" selection-end-column="46" />
               <folding />
             </state>
           </provider>
@@ -52,7 +50,7 @@
       <file leaf-file-name="PatchworkGame.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/PatchworkGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="421">
+            <state relative-caret-position="435">
               <caret line="408" column="44" lean-forward="false" selection-start-line="408" selection-start-column="44" selection-end-line="408" selection-end-column="44" />
               <folding>
                 <marker date="1508317045375" expanded="true" signature="16725:16918" ph="{...}" />
@@ -89,6 +87,7 @@
       <find>confirm</find>
       <find>dragga</find>
       <find>squiltBoard</find>
+      <find>btn1</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -106,9 +105,9 @@
         <option value="$PROJECT_DIR$/tests/comp1140/ass2/TestAll.java" />
         <option value="$PROJECT_DIR$/src/comp1140/ass2/State.java" />
         <option value="$PROJECT_DIR$/src/comp1140/ass2/AITraining.java" />
-        <option value="$PROJECT_DIR$/src/comp1140/ass2/MCTS.java" />
         <option value="$PROJECT_DIR$/src/comp1140/ass2/Test.java" />
         <option value="$PROJECT_DIR$/src/comp1140/ass2/PatchworkGame.java" />
+        <option value="$PROJECT_DIR$/src/comp1140/ass2/MCTS.java" />
         <option value="$PROJECT_DIR$/src/comp1140/ass2/Viewer.java" />
       </list>
     </option>
@@ -764,10 +763,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/PatchworkGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="408" column="44" lean-forward="false" selection-start-line="408" selection-start-column="44" selection-end-line="408" selection-end-column="44" />
+          <folding>
+            <marker date="1508317045375" expanded="true" signature="16725:16918" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/MCTS.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="29" column="31" lean-forward="false" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="31" />
+        <state relative-caret-position="324">
+          <caret line="18" column="2" lean-forward="true" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="2" />
           <folding />
         </state>
       </provider>
@@ -783,20 +792,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/PatchworkGame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="421">
-          <caret line="408" column="44" lean-forward="false" selection-start-line="408" selection-start-column="44" selection-end-line="408" selection-end-column="44" />
-          <folding>
-            <marker date="1508317045375" expanded="true" signature="16725:16918" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/Viewer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="327">
-          <caret line="508" column="9" lean-forward="false" selection-start-line="508" selection-start-column="9" selection-end-line="508" selection-end-column="9" />
+        <state relative-caret-position="111">
+          <caret line="439" column="46" lean-forward="false" selection-start-line="439" selection-start-column="46" selection-end-line="439" selection-end-column="46" />
           <folding />
         </state>
       </provider>
