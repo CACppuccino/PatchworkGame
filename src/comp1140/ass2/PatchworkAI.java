@@ -133,7 +133,7 @@ public class PatchworkAI {
     }
     public static String randomGenerator(String patchCircle, String placement){
         ArrayList<String> ans = generateAllPositionPlacement(patchCircle,placement);
-        Random rng = new Random();
+        Random rng = new Random(5);
         int ind = rng.nextInt(ans.size());
 
         return ans.get(ind);
