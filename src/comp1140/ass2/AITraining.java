@@ -6,6 +6,7 @@ import java.util.Random;
 
 public class AITraining {
     static final int ROUNDS = 5000;
+    static final int LAYERS = 3;
     public double loss(){
         return 0;
     }
@@ -284,10 +285,25 @@ public class AITraining {
         }
     }
     void network01(char tile){
-        Matrix[] nn = new Matrix[3];
+        Matrix[] nn = new Matrix[LAYERS];
+        // initialise the layers
         nn[0] = new Matrix(7,12,0);
         nn[1] = new Matrix(12,7,0);
         nn[2] = new Matrix(7,35,0);
+        // read and set the layers'weight
+
+        // use the layers to calculate the anwser
+        for (int i=0;i<LAYERS;i++)
+        {
+            for (int j=0;j<nn[i].row;j++)
+            {
+                for (int k=0;k<nn[i].col;k++){
+
+                    //different activation functions to calculate in different layers
+//                    if (i==0)
+                }
+            }
+        }
 
     }
     //for training, recursive training
