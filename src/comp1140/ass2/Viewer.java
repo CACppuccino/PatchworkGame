@@ -16,7 +16,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.io.File;
-import java.util.Random;
 
 import static comp1140.ass2.PatchworkGame.*;
 
@@ -190,7 +189,7 @@ public class Viewer extends Application {
         root.getChildren().remove(startScreen);
         timeBoard();
         p = "";
-        c = PatchworkGame.initPathCircle();
+        c = PatchworkGame.initPatchCircle();
         if (c.indexOf('A') != c.length()-1) c = c.substring(c.indexOf('A') + 1) + c.substring(0, c.indexOf('A') + 1);
         candidateArea(c);
         timeToken();

@@ -84,7 +84,9 @@ public class State {
             else return 1;
         }
     }
-
+    /*
+    * the function is for player doing the action 'advance' and update the state of the player
+    * */
     public static void advanced(State p1, State p2) {
         int t = check_turn(p1, p2);
         int diff;
@@ -97,6 +99,9 @@ public class State {
         states[thisOne].timecount = states[another].timecount + 1 > GRIDS ? GRIDS : states[another].timecount + 1;
     }
 
+    /*
+    * the function is for player doing the action 'advance' and update the state of the player
+    * */
     public static void buyPartches(State p1, State p2, char p) {
         int index;
         if (p >= 'A' && p <= 'Z') index = p - 'A';

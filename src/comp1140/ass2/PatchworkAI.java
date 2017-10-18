@@ -77,16 +77,19 @@ public class PatchworkAI {
             }
 
         }
-        //brute force trying
+
         boolean isValid;
+        // if no more money, then choose to advance
         if (player.buttonCount == 0) {
             State.advanced(PatchworkGame.p1, PatchworkGame.p2);
             return ".";
         }
-
+        // brute force trying
         for (int l = 0; l < 3; l++) {
+           //get the three possible tiles
             char t = PatchworkGame.three[l];
             int n = t > 'Z' ? t - 'a' : t - 'A';
+           // if can't afford  the patch, then directly skip this tile
             if (!State.affordPartch(player.buttonCount, PatchworkGame.tileCost[n])) continue;
             for (char i = 'A'; i < 'J'; i++) {
                 for (char j = 'A'; j < 'J'; j++) {
@@ -94,9 +97,9 @@ public class PatchworkAI {
                     for (char k = 'A'; k < 'I'; k++) {
                         isValid = PatchworkGame.isPlacementValid(patchCircle, placement + t + i + j + k);
                         if (isValid) {
+                            // return the placement when find the first suitable patch
                             return "" + t + i + j + k;
                         }
-//                        System.out.println(placement+t+i+j+k);
                         PatchworkGame.p1.copy(cp1);
                         PatchworkGame.p2.copy(cp2);
                         PatchworkGame.aPlc = cpaPlc;
@@ -110,8 +113,10 @@ public class PatchworkAI {
 
     }
 
+    // applied a herustic strategy for choosing the tile
+    // considering the current tilespace, tilecost, special button that the tile will provide and
+    // how many timetoken left
     public static String smarterGenerator(String patchCircle, String placement){
-//    public static String generatePatchPlacement(String patchCircle, String placement) {
         ArrayList<String> ans = generateAllFirstPlacement(patchCircle,placement);
         if (ans==null) return null;
         double max = 0, tmp;
@@ -131,6 +136,9 @@ public class PatchworkAI {
             return re;
         }
     }
+
+    // randomly choose one of the suitable placement from the placements that available in
+    // method 'generateAllPositionPlacement'
     public static String randomGenerator(String patchCircle, String placement){
         ArrayList<String> ans = generateAllPositionPlacement(patchCircle,placement);
         Random rng = new Random(5);
@@ -235,6 +243,9 @@ public class PatchworkAI {
         ans.add(".");
         return ans;
     }
+
+    //similar to the origin one, but generates all the
+    // suitable placement into an arraylist and return it
     public static ArrayList<String> generateAllPositionPlacement(String patchCircle, String placement) {
         ArrayList<String> ans = new ArrayList<>();
         boolean success= false;
@@ -324,6 +335,8 @@ public class PatchworkAI {
         ans.add(".");
         return ans;
     }
+    // check whether a passed placement is formed by dots only or not
+
     private static boolean allDot(String placement) {
         for (char c : placement.toCharArray()) {
             if (c != '.') return false;

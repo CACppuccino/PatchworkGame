@@ -86,7 +86,8 @@ public class PatchworkGame {
         }
     }
 
-    static String initPathCircle() {
+    //init the patchCircle by randomly generate the whole patchCircle
+    static String initPatchCircle() {
         StringBuilder res = new StringBuilder();
         for (char i = 'A'; i <= 'Z'; i++)
             res.append(i);
@@ -265,6 +266,9 @@ public class PatchworkGame {
         return true;
     }
 
+    /*
+    * making the flip according to the tile's property and return the position occupied after the flip
+    * */
     private static int[][] flipHandle(char tile, int[][] expose) {
         int index = getIndex(tile);
 
@@ -297,6 +301,10 @@ public class PatchworkGame {
         return copy;
     }
 
+    /*
+    * a simple method translated the char to the index of the tile array,
+    * extracted because of using too many times
+    * */
     static int getIndex(char tile) {
         int index;
         if (tile >= 'A' && tile <= 'Z')
@@ -306,7 +314,11 @@ public class PatchworkGame {
         return index;
     }
 
+    /*
+    * do the rotate and return the position index of the tile
+    * */
     private static int[][] rotateHandle(char rotate, int[][] expose) {
+        // do the rotation
         if (rotate == 'A')
             return expose;
         else if (rotate == 'B') {
@@ -330,6 +342,8 @@ public class PatchworkGame {
             if (DEBUG) System.out.println("rotation wrong" + rotate);
             return null;
         }
+
+        // process the position data according to the coordinate, further adjustment
         int[] topleft = new int[2];
         topleft[0] = expose[0][0];
         topleft[1] = expose[0][1];
@@ -361,9 +375,7 @@ public class PatchworkGame {
             expo[i][0] = tileSpace[index][i][0] + 1;
             expo[i][1] = tileSpace[index][i][1] + 1;
         }
-
-//        System.out.println("expo: "+Arrays.deepToString(expo));
-
+        // do the rotation if there is one
         if (rotate >= 'A' && rotate <= 'D') {
             result = rotateHandle(rotate, expo);
         }
@@ -371,6 +383,7 @@ public class PatchworkGame {
             rotate = (char) ('A' + rotate - 'E');
             result = rotateHandle(rotate, flipHandle(tile, expo));
         }
+        // change the data to the absolute position
         for (int[] xs : result) {
             xs[0] += rowN;
             xs[1] += colN;
@@ -400,6 +413,7 @@ public class PatchworkGame {
     static int getScoreForPlacement(String patchCircle, String placement, boolean firstPlayer) {
         // FIXME Task 7: determine the score for a player given a placement
         boolean ss = isPlacementValid(patchCircle, placement);
+        // get the score if placement is valid
         if (ss)
             if (firstPlayer) return p1.getScore();
             else return p2.getScore();

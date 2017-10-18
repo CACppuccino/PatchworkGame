@@ -41,7 +41,7 @@ public class AITrainingMultiThreads implements Runnable {
             BufferedWriter writer = new BufferedWriter( new FileWriter(data));
 
             for (int i=1;i<=ROUNDS;i++) {
-                String patchCircle = PatchworkGame.initPathCircle();
+                String patchCircle = PatchworkGame.initPatchCircle();
                 String placement = new String("");
                 System.out.println(patchCircle);
                 writer.write(patchCircle+",");
@@ -53,7 +53,7 @@ public class AITrainingMultiThreads implements Runnable {
 //                    placement = placement + PatchworkAI.smarterGenerator(patchCircle,placement);
 //
 //                if (!PatchworkGame.isPlacementValid(patchCircle, placement)) throw new Error("wrong plc");
-                    placement = placement + PatchworkAI.randomGenerator(patchCircle, placement);
+//                    placement = placement + PatchworkAI.randomGenerator(patchCircle, placement);
 //                if (!PatchworkGame.isPlacementValid(patchCircle, placement)) throw new Error("wrong plc");
                 }
                 winer = PatchworkGame.getScoreForPlacement(patchCircle,placement,true)>
@@ -78,7 +78,7 @@ public class AITrainingMultiThreads implements Runnable {
         int winer;
         int[] stat = {0,0,0};
             for (int i=1;i<=ROUNDS;i++) {
-                String patchCircle = PatchworkGame.initPathCircle();
+                String patchCircle = PatchworkGame.initPatchCircle();
                 String placement = new String("");
                 System.out.println(patchCircle);
                 while (PatchworkGame.p1.timecount != 53 && PatchworkGame.p2.timecount != 53) {
@@ -91,7 +91,7 @@ public class AITrainingMultiThreads implements Runnable {
 //                if (!PatchworkGame.isPlacementValid(patchCircle, placement)) throw new Error("wrong plc");
 //                    placement = placement + PatchworkAI.generatePatchPlacement(patchCircle, placement);
 //                if (!PatchworkGame.isPlacementValid(patchCircle, placement)) throw new Error("wrong plc");
-                      placement = placement + PatchworkAI.randomGenerator(patchCircle,placement);
+//                      placement = placement + PatchworkAI.randomGenerator(patchCircle,placement);
                 }
                 winer = PatchworkGame.getScoreForPlacement(patchCircle,placement,true)>
                         PatchworkGame.getScoreForPlacement(patchCircle,placement,false)?1:2;

@@ -1,10 +1,11 @@
 package comp1140.ass2;
 
 import java.io.*;
+import java.util.Random;
 
 
 public class AITraining {
-    static final int ROUNDS = 10000;
+    static final int ROUNDS = 5000;
     public double loss(){
         return 0;
     }
@@ -28,7 +29,7 @@ public class AITraining {
             BufferedWriter writer = new BufferedWriter( new FileWriter(data));
 
             for (int i=1;i<=ROUNDS;i++) {
-                String patchCircle = PatchworkGame.initPathCircle();
+                String patchCircle = PatchworkGame.initPatchCircle();
                 String placement = new String("");
                 System.out.println(patchCircle);
                 writer.write(patchCircle+",");
@@ -37,7 +38,7 @@ public class AITraining {
 //                for (String sol: PatchworkAI.generateAllPatchPlacement(patchCircle,placement)){
 //                    System.out.print(sol+" ");
 //                }
-                    placement = placement + PatchworkAI.randomGenerator(patchCircle,placement);
+//                    placement = placement + PatchworkAI.randomGenerator(patchCircle,placement);
 //
 //                if (!PatchworkGame.isPlacementValid(patchCircle, placement)) throw new Error("wrong plc");
 //                    placement = placement + PatchworkAI.randomGenerator(patchCircle, placement);
@@ -68,9 +69,10 @@ public class AITraining {
         int winer;
         int[] stat = {0,0,0};
             for (int i=1;i<=ROUNDS;i++) {
-                String patchCircle = PatchworkGame.initPathCircle();
+                String patchCircle = PatchworkGame.initPatchCircle();
                 String placement = new String("");
                 System.out.println(patchCircle);
+                Random rng = new Random(3);
                 while (PatchworkGame.p1.timecount != 53 && PatchworkGame.p2.timecount != 53) {
 //                System.out.println("sol:"+PatchworkAI.generateAllPositionPlacement(patchCircle,placement).size());
 //                for (String sol: PatchworkAI.generateAllPositionPlacement(patchCircle,placement)){
@@ -108,12 +110,12 @@ public class AITraining {
             data2.createNewFile();
             BufferedWriter writer2 = new BufferedWriter( new FileWriter(data2));
             for (int i=1;i<=ROUNDS;i++) {
-                String patchCircle = PatchworkGame.initPathCircle();
+                String patchCircle = PatchworkGame.initPatchCircle();
                 String placement = new String("");
                 System.out.println(patchCircle);
 
                 while (PatchworkGame.p1.timecount != 53 && PatchworkGame.p2.timecount != 53) {
-                    placement = placement + PatchworkAI.randomGenerator(patchCircle,placement);
+                    placement = placement + PatchworkAI.smarterGenerator(patchCircle,placement);
                 }
                 score1 =PatchworkGame.getScoreForPlacement(patchCircle,placement,true) ;
                 score2 = PatchworkGame.getScoreForPlacement(patchCircle,placement,false);
@@ -124,9 +126,9 @@ public class AITraining {
                 PatchworkGame.p2 = new State(2);
                 placement = new String();
                 while (PatchworkGame.p1.timecount != 53 && PatchworkGame.p2.timecount != 53) {
-                    placement = placement + PatchworkAI.randomGenerator(patchCircle,placement);
+                    placement = placement + PatchworkAI.smarterGenerator(patchCircle,placement);
                     if (State.check_turn(PatchworkGame.p1,PatchworkGame.p2)==winer){
-                        int order =tileToNum(PatchworkAI.randomGenerator(patchCircle,placement).charAt(0));
+                        int order =tileToNum(PatchworkAI.smarterGenerator(patchCircle,placement).charAt(0));
 
                         //for tile info
                         if (order!=34) {
@@ -189,10 +191,10 @@ public class AITraining {
             data2.createNewFile();
             BufferedWriter writer2 = new BufferedWriter( new FileWriter(data2));
             for (int i=1;i<=ROUNDS;i++) {
-                String patchCircle = PatchworkGame.initPathCircle();
+                String patchCircle = PatchworkGame.initPatchCircle();
                 String placement = new String("");
                 System.out.println(patchCircle);
-
+                Random rng = new Random(5);
                 while (PatchworkGame.p1.timecount != 53 && PatchworkGame.p2.timecount != 53) {
                     placement = placement + PatchworkAI.randomGenerator(patchCircle,placement);
                 }
@@ -203,22 +205,38 @@ public class AITraining {
                 writer2.write(patchCircle+","+placement+","+winer+","+score1+","+score2+","+diff+"\n");
                 PatchworkGame.p1 = new State(1);
                 PatchworkGame.p2 = new State(2);
-                placement = new String();
-                while (PatchworkGame.p1.timecount != 53 && PatchworkGame.p2.timecount != 53) {
+//                placement = new String();
+                String plc = new String(), plc2 = new String();
+                int x = 0;
+                while (x<placement.length()) {
+                    if (x<placement.length()) {
+                        if (placement.charAt(x) == '.') {
+                            x++;
+                            plc = ".";
+                        } else {
+                            plc = placement.substring(x, x + 4);
+                            x += 4;
+                        }
+                        plc2 = plc2 + plc;
+                    }
+                        boolean xx=PatchworkGame.isPlacementValid(patchCircle, plc2);
                     if (State.check_turn(PatchworkGame.p1,PatchworkGame.p2)==winer){
-                        int order =tileToNum(PatchworkAI.randomGenerator(patchCircle,placement).charAt(0));
-
+                        int order =tileToNum(plc.charAt(0));
                         //for tile info
                         if (order!=34) {
-                            writer.write(order + "," +
+                            writer.write(
+                                    (tileToNum(plc.charAt(1))+
+                                    tileToNum(plc.charAt(2))*10+
+                                    tileToNum(plc.charAt(3))*100)+","+
+                                    order + "," +
                                     PatchworkGame.tileTimetoken[order]+","+
                                     PatchworkGame.tileButton[order]+","+
                                     PatchworkGame.tileSpace[order].length+","+
                                     PatchworkGame.tileCost[order]+","
                             );
                         }else {
-                            int adv =PatchworkGame.p1.timecount-PatchworkGame.p2.timecount;
-                            writer.write(34 + "," + adv + "," + 0 + "," +0+"," +(-Math.abs(adv))+",");
+                            int adv =PatchworkGame.p1.timecount-PatchworkGame.p2.timecount+1;
+                            writer.write(0+","+34+"," + adv + "," + 0 + "," +0+"," +(-Math.abs(adv))+",");
                         }
 
 
@@ -244,12 +262,13 @@ public class AITraining {
                         writer.write("\n");
                     }
 
-                    placement = placement + PatchworkAI.smarterGenerator(patchCircle,placement);
+//                    placement = placement + PatchworkAI.smarterGenerator(patchCircle,placement);
 
                 }
                 stat[winer]++;
                 System.out.println(placement);
                 System.out.println(winer);
+                System.out.println("round:"+i);
 //            if (PatchworkGame.isPlacementValid(patchCircle,placement)) System.out.println("OK");
                 PatchworkGame.p1 = new State(1);
                 PatchworkGame.p2 = new State(2);
@@ -264,9 +283,16 @@ public class AITraining {
             e.printStackTrace();
         }
     }
+    void network01(char tile){
+        Matrix[] nn = new Matrix[3];
+        nn[0] = new Matrix(7,12,0);
+        nn[1] = new Matrix(12,7,0);
+        nn[2] = new Matrix(7,35,0);
+
+    }
     //for training, recursive training
     public static void main(String[] args) {
-        fileIO3("./data/DetailDataset04.csv","./data/Dataset04.csv");
+//        fileIO3("./data/DetailDataset05.csv","./data/Dataset05.csv");
 
     }
 }
