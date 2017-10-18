@@ -375,8 +375,8 @@ public class Viewer extends Application {
         char tName;
         int homeX, homeY;
         double mouseX, mouseY;
-        boolean rotated=false;
-        boolean draggable = true;
+        boolean rotated = false;
+
         DraggableTile(char tName, int x, int y, int scale) {
             homeX = x;
             homeY = y;
@@ -406,7 +406,7 @@ public class Viewer extends Application {
             setOnScroll(event -> {
                 setRotate((getRotate() + 90) % 360);
                 System.out.println(getLayoutX() + " " + getLayoutY());
-                System.out.println(getFitWidth()+" "+getFitHeight());
+                System.out.println(getFitWidth() + " " + getFitHeight());
                 rotated = ((int) getRotate() / 90) % 2 == 1;
                 if (rotated) {
                     setLayoutX(getLayoutX() + (getFitHeight() / 2 - getFitWidth() / 2));
@@ -420,22 +420,12 @@ public class Viewer extends Application {
             });
 
             setOnMousePressed(event -> {      // mouse press indicates begin of drag
-                if (State.check_turn(PatchworkGame.p1, PatchworkGame.p2) == 1) {
-                    if (!State.affordPartch(PatchworkGame.p1.buttonCount, tileCost))
-                        draggable = false;
-                } else {
-                    if (!State.affordPartch(PatchworkGame.p1.buttonCount, tileCost)) {
-                        draggable = false;
-                    }
-                }
-                if (!draggable)
-                    event.consume();
                 mouseX = event.getSceneX();
                 mouseY = event.getSceneY();
                 event.consume();
             });
             setOnMouseDragged(event -> {      // mouse is being dragged
-                if (!draggable) event.consume();
+
                 toFront();
                 double movementX = event.getSceneX() - mouseX;
                 double movementY = event.getSceneY() - mouseY;
@@ -471,6 +461,8 @@ public class Viewer extends Application {
                             root.getChildren().add(this);
                             tilesArea.getChildren().remove(this);
                             setOnScroll(null);
+                            setOnMouseReleased(null);
+                            setOnMouseDragged(null);
                             moveToken(t, (t == 1 ? p1 : p2).timecount);
                             t = State.check_turn(PatchworkGame.p1, PatchworkGame.p2);
                             turn.setText("Player " + t + "'s turn");
@@ -498,7 +490,6 @@ public class Viewer extends Application {
                         event.consume();
                     }
                 });
-
             });
         }
 
@@ -515,16 +506,20 @@ public class Viewer extends Application {
 
 
         void snap() {
-            double x=getLayoutX();
-            double y=getLayoutY();
+            double x = getLayoutX();
+            double y = getLayoutY();
+            double offX = 0;
+            double offY = 0;
             if (rotated) {
-                x -= (getFitHeight() / 2 - getFitWidth() / 2);
-                y -= (getFitWidth() / 2 - getFitHeight() / 2);
+                offX = (getFitHeight() / 2 - getFitWidth() / 2);
+                offY = (getFitWidth() / 2 - getFitHeight() / 2);
+                x -= offX;
+                y -= offY;
             }
             if (State.check_turn(PatchworkGame.p1, PatchworkGame.p2) == 1 && y > BOARDY && y + getFitHeight() < BOARDY + BOARD_SIZE + 30) {
                 if (x > BOARD1X && x + getFitWidth() < BOARD1X + BOARD_SIZE + 30) {
-                    setLayoutX((((int) getLayoutX() - BOARD1X) / 30) * 30 + BOARD1X);
-                    setLayoutY((((int) getLayoutY() - BOARDY) / 30) * 30 + BOARDY);
+                    setLayoutX((((int) x - BOARD1X) / 30) * 30 + BOARD1X + offX);
+                    setLayoutY((((int) y - BOARDY) / 30) * 30 + BOARDY + offY);
                 } else {
                     if (x > BOARD2X && x + getFitWidth() < BOARD2X + BOARD_SIZE + 30) {
                         err.setContentText("It's Player 1's Turn");
@@ -535,8 +530,8 @@ public class Viewer extends Application {
                 }
             } else if (State.check_turn(PatchworkGame.p1, PatchworkGame.p2) == 2 && y > BOARDY && y + getFitHeight() < BOARDY + BOARD_SIZE + 30) {
                 if (x > BOARD2X && x + getFitWidth() < BOARD2X + BOARD_SIZE + 30) {
-                    setLayoutX((((int) getLayoutX() - BOARD2X) / 30) * 30 + BOARD2X);
-                    setLayoutY((((int) getLayoutY() - BOARDY) / 30) * 30 + BOARDY);
+                    setLayoutX((((int) x - BOARD2X) / 30) * 30 + BOARD2X + offX);
+                    setLayoutY((((int) y - BOARDY) / 30) * 30 + BOARDY + offY);
                 } else {
                     if (x > BOARD1X && x + getFitWidth() < BOARD1X + BOARD_SIZE + 30) {
                         err.setContentText("It's Player 2's Turn");
