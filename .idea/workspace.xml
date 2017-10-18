@@ -27,8 +27,8 @@
       <file leaf-file-name="Viewer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/Viewer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="111">
-              <caret line="439" column="46" lean-forward="false" selection-start-line="439" selection-start-column="46" selection-end-line="439" selection-end-column="46" />
+            <state relative-caret-position="-1725">
+              <caret line="407" column="52" lean-forward="true" selection-start-line="407" selection-start-column="52" selection-end-line="407" selection-end-column="52" />
               <folding />
             </state>
           </provider>
@@ -88,6 +88,8 @@
       <find>dragga</find>
       <find>squiltBoard</find>
       <find>btn1</find>
+      <find>out</find>
+      <find>.out.</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -117,6 +119,11 @@
       <expand />
       <select />
     </treeState>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="y" value="30" />
+    <option name="width" value="972" />
+    <option name="height" value="1026" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -794,8 +801,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/Viewer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="439" column="46" lean-forward="false" selection-start-line="439" selection-start-column="46" selection-end-line="439" selection-end-column="46" />
+        <state relative-caret-position="-1725">
+          <caret line="407" column="52" lean-forward="true" selection-start-line="407" selection-start-column="52" selection-end-line="407" selection-end-column="52" />
           <folding />
         </state>
       </provider>

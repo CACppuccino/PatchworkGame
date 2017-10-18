@@ -38,6 +38,7 @@ public class Viewer extends Application {
     private static final int BOARD_SIZE = 270;
 
     public static String c;
+    public static String p;
 
     private final Group root = new Group();
     private final Group controls = new Group();
@@ -45,7 +46,7 @@ public class Viewer extends Application {
     private final Group tilesArea = new Group();
     private final Group startScreen = new Group();
     //    private final Group playScreen = new Group();
-//    ArrayList<Character> candi;
+    //    ArrayList<Character> candi;
     private TextField textField;
 
     private boolean AI = false;
@@ -63,7 +64,6 @@ public class Viewer extends Application {
     private static Alert err;
     private static Alert warn;
     private static Alert win;
-    private static String p;
     private static final File BG1 = new File("src/comp1140/ass2/gui/assets/bg.jpg");
     private static final File BG2 = new File("src/comp1140/ass2/gui/assets/bg2.jpg"); //https://i.ytimg.com/vi/bOlIncfaVOU/maxresdefault.jpg
     private static ImageView bg;
@@ -193,7 +193,7 @@ public class Viewer extends Application {
         timeBoard();
         p = "";
         c = PatchworkGame.initPathCircle();
-        c="AVbBCDEFGHIJKLMNOPQRSTUWXYZacdefg";
+        //c="AVbBCDEFGHIJKLMNOPQRSTUWXYZacdefg";
         if (c.indexOf('A') != c.length()-1) c = c.substring(c.indexOf('A') + 1) + c.substring(0, c.indexOf('A') + 1);
         candidateArea(c);
         timeToken();
@@ -493,6 +493,9 @@ public class Viewer extends Application {
                             err.showAndWait();
                             confirm.setDisable(true);
                             advance.setDisable(false);
+                            tilesArea.setDisable(false);
+                            setRotate(0);
+                            rotated=false;
                             setLayoutX(homeX);
                             setLayoutY(homeY);
                         }
@@ -542,6 +545,8 @@ public class Viewer extends Application {
                         err.setContentText("It's Player 1's Turn");
                         err.showAndWait();
                     }
+                    setRotate(0);
+                    rotated=false;
                     setLayoutX(homeX);
                     setLayoutY(homeY);
                 }
@@ -554,10 +559,14 @@ public class Viewer extends Application {
                         err.setContentText("It's Player 2's Turn");
                         err.showAndWait();
                     }
+                    setRotate(0);
+                    rotated=false;
                     setLayoutX(homeX);
                     setLayoutY(homeY);
                 }
             } else {
+                setRotate(0);
+                rotated=false;
                 setLayoutX(homeX);
                 setLayoutY(homeY);
             }
