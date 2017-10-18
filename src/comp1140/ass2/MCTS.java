@@ -1,14 +1,17 @@
 package comp1140.ass2;
 
 import javax.sound.midi.Patch;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.List;
+import java.util.Scanner;
 
 public class MCTS {
     Random random = new Random();
-    int ActionOfN = 3;
-    MCTS[] children;
+    int ActionOfN = 5;
+    List<MCTS> children = new ArrayList<MCTS>();
     double visits, values;
     double adjust = 1e-6;
     String circle, placement;
@@ -19,15 +22,40 @@ public class MCTS {
         PatchworkGame.three = c.substring(0, 3).toCharArray();
     }
 
-    public void readInfo(String file) {
-
+    public static void readInfo(String file, MCTS m) throws FileNotFoundException {
+        Scanner s = new Scanner(new File(file));
+        s.useDelimiter("[,\n]");
+        while (s.hasNext()) {
+            String c = s.next();
+            System.out.println(c);
+            if (c.equals(m.circle)) {
+                String n = s.next();
+                String w = "0";
+                for (int j = 0; j < 4; j++) w = s.next();
+                String p = "";
+                while (n.length() > 0) {
+                    if (n.charAt(0) == '.') {
+                        p += ".";
+                        n = n.substring(1);
+                    } else {
+                        p += n.substring(0, 4);
+                        n = n.substring(4);
+                    }
+                    m.children.add(0, new MCTS(c, p));
+                    m = m.children.get(0);
+                    m.visits++;
+                    m.values += Integer.parseInt(w);
+                }
+            }
+            for (int j = 0; j < 5; j++) if (s.hasNext()) s.next();
+        }
     }
 
-    public String actionSelect() {
+    public MCTS actionSelect() {
         List<MCTS> visitNode = new ArrayList<MCTS>();
         MCTS current = this;
         visitNode.add(this);
-        while (current.children != null) {
+        while (current.children == null) {
             current = current.selection();
             visitNode.add(current);
         }
@@ -36,10 +64,10 @@ public class MCTS {
         visitNode.add(newNode);
         double value = gameOver(newNode);
         for (MCTS mcts : visitNode) {
-            // would need extra logic for n-player game
             mcts.stateUpdates(value);
         }
-        return ""+this.values;
+
+        return this;
     }
 
     public MCTS selection() {
@@ -53,70 +81,44 @@ public class MCTS {
                 bestValue = valueUCT;
             }
         }
+        System.out.println(selects.placement);
         return selects;
     }
 
 
-//        char tile = PatchworkAI.smarterGenerator(PatchworkGame.initPathCircle(),"").charAt(0);
-
-//
-//        if (tile == '.'){
-//            for (MCTS m : children) {
-//                double valueUCT = m.values / (m.visits + adjust) + Math.sqrt(Math.log(visits + 1) / (m.visits + adjust)) +
-//                        random.nextDouble() * adjust;
-//                if (valueUCT > bestValue) {
-//                    selects = m;
-//                    bestValue = valueUCT;
-//                }
-//            }
-//            return selects;
-//        }
-//        else {
-//            for (char i = 'A'; i < 'J'; i++)
-//                for (char j = 'A'; j < 'J'; j++) {
-//                    if (PatchworkGame.p2.squiltBoard[i - 'A'][j - 'A']) continue;
-//                    for (char k = 'A'; k < 'I'; k++)
-//                        if (PatchworkGame.isPlacementValid(Viewer.c, "" + tile + i + j + k)) {
-//                            for (MCTS m : children) {
-//                                double valueUCT = m.values / (m.visits + adjust) + Math.sqrt(Math.log(visits + 1) / (m.visits + adjust)) +
-//                                        random.nextDouble() * adjust;
-//                                if (valueUCT > bestValue) {
-//                                    selects = m;
-//                                    bestValue = valueUCT;
-//                                    break;
-//                                }
-//                            }
-//                        }
-//                }
-//        }
-//        return selects;
-
     public void expandtion() {
-        children = new MCTS[ActionOfN+1];
+        children = new ArrayList<MCTS>();
         int n = 0;
         char t = PatchworkAI.smarterGenerator(circle, placement).charAt(0);//New Tile
-        outer:
-        while (n < ActionOfN) {
-            for (char i = 'A'; i < 'J'; i++) {
-                for (char j = 'A'; j < 'J'; j++) {
-                    if (PatchworkGame.p2.squiltBoard[i - 'A' + 1][j - 'A' + 1]) continue;
-                    for (char k = 'A'; k < 'I'; k++) {
-                        String p = "" + t + i + j + k;
-                        if (PatchworkGame.isPlacementValid(circle, p)) {
-                            children[n++] = new MCTS(circle, placement+p);
-                        }
-                        if (n>=ActionOfN)                        break outer;
-                    }
-                }
+        while (true) {
+            int r = random.nextInt(8 * 9 * 9);
+            String p = "" + t + (char) ('A' + r / 72) + (char) ('A' + r / 8 % 9) + (char) ('A' + r % 8);
+            if (PatchworkGame.isPlacementValid(circle, p)) {
+                children.add(new MCTS(circle, placement + p));
+                n++;
             }
+            if (n >= ActionOfN) break;
         }
-        children[n++]=new MCTS(circle, placement+'.');
+//        outer:
+//        for (char i = 'A'; i < 'J'; i++) {
+//            for (char j = 'A'; j < 'J'; j++) {
+//                if (PatchworkGame.p2.squiltBoard[i - 'A'][j - 'A']) continue;
+//                for (char k = 'A'; k < 'I'; k++) {
+//                    String p = "" + t + i + j + k;
+//                    if (PatchworkGame.isPlacementValid(circle, p)) {
+//                        children.add(new MCTS(circle, placement + p));
+//                        n++;
+//                    }
+//                    if (n >= ActionOfN) break outer;
+//                }
+//            }
+//        }
+        children.add(new MCTS(circle, placement + '.'));
     }
 
     public double gameOver(MCTS last) {
         String p = last.placement;
         while (PatchworkGame.p1.timecount < 53 && PatchworkGame.p2.timecount < 53) {
-            System.out.println(p);
             p += PatchworkAI.smarterGenerator(circle, p);
             PatchworkGame.isPlacementValid(circle, p);
         }
@@ -125,12 +127,14 @@ public class MCTS {
 
     public void stateUpdates(double value) {
         visits++;
-        values+=value;
+        values += value;
     }
 
-    public static void main(String[] args) {
-        MCTS mcts = new MCTS("BCDEFGHIJKLMNOPQRSTUVWXYZabcdefgA","");
-        System.out.println(mcts.actionSelect());
-    }
+    public static void main(String[] args) throws FileNotFoundException {
+        MCTS mcts = new MCTS("eTLcRBMDGHJaOYAbdSfFNPUIVCWZEXKQg", "");
+        readInfo("./data/Dataset02.csv", mcts);
+        mcts.actionSelect();
+        for (MCTS m : mcts.children) System.out.println(m.values);
+}
 
 }
