@@ -38,7 +38,6 @@ public class Viewer extends Application {
     private static final int BOARD_SIZE = 270;
 
     public static String c;
-    public static String p;
 
     private final Group root = new Group();
     private final Group controls = new Group();
@@ -64,6 +63,8 @@ public class Viewer extends Application {
     private static Alert err;
     private static Alert warn;
     private static Alert win;
+    public static String p;
+
     private static final File BG1 = new File("src/comp1140/ass2/gui/assets/bg.jpg");
     private static final File BG2 = new File("src/comp1140/ass2/gui/assets/bg2.jpg"); //https://i.ytimg.com/vi/bOlIncfaVOU/maxresdefault.jpg
     private static ImageView bg;
