@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5a32a6dc-c878-4401-8c60-960874df58aa" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/game.jar" afterPath="$PROJECT_DIR$/game.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pyscript/k_trans.py" afterPath="$PROJECT_DIR$/pyscript/k_trans.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/comp1140/ass2/State.java" afterPath="$PROJECT_DIR$/src/comp1140/ass2/State.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/comp1140/ass2/Viewer.java" afterPath="$PROJECT_DIR$/src/comp1140/ass2/Viewer.java" />
     </list>
@@ -42,8 +42,8 @@
       <file leaf-file-name="State.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/State.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="262">
-              <caret line="171" column="20" lean-forward="false" selection-start-line="171" selection-start-column="20" selection-end-line="171" selection-end-column="20" />
+            <state relative-caret-position="349">
+              <caret line="175" column="35" lean-forward="false" selection-start-line="175" selection-start-column="35" selection-end-line="175" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -54,8 +54,8 @@
       <file leaf-file-name="PatchworkGame.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/PatchworkGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="241">
-              <caret line="417" column="43" lean-forward="false" selection-start-line="417" selection-start-column="43" selection-end-line="417" selection-end-column="43" />
+            <state relative-caret-position="712">
+              <caret line="424" column="5" lean-forward="true" selection-start-line="424" selection-start-column="5" selection-end-line="424" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -64,8 +64,8 @@
       <file leaf-file-name="Viewer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/Viewer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="414" column="63" lean-forward="true" selection-start-line="414" selection-start-column="63" selection-end-line="414" selection-end-column="63" />
+            <state relative-caret-position="491">
+              <caret line="94" column="68" lean-forward="false" selection-start-line="94" selection-start-column="68" selection-end-line="94" selection-end-column="68" />
               <folding />
             </state>
           </provider>
@@ -113,9 +113,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/comp1140/ass2/PatchworkGame.java" />
         <option value="$PROJECT_DIR$/pyscript/k_trans.py" />
         <option value="$PROJECT_DIR$/src/comp1140/ass2/State.java" />
+        <option value="$PROJECT_DIR$/src/comp1140/ass2/PatchworkGame.java" />
         <option value="$PROJECT_DIR$/src/comp1140/ass2/Viewer.java" />
       </list>
     </option>
@@ -336,6 +336,12 @@
     <servers />
   </component>
   <component name="TestHistory">
+    <history-entry file="PlacementValidTest - 2017.10.20 at 01h 31m 17s.xml">
+      <configuration name="PlacementValidTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="PlacementValidTest - 2017.10.20 at 01h 31m 37s.xml">
+      <configuration name="PlacementValidTest" configurationId="JUnit" />
+    </history-entry>
     <history-entry file="ScoreFromPlacementTest - 2017.10.19 at 01h 13m 05s.xml">
       <configuration name="ScoreFromPlacementTest" configurationId="JUnit" />
     </history-entry>
@@ -348,7 +354,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="390" y="24" width="1303" height="780" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
@@ -360,12 +365,12 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2332815" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="1.0" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Execute Anonymous" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23172629" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1992032" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1992032" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24940239" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -698,24 +703,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/PatchworkGame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="417" column="43" lean-forward="false" selection-start-line="417" selection-start-column="43" selection-end-line="417" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/State.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="171" column="20" lean-forward="false" selection-start-line="171" selection-start-column="20" selection-end-line="171" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/MCTS.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1602">
@@ -744,10 +731,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/State.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="349">
+          <caret line="175" column="35" lean-forward="false" selection-start-line="175" selection-start-column="35" selection-end-line="175" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/PatchworkGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="712">
+          <caret line="424" column="5" lean-forward="true" selection-start-line="424" selection-start-column="5" selection-end-line="424" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/Viewer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="414" column="63" lean-forward="true" selection-start-line="414" selection-start-column="63" selection-end-line="414" selection-end-column="63" />
+        <state relative-caret-position="491">
+          <caret line="94" column="68" lean-forward="false" selection-start-line="94" selection-start-column="68" selection-end-line="94" selection-end-column="68" />
           <folding />
         </state>
       </provider>

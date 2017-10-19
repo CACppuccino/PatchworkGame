@@ -167,6 +167,15 @@ public class State {
     //    the functions is called to get two players' score,
 // first int is for player 1, second for player 2
 
+    static void printSb(State player){
+        for (boolean[] x: player.squiltBoard)
+        {
+            for (boolean xx:x) {
+                System.out.print(xx ? "*" : "@");
+            }
+            System.out.print("\n");
+        }
+    }
     //this function should only be called at the final of the game
     public int getScore() {
         scoreCount = buttonCount - squareleft * 2;

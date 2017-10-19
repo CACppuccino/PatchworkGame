@@ -92,7 +92,7 @@ public class Viewer extends Application {
                     rotate = p.charAt(3);
 //
             /*get the image path*/
-            String tileN = tileName + (tileName > 'a' && tileName < 'i' ? "_.png" : ".png");
+            String tileN = tileName + (tileName >= 'a' && tileName < 'i' ? "_.png" : ".png");
             String tilePath = "file:" + (new File("src/comp1140/ass2/gui/assets/" + tileN)).getAbsolutePath();
             Image tile = new Image(tilePath);
             ImageView tileView = new ImageView(tile);
@@ -375,6 +375,7 @@ public class Viewer extends Application {
         }
     }
 
+    // make every tile as a class with embedded listener methods in it
     class DraggableTile extends ImageView {
         int tileCost;
         char tName;
@@ -598,6 +599,7 @@ public class Viewer extends Application {
         turn.setText("Player " + t + "'s turn");
         btn1.setText(p1.buttonCount + " buttons");
         btn2.setText(p2.buttonCount + " buttons");
+        State.printSb(PatchworkGame.p2);
         clickArea();
 
     }
