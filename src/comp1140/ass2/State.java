@@ -169,7 +169,7 @@ public class State {
 
     //this function should only be called at the final of the game
     public int getScore() {
-        scoreCount = scoreCount + buttonCount - squareleft * 2;
+        scoreCount = buttonCount - squareleft * 2;
         return scoreCount;
     }
 }

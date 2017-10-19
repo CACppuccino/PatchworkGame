@@ -15,6 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import java.io.File;
 
@@ -223,7 +224,9 @@ public class Viewer extends Application {
                 int s1= PatchworkGame.getScoreForPlacement(c,p, true);
                 int s2=PatchworkGame.getScoreForPlacement(c,p, false);
                 System.out.println(p);
-                win.setContentText("Player " + (s1>s2 ? 1 : 2) + " wins\n"+s1+" "+s2);
+                if (s1!=s2)
+                    win.setContentText("Player " + (s1>s2 ? 1 : 2) + " wins\n"+ "Player 1:" +s1+" scores\n"+ "Player 2:" +s2 +" scores");
+                else    win.setContentText("Tie game!");
                 win.showAndWait();
                 reset();
             }
@@ -406,7 +409,11 @@ public class Viewer extends Application {
 
             /* event handler*/
             setOnScroll(event -> {
-                setRotate((getRotate() + 90) % 360);
+                if ((getRotate()+90)==360){
+                    setScaleX(-getScaleX());
+                    setRotate(0);
+                }else                setRotate((getRotate()+90));
+
                 System.out.println(getLayoutX() + " " + getLayoutY());
                 System.out.println(getFitWidth() + " " + getFitHeight());
                 rotated = ((int) getRotate() / 90) % 2 == 1;
@@ -418,9 +425,9 @@ public class Viewer extends Application {
                     setLayoutY(getLayoutY() - (getFitWidth() / 2 - getFitHeight() / 2));
                 }
 
+
                 event.consume();
             });
-
             setOnMousePressed(event -> {      // mouse press indicates begin of drag
                 mouseX = event.getSceneX();
                 mouseY = event.getSceneY();
@@ -465,7 +472,9 @@ public class Viewer extends Application {
                                 int s1 = PatchworkGame.getScoreForPlacement(c, p, true);
                                 int s2 = PatchworkGame.getScoreForPlacement(c, p, false);
                                 System.out.println(s1 + s2);
-                                win.setContentText("Player " + (s1 > s2 ? 1 : 2) + " wins\n" + "Player 1: " + s1 + " Player 2: " + s2);
+                                if (s1!=s2)
+                                    win.setContentText("Player " + (s1>s2 ? 1 : 2) + " wins\n"+ "Player 1:" +s1+" scores\n"+ "Player 2:" +s2 +" scores");
+                                else win.setContentText("Tie game !");
                                 win.showAndWait();
                                 reset();
                             }
