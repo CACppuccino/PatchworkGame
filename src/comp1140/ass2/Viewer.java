@@ -212,6 +212,7 @@ public class Viewer extends Application {
         setBtnPos(advance,460,250);
         advance.setDisable(false);
         advance.setOnMouseClicked(event -> {
+            tilesArea.getChildren().clear();
             p += ".";
             int t = State.check_turn(PatchworkGame.p1, PatchworkGame.p2);
             PatchworkGame.isPlacementValid(c, p);
@@ -498,6 +499,9 @@ public class Viewer extends Application {
                             rotated=false;
                             setLayoutX(homeX);
                             setLayoutY(homeY);
+                            tilesArea.setDisable(false);
+                            tilesArea.getChildren().add(this);
+                            root.getChildren().remove(this);
                         }
                         event.consume();
                     }

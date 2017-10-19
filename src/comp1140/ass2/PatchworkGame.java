@@ -421,6 +421,7 @@ public class PatchworkGame {
     }
 
     public static void main(String[] args) {
+//        System.out.println(isPlacementValid("FEJbDMKaBeLHfSXVcCOIUWgYRZPdGQTNA",".HAAA.LADB.dAFA.EAHB.aCAC...eCGF.....hDCACDEAODHD.UFBAhAAA.FFFH.KHGA...hFDADIAA............hHAA.......hHCA....."));
     }
 
 }
