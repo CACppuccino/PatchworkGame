@@ -22,11 +22,6 @@ public class Matrix{
 //            for (double c : cc)
 //                c = ele;
     }
-    Matrix(double[][] matrix){
-        row = matrix.length;
-        col = matrix.length;
-        this.matrix = matrix;
-    }
 //    Matrix(double[] vector){
 //        row = vector.length;
 //        col = 1;

@@ -3,7 +3,7 @@ from keras.models import Sequential, load_model, model_from_json
 from keras.layers import Dense
 import numpy
 
-model = load_model('./t05.h5')
+model = load_model('../model/m_plc.h5')
 
 json_string = model.to_json()
 #print (json_string)
@@ -15,31 +15,28 @@ weights  = model.get_weights()
 #    print ('neruon',len(xx))
 #for zz in weights[4]:
 #    print ('1-neruon',len(zz))
-f = open('weight.txt','w')
+f = open('weight_plc.txt','w')
+print('0:m',weights[0])
 for x in weights[0]:
+    print ('0:',len(x))
     for x0 in x:
         f.write(repr(x0))
         f.write(',')
 f.write('\n')
+print('1:',len(weights[1]))
 for x in weights[1]:
     f.write(repr(x))
     f.write(',')
 f.write('\n')
+print('2:',len(weights[2]))
 for x in weights[2]:
+    print('2:x',len(x))
     for x2 in x:
         f.write(repr(x2))
         f.write(',')
 f.write('\n')
+print('3:',len(weights[3]))
 for x in weights[3]:
-     f.write(repr(x))
-     f.write(',')
-f.write('\n')  
-for x in weights[4]:
-    for x4 in x:
-        f.write(repr(x4))
-        f.write(',')
-f.write('\n')
-for x in weights[5]:
   #  for x5 in x:
     f.write(repr(x))
     f.write(',')

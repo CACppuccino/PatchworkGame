@@ -7,16 +7,16 @@ import numpy
 seed = 3
 numpy.random.seed(seed)
 # load pima indians dataset
-dataset = numpy.loadtxt("./data/DetailDataset05.csv", delimiter=",")
+dataset = numpy.loadtxt("../data/DetailDataset07.csv", delimiter=",")
 # split into input (X) and output (Y) variables
-X_train = dataset[0:1000,1:172]
-Y_train = dataset[0:1000,0]
+X_train = dataset[0:500,1:172]
+Y_train = dataset[0:500,0]
 X_test = dataset[3000:, 1:172]
 Y_test = dataset[3000:, 0]
 # create model
 model = Sequential()
 model.add(Dense(12, input_dim=171, init='uniform'))
-model.add(Dense(171, init='uniform', activation='relu'))
+#model.add(Dense(171, init='uniform', activation='relu'))
 model.add(Dense(788, init='uniform', activation='softmax'))
 # Compile model
 model.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
@@ -33,7 +33,7 @@ scores = model.evaluate(X_test, Y_test)
 print("\n%s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
 
 # Save the model and weights
-model.save("./models/t052_02.h5")
+model.save("../model/m_plc.h5")
 
 # If need to load the model
 # keras.models.load_model("./models/t01_300.h5")

@@ -11,7 +11,7 @@ import static comp1140.ass2.PatchworkAI.smarterGenerator;
 
 
 public class AITraining {
-    static final int ROUNDS = 2000;
+    static final int ROUNDS = 500;
     static final int LAYERS = 6;
     static Matrix[] WEIGHTS = new Matrix[LAYERS];
     public double loss(){
@@ -49,7 +49,8 @@ public class AITraining {
 //                    placement = placement + PatchworkAI.randomGenerator(patchCircle,placement);
 //
 //                if (!PatchworkGame.isPlacementValid(patchCircle, placement)) throw new Error("wrong plc");
-//                    placement = placement + PatchworkAI.randomGenerator(patchCircle, placement);
+                    placement = placement + PatchworkAI.smarterGenerator(patchCircle, placement);
+                    placement = placement + network02(patchCircle,placement);
 //                if (!PatchworkGame.isPlacementValid(patchCircle, placement)) throw new Error("wrong plc");
                 }
                 score1 =PatchworkGame.getScoreForPlacement(patchCircle,placement,true) ;
@@ -59,6 +60,7 @@ public class AITraining {
 
                 stat[winer]++;
                 writer.write(placement+","+winer+","+score1+","+score2+","+diff+"\n");
+                System.out.println("Round:"+i);
                 System.out.println(placement);
                 System.out.println(winer);
 //            if (PatchworkGame.isPlacementValid(patchCircle,placement)) System.out.println("OK");
@@ -346,37 +348,15 @@ public class AITraining {
 
         return result;
     }
-    static void network01(char tile){
-        Matrix[] nn = new Matrix[LAYERS];
-        // initialise the layers
-        nn[0] = new Matrix(7,12,0);
-        nn[1] = new Matrix(12,7,0);
-        nn[2] = new Matrix(7,35,0);
-        // read and set the layers'weight
-
-        // use the layers to calculate the anwser
-        for (int i=0;i<LAYERS;i++)
-        {
-            for (int j=0;j<nn[i].row;j++)
-            {
-                for (int k=0;k<nn[i].col;k++){
-
-                    //different activation functions to calculate in different layers
-//                    if (i==0)
-                }
-            }
-        }
-
-    }
     static String network02(String patchCircle, String placement){
         try {
             String smg = smarterGenerator(patchCircle,placement);
             char tile = smg.charAt(0);
             //        input.
             double[] input = encoding(patchCircle, placement,tile);
-            double[][] inputVec = new double[input.length][1];
+            double[][] inputVec = new double[1][input.length];
             for (int j=0;j<input.length;j++)
-                inputVec[j][0] = input[j];
+                inputVec[0][j] = input[j];
             Matrix[] nn = new Matrix[LAYERS];
             Matrix result;
             // initialise the layers
@@ -396,17 +376,21 @@ public class AITraining {
                         for (int j=0;j<nn[h].col;j++)
                             nn[h].setMatrix(i,j,s.nextFloat());
 
-                System.out.println("***");
-                System.out.println(Arrays.deepToString(nn[0].matrix));
+//                System.out.println("***");
+//                System.out.println(Arrays.deepToString(nn[0].matrix));
             }catch (Exception e){e.printStackTrace();}
 
             // use the layers to calculate the anwser
-
-                result = Matrix.multiply(new Matrix(inputVec), nn[0]);
-                result = Matrix.multiply(result,nn[1]);
+//            System.out.println(inputVec);
+            Matrix cc = new Matrix(1,171);
+            for (int x=0;x<1;x++)
+                for (int y=0;y<171;y++)
+                    cc.matrix[x][y] = inputVec[0][y];
+                result = Matrix.multiply(cc, nn[0]);
                 result = Matrix.multiply(result,nn[2]);
-                result = Relu(Matrix.multiply(result,nn[3]));
-                result = Softmax(Matrix.multiply(result,nn[4]));
+                result = Relu(Matrix.multiply(result,nn[4]));
+//                result = Relu(Matrix.multiply(result,nn[]));
+                result = Softmax(Matrix.multiply(result,nn[5]));
                 double max=0;
                 int sign=0;
                 for (int i=0;i<result.row;i++)
@@ -425,8 +409,7 @@ public class AITraining {
     }
     //for training, recursive training
     public static void main(String[] args) {
-//        fileIO2("./data/DetailDataset06.csv","./data/Dataset06.csv");
-//        String ta = network02("YAHOeDKIMJcCbNFagSBEfQXVRGZWULPdT","HAAAeAAAKADAMACA.CAFA.FAFA..aAGDBBHAEBDF.QCCAhAAA.RCEAZEFBLCFAhAAAdFCAADIB.DCCB");
+        fileIO("./data/Dataset07.csv");
     }
 
 }
