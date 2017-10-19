@@ -14,15 +14,6 @@ public class AITraining {
     static final int ROUNDS = 2000;
     static final int LAYERS = 6;
     static Matrix[] WEIGHTS = new Matrix[LAYERS];
-//    static {
-//        try {
-//            BufferedReader br = new BufferedReader(new FileReader("./model/t01_300.csv"));
-//            String line;
-//            while ((line=br.readLine())!=null && !line.isEmpty()){
-//
-//            }
-//        }catch (Exception e){e.printStackTrace();}
-//    }
     public double loss(){
         return 0;
     }

@@ -3,4 +3,5 @@ We declare that the work we have submitted for Stage G of this assignment and al
 Background images taken from online.
 URLs in code comments.
 
-Signed: Mary Jones (u2345678), Bob Smith (u3456789), and Sue Black (u0123456)
+
+Signed: Adonis Mouti (u6385898), Weitao Chen (u6309924), and Ziyang Liu (u6210090)
