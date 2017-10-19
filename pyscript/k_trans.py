@@ -18,30 +18,30 @@ weights  = model.get_weights()
 f = open('weight.txt','w')
 for x in weights[0]:
     for x0 in x:
-        f.write(x0)
+        f.write(repr(x0))
         f.write(',')
 f.write('\n')
 for x in weights[1]:
-    f.write(x)
+    f.write(repr(x))
     f.write(',')
 f.write('\n')
 for x in weights[2]:
     for x2 in x:
-        f.write(x2)
+        f.write(repr(x2))
         f.write(',')
 f.write('\n')
 for x in weights[3]:
-     f.write(x)
+     f.write(repr(x))
      f.write(',')
 f.write('\n')  
 for x in weights[4]:
     for x4 in x:
-        f.write(x4)
+        f.write(repr(x4))
         f.write(',')
 f.write('\n')
 for x in weights[5]:
   #  for x5 in x:
-    f.write(x)
+    f.write(repr(x))
     f.write(',')
 
 print('end-----------')

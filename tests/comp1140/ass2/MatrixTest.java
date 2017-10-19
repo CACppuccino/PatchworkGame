@@ -106,7 +106,7 @@ public class MatrixTest {
                     b.matrix[k][j] = ele;
                 }
             }
-            assertTrue("The transpose of a  " + Arrays.deepToString(a.transpose().matrix) + " is not equal to b " + Arrays.deepToString(b.matrix), Arrays.deepEquals(a.transpose().matrix, b.matrix));
+            assertTrue("The transpose of a  " + Arrays.deepToString(Matrix.transpose(a).matrix) + " is not equal to b " + Arrays.deepToString(b.matrix), Arrays.deepEquals(Matrix.transpose(a).matrix, b.matrix));
         }
     }
 

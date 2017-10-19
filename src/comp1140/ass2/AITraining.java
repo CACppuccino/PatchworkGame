@@ -2,7 +2,9 @@ package comp1140.ass2;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
+import java.util.Scanner;
 
 import static comp1140.ass2.PatchworkAI.generateAllPositionPlacement;
 import static comp1140.ass2.PatchworkAI.smarterGenerator;
@@ -10,7 +12,7 @@ import static comp1140.ass2.PatchworkAI.smarterGenerator;
 
 public class AITraining {
     static final int ROUNDS = 2000;
-    static final int LAYERS = 3;
+    static final int LAYERS = 6;
     static Matrix[] WEIGHTS = new Matrix[LAYERS];
 //    static {
 //        try {
@@ -326,18 +328,24 @@ public class AITraining {
 //        ArrayList<String> candi = generateAllPositionPlacement(patchCircle,placement);
         State[] players = {PatchworkGame.p1,PatchworkGame.p2};
         int turn = State.check_turn(players[0],players[1])-1;
-        double[] result = new double[170];
+        double[] result = new double[171];
             PatchworkGame.isPlacementValid(patchCircle,placement);
             int order = tileToNum(tile);
             result[0] = order;
-            result[1] = PatchworkGame.tileTimetoken[order];
-            result[2] = PatchworkGame.tileButton[order];
-            result[3] = PatchworkGame.tileSpace[order].length;
-            result[4] = PatchworkGame.tileCost[order];
-            result[5] = players[turn].buttonCount;
-            result[6] = players[turn].timecount;
-            result[6] = players[turn].specialButton;
-            result[7] = players[turn].squareleft;
+            if (order!=34) {
+                result[1] = PatchworkGame.tileTimetoken[order];
+                result[2] = PatchworkGame.tileButton[order];
+                result[3] = PatchworkGame.tileSpace[order].length;
+                result[4] = PatchworkGame.tileCost[order];
+            }else {
+                for (int i=1;i<=4;i++)
+                    result[i] = 0;
+            }
+                result[5] = players[turn].buttonCount;
+                result[6] = players[turn].timecount;
+                result[6] = players[turn].specialButton;
+                result[7] = players[turn].squareleft;
+
             for (int k=0;k<9;k++)
                 for (int h =0 ;h<9;h++)
                     result[k*9+h+8] = (PatchworkGame.p1.squiltBoard[k][h]?0:1);
@@ -375,6 +383,9 @@ public class AITraining {
             char tile = smg.charAt(0);
             //        input.
             double[] input = encoding(patchCircle, placement,tile);
+            double[][] inputVec = new double[input.length][1];
+            for (int j=0;j<input.length;j++)
+                inputVec[j][0] = input[j];
             Matrix[] nn = new Matrix[LAYERS];
             Matrix result;
             // initialise the layers
@@ -383,13 +394,24 @@ public class AITraining {
             nn[2] = new Matrix(12, 171, 0);
             nn[3] = new Matrix(171, 1, 0);
             nn[4] = new Matrix(171, 788, 0);
+            nn[5] = new Matrix(788,1,0);
             // read and set the layers'weight
+            String file = "./model/weight.csv";
+            try {
+                Scanner s = new Scanner(new File(file));
+                s.useDelimiter("[,\n]");
+                for (int h=0;h<6;h++)
+                    for (int i =0;i<nn[h].row;i++)
+                        for (int j=0;j<nn[h].col;j++)
+                            nn[h].setMatrix(i,j,s.nextFloat());
 
+                System.out.println("***");
+                System.out.println(Arrays.deepToString(nn[0].matrix));
+            }catch (Exception e){e.printStackTrace();}
 
             // use the layers to calculate the anwser
 
-                result = Matrix.multiply(new Matrix(input).transpose(), nn[0]);
-
+                result = Matrix.multiply(new Matrix(inputVec), nn[0]);
                 result = Matrix.multiply(result,nn[1]);
                 result = Matrix.multiply(result,nn[2]);
                 result = Relu(Matrix.multiply(result,nn[3]));
@@ -412,8 +434,8 @@ public class AITraining {
     }
     //for training, recursive training
     public static void main(String[] args) {
-        fileIO2("./data/DetailDataset06.csv","./data/Dataset06.csv");
-
+//        fileIO2("./data/DetailDataset06.csv","./data/Dataset06.csv");
+//        String ta = network02("YAHOeDKIMJcCbNFagSBEfQXVRGZWULPdT","HAAAeAAAKADAMACA.CAFA.FAFA..aAGDBBHAEBDF.QCCAhAAA.RCEAZEFBLCFAhAAAdFCAADIB.DCCB");
     }
 
 }

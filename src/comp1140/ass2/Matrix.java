@@ -27,11 +27,12 @@ public class Matrix{
         col = matrix.length;
         this.matrix = matrix;
     }
-    Matrix(double[] vector){
-        row = vector.length;
-        col = 1;
-        this.matrix[0] =vector;
-    }
+//    Matrix(double[] vector){
+//        row = vector.length;
+//        col = 1;
+//        for (int i=0;i<vector.length;i++)
+//            matrix[0][i] = vector[i];
+//    }
     public double[][] getMatrix(){return matrix;}
     void setZero(){
         for (int i =0;i<row;i++)
@@ -99,12 +100,14 @@ public class Matrix{
         }
     }
 
-    public Matrix transpose(){
-        Matrix c = new Matrix(this.row,this.col);
-        for (int i=0;i<row;i++)
-            for (int j = 0; j < col; j++)
-                c.matrix[i][j] = this.matrix[j][i];
-        return c;
+    public static Matrix transpose(Matrix oldM){
+//        Matrix c = new Matrix(this.row,this.col);
+        Matrix newM = new Matrix(oldM.col,oldM.row);
+        for (int i=0;i<oldM.col;i++)
+            for (int j = 0; j < oldM.row; j++)
+                newM.matrix[i][j] =
+                        oldM.matrix[j][i];
+        return newM;
     }
 
     public boolean isSquare(){return row==col;}
@@ -145,15 +148,8 @@ public class Matrix{
         return mat;
     }
     static Matrix multiply(Matrix a, Matrix b) throws Exception{
-        if (a.col!=b.row) throw new Exception("wrong size matrix");
+        if (a.col!=b.row) throw new Exception("wrong size matrix"+a.row+" "+a.col+" "+b.row+" "+b.col);
         Matrix c = new Matrix(a.row,b.col,0);
-//        for (int i=0;i<a.row;i++){
-//            for (int j=0;j<a.col;j++){
-//                double x = a.getElement(i,j);
-//                for (int h=0;h<b.col;h++)
-//                    c.setMatrix(i,j,a.getElement(i,j)+x*b.getElement(j,h));
-//            }
-//        }
         for (int i = 0; i < a.row; i++) {
             for (int j = 0; j < b.col; j++) {
                 for (int k = 0; k < a.col; k++) {
@@ -165,9 +161,7 @@ public class Matrix{
     }
 
     public static void main(String[] args) throws Exception{
-//        Matrix a = new Matrix(9,3);
-//        a.setZero();
-//        a.printMatrix();
+
         Matrix a = new Matrix(5, 5);
         for(int i=0;i<5;i++) {
             for (int j = 0; j < 5; j++) a.setMatrix(i, j, i + j);
@@ -178,45 +172,3 @@ public class Matrix{
     }
 
 }
-//public class Matrix {
-//    int dimension;
-//    int[] rowNum;
-//    double[] matrix;
-//    Matrix(int dimension){this.dimension = dimension;this.rowNum = new int[dimension];}
-//
-//    public void setDimLength(int[] dimLength) throws Exception{
-//        if (dimLength.length!=dimension)
-//            throw new Exception("Wrong dimension length input");
-//        for (int i=0;i < dimLength.length;i++)
-//            rowNum[i] = dimLength[i];
-//    }
-//    //0 {}/ 1 {0,1,2..}/2 {00,10,01,11} //
-//    // 3 {00-0,1,2
-//    //    01-0,1,2
-//    //    02-0,1,2...}
-//    //4{000-0,1,2,3 => 0*4^3+0*4^2+0*4^1+(0/1/2/3)*4^0
-//    //  001-0,1,2,3 => 0*4^3+0*4^2+1*4^1+(0/1/2/3)*4^0
-//    //  002-0,1,2,3
-//    //  003-0,1,2,3}
-//    public void setMatrix(int[] dim, double element){
-//        int sum = 0;
-//        for (int i = 0;i < dim.length;i++){
-//            sum += dim[i]*Math.pow(dimension,i);
-//        }
-//        matrix[sum] = element;
-//    }
-//    public double getElement(int[] coordinate) throws Exception {
-//        if (coordinate.length!=this.dimension)
-//            throw new Exception("Not enough number for getElement input, expected "+this.dimension+" but get "+coordinate.length);
-//        int sum = 0;
-//        for (int i = 0;i < coordinate.length;i++){
-//            sum += coordinate[i]*Math.pow(dimension,i);
-//        }
-//        return matrix[sum];
-//    }
-//    public void printMatrix() throws Exception{
-//        for (int i=0;i<matrix.length;i++){
-//
-//        }
-//    }
-//}
