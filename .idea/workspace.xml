@@ -2,9 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5a32a6dc-c878-4401-8c60-960874df58aa" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyscript/.k_adv.py.swp" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/game.jar" afterPath="$PROJECT_DIR$/game.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/comp1140/ass2/State.java" afterPath="$PROJECT_DIR$/src/comp1140/ass2/State.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pyscript/.k_trans.py.swp" afterPath="$PROJECT_DIR$/pyscript/.k_trans.py.swp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pyscript/k_trans.py" afterPath="$PROJECT_DIR$/pyscript/k_trans.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/comp1140/ass2/AITraining.java" afterPath="$PROJECT_DIR$/src/comp1140/ass2/AITraining.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/comp1140/ass2/MCTS.java" afterPath="$PROJECT_DIR$/src/comp1140/ass2/MCTS.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/comp1140/ass2/Matrix.java" afterPath="$PROJECT_DIR$/src/comp1140/ass2/Matrix.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/comp1140/ass2/Viewer.java" afterPath="$PROJECT_DIR$/src/comp1140/ass2/Viewer.java" />
     </list>
     <option name="TRACKING_ENABLED" value="true" />
@@ -15,15 +19,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="AITraining.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AITraining.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/AITraining.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1833">
-              <caret line="348" column="38" lean-forward="false" selection-start-line="348" selection-start-column="38" selection-end-line="348" selection-end-column="38" />
+            <state relative-caret-position="162">
+              <caret line="15" column="6" lean-forward="false" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#619#620#0" expanded="true" />
-                <element signature="e#643#644#0" expanded="true" />
+                <element signature="e#695#696#0" expanded="true" />
+                <element signature="e#719#720#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -32,8 +36,18 @@
       <file leaf-file-name="MCTS.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/MCTS.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1602">
-              <caret line="25" column="44" lean-forward="false" selection-start-line="25" selection-start-column="44" selection-end-line="25" selection-end-column="44" />
+            <state relative-caret-position="1389">
+              <caret line="143" column="34" lean-forward="true" selection-start-line="143" selection-start-column="34" selection-end-line="143" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Matrix.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/Matrix.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="521">
+              <caret line="32" column="31" lean-forward="false" selection-start-line="32" selection-start-column="31" selection-end-line="32" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -42,8 +56,8 @@
       <file leaf-file-name="State.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/State.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="349">
-              <caret line="175" column="35" lean-forward="false" selection-start-line="175" selection-start-column="35" selection-end-line="175" selection-end-column="35" />
+            <state relative-caret-position="381">
+              <caret line="180" column="40" lean-forward="false" selection-start-line="180" selection-start-column="39" selection-end-line="180" selection-end-column="40" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -54,18 +68,18 @@
       <file leaf-file-name="PatchworkGame.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/PatchworkGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="712">
-              <caret line="424" column="5" lean-forward="true" selection-start-line="424" selection-start-column="5" selection-end-line="424" selection-end-column="5" />
+            <state relative-caret-position="232">
+              <caret line="263" column="13" lean-forward="true" selection-start-line="263" selection-start-column="13" selection-end-line="263" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Viewer.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Viewer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/Viewer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="491">
-              <caret line="94" column="68" lean-forward="false" selection-start-line="94" selection-start-column="68" selection-end-line="94" selection-end-column="68" />
+            <state relative-caret-position="275">
+              <caret line="235" column="27" lean-forward="true" selection-start-line="235" selection-start-column="27" selection-end-line="235" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -74,8 +88,18 @@
       <file leaf-file-name="PatchworkAI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/PatchworkAI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="118">
-              <caret line="97" column="24" lean-forward="true" selection-start-line="97" selection-start-column="24" selection-end-line="97" selection-end-column="24" />
+            <state relative-caret-position="185">
+              <caret line="139" column="29" lean-forward="false" selection-start-line="139" selection-start-column="29" selection-end-line="139" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AITrainingMultiThreads.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/AITrainingMultiThreads.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="296">
+              <caret line="94" column="17" lean-forward="true" selection-start-line="94" selection-start-column="17" selection-end-line="94" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -94,7 +118,6 @@
     <findStrings>
       <find>isSeven</find>
       <find>final w</find>
-      <find>System</find>
       <find>Sys</find>
       <find>random</find>
       <find>writer</find>
@@ -105,6 +128,9 @@
       <find>win</find>
       <find>rotate</find>
       <find>click</find>
+      <find>transpose</find>
+      <find>System</find>
+      <find>oftmax</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -116,7 +142,10 @@
         <option value="$PROJECT_DIR$/pyscript/k_trans.py" />
         <option value="$PROJECT_DIR$/src/comp1140/ass2/State.java" />
         <option value="$PROJECT_DIR$/src/comp1140/ass2/PatchworkGame.java" />
+        <option value="$PROJECT_DIR$/src/comp1140/ass2/MCTS.java" />
+        <option value="$PROJECT_DIR$/src/comp1140/ass2/Matrix.java" />
         <option value="$PROJECT_DIR$/src/comp1140/ass2/Viewer.java" />
+        <option value="$PROJECT_DIR$/src/comp1140/ass2/AITraining.java" />
       </list>
     </option>
   </component>
@@ -144,6 +173,11 @@
             <path>
               <item name="comp1140-ass2-wed15c" type="b2602c69:ProjectViewProjectNode" />
               <item name="comp1140-ass2-wed15c" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="comp1140-ass2-wed15c" type="b2602c69:ProjectViewProjectNode" />
+              <item name="comp1140-ass2-wed15c" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="comp1140-ass2-wed15c" type="b2602c69:ProjectViewProjectNode" />
@@ -193,7 +227,45 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Viewer">
+  <component name="RunManager" selected="Application.AITraining">
+    <configuration name="AITraining" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="comp1140.ass2.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="comp1140.ass2.AITraining" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="comp1140-ass2" />
+      <envs />
+    </configuration>
+    <configuration name="MCTS" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="comp1140.ass2.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="comp1140.ass2.MCTS" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="comp1140-ass2" />
+      <envs />
+    </configuration>
     <configuration name="PatchworkGame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -313,7 +385,7 @@
       <properties />
       <listeners />
     </configuration>
-    <list size="7">
+    <list size="9">
       <item index="0" class="java.lang.String" itemvalue="JUnit.GeneratePatchPlacementTest" />
       <item index="1" class="java.lang.String" itemvalue="JUnit.PatchPlacementWellFormedTest" />
       <item index="2" class="java.lang.String" itemvalue="JUnit.PlacementValidTest" />
@@ -321,11 +393,15 @@
       <item index="4" class="java.lang.String" itemvalue="JUnit.ScoreFromPlacementTest" />
       <item index="5" class="java.lang.String" itemvalue="Application.Viewer" />
       <item index="6" class="java.lang.String" itemvalue="Application.PatchworkGame" />
+      <item index="7" class="java.lang.String" itemvalue="Application.MCTS" />
+      <item index="8" class="java.lang.String" itemvalue="Application.AITraining" />
     </list>
     <recent_temporary>
-      <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="Application.Viewer" />
-        <item index="1" class="java.lang.String" itemvalue="Application.PatchworkGame" />
+      <list size="4">
+        <item index="0" class="java.lang.String" itemvalue="Application.AITraining" />
+        <item index="1" class="java.lang.String" itemvalue="Application.MCTS" />
+        <item index="2" class="java.lang.String" itemvalue="Application.Viewer" />
+        <item index="3" class="java.lang.String" itemvalue="Application.PatchworkGame" />
       </list>
     </recent_temporary>
   </component>
@@ -365,12 +441,12 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="1.0" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2332815" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Execute Anonymous" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23172629" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1992032" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1992032" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24940239" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -614,14 +690,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/AITrainingMultiThreads.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="327">
-          <caret line="94" column="17" lean-forward="true" selection-start-line="94" selection-start-column="17" selection-end-line="94" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/Dataset05.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -642,14 +710,6 @@
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/AI/DetailDataset05.csv" />
-    <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/Matrix.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="22" lean-forward="false" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/comp1140/ass2/TestAll.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
@@ -703,57 +763,73 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/MCTS.java">
+    <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/PatchworkGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1602">
-          <caret line="25" column="44" lean-forward="false" selection-start-line="25" selection-start-column="44" selection-end-line="25" selection-end-column="44" />
+        <state relative-caret-position="232">
+          <caret line="263" column="13" lean-forward="true" selection-start-line="263" selection-start-column="13" selection-end-line="263" selection-end-column="13" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/AITraining.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1833">
-          <caret line="348" column="38" lean-forward="false" selection-start-line="348" selection-start-column="38" selection-end-line="348" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#619#620#0" expanded="true" />
-            <element signature="e#643#644#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/PatchworkAI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="97" column="24" lean-forward="true" selection-start-line="97" selection-start-column="24" selection-end-line="97" selection-end-column="24" />
+        <state relative-caret-position="185">
+          <caret line="139" column="29" lean-forward="false" selection-start-line="139" selection-start-column="29" selection-end-line="139" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/AITrainingMultiThreads.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="296">
+          <caret line="94" column="17" lean-forward="true" selection-start-line="94" selection-start-column="17" selection-end-line="94" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/State.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="175" column="35" lean-forward="false" selection-start-line="175" selection-start-column="35" selection-end-line="175" selection-end-column="35" />
+        <state relative-caret-position="381">
+          <caret line="180" column="40" lean-forward="false" selection-start-line="180" selection-start-column="39" selection-end-line="180" selection-end-column="40" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/PatchworkGame.java">
+    <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/Matrix.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="712">
-          <caret line="424" column="5" lean-forward="true" selection-start-line="424" selection-start-column="5" selection-end-line="424" selection-end-column="5" />
+        <state relative-caret-position="521">
+          <caret line="32" column="31" lean-forward="false" selection-start-line="32" selection-start-column="31" selection-end-line="32" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/MCTS.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1389">
+          <caret line="143" column="34" lean-forward="true" selection-start-line="143" selection-start-column="34" selection-end-line="143" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/Viewer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="491">
-          <caret line="94" column="68" lean-forward="false" selection-start-line="94" selection-start-column="68" selection-end-line="94" selection-end-column="68" />
+        <state relative-caret-position="275">
+          <caret line="235" column="27" lean-forward="true" selection-start-line="235" selection-start-column="27" selection-end-line="235" selection-end-column="27" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/comp1140/ass2/AITraining.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="15" column="6" lean-forward="false" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#695#696#0" expanded="true" />
+            <element signature="e#719#720#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

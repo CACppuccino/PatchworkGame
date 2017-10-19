@@ -5,21 +5,22 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import static comp1140.ass2.PatchworkAI.generateAllPositionPlacement;
+import static comp1140.ass2.PatchworkAI.smarterGenerator;
 
 
 public class AITraining {
-    static final int ROUNDS = 5000;
+    static final int ROUNDS = 2000;
     static final int LAYERS = 3;
     static Matrix[] WEIGHTS = new Matrix[LAYERS];
-    static {
-        try {
-            BufferedReader br = new BufferedReader(new FileReader("./model/t01_300.csv"));
-            String line;
-            while ((line=br.readLine())!=null && !line.isEmpty()){
-
-            }
-        }catch (Exception e){e.printStackTrace();}
-    }
+//    static {
+//        try {
+//            BufferedReader br = new BufferedReader(new FileReader("./model/t01_300.csv"));
+//            String line;
+//            while ((line=br.readLine())!=null && !line.isEmpty()){
+//
+//            }
+//        }catch (Exception e){e.printStackTrace();}
+//    }
     public double loss(){
         return 0;
     }
@@ -141,7 +142,8 @@ public class AITraining {
                 placement = new String();
                 while (PatchworkGame.p1.timecount != 53 && PatchworkGame.p2.timecount != 53) {
                     placement = placement + PatchworkAI.smarterGenerator(patchCircle,placement);
-                    if (State.check_turn(PatchworkGame.p1,PatchworkGame.p2)==winer){
+//                    if (State.check_turn(PatchworkGame.p1,PatchworkGame.p2)==winer){
+                if (true){
                         int order =tileToNum(PatchworkAI.smarterGenerator(patchCircle,placement).charAt(0));
 
                         //for tile info
@@ -298,30 +300,51 @@ public class AITraining {
             e.printStackTrace();
         }
     }
-    private static double[][] encoding(String patchCircle, String placement){
-        ArrayList<String> candi = generateAllPositionPlacement(patchCircle,placement);
+    //activation function - ReLu
+    static Matrix Relu(Matrix a) throws Exception{
+        for (int i=0;i<a.row;i++)
+            for (int j=0;j<a.col;j++)
+                a.setMatrix(i,j,Math.max(0,a.getElement(i,j)));
+        return a;
+    }
+    //activation function - Softmax
+    static Matrix Softmax(Matrix a) throws Exception{
+        if (a.col!=1) throw new Exception("not a vecotr in Softmax");
+        double sum =0;
+
+        for (int i=0;i<a.matrix[0].length;i++){
+            a.matrix[0][i] = Math.exp(a.matrix[0][i]);
+            sum += a.matrix[0][i];
+        }
+        for (int i=0;i<a.matrix[0].length;i++)
+            a.matrix[0][i] = a.matrix[0][i]/sum;
+
+        return a;
+    }
+    //
+    private static double[] encoding(String patchCircle, String placement,char tile){
+//        ArrayList<String> candi = generateAllPositionPlacement(patchCircle,placement);
         State[] players = {PatchworkGame.p1,PatchworkGame.p2};
         int turn = State.check_turn(players[0],players[1])-1;
-        double[][] result = new double[candi.size()][170];
-        for (int i=0;i<candi.size();i++){
+        double[] result = new double[170];
             PatchworkGame.isPlacementValid(patchCircle,placement);
-            int order = tileToNum(candi.get(i).charAt(0));
-            result[i][0] = order;
-            result[i][1] = PatchworkGame.tileTimetoken[order];
-            result[i][2] = PatchworkGame.tileButton[order];
-            result[i][3] = PatchworkGame.tileSpace[order].length;
-            result[i][4] = PatchworkGame.tileCost[order];
-            result[i][5] = players[turn].buttonCount;
-            result[i][6] = players[turn].timecount;
-            result[i][6] = players[turn].specialButton;
-            result[i][7] = players[turn].squareleft;
+            int order = tileToNum(tile);
+            result[0] = order;
+            result[1] = PatchworkGame.tileTimetoken[order];
+            result[2] = PatchworkGame.tileButton[order];
+            result[3] = PatchworkGame.tileSpace[order].length;
+            result[4] = PatchworkGame.tileCost[order];
+            result[5] = players[turn].buttonCount;
+            result[6] = players[turn].timecount;
+            result[6] = players[turn].specialButton;
+            result[7] = players[turn].squareleft;
             for (int k=0;k<9;k++)
                 for (int h =0 ;h<9;h++)
-                    result[i][k*9+h+8] = (PatchworkGame.p1.squiltBoard[k][h]?0:1);
+                    result[k*9+h+8] = (PatchworkGame.p1.squiltBoard[k][h]?0:1);
             for (int k=0;k<9;k++)
                 for (int h =0 ;h<9;h++)
-                    result[i][k*9+h+89] = (PatchworkGame.p2.squiltBoard[k][h]?0:1);
-        }
+                    result[k*9+h+89] = (PatchworkGame.p2.squiltBoard[k][h]?0:1);
+
         return result;
     }
     static void network01(char tile){
@@ -346,9 +369,50 @@ public class AITraining {
         }
 
     }
+    static String network02(String patchCircle, String placement){
+        try {
+            String smg = smarterGenerator(patchCircle,placement);
+            char tile = smg.charAt(0);
+            //        input.
+            double[] input = encoding(patchCircle, placement,tile);
+            Matrix[] nn = new Matrix[LAYERS];
+            Matrix result;
+            // initialise the layers
+            nn[0] = new Matrix(171, 12, 0);
+            nn[1] = new Matrix(12, 1, 0);
+            nn[2] = new Matrix(12, 171, 0);
+            nn[3] = new Matrix(171, 1, 0);
+            nn[4] = new Matrix(171, 788, 0);
+            // read and set the layers'weight
+
+
+            // use the layers to calculate the anwser
+
+                result = Matrix.multiply(new Matrix(input).transpose(), nn[0]);
+
+                result = Matrix.multiply(result,nn[1]);
+                result = Matrix.multiply(result,nn[2]);
+                result = Relu(Matrix.multiply(result,nn[3]));
+                result = Softmax(Matrix.multiply(result,nn[4]));
+                double max=0;
+                int sign=0;
+                for (int i=0;i<result.row;i++)
+                    if (max<=result.matrix[0][i]){
+                        max = result.matrix[0][i];
+                        sign = i;
+                    }
+
+            String ans = tile+""+((char)((sign%10)+'A'))+""+((char)((sign%100)/10+'A'))+""+((char)(sign/100+'A'));
+            for (String pans:generateAllPositionPlacement(patchCircle,placement))
+                if (pans.equals(ans)) return ans;
+            return smg;
+        }catch (Exception e){e.printStackTrace();}finally {
+            return smarterGenerator(patchCircle,placement);
+        }
+    }
     //for training, recursive training
     public static void main(String[] args) {
-//        fileIO3("./data/DetailDataset05.csv","./data/Dataset05.csv");
+        fileIO2("./data/DetailDataset06.csv","./data/Dataset06.csv");
 
     }
 

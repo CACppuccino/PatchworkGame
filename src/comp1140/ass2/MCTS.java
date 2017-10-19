@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class MCTS {
     Random random = new Random();
-    int ActionOfN = 5;
+    int ActionOfN = 50;
     List<MCTS> children = new ArrayList<MCTS>();
     double visits, values;
     double adjust = 1e-6;
@@ -27,7 +27,7 @@ public class MCTS {
         s.useDelimiter("[,\n]");
         while (s.hasNext()) {
             String c = s.next();
-            System.out.println(c);
+//            System.out.println(c);
             if (c.equals(m.circle)) {
                 String n = s.next();
                 String w = "0";
@@ -81,7 +81,7 @@ public class MCTS {
                 bestValue = valueUCT;
             }
         }
-        System.out.println(selects.placement);
+//        System.out.println(selects.placement);
         return selects;
     }
 
@@ -130,11 +130,22 @@ public class MCTS {
         values += value;
     }
 
+    static void printChildren(MCTS m,int layer){
+        layer++;
+        if (m.children.size()!=0){
+            for (MCTS mcts:m.children){
+                System.out.print("layer "+layer+" "+mcts.values+" ");
+                printChildren(mcts,layer);
+            }
+            System.out.println();
+        }
+    }
     public static void main(String[] args) throws FileNotFoundException {
         MCTS mcts = new MCTS("eTLcRBMDGHJaOYAbdSfFNPUIVCWZEXKQg", "");
         readInfo("./data/Dataset02.csv", mcts);
         mcts.actionSelect();
-        for (MCTS m : mcts.children) System.out.println(m.values);
-}
+//        for (MCTS m : mcts.children) System.out.println(m.values);
+        printChildren(mcts,0);
+    }
 
 }

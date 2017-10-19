@@ -220,6 +220,8 @@ public class Viewer extends Application {
             System.out.println("P1:"+p);
             moveToken(t, (t == 1 ? p1 : p2).timecount);
             if (p1.timecount >= 53 && p2.timecount >= 53) {
+                btn1.setText(p1.buttonCount + " buttons");
+                btn2.setText(p2.buttonCount + " buttons");
                 win = new Alert(Alert.AlertType.INFORMATION);
                 int s1= PatchworkGame.getScoreForPlacement(c,p, true);
                 int s2=PatchworkGame.getScoreForPlacement(c,p, false);

@@ -22,6 +22,16 @@ public class Matrix{
 //            for (double c : cc)
 //                c = ele;
     }
+    Matrix(double[][] matrix){
+        row = matrix.length;
+        col = matrix.length;
+        this.matrix = matrix;
+    }
+    Matrix(double[] vector){
+        row = vector.length;
+        col = 1;
+        this.matrix[0] =vector;
+    }
     public double[][] getMatrix(){return matrix;}
     void setZero(){
         for (int i =0;i<row;i++)
@@ -134,7 +144,25 @@ public class Matrix{
         }
         return mat;
     }
-
+    static Matrix multiply(Matrix a, Matrix b) throws Exception{
+        if (a.col!=b.row) throw new Exception("wrong size matrix");
+        Matrix c = new Matrix(a.row,b.col,0);
+//        for (int i=0;i<a.row;i++){
+//            for (int j=0;j<a.col;j++){
+//                double x = a.getElement(i,j);
+//                for (int h=0;h<b.col;h++)
+//                    c.setMatrix(i,j,a.getElement(i,j)+x*b.getElement(j,h));
+//            }
+//        }
+        for (int i = 0; i < a.row; i++) {
+            for (int j = 0; j < b.col; j++) {
+                for (int k = 0; k < a.col; k++) {
+                    c.matrix[i][j] += a.matrix[i][k] * b.matrix[k][j];
+                }
+            }
+        }
+        return c;
+    }
 
     public static void main(String[] args) throws Exception{
 //        Matrix a = new Matrix(9,3);

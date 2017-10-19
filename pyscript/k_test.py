@@ -4,14 +4,14 @@ from keras.layers import Dense
 import numpy
 
 # load the model
-model = load_model("./models/t01_300.h5")
+model = load_model("../model/m_tile.h5")
 
 # define the dataset
-dataset = numpy.loadtxt("./data/DetailDataset02.csv", delimiter=",")
+dataset = numpy.loadtxt("../data/DetailDataset06.csv", delimiter=",")
 
 # get the test data from dataset
-X_test = dataset[300:,1:8]
-Y_test = dataset[300:,0]
+X_test = dataset[:,1:9]
+Y_test = dataset[:,0]
 
 # get the score 
 
