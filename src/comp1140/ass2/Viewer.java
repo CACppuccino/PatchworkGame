@@ -44,12 +44,7 @@ public class Viewer extends Application {
     private final Group sqiltBoard = new Group();
     private final Group tilesArea = new Group();
     private final Group startScreen = new Group();
-    //    private final Group playScreen = new Group();
-    //    ArrayList<Character> candi;
-    private TextField textField;
-
     private boolean AI = false;
-
     private static Text turn;
     private static Button confirm;
     private static Button advance;
@@ -126,6 +121,8 @@ public class Viewer extends Application {
         }
     }
 
+    /*
+    * Extract all the common methods to a static method*/
     private static void setTextPos(Text obj, double LayoutX, double LayoutY){
         obj.setLayoutX(LayoutX);
         obj.setLayoutY(LayoutY);
@@ -156,14 +153,17 @@ public class Viewer extends Application {
         primaryStage.setTitle("Patchwork Viewer");
         Scene scene = new Scene(root, VIEWER_WIDTH, VIEWER_HEIGHT);
         //http://www.planwallpaper.com/static/images/cool-background.jpg
+        // the start background
         bg = new ImageView(new Image("file:" + BG1.getAbsolutePath()));
         bg.toBack();
         root.getChildren().add(bg);
+        //start title
         Text title = new Text("PATCHWORK");
         setTextPos(title,400,200);
         title.setScaleX(5);
         title.setScaleY(5);
         title.setFill(Color.WHITE);
+        // start button setup
         ToggleGroup option = new ToggleGroup();
         RadioButton option1 = new RadioButton("Play with AI (1P)");
         option1.setLayoutX(400);
@@ -188,13 +188,13 @@ public class Viewer extends Application {
         primaryStage.show();
     }
 
+    // the main game scene
     public void game() {
         bg.setImage(new Image("file:" + BG2.getAbsolutePath()));
         root.getChildren().remove(startScreen);
         timeBoard();
         p = "";
         c = PatchworkGame.initPatchCircle();
-
         if (c.indexOf('A') != c.length()-1) c = c.substring(c.indexOf('A') + 1) + c.substring(0, c.indexOf('A') + 1);
         candidateArea(c);
         timeToken();
@@ -204,14 +204,18 @@ public class Viewer extends Application {
         PatchworkGame.three = c.substring(0, 3).toCharArray();
         clickArea();
         err = new Alert(Alert.AlertType.ERROR);
+        // Text showing players's turn
         turn = new Text("Player 1's Turn");
         setTextPos(turn,400,200);
+        // Buttons initilsation
         confirm = new Button("End Turn");
         confirm.setDisable(true);
         setBtnPos(confirm,380,250);
         advance = new Button("Advance");
         setBtnPos(advance,460,250);
         advance.setDisable(false);
+        // Advance button event setting when clicked
+        // do the advance action and update the state
         advance.setOnMouseClicked(event -> {
             tilesArea.getChildren().clear();
             p += ".";
@@ -237,6 +241,7 @@ public class Viewer extends Application {
             btn1.setText(p1.buttonCount + " buttons");
             btn2.setText(p2.buttonCount + " buttons");
             clickArea();
+            // If is AI mode, keep changing until the round is over
             if (AI) {
                 while (t == 2 && p2.timecount < 53) {
                     aiTurn();
@@ -244,6 +249,7 @@ public class Viewer extends Application {
                 }
             }
         });
+        // button display initialiser
         btn1 = new Text("5 buttons");
         setTextPos(btn1,30,580);
         btn1.setFill(Color.WHITE);
@@ -258,6 +264,7 @@ public class Viewer extends Application {
                 reset();
             }
         });
+        // timetoken display initialiser
         player1 = new Text("Player 1: Yellow");
         setTextPos(player1,30,280);
         player1.setFill(Color.YELLOW);
@@ -267,6 +274,7 @@ public class Viewer extends Application {
         root.getChildren().addAll(sqiltBoard, tilesArea, turn, confirm, advance, btn1, btn2, menu, player1, player2);
     }
 
+    // reset the background when back to the main page
     public void reset() {
         root.getChildren().clear();
         controls.getChildren().clear();
@@ -277,6 +285,8 @@ public class Viewer extends Application {
         PatchworkGame.p2 = new State(2);
     }
 
+    // method of building the squiltboard
+    // only varies in position and the color
     private void setSquiltBoard(int x, Color color){
         Rectangle[][] sq = new Rectangle[9][9];
         HBox sq1 = new HBox();
@@ -343,6 +353,7 @@ public class Viewer extends Application {
         box.setOpacity(0.5);
         root.getChildren().add(box);
         HBox[] hb = new HBox[init.length()];
+        // shows all the tiles in the partch circle
         for (int i = 0; i < init.length(); i++) {
             hb[i] = new HBox();
             String cc;
@@ -385,6 +396,7 @@ public class Viewer extends Application {
         double mouseX, mouseY;
         boolean rotated = false;
 
+        // initialise the object's image, coordinate and the cost
         DraggableTile(char tName, int x, int y, int scale) {
             homeX = x;
             homeY = y;
@@ -411,6 +423,8 @@ public class Viewer extends Application {
 
 
             /* event handler*/
+            // do the rotate when rotate angle is smaller than 360 degrees
+            // do the flip and rotation when the angle is larger than 360 degrees
             setOnScroll(event -> {
                 if ((getRotate()+90)==360){
                     setScaleX(-getScaleX());
@@ -463,10 +477,8 @@ public class Viewer extends Application {
                 confirm.setOnMouseClicked(event1 -> {
                     if (getLayoutX() != homeX) {
                         String m = makeString();
-                        System.out.println(m);
-                        System.out.println(new String(PatchworkGame.three));
-                        System.out.println(c);
                         int t = State.check_turn(PatchworkGame.p1, PatchworkGame.p2);
+                        // updates the game state and check whether the game ends
                         if (PatchworkGame.isPlacementValid(c, p + m)) {
                             p += m;
                             System.out.println("P1:" + p);
@@ -500,6 +512,8 @@ public class Viewer extends Application {
                                 }
                             }
                         } else {
+                            // throws the reminder when cant buy the patch or the placement is invalid
+                            // then clean and resume the state before the purchase
                             if ((t == 1 ? p1 : p2).buttonCount < tileCost)
                                 err.setContentText("You can't afford this patch");
                             else err.setContentText("Invalid placement");
@@ -536,7 +550,8 @@ public class Viewer extends Application {
             return s;
         }
 
-
+//  making the action of snapping the tile to the grids of the squiltboard,
+        // adjust the snap point when rotated
         void snap() {
             double x = getLayoutX();
             double y = getLayoutY();
@@ -589,6 +604,9 @@ public class Viewer extends Application {
         }
     }
 
+    // doing AI actions by calling the method built in task 10
+    // and append the new generated placement
+    // display it on the viewer
     private void aiTurn() {
         String s = PatchworkAI.generatePatchPlacement(c, p);
         System.out.println(s);
