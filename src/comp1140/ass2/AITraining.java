@@ -350,7 +350,9 @@ public class AITraining {
     }
     static String network02(String patchCircle, String placement){
         try {
+
             String smg = smarterGenerator(patchCircle,placement);
+            if (smg==null) return "";
             char tile = smg.charAt(0);
             //        input.
             double[] input = encoding(patchCircle, placement,tile);
