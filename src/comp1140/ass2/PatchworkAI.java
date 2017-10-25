@@ -21,7 +21,7 @@ public class PatchworkAI {
      */
     public static String generatePatchPlacement(String patchCircle, String placement) {
         // FIXME Task 10: generate a valid move
-        return AITraining.network02(patchCircle,placement);
+        return smarterGenerator(patchCircle,placement);
     }
     static String originGenerator(String patchCircle, String placement){
         String pC;

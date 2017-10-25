@@ -1,2 +1,2 @@
-A simple 3 layer Neural Network
+fake AI
 powered by wed15c
