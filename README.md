@@ -1,67 +1,30 @@
-# COMP1140 Assignment 2
+# Patchwork Game
 
-*This assignment is only for those enrolled in COMP1140.
-COMP1110 and COMP6710 students should look [here](https://gitlab.cecs.anu.edu.au/comp1110/comp1110-ass2).*
+## Motivation
+The project is originally developed in the course of Australian National University, College of Engineering and Computer Science, COMP 1140, Assignment 2. Aiming at building the patchwork game in Java and developing a computer opponent for the game.
+Although the assignment was completed, it was found that the project was still valuable in 
+researching and developing machine learning on this game. With the permission of all authors, the project is open sourced
+under license Apache 2.0 for all people who is interested in this area.
 
-## Academic Honesty and Integrity
-
-Honesty and integrity are of utmost importance. These goals are *not* at odds
-with being resourceful and working collaboratively. You *should* be resourceful
-and you should discuss the assignment
-and other aspects of the course with others taking the class. However, *you must
-never misrepresent the work of others as your own*. If you have taken ideas from
-elsewhere or used code sourced from elsewhere, you must say so with *utmost
-clarity*. At each stage of the assignment you will be asked to submit a statement
-of originality, either as a group or as individuals. This statement is the place
-for you to declare which ideas or code contained in your submission were sourced
-from elsewhere.
-
-Please read the ANU's [official position](http://academichonesty.anu.edu.au/) on
-academic honesty. If you have any questions, please ask me.
-
-For each phase, you must complete a statement of originality (in the 
-[admin directory](admin).
-Edit the statement and update it as you complete each task, ensuring that when you 
-complete each phase of the assignment, a truthful statement is committed
-and pushed to your repo.
-
-## Purpose
-
-In this assignment you will exercise a number of major themes of the course,
-including software design and implemention, using development tools such as
-Git and IntelliJ, using JavaFX to build a user interface.  For COMP1140 students,
-this assignment has the additional purpose of exploring strategies for writing
-agents that play games *(there is a guest lecture in week four for 1140 students
-that addresses this element of the assignment)*.  Above all, this assignment will
-emphasize group work.
-
-## Assignment Deliverables
-
-The assignment is worth 25% of your total assessment, and it will be marked out
-of 25. So each mark in the assignment corresponds to a mark in your final
-assessment for the course. Note that for some stages of the assignment you 
-will get a _group_ mark, and for others you will be _individually_ marked. The
-mark breakdown and the due dates are described on the
-[deliverables](http://cs.anu.edu.au/courses/COMP1110/deliverables.html) page.
-
-Your work will be marked via your tutor accessing git, so it is essential that
-you carefully follow instructions for setting up and maintaining your group
-repository. At each deadline you will be marked according to whatever is
-committed to your repository at the time of the deadline. You will be assessed
-on how effectively you use git as a development tool.
-
-## Problem Description
-
-In this assignment, you will use Java to create a simplified version of a two-player
-abstract strategy game called [Patchwork](https://boardgamegeek.com/boardgame/163412/patchwork)
-made by the German games developer [Lookout Games](http://lookout-spiele.de/).
-BoardGameGeek has an [overview](https://boardgamegeek.com/boardgame/163412/patchwork),
-including a handful of [videos](https://boardgamegeek.com/boardgame/163412/patchwork/videos/all),
-including a [two minute tutorial](https://boardgamegeek.com/video/128863/patchwork/how-play-patchwork-2-minutes-rules-girl).
-
-Lookout Games has published the [full rules for Patchwork](http://lookout-spiele.de/wp-content/uploads/Patchwork_Rules_US.pdf).
-BoardGameGeek also has a photograph of [the Patchwork game components](https://boardgamegeek.com/image/2371709/w-eric-martin?size=large).
-
+## Special thanks
+Several people had contributed to this project before its being open sourced but not linked or shown in the GitHub:
+Adonis Mouti, Weitao Chen, Steve Blackburn and Xueqin Cui.
+    
+## File Structure
+1. `assets` is the file storing images for README
+2. `data` is file storing game playing records by several level of AIs
+3. `model` are mainly the h5 models that built under the python framework Keras
+4. `pyscript` are python scripts written in the Keras framework for machine learning
+5. `src` is the main file storing all java classes, among these files,
+    1. `AITraining` is the file that calls AI methods and outputs the playing record
+    2. `Matrix` is the simple matrix library built for matrix calculation in Neural Network
+    3. `MCTS` is a class **still building**, attempting to training the AI by Monte-Carlo Search Tree
+    4. `PatchworkAI` is the class that implements parts of the AI and provides actions to the game
+    5. `State` is the class implementing the player's logic in the game
+    6. `Viewer` is mainly written in JavaFx for visualising the game(can be played in `game.jar` under the root file)
+6. `tests` is the file containing tests testing the correctness and functionality of the program    
+    
+## Game Introduction
 #### Objective
 
 The game consists of a number of *patch tiles*, some *buttons* which serve
@@ -288,110 +251,3 @@ Each player's score is calculated as follows:
 The player with the highest score wins.
 In case of a tie, the player who reached the final space of the time board first wins.
 
-## Legal and Ethical Issues
-
-First, as with any work you do, you must abide by the principles of 
-[honesty and integrity](http://academichonesty.anu.edu.au). 
-I expect you to demonstrate honesty and integrity in everything you do.
-
-In addition to those ground rules, you are to follow the rules one would 
-normally be subject to in a commercial setting. In particular, you may make use
-of the works of others under two fundamental conditions: 
-a) your use of their work must be clearly acknowledged, and 
-b) your use of their work must be legal (for example, consistent with any
-copyright and licensing that applies to the given material). 
-*Please understand that violation of these rules is a very serious offence.*
-However, as long as you abide by these rules, you are explicitly invited to
-conduct research and make use of a variety of sources. 
-You are also given an explicit means with which to declare your use of other
-sources (via originality statements you must complete).
-It is important to realize that you will be assessed on the basis of your
-original contributions to the project. 
-While you won't be penalized for correctly attributed use of others' ideas,
-the work of others will not be considered as part of your contribution.
-Therefore, these rules allow you to copy another student's work entirely if:
-a) they gave you permission to do so, and
-b) you acknowledged that you had done so.
-Notice, however, that if you were to do this you would have no original
-contribution and so would recieve no marks for the assigment (but you would
-not have broken any rules either).
-
-
-## Evaluation Criteria
-
-It is essential that you refer to the [deliverables page](https://cs.anu.edu.au/courses/comp1110/assessments/deliverables/) to check that you understand each of the deadlines and what is required.   Your assignment will be marked via git, so all submittable materials will need to be in git and in the *correct* locations, as prescribed by the [deliverables page](https://cs.anu.edu.au/courses/comp1110/assessments/deliverables/).
-
-**The mark breakdown is described on the
-[deliverables](https://cs.anu.edu.au/courses/comp1110/assessments/deliverables/) page.**
-
-
-### Part One
-
-In the first part of the assignment you will:
-* Create a skeleton of your *initial* design for the final assignment (Task #2).
-* Implement parts of the text interface to the game (Tasks #3, #4, and #6).
-* Implement a simple viewer that allows you to visualise game states (Task #5).
-
-The criteria for the [completion of part one](https://gitlab.cecs.anu.edu.au/comp1110/comp1110/wikis/deliverables#d2c-assignment-2-stage-c-2-marks-group)
-is as follows:
-
-<a name="p"></a>
-**Pass**
-* Tasks #2, #3 and #4.
-
-<a name="cr"></a>
-**Credit**
-* Task #5 *(in addition to all tasks required for Pass)*.
-
-<a name="d"></a>
-**Distinction**
-* Task #6 *(in addition to all tasks required for Credit)*.
-
-
-### Part Two
-
-Create a fully working game, using JavaFX to implement a playable graphical
-version of the game in a 933x700 window.
-You will be able to play your game against another human or against the
-computer.
-
-Notice that aside from the window size, the details of exactly how the game
-looks and plays are **intentionally** left up to you.
-The diagrams above are for illustration purposes only.
-However, you are provided with images for each of the thirty-three pieces,
-which you may use.
-
-The only **firm** requirements are that:
-
-* you use Java and JavaFX,
-* the game respects the specification of the game given here,
-* the game be easy to play,
-* it runs in a 933x700 window, and
-* that it is executable on a standard lab machine from a jar file called `game.jar`,
-
-Your game must successfully run from `game.jar` from within another user's (i.e.
-your tutor's) account on a standard lab machine (in other words, your game must
-not depend on features not self-contained within that jar file and the Java 8 
-runtime).
-
-<a name="2p"></a>
-**Pass**
-* Correctly implements all of the <b>Part One</b> criteria.
-* Appropriate use of git (as demonstrated by the history of your repo).
-* Completion of Task #7.
-* Executable on a standard lab computer from a runnable jar file, game.jar, which resides in the root level of your group repo.
-
-<a name="2c"></a>
-**Credit**
-* _All of the Pass-level criteria, plus the following..._
-* Task #8.
-
-<a name="2d"></a>
-**Distinction**
-* _All of the Credit-level criteria, plus the following..._
-* Tasks #9, #10 and #11.
-
-<a name="2hd"></a>
-**High Distinction**
-* _All of the Distinction-level criteria, plus the following..._
-* Task #12.

@@ -377,7 +377,7 @@ public class AITraining {
                     for (int i =0;i<nn[h].row;i++)
                         for (int j=0;j<nn[h].col;j++)
                             nn[h].setMatrix(i,j,s.nextFloat());
-
+                s.close();
 //                System.out.println("***");
 //                System.out.println(Arrays.deepToString(nn[0].matrix));
             }catch (Exception e){e.printStackTrace();}

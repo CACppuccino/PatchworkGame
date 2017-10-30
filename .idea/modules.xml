@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/comp1140-ass2.iml" filepath="$PROJECT_DIR$/comp1140-ass2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/patchworkAI.iml" filepath="$PROJECT_DIR$/patchworkAI.iml" />
     </modules>
   </component>
 </project>
